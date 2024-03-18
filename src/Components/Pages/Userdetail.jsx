@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import './Userdetail.css';
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 
 const Userdetail = () => {
 
