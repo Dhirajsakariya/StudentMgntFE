@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import config from '../Login/config';
 
 const DisplayCategory = () => {
