@@ -6,7 +6,7 @@ import { BiSolidUserDetail, BiLogOut } from "react-icons/bi";
 import { MdFamilyRestroom } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import user from './Assets/user.jpg'
+import user from './Assets/profile.png'
 import user_icon from './Assets/user_icon.png'
 import logout from './Assets/logout.png'
 
