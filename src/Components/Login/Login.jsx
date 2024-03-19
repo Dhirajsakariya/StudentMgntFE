@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import config from './config'; 
-import { useHistory,useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; 
 import { CgMail } from 'react-icons/cg';
 import { toast, Toaster } from 'react-hot-toast';
@@ -12,6 +12,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false); 
     const [id, setId] = useState();
     const navigate = useHistory();
+    const [role, setRole] = useState();
     const [rememberMe, setRememberMe] = useState(false); // Add rememberMe state
 
     useEffect(() => {
@@ -64,6 +65,11 @@ const handleUserChange = (e) => {
         
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!role) {
+            toast.error('Please select your role!');
+            return;
+          }
+        
         try {
             const response = await fetch(`${config.ApiUrl}User/Login`, {
                 method: 'POST',
@@ -120,6 +126,17 @@ const handleUserChange = (e) => {
                 <h2>Login Form</h2>
                 <input type='hidden' value={id}/>
                 <div className='form-groupl'>
+                    <label className='labellogin'>User Role</label>
+                    <div className='radio-group3'>
+                    <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole(e.target.value)} />
+                    <label htmlFor="administrator">Admin</label>
+                    <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole(e.target.value)} />
+                    <label htmlFor="staff">Teacher</label>
+                    <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
+                    <label htmlFor="user">Student</label>
+                    </div>
+                </div>
+                <div className='form-groupl'>
                     <label className='labell'>Email:</label>
                     <input
                         className='inputl'
@@ -136,7 +153,7 @@ const handleUserChange = (e) => {
                     <div className='password-input'>
                     <input className='inputl' type={showPassword ? 'text' : 'password'} value={password}     autoComplete="current-password"
                             onChange={handlePasswordChange} placeholder='Enter Your Password'
-                         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
+                         pattern="^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[~\@\!\#\$\%\^\&\\?]).{8,15}$"
                          title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
                          required />
                         {showPassword ? <IoEyeOutline className='iconl' onClick={togglePasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={togglePasswordVisibility} />}
