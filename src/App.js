@@ -10,6 +10,10 @@ import JsonData from './Components/Pages/JsonData';
 import Userdetail from './Components/Pages/Userdetail';
 import UpdateUserdetail from './Components/Pages/UpdateUserdetail';
 import Familydetail from './Components/Pages/Familydetail';
+import Student from './Components/Student/Student';
+import FamilyForm from './Components/Admin/FamilyForm'
+import VerifyOTP from './Components/Admin/FeeForm';
+import StudentFeeForm from './Components/Student/StudentFeeForm';
 
 function App() {
  
@@ -21,10 +25,14 @@ function App() {
         <Switch>
           <Route path='/Familydetail' component={Familydetail}/>
           <Route path='/UpdateUserdetail' component={UpdateUserdetail}/>
+          <Route path='/StudentFeeForm' component={StudentFeeForm}/>
           <Route path='/Userdetail' component={Userdetail}/>
           <Route path='/Sidebar' component={Sidebar}/>
           <Route path='/DisplayCategory' component={DisplayCategory}/>
           <Route path='/JsonData' component={JsonData}/>
+          <Route path='/Student' component={Student}/>
+          <Route path='/FamilyForm' component={FamilyForm}/>
+          <Route path='/FeeForm' component={VerifyOTP}/>
           <Route path='/ForgotPassword' component={ForgotPassword}/>
           <Route path='/Registration' component={Registration}/>
           <Route path='/' component={Login}/>
