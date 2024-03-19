@@ -1,5 +1,4 @@
 import React, { useState , useEffect} from 'react';
-//import './ForgotPassword.css';
 import './Login.css';
 import { useHistory } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
@@ -7,7 +6,6 @@ import { CgMail } from 'react-icons/cg';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import moment from 'moment';
 import config from './config';
-
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -81,10 +79,10 @@ const ForgotPassword = () => {
         fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
         fontSize: '16px',
         fontWeight: 'bold',
-      };
+    };
 
     return (
-        <div className='containerr'>
+        <div className='containerl'>
             <form onSubmit={handleSubmit}>
                 <h2 className='signup'>Reset Password</h2>
                 <div className='form-groupl'>
@@ -95,7 +93,8 @@ const ForgotPassword = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder='Enter Your Email'
-                        required/> 
+                        required
+                    /> 
                 </div>
                 <CgMail className='icone'/>
                 <div className='form-groupl'>
@@ -117,7 +116,6 @@ const ForgotPassword = () => {
                         />
                         {showNewPassword ? <IoEyeOutline className='iconl' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleNewPasswordVisibility} />}
                     </div>
-                
                 </div>
                 <div className='form-groupl'>
                     <label className='labell'>Confirm Password:</label>
@@ -134,7 +132,6 @@ const ForgotPassword = () => {
                         />
                         {showConfirmPassword ? <IoEyeOutline className='iconle' onClick={toggleConfirmPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleConfirmPasswordVisibility} />}
                     </div>
-                
                 </div>
                 <div>
                     <button type='submit' className='buttonf'>Reset Password</button>
