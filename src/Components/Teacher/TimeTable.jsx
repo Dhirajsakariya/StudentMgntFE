@@ -7,8 +7,8 @@ const TimeTable = () => {
       <div className='timetable'>
         <h1 className='timetable-heading'>TimeTable</h1>
         <div>
-            <table>
-                <tr className='table'>
+            <table className='table'>
+                <tr>
                     <th>Day/Period</th>
                     <th>Monday</th>
                     <th>Tuesday</th>
