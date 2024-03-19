@@ -9,6 +9,7 @@
     font: bold;
     color:black;
     border: 2px solid;
+    border-radius: 10px;
     background-color: hsl(107, 17%, 78%);
 }
 h1{
