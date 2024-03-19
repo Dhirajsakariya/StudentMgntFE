@@ -13,6 +13,10 @@ import Familydetail from './Components/Pages/Familydetail';
 import Standard from './Components/Teacher/Standard';
 import TimeTable from './Components/Teacher/TimeTable';
 import SubjectForm from './Components/Teacher/SubjectForm';
+import Student from './Components/Student/Student';
+import FamilyForm from './Components/Admin/FamilyForm'
+import FeeForm from './Components/Admin/FeeForm';
+import StudentFeeForm from './Components/Student/StudentFeeForm';
 
 function App() {
   
@@ -22,10 +26,14 @@ function App() {
         <Switch>
           <Route path='/Familydetail' component={Familydetail}/>
           <Route path='/UpdateUserdetail' component={UpdateUserdetail}/>
+          <Route path='/StudentFeeForm' component={StudentFeeForm}/>
           <Route path='/Userdetail' component={Userdetail}/>
           <Route path='/Sidebar' component={Sidebar}/>
           <Route path='/DisplayCategory' component={DisplayCategory}/>
           <Route path='/JsonData' component={JsonData}/>
+          <Route path='/Student' component={Student}/>
+          <Route path='/FamilyForm' component={FamilyForm}/>
+          <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/ForgotPassword' component={ForgotPassword}/>
           <Route path='/Registration' component={Registration}/>
           <Route path='/TimeTable' component={TimeTable}/>
