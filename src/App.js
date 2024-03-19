@@ -15,7 +15,7 @@ import TimeTable from './Components/Teacher/TimeTable';
 import SubjectForm from './Components/Teacher/SubjectForm';
 import Student from './Components/Student/Student';
 import FamilyForm from './Components/Admin/FamilyForm'
-import VerifyOTP from './Components/Admin/FeeForm';
+import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
           <Route path='/JsonData' component={JsonData}/>
           <Route path='/Student' component={Student}/>
           <Route path='/FamilyForm' component={FamilyForm}/>
-          <Route path='/FeeForm' component={VerifyOTP}/>
+          <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/ForgotPassword' component={ForgotPassword}/>
           <Route path='/Registration' component={Registration}/>
           <Route path='/TimeTable' component={TimeTable}/>
