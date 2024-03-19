@@ -1,0 +1,55 @@
+ .standard{
+    padding: 20px;
+}
+.standard-heading{
+    max-width: 800px;
+    margin-left: 370px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 35pxs;
+    font: bold;
+    text-decoration: underline;
+}
+h1{
+    font-size: 30px;
+    color:#146a51;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+  }
+.tables {    
+    margin-left: 570px;
+    width:28%;
+    height: 50px;
+    table-layout: fixed;
+    border: 1px solid black;
+    text-align: center;
+    background-color: hsl(107, 17%, 78%);
+}
+
+table tr {
+    background-color: #1f7a61;  
+
+}
+table th{
+    color: white;
+}
+.tbl-content{    
+    height:300px;
+    overflow-x:auto;
+    margin-top: 0px;
+} 
+th{    
+    padding: 8px;
+    text-align: center;
+    vertical-align:middle;    
+    font-size: 18px;
+    color: black;    
+}
+td{        
+    text-align: center;
+    border: 1px solid black;
+    font-size: 18px;   
+}
+
+
