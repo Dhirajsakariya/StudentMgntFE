@@ -10,12 +10,13 @@ import JsonData from './Components/Pages/JsonData';
 import Userdetail from './Components/Pages/Userdetail';
 import UpdateUserdetail from './Components/Pages/UpdateUserdetail';
 import Familydetail from './Components/Pages/Familydetail';
+import Standard from './Components/Teacher/Standard';
+import TimeTable from './Components/Teacher/TimeTable';
+import SubjectForm from './Components/Teacher/SubjectForm';
 
 function App() {
- 
   
   return (
-
     <div>
       <Router>
         <Switch>
@@ -27,6 +28,9 @@ function App() {
           <Route path='/JsonData' component={JsonData}/>
           <Route path='/ForgotPassword' component={ForgotPassword}/>
           <Route path='/Registration' component={Registration}/>
+          <Route path='/TimeTable' component={TimeTable}/>
+          <Route path='/Standard' component={Standard}/>
+          <Route path='/SubjectForm' component={SubjectForm}/>
           <Route path='/' component={Login}/>
         </Switch>
       </Router>
