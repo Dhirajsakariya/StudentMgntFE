@@ -13,13 +13,10 @@ import Familydetail from './Components/Pages/Familydetail';
 import Standard from './Components/Teacher/Standard';
 import TimeTable from './Components/Teacher/TimeTable';
 import SubjectForm from './Components/Teacher/SubjectForm';
-<<<<<<< HEAD
 import Student from './Components/Student/Student';
 import FamilyForm from './Components/Admin/FamilyForm'
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
-=======
->>>>>>> 525134588ac37247b57c3894bd6d0e3ecc267fd8
 
 function App() {
   
