@@ -25,6 +25,9 @@ h1{
     margin-bottom: 10px;
     margin-top: 5px;
   }
+  .formtable p{
+    margin-left: 70px;
+  }
   .labelofform {
     display: block;
     margin-bottom: 5px;
