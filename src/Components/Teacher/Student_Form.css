@@ -1,0 +1,154 @@
+.containers {
+    width: 800px;
+    color:black;
+    border-radius: 10px;
+    padding: 30px 30px;
+    height: 700px;
+    background: transparent;
+    border: 2px solid;
+    background-color:  hsl(107, 17%, 78%);
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    padding-top: 15px;
+  }
+  
+  .form-groupstd {
+    margin-bottom: 10px;
+  }
+  .labelstd {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-left: 80px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+  }
+  .inputstd {
+    width: 300px;
+    margin-left: 80px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 5px;
+  }
+
+  .form-grouph {
+    margin-bottom: 10px;
+  }
+  .labelh {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-left: 480px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+  }
+  .inputh {
+    width: 300px;
+    margin-left: 480px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 5px;
+  }
+  
+  
+  .radio-groupstd  {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+  
+  .radio-groupstd label {
+    margin-top: 5px;
+  }
+  
+  .radio-groupstd input {
+    width: 10%;
+    padding: 0;
+  }
+  .div_two{
+    margin-top: -500px;
+  }
+  .student-form{
+  justify-content: center;
+  padding-top: 1px;
+  color:#146a51;;
+  text-align: center;
+  font: bold;
+  margin-top:10px;
+  margin-bottom:40px ;
+  text-decoration: underline;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .containera h2{
+      justify-content: center;
+      color:#146a51;;
+      text-align: center;
+      font: bold;
+      
+      text-decoration: underline;
+      padding-bottom: 8px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
+  }
+  
+  .country-code {
+    width: 20%;
+    margin-right: -9px;
+  }
+  
+  label,p {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+  }
+  
+  p{
+    color:white;
+  }
+  
+  input {
+    width: 300px;
+    margin-left: 15px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 5px;
+  }
+  
+  .phone_number {
+    width: 400px;
+    margin-left: 470px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 8px;
+  }
+  
+.btnnexts{
+    width: 30%;
+    height: 40px;
+    border-radius: 10px;
+    outline: auto;
+    border: 1px;
+    background:#146a51;;
+    justify-content: center;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 80px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+}
