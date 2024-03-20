@@ -3,7 +3,7 @@ import './Familydetail.css';
 import moment from 'moment';
 import { BiMale ,BiFemale} from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 

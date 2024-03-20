@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './JsonData.css';
 import { FcSearch } from "react-icons/fc";
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import { useHistory } from 'react-router-dom';
 import config from '../Login/config';
 

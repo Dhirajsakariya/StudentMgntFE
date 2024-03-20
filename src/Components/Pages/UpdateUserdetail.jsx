@@ -3,7 +3,7 @@ import './UpdateUserdetail.css';
 import config from '../Login/config';
 import { useHistory } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import moment from 'moment';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
