@@ -3,6 +3,7 @@ import moment from 'moment';
 import './Student_Form.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import Sidebar from '../Sidebar/Sidebar';
 
 export const Student_Form = () => {
 
@@ -47,9 +48,9 @@ export const Student_Form = () => {
       
     
   return (
-
+  <Sidebar>
     <>
-    <div className='containers'>
+    <div className='containerST'>
         <form>
             <div>
             <h2 className='student-form'>Student Detail</h2>
@@ -147,7 +148,7 @@ export const Student_Form = () => {
            
            <div className='form-grouph'>
                <label className='labelh'>Mobile Number:</label>
-               <div className='phone_number'>
+               <div className='phone_numberS'>
                <PhoneInput
                    country={'in'}
                    value={mobileNumber}
@@ -169,6 +170,8 @@ export const Student_Form = () => {
          </form>
     </div>
     </>
+     </Sidebar>
     
   )
 }
+export default Student_Form;

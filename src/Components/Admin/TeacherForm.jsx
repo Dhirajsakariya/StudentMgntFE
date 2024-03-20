@@ -3,6 +3,8 @@ import moment from 'moment';
 import './TeacherForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import Sidebar from '../Sidebar/Sidebar';
+
 
 const TeacherForm = () => {
 
@@ -38,8 +40,9 @@ const TeacherForm = () => {
       
 
   return (
-    <>
-    <div className='containert'>
+    <Sidebar>   
+       <>
+    <div className='containerT'>
         <form>
             <div>
             <h2 className='teacher-form'>Teacher Form</h2>
@@ -144,7 +147,10 @@ const TeacherForm = () => {
             <button className='btnnexts' type='submit'>Next</button>
          </form>
     </div>
+   
+
     </>
+    </Sidebar>
     
   )
 }

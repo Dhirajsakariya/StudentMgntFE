@@ -1,4 +1,4 @@
-.containers {
+.containerS {
     width: 800px;
     color:black;
     border-radius: 10px;
@@ -138,7 +138,7 @@
     border-radius: 5px;
   }
   
-  .phone_number {
+  .phone_numberT {
     width: 400px;
     margin-left: 470px;
     padding: 8px;
