@@ -174,7 +174,6 @@ return (
         <div className='form-groupr'>
             <label className='labelr'>Role</label>
             <div className='radio-groupa'>
-            
               <input className='inputr'
                 type="radio" 
                 value="admin"
