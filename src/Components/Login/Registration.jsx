@@ -9,6 +9,7 @@ import moment from 'moment';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './Registration.css';
+import axios from 'axios';
 function Registration(props) {
 
   //const [id, setId] = useState('');
@@ -27,7 +28,7 @@ function Registration(props) {
   const [city, setCity] = useState('');
   const [pinCode, setPinCode] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
-  const [isAdmin, setIsAdmin] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState();
 
   const [isVisible, setVisible] = useState(false);
@@ -37,13 +38,22 @@ function Registration(props) {
   const toggle = () => {
       setVisible(!isVisible);
     };
-
+  
   const toggleBtn = () => { 
       setDisable(!isDisable);
     };
-
+  
+  const handleRole = (e) =>{
+    if (e.target.value === 'admin'){
+      setIsAdmin(isAdmin => !isAdmin)
+      setRole(isAdmin)
+      console.log(role)
+      setRole(e.target.value)
+    }
+    setRole(e.target.value)
+  }
   const navigate=useHistory();
-
+  
   const handlePhoneChange = (value) => {
     setMobileNumber(value);
     const phoneRegex = /^[+]?[0-9]{8,}$/;
@@ -115,37 +125,35 @@ function Registration(props) {
     }
 
   try {
-    const addUserDto = {
-      Name: name,
-      Email: email,
-      BirthDate: birthday,
-      Password: password
-    };
-
-    const response = await fetch(`${config.ApiUrl}User/addUser`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(addUserDto)
-    });
-    const result = await response.text();
-    console.log(result);
-    if (result === "User Created.") 
-    {            
+        const url = `${config.ApiUrl}AdminTeacher/PostAdminTeachers`;
+        const data = {
+          Name : name,
+          Email : email,
+          Password : password,
+          Gender : gender,
+          BirthDate : birthday,
+          MobileNumber : mobileNumber,
+          JoinDate : joinDate,
+          Address : address,
+          City : city,
+          District : selectedDistrict,
+          State : state,
+          PinCode : pinCode,
+          IsAdmin : isAdmin
+        }
+      JSON.stringify(data)
+      const emailresponse =axios.post(url, data)
+      const userERes = emailresponse.data;
+      if(userERes === "email already exists")
+      {
+            toast.error("User already exist !!!");
+            return;
+      }
       setTimeout(() => {
         navigate.push('/') 
         }, 1500);
       toast.success("Registration Successfull!")
-      localStorage.setItem('registeredEmail', email);
-    } 
-    else if (result === "User Already Registered!") {
-      toast.error('User with this email already exists!');
-    } 
-    else 
-    {
-      toast.error('Signup failed. Please try again later.');
-    }
+
   } catch {
       toast.error('Signup failed. Please try again later.');
     }
@@ -164,11 +172,21 @@ return (
         <h2 className='signup'>Sign Up</h2>
       <div className='form-group1'>
         <div className='form-groupr'>
-            <label className='labelr'>User Role</label>
+            <label className='labelr'>Role</label>
             <div className='radio-groupa'>
-              <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole(e.target.value)} />
+              <input className='inputr'
+                type="radio" 
+                value="admin"
+              checked={role === "admin"}
+              onChange={handleRole}
+              required/>
               <label htmlFor="administrator">Admin</label>
-              <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole(e.target.value)} />
+              <input className="form-check-input" 
+                type="radio" 
+                value="teacher"
+              checked={role === "teacher"}
+              onChange={handleRole}
+              required/>
               <label htmlFor="staff">Teacher</label>
               {/* <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
               <label htmlFor="user">Student</label> */}
