@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import '../Teacher/SubjectForm.css';
 import { toast, Toaster } from 'react-hot-toast';
 import config from '../Login/config';
@@ -6,16 +6,18 @@ import { useHistory } from 'react-router-dom';
 
 const SubjectForm = () => {
 
-    //const navigate = useHistory();
+    const navigate = useHistory();
 
-    //const [userData, setUserData] = useState({id:''});
-    const [day, setDayError] = useState('');
-    const [startTime, setStartTimeError] = useState('');
-    const [endTime, setEndTimeError] = useState('');
-    const [standard, setStandardError] = useState('');
-    const [section, setSectionError] = useState('');
-    const [subject, setSubjectError] = useState('');
+    const [dayError, setDayError] = useState('');
+    const [startTimeError, setStartTimeError] = useState('');
+    const [endTimeError, setEndTimeError] = useState('');
+    const [standardError, setStandardError] = useState('');
+    const [sectionError, setSectionError] = useState('');
+    const [subjectError, setSubjectError] = useState('');
     
+    // const [subjectId, setSubjectId] = useState('');
+    // const [standardId, setStandardId] = useState('');
+
     const [formData, setFormData] = useState({
       id: '',
       day: '',
@@ -37,6 +39,23 @@ const SubjectForm = () => {
       fontWeight: 'bold',
     };
 
+    useEffect(() => {
+      const subjectTimetable = async () => {
+          try {
+                const response = await fetch(`${config.ApiUrl}Subject/GetSubjects`);
+                if (!response.ok) 
+                {
+                  console.log('Failed to fetch subject timetable data');
+                }
+              } 
+              catch (error) 
+              {
+                console.error('Error fetching subject timetable data:', error);
+              }
+      };
+        subjectTimetable();
+      }); 
+      
     const handleSubmit =  (e) => {
         e.preventDefault();
 
@@ -120,7 +139,7 @@ const SubjectForm = () => {
         <div className='subjectttableform'>
       <div className='formheading'>
             <form onSubmit={handleSubmit}>
-                <h1>Subject Timetable Form</h1>
+                <h1>Subject TimeTable Form</h1>
                 <div className="formtable">
                 <label className='labelofform'>Name of Day:</label>
               <select
@@ -139,7 +158,7 @@ const SubjectForm = () => {
                   </option>
                 ))}
               </select>
-              {day && <p style={{ color: 'red'}}>{day}</p>}
+              {dayError && <p style={{ color: 'red'}}>{dayError}</p>}
             </div>
                 <div className='formtable'>
                     <label className='labelofform'>Start-Time:</label>
@@ -153,7 +172,7 @@ const SubjectForm = () => {
                         }}
                         required
                     />
-                    {startTime && <p style={{ color: 'red'}}>{startTime}</p>}
+                    {startTimeError && <p style={{ color: 'red'}}>{startTimeError}</p>}
                </div>
                 <div className='formtable'>
                     <label className='labelofform'>End-Time:</label>
@@ -167,7 +186,7 @@ const SubjectForm = () => {
                         }}
                         required
                     /> 
-                    {endTime && <p style={{ color: 'red'}}>{endTime}</p>}
+                    {endTimeError && <p style={{ color: 'red'}}>{endTimeError}</p>}
                 </div>
                 <div className="formtable">
                 <label className='labelofform'>Standard:</label>
@@ -187,7 +206,7 @@ const SubjectForm = () => {
                   </option>
                 ))}
               </select>
-              {standard && <p style={{ color: 'red'}}>{standard}</p>}
+              {standardError && <p style={{ color: 'red'}}>{standardError}</p>}
             </div>
             <div className="formtable">
                 <label className='labelofform'>Section:</label>
@@ -207,7 +226,7 @@ const SubjectForm = () => {
                   </option>
                 ))}
               </select>
-              {section && <p style={{ color: 'red'}}>{section}</p>}
+              {sectionError && <p style={{ color: 'red'}}>{sectionError}</p>}
             </div>                
             <div className="formtable">
                 <label className='labelofform'>Subject:</label>
@@ -227,7 +246,7 @@ const SubjectForm = () => {
                   </option>
                 ))}
               </select>
-              {subject && <p style={{ color: 'red'}}>{subject}</p>}
+              {subjectError && <p style={{ color: 'red'}}>{subjectError}</p>}
             </div>
                 <div className='formtable'>
                 <button type="submit" className='savebutton' onClick={handleSubmit}>Save</button>
