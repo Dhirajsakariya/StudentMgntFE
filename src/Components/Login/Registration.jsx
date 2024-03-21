@@ -22,12 +22,13 @@ function Registration(props) {
   const [mobileNumber, setMobileNumber] = useState('');
   const [joinDate, setJoinDate] = useState('');
   const [address, setAddress] = useState('');
-  const [state] = useState('Gujarat'); // Default state is Gujarat
-  const districts = ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar", "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar", "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad"];
-  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [state,setState] = useState(); 
+  const [district , setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [pinCode, setPinCode] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
+
+  //State for Enter role in Db
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState();
 
@@ -49,8 +50,6 @@ function Registration(props) {
   const handleRole = (e) =>{
     if (e.target.value === 'admin'){
       setIsAdmin(isAdmin => !isAdmin)
-      setRole(isAdmin)
-      console.log(role)
       setRole(e.target.value)
       setRoleError('');
     }
@@ -73,11 +72,11 @@ function Registration(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!role){
-      setRoleError('Enter Role');
+      setRoleError('Select Role');
       return;
     }
     if(!gender){
-      setGenderrError('Enter Gender');
+      setGenderrError('Select Gender');
       return;
     }
     try {
@@ -92,7 +91,7 @@ function Registration(props) {
           JoinDate : joinDate,
           Address : address,
           City : city,
-          District : selectedDistrict,
+          District : district,
           State : state,
           PinCode : pinCode,
           IsAdmin : isAdmin
@@ -109,7 +108,6 @@ function Registration(props) {
         navigate.push('/') 
         }, 1500);
       toast.success("Registration Successfull!")
-
   } catch {
       toast.error('Signup failed. Please try again later.');
     }
@@ -180,7 +178,9 @@ return (
             <input className='inputr' type={!isDisable ? "password" : "text"}
               name='password' placeholder='Confirm-Password'
               autoComplete='Confirm-Password'
-              value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)} required/>
+              value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}
+              pattern={password} 
+              title="The Password Confirmation does not match !"required/>
             <span className='iconr' onClick={toggleBtn}>
               {isDisable  ? <IoEyeOutline /> : <IoEyeOffOutline /> }</span>
           </div><p className='pass'>{error}</p>
@@ -241,23 +241,19 @@ return (
               className="inputr"
               type="text"
               value={state}
+              onChange={e => setState(e.target.value)}
+              placeholder="Enter State" 
             required/>
           </div>
           <div className="form-groupr">
-            <label className='labelr'>Select District:</label>
-            <select
-              value={selectedDistrict}
-              onChange={(e) => setSelectedDistrict(e.target.value)}
+            <label className='labelr'>District:</label>
+            <input
               className="inputr"
-              required
-            >
-              <option value="">Select District</option>
-              {districts.map((district, index) => (
-                <option key={index} value={district}>
-                  {district}
-                </option>
-              ))}
-            </select>
+              type="text"
+              value={district}
+              onChange={e => setDistrict(e.target.value)}
+              placeholder="Enter District" 
+            required/>
           </div>
           <div className="form-groupr">
             <label className='labelr'>City:</label>
