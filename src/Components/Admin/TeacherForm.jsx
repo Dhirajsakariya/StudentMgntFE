@@ -4,7 +4,10 @@ import './TeacherForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import Sidebar from '../Sidebar/Sidebar';
-
+import { LuUserCircle2 } from "react-icons/lu";
+import { MdOutlineMail } from "react-icons/md";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 const TeacherForm = () => {
 
@@ -20,6 +23,8 @@ const TeacherForm = () => {
     const [state,setState] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [isValidPhone, setIsValidPhone] = useState(false);
+    const [showPassword, setShowPassword] = useState(false); 
+
 
     const districts = [
         "Ahmedabad", "Amreli","Anand","Aravalli","Banaskantha", "Bharuch", "Bhavnagar", "Botad","Chhota Udaipur", "Dahod", "Dang","Devbhoomi Dwarka",
@@ -37,6 +42,10 @@ const TeacherForm = () => {
         const phoneRegex = /^[+]?[0-9]{8,}$/;
         setIsValidPhone(phoneRegex.test(value));
       };
+      const toggleNewPasswordVisibility = () => { 
+        setShowPassword(!showPassword);
+    };
+      
       
 
   return (
@@ -51,16 +60,20 @@ const TeacherForm = () => {
                 <label className='labels'>Name:</label>
                 <input className='inputs' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
                 name='name'  required />
+                 <LuUserCircle2 className = 'iconT' />
             </div>
             <div className='form-groupa'>
                 <label className='labels'>Email:</label>
                 <input className='inputs' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
                 name='Email'  required />
+                    <MdOutlineMail className = 'iconT' />
             </div>
             <div className='form-groupa'>
                 <label className='labels'>Password:</label>
                 <input className='inputs' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                 name='Password'  required />
+               {showPassword? <IoEyeOutline className='iconT' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconT' onClick={toggleNewPasswordVisibility}/>}
+
             </div>
             <div className='form-groupa'>
             <label className='labels'>Gender:</label>
