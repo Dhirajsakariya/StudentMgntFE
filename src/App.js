@@ -20,7 +20,7 @@ import Student from './Components/Student/Student';
 import FamilyForm from './Components/Admin/FamilyForm'
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
-
+import Config from './Components/Login/config';
 
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
           <Route path='/FamilyForm' component={FamilyForm}/>
           <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/StudentFeeForm' component={StudentFeeForm}/>
-
+          <Route path ='/config' component = {Config}/>
           <Route path='/' component={Login}/>
         </Switch>
       </Router>

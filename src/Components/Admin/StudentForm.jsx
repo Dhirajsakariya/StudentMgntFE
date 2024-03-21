@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {  useHistory } from 'react-router-dom';
 import moment from 'moment';
 import './StudentForm.css'
 import PhoneInput from 'react-phone-input-2';
@@ -9,6 +10,8 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import {CgMail } from "react-icons/cg";
 import {FaRegUserCircle} from "react-icons/fa";
 import {toast,Toaster} from 'react-hot-toast';
+import config from './Config';
+import axios from 'axios';
 
 const StudentForm = () => {
     
@@ -22,7 +25,7 @@ const StudentForm = () => {
     const [joinDate,setJoinDate] = useState('');
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
-    const [districts,setDistrict] = useState('');
+    const [district,setDistrict] = useState('');
     const [state,setState] = useState('');
     const [pinCode, setPinCode] = useState('');
     const [standard,setStandard] =useState('');
@@ -31,11 +34,10 @@ const StudentForm = () => {
     const [isValidPhone, setIsValidPhone] = useState(false);
     const [isVisible, setVisible] = useState(false);
     const [error] = useState('');
-    const [genderError,setGenderError] = useState('');
-
-
-     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
-     const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
+    const[genderError,setGenderrError]=useState('');
+    const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
+    const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
+    const navigate=useHistory();
 
      const handleBloodGroupChange = (e) => {
        setSelecteBloodGroup(e.target.value);
@@ -44,29 +46,68 @@ const StudentForm = () => {
     const toggle = () => {
       setVisible(!isVisible);
     };
-  
 
-    
-      const handlePhoneChange = (value) => {
-        setMobileNumber(value);
-        const phoneRegex = /^[+]?[0-9]{8,}$/;
-        setIsValidPhone(phoneRegex.test(value));
-      };
-      const customToastStyle = { 
-        fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-        fontSize: '16px',
-        fontWeight: 'bold',
-      };
+    const handlePhoneChange = (value) => {
+    setMobileNumber(value);
+    const phoneRegex = /^[+]?[0-9]{8,}$/;
+    setIsValidPhone(phoneRegex.test(value));
+    };
 
+    const customToastStyle = { 
+    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+    fontSize: '16px',
+    fontWeight: 'bold',
+   };
 
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        if(!gender){
-          setGenderError('Please select a Gender');
-          return;
-        }
-      }
+    const handleGender = (e) =>{
+    setGender(e.target.value)
+    setGenderrError('');
+     }
       
+const handleSubmit = async (e) =>
+{
+     e.preventDefault();
+     if(!gender){
+        setGenderrError('Select Gender');
+         return;
+       }
+     try {
+       const url = `${config.ApiUrl}Student/PostStudent`;
+       const data = 
+       { 
+    
+            Name : name,
+            Email : email,
+            Password : password,
+            Gender : gender,
+            BirthDate : birthday,
+            MobileNumber : mobileNumber,
+            JoinDate : joinDate,
+            Address : address,
+            City : city,
+            District : district,
+            State : state,
+            PinCode : pinCode,
+        }
+          JSON.stringify(data)
+          const emailresponse =axios.post(url, data)
+          const userERes = emailresponse.data;
+          if(userERes === "email already exists")
+          {
+                toast.error("User already exist !!!");
+                return;
+          }
+          setTimeout(() => {
+            navigate.push('/') 
+            }, 1500);
+          toast.success("Student Registration Successfull!")
+      } 
+      catch 
+      {
+          toast.error(' Please try again later.');
+      }
+        return;
+ }
       
       
     
@@ -74,7 +115,7 @@ const StudentForm = () => {
   return (
     <Sidebar>
   <>
-    <div className='containerr'>
+    <div className='containerS'>
       <form onSubmit={handleSubmit}>
         <h2 className='signup'>Student Form</h2>
       <div className='form-group1'>
@@ -137,7 +178,7 @@ const StudentForm = () => {
               type="radio"
               value="male"
               checked={gender === "male"}
-              onChange={() => setGender("male")}
+              onChange={handleGender}
               required
             />
             <label>Male</label>
@@ -145,12 +186,13 @@ const StudentForm = () => {
               type="radio"
               value="female"
               checked={gender === "female"}
-              onChange={() => setGender("female")}
+              onChange={handleGender}
               required
             />
             <label>Female</label>
           </div>
-          
+          {genderError && <p style={{color:'red'}}>{genderError}</p>}
+
         </div>
         </div>
         <div className='form-groupr2'>
@@ -180,7 +222,7 @@ const StudentForm = () => {
               className="inputr"
               id="district"
               name="district"
-              value={districts}
+              value={district}
               onChange={(e) => setDistrict(e.target.value)}
               placeholder="District"
               required
@@ -243,7 +285,7 @@ const StudentForm = () => {
           </div>       
           </div>
         </div>
-        <button className='buttonr'  type='submit'>Sign Up</button>
+        <button className='buttonr'  type='submit'onClick={()=>handleSubmit}>Save</button>
       </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
