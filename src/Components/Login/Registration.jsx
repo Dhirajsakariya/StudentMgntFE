@@ -46,7 +46,6 @@ function Registration(props) {
       setDisable(!isDisable);
     };
   
-    console.log(role);
   const handleRole = (e) =>{
     if (e.target.value === 'admin'){
       setIsAdmin(isAdmin => !isAdmin)
