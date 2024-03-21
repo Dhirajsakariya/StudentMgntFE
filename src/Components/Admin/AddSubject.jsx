@@ -42,7 +42,7 @@ const AddSubject = () => {
               value={subjectName}
               onChange={(e) => {setSubjectName(e.target.value);setSubjectNameError('');}}
               
-            />
+            />  
             <PiBookOpenTextLight className="feeformicon"/>
             <br />
             

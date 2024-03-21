@@ -46,7 +46,6 @@ function App() {
           <Route path='/FamilyForm' component={FamilyForm}/>
           <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/StudentFeeForm' component={StudentFeeForm}/>
-
           <Route path='/' component={Login}/>
         </Switch>
       </Router>
