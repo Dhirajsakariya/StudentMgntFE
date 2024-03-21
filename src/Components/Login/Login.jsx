@@ -12,7 +12,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false); 
     const [id, setId] = useState();
     const navigate = useHistory();
-    const [role, setRole] = useState();
+    const [role, setRole] = useState('');
+
     const [rememberMe, setRememberMe] = useState(false); // Add rememberMe state
 
     useEffect(() => {
@@ -36,20 +37,7 @@ useEffect(() => {
             localStorage.removeItem('registeredEmail'); // Remove the email after fetching it
         }
      }, []); // Empty dependency array means this effect runs only once when component mounts
-
-     useEffect(() => {
-        const fetchUserName = async () => {
-                const response = await fetch(`${config.ApiUrl}User/GetUserName${email}`);
-                if (response.ok) {
-                    const userData = await response.json();
-                    setId(userData.id);
-                } 
-        };
-        if(email)
-        {
-            fetchUserName();
-        }
-    }, [email]);
+    
 
 const handleUserChange = (e) => {
     setEmail(e.target.value);
@@ -70,14 +58,16 @@ const handleUserChange = (e) => {
             return;
           }
         
-        try {
-            const response = await fetch(`${config.ApiUrl}User/Login`, {
-                method: 'POST',
+          try {
+            const response = await fetch(`${config.ApiUrl}AdminTeacher/IsLogin`, {
+                method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({Role:role ,email, password })
             });
+        
+
             if (response.ok) {
 
                 const data = await response.json();
@@ -92,7 +82,7 @@ const handleUserChange = (e) => {
                 }
 
                 // Delay navigation to ensure toast message is visible
-                setTimeout(() => {
+               setTimeout(() => {
                     navigate.push('/UpdateUserDetail'); 
                 }, 1500); 
                 
@@ -128,11 +118,11 @@ const handleUserChange = (e) => {
                 <div className='form-groupl'>
                     <label className='labellogin'>User Role</label>
                     <div className='radio-group3'>
-                    <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole(e.target.value)} />
+                    <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
                     <label htmlFor="administrator">Admin</label>
-                    <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole(e.target.value)} />
+                    <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole('teacher')} />
                     <label htmlFor="staff">Teacher</label>
-                    <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
+                    <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole('student')} />
                     <label htmlFor="user">Student</label>
                     </div>
                 </div>
@@ -153,8 +143,6 @@ const handleUserChange = (e) => {
                     <div className='password-input'>
                     <input className='inputl' type={showPassword ? 'text' : 'password'} value={password}     autoComplete="current-password"
                             onChange={handlePasswordChange} placeholder='Enter Your Password'
-                         pattern="^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[~\@\!\#\$\%\^\&\\?]).{8,15}$"
-                         title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
                          required />
                         {showPassword ? <IoEyeOutline className='iconl' onClick={togglePasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={togglePasswordVisibility} />}
                     </div>
