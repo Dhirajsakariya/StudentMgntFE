@@ -20,6 +20,7 @@ import Student from './Components/Student/Student';
 import FamilyForm from './Components/Admin/FamilyForm'
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
+import AddSubject from './Components/Admin/AddSubject';
 
 function App() {  
   return (
@@ -41,10 +42,10 @@ function App() {
           <Route path='/Standard' component={Standard}/>
           <Route path='/SubjectTimeTableForm' component={SubjectTimeTableForm}/>
           <Route path='/Student' component={Student}/>
+          <Route path='/AddSubject' component={AddSubject}/>
           <Route path='/FamilyForm' component={FamilyForm}/>
           <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/StudentFeeForm' component={StudentFeeForm}/>
-
           <Route path='/' component={Login}/>
         </Switch>
       </Router>

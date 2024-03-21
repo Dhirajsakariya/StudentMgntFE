@@ -17,28 +17,28 @@ const FamilyForm = () => {
 
   const [userData, setUserData] = useState({id:'',email:''});
   const [editing, setEditing] = useState(false);
-  const [familyMembers, setFamilyMembers] = useState([]);
-  const [email, setEmail] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [isValidPhone, setIsValidPhone] = useState(false);
- 
+
   const [formData, setFormData] = useState({
     id: '',
     email:'',
     name: '',
     occupation: '',
     gender: '',
-    mobileNo: '',
+    
     relation: '',
   });
+  const[emailError,setEmailError] =useState();
+  const[nameError,setNameError] = useState();
+  const [familyMembers, setFamilyMembers] = useState([]);
+  const [occupationError, setOccupationError] = useState('');
+  const [genderError,setGenderError] =useState('');
+  const[mobileNoError,setMobileNoError]=useState('');
+  const[mobileNo,setMobileNo] = useState('');
+  const [relationError, setRelationError] = useState('');
   
-  const relations=[ "Father", "Mother"];
-  const handlePhoneChange = (value) => {
-    setMobileNo(value);
-    const phoneRegex = /^[+]?[0-9]{8,}$/;
-    setIsValidPhone(phoneRegex.test(value));
-  };
+  const [isValidPhone, setIsValidPhone] = useState(false);
 
+  const relations=[ "Father", "Mother"];
  useEffect(() => {
   const storedUserDetails = JSON.parse(localStorage.getItem('loggedEmail'));
   if(storedUserDetails){
@@ -73,29 +73,35 @@ const FamilyForm = () => {
     e.preventDefault();
 
     const emailRegex = /^\S+@\S+\.\S+$/;
-    if (!emailRegex.test(email)) {
-        toast.error('Please enter a valid email address!');
+    if (!emailRegex.test(formData.email)) {
+       // toast.error('Please enter a valid email address!');
+        setEmailError('Please Enter an Valid Email');
         return;
     }
-    if(!formData.occupation)
-    {
-        toast.error('please enter occupation');
-    }
+  //  if (!formData.email) {
+  //     setEmailError('please Enter an Email')
+  //     return;
+  //   }
     else if(!formData.name)
     {
-       toast.error('Please Enter a name');
-      
-    }
-    else if (!formData.gender) {
-      toast.error('Please select a Gender');
+      setNameError('Please Enter a Name');
       return;
     }
-    // else if(!formData.mobileNo){
-    //   toast.error('Please Select a Mobile Number');
-    //   return;
-    // }
+    else if(!formData.occupation)
+    {
+      setOccupationError('Please Enter an Occupation');
+      return;
+    }
+    else if (!formData.gender) {
+      setGenderError('Please select a Gender');
+      return;
+    }
     else if (!formData.relation) {
-      toast.error('Please select a Relation');
+      setRelationError('Please select a Relation');
+      return;
+    }
+    else if(!mobileNo){
+      setMobileNoError('Please Select a Mobile Number');
       return;
     }
      
@@ -115,7 +121,7 @@ const FamilyForm = () => {
           if (editing) {
             familyMember.Id = formData.id; // Add member id for editing
             response = await fetch(`${config.ApiUrl}FamilyMember/UpdateFamilyMember`, {
-            method: 'PUT',
+            method: 'PUT',  
             headers: {
               'Content-Type': 'application/json'
             },
@@ -169,6 +175,7 @@ const FamilyForm = () => {
           relation: '',
          });
         } 
+        
   
         } catch (error) {
             toast.error(error.message || (editing ? 'Failed to edit family member' : 'Failed to add family member'));
@@ -179,6 +186,18 @@ const handleEdit = async (user) => {
   setFormData(user);
   setEditing(true);
 };
+
+const handlePhoneChange = (value) => {
+  setMobileNo(value);
+  const phoneRegex = /^[+]?[0-9]{8,}$/;
+  if (!phoneRegex.test(value)) {
+    setMobileNoError('please enter valid Mobile Number');
+  }else{
+    setMobileNoError('');//clear the error if the input is valid
+  }
+  setIsValidPhone(phoneRegex.test(value));
+};
+
 
 const handleDelete = async (id) => {
   Swal.fire({
@@ -230,11 +249,15 @@ const customToastStyle = {
                 <label >Email:</label>
                   <input 
                           type='email' 
-                          value={email} 
-                          onChange={(e) => setEmail(e.target.value)}
+                          value={formData.email} 
                           placeholder='Email'
-                          name='email'  required />
-                  <CgMail className='familyformicon' />
+                          onChange={(e) => {setFormData({ ...formData, email: e.target.value });
+                          setEmailError('');} }
+                required
+              /><CgMail className='familyformicon' />
+              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}
+                          
+                  
             </div>
           
             <div className='form-groupf'>
@@ -243,9 +266,11 @@ const customToastStyle = {
                         type="text"
                         value={formData.name}
                         placeholder='Full Name'
-                        onChange={(e) => {setFormData({ ...formData, name: e.target.value })}}
-                        required/>
-                  < FiUser className='familyformicon' />
+                        onChange={(e) => {setFormData({ ...formData, name: e.target.value });
+                          setNameError('');} }
+                required
+              /> < FiUser className='familyformicon' />
+              {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
             </div>
 
             <div className='form-groupf'>
@@ -254,9 +279,11 @@ const customToastStyle = {
                         type='text'
                         value={formData.occupation}
                         placeholder='Occupation'
-                        onChange={(e)=>{setFormData({ ...formData, occupation: e.target.value })}}
-                        required/>
-                <img src={ocuupation} className='familyformicon'/>
+                        onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
+                        setOccupationError('');} }
+              required
+            /><img src={ocuupation} className='familyformicon'/>
+            {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
             </div>
             <div className='form-groupf'>
               <label>Gender:</label>
@@ -266,8 +293,11 @@ const customToastStyle = {
                           value="male"
                           checked={formData.gender === "male" }
                           onChange={(e) => {
-                          setFormData({...formData, gender: e.target.value});}}
-                          required/>
+                            setFormData({...formData, gender: e.target.value});
+                            setGenderError('');
+                          }}
+                          required
+                        />
                 
               <label>Male</label>
                 <input
@@ -275,10 +305,14 @@ const customToastStyle = {
                         value="female"
                         checked={formData.gender === "female"}
                         onChange={(e) => {
-                        setFormData({...formData, gender: e.target.value});}}
-                        required/>
+                          setFormData({...formData, gender: e.target.value});
+                          setGenderError('');
+                        }}
+                        required
+                      />
               <label>Female</label>
               </div>
+              {genderError && <p style={{color: 'red'}}>{genderError}</p>}
             </div>
            
             <div className="form-groupf">
@@ -288,7 +322,10 @@ const customToastStyle = {
                         className='relation'
                         required
                         onChange={(e) => {
-                        setFormData({ ...formData, relation: e.target.value });}}>
+                          setFormData({ ...formData, relation: e.target.value });
+                          setRelationError('');
+                        }}
+                      >
                 <option value="">Select Relation</option>
                   {relations.map((relation) => (
                     <option key={relation} value={relation}>
@@ -296,6 +333,7 @@ const customToastStyle = {
                     </option>
                   ))}
                 </select>
+                {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
             </div>
 
             <div className='form-groupa'>
@@ -305,12 +343,14 @@ const customToastStyle = {
                        country={'in'}
                        value={mobileNo}
                        onChange={handlePhoneChange}
-                       enableSearch={true}
+                       disableDropdown={true}
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
                        containerStyle={{padding:'1px'}}
+                     
                   />
                 </div>
+                {mobileNoError && <p style={{ color:'red'}}>{mobileNoError}</p>}
             </div>
             
             <button type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
