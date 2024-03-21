@@ -22,19 +22,22 @@ function Registration(props) {
   const [mobileNumber, setMobileNumber] = useState('');
   const [joinDate, setJoinDate] = useState('');
   const [address, setAddress] = useState('');
-  const [state] = useState('Gujarat'); // Default state is Gujarat
-  const districts = ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar", "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar", "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad"];
-  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [state,setState] = useState(); 
+  const [district , setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [pinCode, setPinCode] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
+
+  //State for Enter role in Db
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState();
 
   const [isVisible, setVisible] = useState(false);
   const [isDisable, setDisable] = useState(false);
   const [error] = useState('');
-
+  const[roleError,setRoleError]=useState('');
+  const[genderError,setGenderrError]=useState('');
+  
   const toggle = () => {
       setVisible(!isVisible);
     };
@@ -46,11 +49,16 @@ function Registration(props) {
   const handleRole = (e) =>{
     if (e.target.value === 'admin'){
       setIsAdmin(isAdmin => !isAdmin)
-      setRole(isAdmin)
-      console.log(role)
       setRole(e.target.value)
+      setRoleError('');
     }
     setRole(e.target.value)
+    setRoleError('');
+  }
+
+  const handleGender = (e) =>{
+    setGender(e.target.value)
+    setGenderrError('');
   }
   const navigate=useHistory();
   
@@ -61,70 +69,16 @@ function Registration(props) {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-    if (!name || !email || !birthday || !password || !confirmPassword) {
-      toast.error('All fields are required!');
+    e.preventDefault();
+    if(!role){
+      setRoleError('Select Role');
       return;
     }
-    if (!name) {
-      toast.error('Please enter your name!');
+    if(!gender){
+      setGenderrError('Select Gender');
       return;
     }
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    if (!email || !emailRegex.test(email)) {
-      toast.error('Please enter a valid email address!');
-      return;
-    }
-    if (!password) {
-      toast.error('Please enter a password!');
-      return;
-    }
-    if (!confirmPassword || password !== confirmPassword) {
-      toast.error('Password does not match!');
-      return;
-    }
-    if (!gender) {
-      toast.error('Please select your gender!');
-      return;
-    }
-    if (!birthday) {
-      toast.error('Please select your birthday!');
-      return;
-    }
-    if (!isValidPhone) {
-      toast.error('Please enter a valid mobile number!');
-      return;
-    }
-    if (!joinDate) {
-      toast.error('Please select your join date!');
-      return;
-    }
-    if (!address) {
-      toast.error('Please enter your address!');
-      return;
-    }
-    if (!state) {
-      toast.error('Please enter your state!');
-      return;
-    }
-    if (!selectedDistrict) {
-      toast.error('Please select your district!');
-      return;
-    }
-    if (!city) {
-      toast.error('Please enter your city!');
-      return;
-    }
-    if (!pinCode) {
-      toast.error('Please enter your pin code!');
-      return;
-    }
-    if (!role) {
-      toast.error('Please select your role!');
-      return;
-    }
-
-  try {
+    try {
         const url = `${config.ApiUrl}AdminTeacher/PostAdminTeachers`;
         const data = {
           Name : name,
@@ -136,7 +90,7 @@ function Registration(props) {
           JoinDate : joinDate,
           Address : address,
           City : city,
-          District : selectedDistrict,
+          District : district,
           State : state,
           PinCode : pinCode,
           IsAdmin : isAdmin
@@ -153,10 +107,10 @@ function Registration(props) {
         navigate.push('/') 
         }, 1500);
       toast.success("Registration Successfull!")
-
   } catch {
       toast.error('Signup failed. Please try again later.');
     }
+      return;
 };
 
 const customToastStyle = { 
@@ -191,6 +145,7 @@ return (
               {/* <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
               <label htmlFor="user">Student</label> */}
             </div>
+            {roleError && <p style={{color:'red'}}>{roleError}</p>}
           </div>
           <div className='form-groupr'>
             <label className='labelr'>Name:</label>
@@ -222,7 +177,9 @@ return (
             <input className='inputr' type={!isDisable ? "password" : "text"}
               name='password' placeholder='Confirm-Password'
               autoComplete='Confirm-Password'
-              value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)} required/>
+              value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}
+              pattern={password} 
+              title="The Password Confirmation does not match !"required/>
             <span className='iconr' onClick={toggleBtn}>
               {isDisable  ? <IoEyeOutline /> : <IoEyeOffOutline /> }</span>
           </div><p className='pass'>{error}</p>
@@ -240,6 +197,7 @@ return (
                 onChange={handlePhoneChange}
                 inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
                 containerStyle={{padding:'1px'}}
+                required
               />                     
             </div>
           </div>
@@ -253,7 +211,7 @@ return (
               type="radio"
               value="male"
               checked={gender === "male"}
-              onChange={() => setGender("male")}
+              onChange={handleGender}
               required
             />
             <label>Male</label>
@@ -261,11 +219,12 @@ return (
               type="radio"
               value="female"
               checked={gender === "female"}
-              onChange={() => setGender("female")}
+              onChange={handleGender}
               required
             />
             <label>Female</label>
           </div>
+          {genderError && <p style={{color:'red'}}>{genderError}</p>}
         </div>
           <div className='form-groupr'>
           <label className='labell'>Join Date:</label>
@@ -281,22 +240,19 @@ return (
               className="inputr"
               type="text"
               value={state}
-            />
+              onChange={e => setState(e.target.value)}
+              placeholder="Enter State" 
+            required/>
           </div>
           <div className="form-groupr">
-            <label className='labelr'>Select District:</label>
-            <select
-              value={selectedDistrict}
-              onChange={(e) => setSelectedDistrict(e.target.value)}
+            <label className='labelr'>District:</label>
+            <input
               className="inputr"
-            >
-              <option value="">Select District</option>
-              {districts.map((district, index) => (
-                <option key={index} value={district}>
-                  {district}
-                </option>
-              ))}
-            </select>
+              type="text"
+              value={district}
+              onChange={e => setDistrict(e.target.value)}
+              placeholder="Enter District" 
+            required/>
           </div>
           <div className="form-groupr">
             <label className='labelr'>City:</label>
@@ -322,7 +278,7 @@ return (
             />
           </div>        
         </div>
-        <button className='buttonr' onClick={handleSubmit} type='submit'>Sign Up</button>
+        <button type="submit" className='buttonr' onClick={()=>handleSubmit}>Sign Up</button>
       </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
