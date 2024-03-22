@@ -108,6 +108,9 @@
   color:gray;
   position:absolute;
 }
+textarea{
+  height: 33px;
+}
 
 .iconT {
   margin-left:-20px ;
