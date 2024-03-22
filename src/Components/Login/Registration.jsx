@@ -31,13 +31,14 @@ function Registration(props) {
   //State for Enter role in Db
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState();
-
+  
   const [isVisible, setVisible] = useState(false);
   const [isDisable, setDisable] = useState(false);
   const [error] = useState('');
   const[roleError,setRoleError]=useState('');
-  const[genderError,setGenderrError]=useState('');
-  
+  const[genderError,setGenderError]=useState('');
+  const[mobileError,setMobileError]=useState('');
+
   const toggle = () => {
       setVisible(!isVisible);
     };
@@ -46,7 +47,8 @@ function Registration(props) {
       setDisable(!isDisable);
     };
   
-    console.log(role);
+  const navigate=useHistory();
+  
   const handleRole = (e) =>{
     if (e.target.value === 'admin'){
       setIsAdmin(isAdmin => !isAdmin)
@@ -59,14 +61,14 @@ function Registration(props) {
 
   const handleGender = (e) =>{
     setGender(e.target.value)
-    setGenderrError('');
+    setGenderError('');
   }
-  const navigate=useHistory();
-  
+
   const handlePhoneChange = (value) => {
     setMobileNumber(value);
     const phoneRegex = /^[+]?[0-9]{8,}$/;
     setIsValidPhone(phoneRegex.test(value));
+    setMobileError('');
   };
 
   const handleSubmit = async (e) => {
@@ -76,12 +78,15 @@ function Registration(props) {
       return;
     }
     if(!gender){
-      setGenderrError('Select Gender');
+      setGenderError('Select Gender');
+      return;
+    }
+    if(!mobileNumber){
+      setMobileError('Enter Mobile Number');
       return;
     }
     try {
-        const url = `${config.ApiUrl}AdminTeacher/PostAdminTeachers`;
-        const data = {
+          const emailresponse =await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
           Name : name,
           Email : email,
           Password : password,
@@ -95,19 +100,20 @@ function Registration(props) {
           State : state,
           PinCode : pinCode,
           IsAdmin : isAdmin
-        }
-      JSON.stringify(data)
-      const emailresponse =axios.post(url, data)
+      });
       const userERes = emailresponse.data;
       if(userERes === "email already exists")
       {
             toast.error("User already exist !!!");
             return;
       }
-      setTimeout(() => {
-        navigate.push('/') 
-        }, 1500);
-      toast.success("Registration Successfull!")
+      else{
+        setTimeout(() => {
+          navigate.push('/') 
+          }, 1500);
+        toast.success("Registration Successfull!")
+      }
+      
   } catch {
       toast.error('Signup failed. Please try again later.');
     }
@@ -202,6 +208,7 @@ return (
               />                     
             </div>
           </div>
+          {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
         </div>
         <div className='form-groupr2'>
         <div className='form-groupr'>

@@ -15,19 +15,15 @@ import TeacherForm from './Components/Admin/TeacherForm';
 import Student_Form from './Components/Teacher/Student_Form';
 import Standard from './Components/Teacher/Standard';
 import TimeTable from './Components/Teacher/TimeTable';
-import SubjectForm from './Components/Teacher/SubjectForm';
+import SubjectTimeTableForm from './Components/Teacher/SubjectTimeTableForm';
 import Student from './Components/Student/Student';
 import FamilyForm from './Components/Admin/FamilyForm'
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
+import AddSubject from './Components/Admin/AddSubject';
 
-
-
-function App() {
- 
-  
+function App() {  
   return (
-
     <div>
       <Router>
         <Switch>
@@ -44,12 +40,12 @@ function App() {
           <Route path='/Student_Form' component ={Student_Form}/>
           <Route path='/TimeTable' component={TimeTable}/>
           <Route path='/Standard' component={Standard}/>
-          <Route path='/SubjectForm' component={SubjectForm}/>
+          <Route path='/SubjectTimeTableForm' component={SubjectTimeTableForm}/>
           <Route path='/Student' component={Student}/>
+          <Route path='/AddSubject' component={AddSubject}/>
           <Route path='/FamilyForm' component={FamilyForm}/>
           <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/StudentFeeForm' component={StudentFeeForm}/>
-
           <Route path='/' component={Login}/>
         </Switch>
       </Router>
