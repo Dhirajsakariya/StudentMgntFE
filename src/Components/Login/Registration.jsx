@@ -38,7 +38,11 @@ function Registration(props) {
   const[roleError,setRoleError]=useState('');
   const[genderError,setGenderError]=useState('');
   const[mobileError,setMobileError]=useState('');
-
+  const [toggleTeacher, setToggleTeacher] = useState(false)
+  const[standard,setStandard]=useState('');
+  const[subject,setSubject]=useState('');
+  const[subjectError,setSubjectError]=useState('');
+  const[standardError,setStandardError]=useState('');
   const toggle = () => {
       setVisible(!isVisible);
     };
@@ -50,14 +54,32 @@ function Registration(props) {
   const navigate=useHistory();
   
   const handleRole = (e) =>{
-    if (e.target.value === 'admin'){
+    if (e.target.value === 'teacher'){
+      setRole(e.target.value)
+      setRoleError('');
+      if(!toggleTeacher){
+      setToggleTeacher(toggleTeacher => !toggleTeacher)
+      }
+    }
+    else{
       setIsAdmin(isAdmin => !isAdmin)
       setRole(e.target.value)
       setRoleError('');
+      if(toggleTeacher){
+      setToggleTeacher(toggleTeacher => !toggleTeacher)
+      }
     }
-    setRole(e.target.value)
-    setRoleError('');
   }
+
+  const handleStandard = (e) => {
+    setStandard(e.target.value);
+    setStandardError('');
+  };
+
+  const handleSubject = (e) => {
+    setSubject(e.target.value);
+    setSubjectError('');
+  };
 
   const handleGender = (e) =>{
     setGender(e.target.value)
@@ -84,6 +106,17 @@ function Registration(props) {
     if(!mobileNumber){
       setMobileError('Enter Mobile Number');
       return;
+    }
+    if(role === 'teacher')
+    {
+      if(!standard){
+        setStandardError('Select standard');
+        return;
+      }
+      if(!subject){
+        setStandardError('Select Subject');
+        return;
+      }
     }
     try {
           const emailresponse =await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
@@ -155,6 +188,30 @@ return (
             {roleError && <p style={{color:'red'}}>{roleError}</p>}
           </div>
           <div className='form-groupr'>
+          {toggleTeacher && (
+             <div className='subjectselection'>
+              <div>
+                <label className='labelr'>Standard Subject</label>
+                <select className='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
+                    <option value="8 - A"> 8 - A</option>
+                    <option value="8 - B"> 8 - B</option>
+                    <option value="9 - A"> 9 - A</option>
+                    <option value="9 - B"> 9 - B</option>
+                    <option value="10 - A">10 - A</option>
+                    <option value="10 - B">10 - B</option>
+                </select>
+                <select className='SubjectSelection' value={subject} onChange={handleSubject}>
+                    <option value="maths">Maths</option>
+                    <option value="science">Science</option>
+                    <option value="English">English</option>
+                </select>
+              </div>
+              {standardError && <p style={{color:'red'}}>{standardError}</p>}
+              {subjectError  && <p style={{color:'red'}}>{subjectError}</p>}
+           </div>
+          )}
+          </div>
+          <div className='form-groupr'>
             <label className='labelr'>Name:</label>
             <input className='inputr' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Full Name'
               name='name'  required />
@@ -175,7 +232,7 @@ return (
               title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
               autoComplete='current-password'
               required/>
-            <span className='iconr' onClick={toggle}>
+            <span className='iconeye' onClick={toggle}>
               {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />
               }</span>
           </div><p className='pass'>{error}</p>
@@ -187,7 +244,7 @@ return (
               value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}
               pattern={password} 
               title="The Password Confirmation does not match !"required/>
-            <span className='iconr' onClick={toggleBtn}>
+            <span className='iconeye' onClick={toggleBtn}>
               {isDisable  ? <IoEyeOutline /> : <IoEyeOffOutline /> }</span>
           </div><p className='pass'>{error}</p>
           <div className='form-groupr'>
