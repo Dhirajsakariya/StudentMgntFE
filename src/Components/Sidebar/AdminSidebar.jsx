@@ -9,11 +9,12 @@ import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import logout from '../Assets/logout.png';
 
-const AdminSidebar = ({ children }) => {
+const AdminSidebar = ({userName, children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    
 
     const menuItem = [
         {
@@ -47,7 +48,7 @@ const AdminSidebar = ({ children }) => {
         <>
              <div className="menu-container">
                 <div className="menu-trigger">
-                    <h2>Welcome To Web</h2>
+                    <h2>Welcome </h2>
                     <div
                         className="user-icon-container"
                         onMouseEnter={() => setDropdownOpen(true)}
@@ -59,7 +60,7 @@ const AdminSidebar = ({ children }) => {
                                 <ul>
                                     <li>
                                         <img className='user_icon' src={user_icon} alt="" />
-                                        <h3>Angle</h3>
+                                        <a href="/AdminPersonal">Angle</a>
                                     </li>
                                     <li onClick={handleLogout}>
                                     <img className='logout_icon' src={logout} alt="" />
@@ -75,8 +76,8 @@ const AdminSidebar = ({ children }) => {
                 <div style={{ width: isOpen ? '300px' : '60px' }} className="sidebar">
                     <div className="top-section">
                         <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
-                            Angle
-                            <br /> <span>Infotech</span>
+                            {}
+                            <br /> <span>{}</span>
                         </h1>
                         <div style={{ marginLeft: isOpen ? '30px' : '0px' }} className="bars">
                             <FaBars onClick={toggle} />
