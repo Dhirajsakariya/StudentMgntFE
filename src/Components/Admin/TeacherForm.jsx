@@ -39,6 +39,12 @@ const TeacherForm = () => {
       const toggleNewPasswordVisibility = () => { 
         setShowPassword(!showPassword);
     };
+    const customToastStyle = { 
+      fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+      fontSize: '16px',
+      fontWeight: 'bold',
+    };
+    
     const navigate=useHistory();
 
     const handleSubmit = async (e) => {
@@ -71,7 +77,9 @@ const TeacherForm = () => {
         const userERes = emailresponse.data;
         if(userERes === "email already exists")
         {
-              toast.error("User already exist !!!");
+              toast.error("Email already exist !!!");
+              console.log(userERes);
+
               return;
         }
         else{
@@ -215,7 +223,8 @@ const TeacherForm = () => {
             <button className='btnnexts'onClick={()=>handleSubmit} type='submit'>Next</button>
          </form>
     </div>
-   
+    <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+
 
     </>
     </Sidebar>
