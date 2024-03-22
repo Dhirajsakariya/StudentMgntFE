@@ -24,7 +24,9 @@ import FamilyForm from './Components/Admin/FamilyForm'
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
 import SubjectTimeTableForm from './Components/Teacher/SubjectTimeTableForm';
-
+import AdminPersonal from './Components/Admin/AdminPersonal';
+import StudentPersonal from './Components/Student/StudentPersonal';
+import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 
 
 function App() {
@@ -57,6 +59,10 @@ function App() {
           <Route path='/AdminSidebar' component={AdminSidebar} />
           <Route path='/StudentSidebar' component={StudentSidebar} />
           <Route path='/TeacherSidebar' component={TeacherSidebar} />
+          <Route path='/AdminPersonal' component={AdminPersonal} />
+          <Route path='/StudentPersonal' component={StudentPersonal} />
+          <Route path='/TeacherPersonal' component={TeacherPersonal} />
+
           <Route path='/' component={Login} />
         </Switch>
       </Router>
