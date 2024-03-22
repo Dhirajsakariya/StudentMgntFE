@@ -32,6 +32,7 @@ const TeacherForm = () => {
   const [isVisible, setVisible] = useState(false);
   const [error] = useState('');
   const[genderError,setGenderrError]=useState('');
+  const [mobileNumberError,setMobileNumberError] =useState('');
   const navigate=useHistory();
 
    
@@ -43,6 +44,12 @@ const TeacherForm = () => {
   const handlePhoneChange = (value) => {
   setMobileNumber(value);
   const phoneRegex = /^[+]?[0-9]{8,}$/;
+  if(!phoneRegex.test(value)){
+    setMobileNumberError('please Enter Valid Mobile No');
+  }
+  else{
+    setMobileNumberError('');//clear the error if input is valid
+  }
   setIsValidPhone(phoneRegex.test(value));
   };
 
@@ -63,7 +70,10 @@ const TeacherForm = () => {
         if(!gender){
            setGenderrError('Select Gender');
             return;
-          }
+        }
+        if(!mobileNumber){
+          setMobileNumberError('Enter Mobile Number');
+        }
         try {
           const url = `${config.ApiUrl}AdminTeacher/PostAdminTeachers`;
           const data = 
@@ -82,20 +92,19 @@ const TeacherForm = () => {
                State : state,
                PinCode : pinCode,
            }
-             JSON.stringify(data)
-             const emailresponse =axios.post(url, data)
-             const userERes = emailresponse.data;
-             if(userERes === "email already exists")
-             {
-                   toast.error("User already exist !!!");
-                   return;
-             }
-             setTimeout(() => {
-               navigate.push('/') 
-               }, 1500);
-             toast.success("Teacher Registration Successfull!")
-         } 
-         catch 
+           JSON.stringify(data)
+           const emailresponse =axios.post(url, data)
+           const userERes = emailresponse.data;
+           if(userERes === "email already exists")
+           {
+                 toast.error("User already exist !!!");
+                 return;
+           }
+           setTimeout(() => {
+             navigate.push('/') 
+             }, 1500);
+           toast.success("Registration Successfull!")
+       } catch 
          {
              toast.error(' Please try again later.');
          }
@@ -108,7 +117,7 @@ const TeacherForm = () => {
   return (
     <Sidebar>   
        <>
-       <div className='containerr'>
+       <div className='containerT'>
       <form onSubmit={handleSubmit}>
         <h2 className='signup'>Teacher Form</h2>
       <div className='form-group1'>
@@ -158,6 +167,7 @@ const TeacherForm = () => {
                 containerStyle={{padding:'1px'}}
               />                     
             </div>
+            {mobileNumberError && <p style={{color:'red'}}>{mobileNumberError}</p>}
           </div>
           
         </div>

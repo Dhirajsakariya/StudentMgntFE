@@ -195,7 +195,7 @@ const handleSubmit = async (e) =>
 
         </div>
         </div>
-        <div className='form-groupr2'>
+        <div className='form-groupr-stud'>
        
         <div className='form-groupr'>
           <label className='labell'>Join Date:</label>
