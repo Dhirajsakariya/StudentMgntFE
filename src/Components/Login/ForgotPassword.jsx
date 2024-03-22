@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import './Login.css';
+import './ForgotPassword.css';
 import { useHistory } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { CgMail } from 'react-icons/cg';
@@ -82,13 +82,13 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className='containerl'>
+        <div className='containerF'>
             <form onSubmit={handleSubmit}>
                 <h2 className='signup'>Reset Password</h2>
-                <div className='form-groupl'>
-                    <label className='labell'>Email:</label>
+                <div className='form-groupF'>
+                    <label className='labelF'>Email:</label>
                     <input
-                        className='inputl'
+                        className='inputF'
                         type='email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -97,15 +97,14 @@ const ForgotPassword = () => {
                     /> 
                 </div>
                 <CgMail className='icone'/>
-                <div className='form-groupl'>
-                    <label className='labell'>Birthdate:</label>
-                    <input className='inputl' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
+                <div className='form-groupF'>
+                    <label className='labelF'>Birthdate:</label>
+                    <input className='inputF' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
                 </div>
-                <div className='form-groupl'>
-                    <label className='labell'>New Password:</label>
-                    <div className='password-input'>
+                <div className='form-groupF'>
+                    <label className='labelFp'>New Password:</label>
                         <input 
-                            className='inputl' 
+                            className='inputF' 
                             type={showNewPassword ? 'text' : 'password'} 
                             value={newPassword} 
                             onChange={(e) => setNewPassword(e.target.value)} 
@@ -115,13 +114,11 @@ const ForgotPassword = () => {
                             required 
                         />
                         {showNewPassword ? <IoEyeOutline className='iconl' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleNewPasswordVisibility} />}
-                    </div>
                 </div>
-                <div className='form-groupl'>
-                    <label className='labell'>Confirm Password:</label>
-                    <div className='password-input'>
+                <div className='form-groupF'>
+                    <label className='labelFp'>Confirm Password:</label>
                         <input 
-                            className='inputl' 
+                            className='inputF' 
                             type={showConfirmPassword ? 'text' : 'password'} 
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -131,10 +128,9 @@ const ForgotPassword = () => {
                             required 
                         />
                         {showConfirmPassword ? <IoEyeOutline className='iconle' onClick={toggleConfirmPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleConfirmPasswordVisibility} />}
-                    </div>
-                </div>
+                      </div>
                 <div>
-                    <button type='submit' className='buttonf'>Reset Password</button>
+                    <button type='submit' className='buttonF'>Reset Password</button>
                 </div>
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
