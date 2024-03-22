@@ -28,6 +28,7 @@ const StudentForm = () => {
     const [selectedBloodGroup,setSelectedBloodGroup] = useState("");
     const [selectedStandarad,setSelectedStandard] = useState("");
     const [pinCode,setPinCode] = useState('');
+    const [isVisible,setVisible] = useState('');
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
     const standard = ["8A","8B","9A","9B","10A","10B"];
@@ -35,10 +36,16 @@ const StudentForm = () => {
       setSelectedStandard(e.target.value);
     }
 
-    const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
- 
-    const handleBloodGroupChange = (e) => {
-      setSelectedBloodGroup(e.target.value);
+      
+     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
+    // const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
+
+      const handleBloodGroupChange = (e) => {
+        setSelectedBloodGroup(e.target.value);
+     };
+
+    const toggle = () => {
+      setVisible(!isVisible);
     };
 
     const districts = [
