@@ -16,7 +16,7 @@ const StudentForm = () => {
     const [gender,setGender] = useState('');
     const [birthday, setBirthday] = useState('');
     const [joinDate,setJoinDate] = useState('');
-    //const [bloodGroup,setBloodGroup] = useState('');
+    const [bloodGroup,setBloodGroup] = useState('');
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
