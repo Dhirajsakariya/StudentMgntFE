@@ -81,10 +81,23 @@ const handleUserChange = (e) => {
                     localStorage.removeItem('rememberedPassword');
                 }
 
-                // Delay navigation to ensure toast message is visible
-               setTimeout(() => {
-                    navigate.push('/UpdateUserDetail'); 
-                }, 1500); 
+                setTimeout(() => {
+                switch (role) {
+                    case 'admin':
+                        navigate.push('/AdminSidebar');
+                        break;
+                    case 'teacher':
+                        navigate.push('/TeacherSidebar');
+                        break;
+                    case 'student':
+                        navigate.push('/StudentSidebar');
+                        break;
+                    default:
+                        navigate.push('/'); 
+                        break;
+                }
+               
+                  }, 1500); 
                 
                 toast.success("Login Successfully!")
                 localStorage.setItem("loggedEmail",JSON.stringify({
