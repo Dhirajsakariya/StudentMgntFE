@@ -3,7 +3,7 @@ import moment from 'moment';
 import './StudentForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import {  useHistory } from 'react-router-dom';
 import {toast,Toaster} from 'react-hot-toast';
 import axios from 'axios';
@@ -18,6 +18,7 @@ const StudentForm = () => {
     const [gender,setGender] = useState('');
     const [birthday, setBirthday] = useState('');
     const [joinDate,setJoinDate] = useState('');
+    const [grNo,setGrNo] = useState('');
     //const [bloodGroup,setBloodGroup] = useState('');
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
@@ -28,7 +29,6 @@ const StudentForm = () => {
     const [selectedBloodGroup,setSelectedBloodGroup] = useState("");
     const [selectedStandarad,setSelectedStandard] = useState("");
     const [pinCode,setPinCode] = useState('');
-    const [isVisible,setVisible] = useState('');
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
     const standard = ["8A","8B","9A","9B","10A","10B"];
@@ -36,16 +36,10 @@ const StudentForm = () => {
       setSelectedStandard(e.target.value);
     }
 
-      
-     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
-    // const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
-
-      const handleBloodGroupChange = (e) => {
-        setSelectedBloodGroup(e.target.value);
-     };
-
-    const toggle = () => {
-      setVisible(!isVisible);
+    const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
+ 
+    const handleBloodGroupChange = (e) => {
+      setSelectedBloodGroup(e.target.value);
     };
 
     const districts = [
@@ -78,6 +72,7 @@ const StudentForm = () => {
         }
         try {
               const emailresponse =await axios.post(`${Config.ApiUrl}Student/PostStudent`,{
+              GrNo : grNo,
               Name : name,
               Email : email,
               Password : password,
@@ -115,39 +110,50 @@ const StudentForm = () => {
   
    
   return (
-    <Sidebar>
+    <AdminSidebar>
     <>
         <div className='containerS'>
             <form onSubmit={handleSubmit}>
                 <div className='div-one'>
-                <h2 className='studentformh2'>Student Detail</h2>
-                <div className='form-groups'>
+                  <h2 className='studentformh2'>Student Detail</h2>
+
+                  <div className='form-groupadminstudent'>
+                    <label className='labels'>Gr No:</label>
+                    <input className='inputs' type='text' value={grNo} onChange={(e)=> setGrNo(e.target.value)} placeholder='Enter Gr No.'
+                      name='grno'  required />
+                  </div>
+
+                  <div className='form-groupadminstudent'>
                     <label className='labels'>Roll  No:</label>
                     <input className='inputs' type='text' value={rollNo} onChange={(e)=> setRollNo(e.target.value)} placeholder='Enter RollNo'
                     name='Rollno'  required />
-                </div>
-                <div className='form-groups'>
+                  </div>
+
+                  <div className='form-groupadminstudent'>
                     <label className='labels'>Name:</label>
                     <input className='inputs' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
                     name='name'  required />
-                </div>
-                <div className='form-groups'>
+                  </div>
+                
+                  <div className='form-groupadminstudent'>
                     <label className='labels'>Email:</label>
                     <input className='inputs' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
                     name='Email'  required />
-                </div>
-                <div className='form-groups'>
+                  </div>
+                
+                  <div className='form-groupadminstudent'>
                     <label className='labels'>Password:</label>
                     <input className='inputs' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                     name='Password'  required />
-                </div>
-                <div className='form-groups'>
-                <label className='labels'>Gender:</label>
-                <div className="radio-groupa">
+                  </div>
+                
+                  <div className='form-groupadminstudent'>
+                    <label className='labels'>Gender:</label>
+                      <div className="radio-groupa">
                        <input className='inputl'
                          type="radio"
                          value="male"
-                     checked={gender === "male"}
+                         checked={gender === "male"}
                          onChange={() => setGender("male")}
                          required
                        />
@@ -160,99 +166,104 @@ const StudentForm = () => {
                          required
                        />
                        <label>Female</label>
-                     </div>
-                     {genderError && <p style={{color:'red'}}>{genderError}</p>}
+                      </div>
+                      {genderError && <p style={{color:'red'}}>{genderError}</p>}
+                  </div>
 
-                </div>
-                <div className='form-groups'>
+                  <div className='form-groupadminstudent'>
                     <label className='labels'>DOB:</label>
                     <input className='inputs' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
-                </div>
+                  </div>
 
-                <div>
-                 <label className='labels' htmlFor="bloodgroup">Select Standard:</label>
-                 <select className='inputs'  value={selectedStandarad} onChange={handelStandardChange}>
-                 <option value="">--Select Standard--</option>
-                  {standard.map((standard, index) => (
-                  <option key={index} value={standard}>{standard}</option>
-                   ))}
-                 </select>
-             </div>
+                  <div>
+                    <label className='labels' htmlFor="bloodgroup">Select Standard:</label>
+                    <select className='inputs'  value={selectedStandarad} onChange={handelStandardChange}>
+                    <option value="">--Select Standard--</option>
+                    {standard.map((standard, index) => (
+                    <option key={index} value={standard}>{standard}</option>
+                     ))}
+                    </select>
+                  </div>
 
-                <div className='form-groups'>
-                    <label className='labels'>Join-Date:</label>
-                    <input className='inputs' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
-                </div>
-           </div>
-        
-            <div className='div-two'>        
+                  
+              </div>
+              
+              <div className='secondpart'>        
                     
-              <div>
-                 <label className='labelh' htmlFor="bloodgroup">Select a BloodGroup:</label>
-                 <select className='inputh'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
-                 <option value="">--Select BloodGroup--</option>
-                  {bloodGroup.map((bloodGroup, index) => (
-                  <option key={index} value={bloodGroup}>{bloodGroup}</option>
+              <div className='formgroupadminstudent1'>
+                    <label className='labelh'>Join-Date:</label>
+                    <input className='inputh' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
+                  </div>
+
+                 <div>
+                   <label className='labelh' htmlFor="bloodgroup">Select a BloodGroup:</label>
+                   <select className='inputh'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
+                   <option value="">--Select BloodGroup--</option>
+                   {bloodGroup.map((bloodGroup, index) => (
+                   <option key={index} value={bloodGroup}>{bloodGroup}</option>
                    ))}
-                 </select>
-             </div>
-                <div className='form-grouph'>
+                  </select>
+                 </div>
+                
+                  <div className='formgroupadminstudent1'>
                     <label className='labelh'>Address:</label>
                     <textarea className='inputtextarea'  value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
                     name='Address'  required />
-                </div> 
-                <div className='form-grouph'>
+                 </div> 
+               
+                  <div className='formgroupadminstudent1'>
                     <label className='labelh'>City:</label>
                     <input className='inputh' type='text' value={city} onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your City'
                     name='city'  required />
-                </div>
+                  </div>
                
-                <div>
-                <label className='labelh' htmlFor="district">Select a district:</label>
+                  <div>
+                     <label className='labelh' htmlFor="district">Select a district:</label>
                      <select className='inputh'  value={selectedDistrict} onChange={handleDistrictChange}>
                      <option value="">--Select District--</option>
-                      {districts.map((district, index) => (
-                      <option key={index} value={district}>{district}</option>
-                       ))}
+                     {districts.map((district, index) => (
+                     <option key={index} value={district}>{district}</option>
+                     ))}
                      </select>
                      {/* {selectedDistrict &&  <p style={{color:'black',position:'right'}}>You selected: {selectedDistrict}</p>} */}
-               </div>
-               <div className='form-grouph'>
+                  </div>
+               
+                  <div className='formgroupadminstudent1'>
                     <label className='labelh'>State:</label>
                     <input className='inputh' type='text' value='Gujarat' onChange={(e)=> setState(e.target.value)}
                     name='city'  required />
+                  </div>
+
+                  <div className='formgroupadminstudent1'>
+                  <label className='labelh'>PinCode:</label>
+                  <input className='inputh' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)} placeholder='Enter PinCode'
+                  name='pincode'  required />
                 </div>
 
-                <div className='form-grouph'>
-                <label className='labelh'>PinCode:</label>
-                <input className='inputh' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)} placeholder='Enter PinCode'
-                name='pincode'  required />
-            </div>
-
-               <div className='form-grouph'>
+                <div className='formgroupadminstudent1'>
                    <label className='labelh'>Mobile Number:</label>
                    <div className='phone_numberS'>
                    <PhoneInput
                        country={'in'}
                        value={mobileNumber}
                        onChange={handlePhoneChange}
-                       enableSearch={true}
+                       disableDropdown={true}
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
                        containerStyle={{padding:'1px'}}
                     />
-                     </div>
-                     {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
-
                    </div>
+                  {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
+                 </div>
                    
+                </div>
+                <button className='btnnext' type='submit'>Next</button>
+                </form>
             </div>
-             <button className='btnnext' type='submit'>Next</button>
-             </form>
-        </div>
-        <Toaster/>
-        </>
-        </Sidebar>
+            
+            <Toaster/>
+          </>
+          </AdminSidebar>
   )
 }
 export default StudentForm

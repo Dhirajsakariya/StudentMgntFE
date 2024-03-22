@@ -3,7 +3,7 @@
   color:black;
   border-radius: 10px;
   padding: 30px 30px;
-  height:700px;
+  height:750px;
   background: transparent;
   border: 2px solid;
   background-color: hsl(107, 17%, 78%);
@@ -102,14 +102,15 @@
   font-size: 18px;
   color: white;
 }
-.form-groupr2{
+/* .form-groupr2{
   margin-left: 400px;
   margin-top: -640px;
-}
+} */
+ 
 
-.div-two{
-  margin-top: -550px;
-  margin-left: -50px;
+.secondpart{
+  margin-top: -548px; 
+  margin-left: -55px; 
 }
 .inputtextarea{
 width: 300px;
@@ -118,7 +119,7 @@ padding: 8px;
 box-sizing: border-box;
 margin-top: 5px;
 border: 1px;
-height: 85px;
+height: 35px;
 border-radius: 5px;
 }
 
@@ -132,7 +133,7 @@ border-radius: 5px;
   justify-content: center;
   text-align: center;
   margin-left: 300px;
-  margin-top: 10px;
+  margin-top: 65px;
   margin-bottom: 15px;
   font-weight: 700;
   font-size: 18px;
