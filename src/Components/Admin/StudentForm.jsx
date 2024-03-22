@@ -74,7 +74,7 @@ const StudentForm = () => {
   return (
     <Sidebar>
   <>
-    <div className='containerr'>
+    <div className='containerS'>
       <form onSubmit={handleSubmit}>
         <h2 className='signup'>Student Form</h2>
       <div className='form-group1'>
