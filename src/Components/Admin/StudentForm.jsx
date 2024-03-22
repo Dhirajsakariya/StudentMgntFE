@@ -10,7 +10,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import {CgMail } from "react-icons/cg";
 import {FaRegUserCircle} from "react-icons/fa";
 import {toast,Toaster} from 'react-hot-toast';
-import config from './Config';
+//import config from './Config';
 import axios from 'axios';
 
 const StudentForm = () => {
@@ -71,42 +71,42 @@ const handleSubmit = async (e) =>
         setGenderrError('Select Gender');
          return;
        }
-     try {
-       const url = `${config.ApiUrl}Student/PostStudent`;
-       const data = 
-       { 
+    //  try {
+    //    const url = `${config.ApiUrl}Student/PostStudent`;
+    //    const data = 
+    //    { 
     
-            Name : name,
-            Email : email,
-            Password : password,
-            Gender : gender,
-            BirthDate : birthday,
-            MobileNumber : mobileNumber,
-            JoinDate : joinDate,
-            Address : address,
-            City : city,
-            District : district,
-            State : state,
-            PinCode : pinCode,
-        }
-          JSON.stringify(data)
-          const emailresponse =axios.post(url, data)
-          const userERes = emailresponse.data;
-          if(userERes === "email already exists")
-          {
-                toast.error("User already exist !!!");
-                return;
-          }
-          setTimeout(() => {
-            navigate.push('/') 
-            }, 1500);
-          toast.success("Student Registration Successfull!")
-      } 
-      catch 
-      {
-          toast.error(' Please try again later.');
-      }
-        return;
+    //         Name : name,
+    //         Email : email,
+    //         Password : password,
+    //         Gender : gender,
+    //         BirthDate : birthday,
+    //         MobileNumber : mobileNumber,
+    //         JoinDate : joinDate,
+    //         Address : address,
+    //         City : city,
+    //         District : district,
+    //         State : state,
+    //         PinCode : pinCode,
+    //     }
+    //       JSON.stringify(data)
+    //       const emailresponse =axios.post(url, data)
+    //       const userERes = emailresponse.data;
+    //       if(userERes === "email already exists")
+    //       {
+    //             toast.error("User already exist !!!");
+    //             return;
+    //       }
+    //       setTimeout(() => {
+    //         navigate.push('/') 
+    //         }, 1500);
+    //       toast.success("Student Registration Successfull!")
+    //   } 
+    //   catch 
+    //   {
+    //       toast.error(' Please try again later.');
+    //   }
+    //     return;
  }
       
       
