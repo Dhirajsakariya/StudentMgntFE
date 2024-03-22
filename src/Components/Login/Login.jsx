@@ -81,10 +81,23 @@ const handleUserChange = (e) => {
                     localStorage.removeItem('rememberedPassword');
                 }
 
-                // Delay navigation to ensure toast message is visible
-               setTimeout(() => {
-                    navigate.push('/UpdateUserDetail'); 
-                }, 1500); 
+                setTimeout(() => {
+                switch (role) {
+                    case 'admin':
+                        navigate.push('/AdminSidebar');
+                        break;
+                    case 'teacher':
+                        navigate.push('/TeacherSidebar');
+                        break;
+                    case 'student':
+                        navigate.push('/StudentSidebar');
+                        break;
+                    default:
+                        navigate.push('/'); 
+                        break;
+                }
+               
+                  }, 1500); 
                 
                 toast.success("Login Successfully!")
                 localStorage.setItem("loggedEmail",JSON.stringify({
@@ -115,7 +128,7 @@ const handleUserChange = (e) => {
             <form onSubmit={handleSubmit}>
                 <h2>Login Form</h2>
                 <input type='hidden' value={id}/>
-                <div className='form-groupl'>
+                <div id='form-groupll'>
                     <label className='labellogin'>User Role</label>
                     <div className='radio-group3'>
                     <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
@@ -126,7 +139,7 @@ const handleUserChange = (e) => {
                     <label htmlFor="user">Student</label>
                     </div>
                 </div>
-                <div className='form-groupl'>
+                <div id='form-groupll'>
                     <label className='labell'>Email:</label>
                     <input
                         className='inputl'
@@ -137,7 +150,7 @@ const handleUserChange = (e) => {
                         required
                     /> 
                 </div>
-                <CgMail className='icone'/>
+                <CgMail id='iconemaill'/>
                 <div className='form-groupl'>
                     <label className='labell'>Password:</label>
                     <div className='password-input'>
