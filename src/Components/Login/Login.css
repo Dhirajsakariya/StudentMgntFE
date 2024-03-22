@@ -120,7 +120,7 @@
   width: 5%;
   margin: 10px;
   margin-left: 2px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 .pass{
   margin-left: 25px;
@@ -223,7 +223,7 @@ button:hover {
 .labellogin{
   margin-left: 25px;
 }
-
+/* 
 #form-groupll{
   margin-bottom: -15px;
 }
@@ -236,4 +236,4 @@ button:hover {
   margin-left:325px;
 
 }  
-
+ */
