@@ -21,6 +21,9 @@ import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
 import AddSubject from './Components/Admin/AddSubject';
 import ParentsPortal from './Components/Admin/ParentsPortal';
+import StudentSidebar from './Components/Sidebar/StudentSidebar';
+import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
+import AdminSidebar from './Components/Sidebar/AdminSidebar';
 
 function App() {  
   return (
@@ -45,7 +48,10 @@ function App() {
           <Route path='/AddSubject' component={AddSubject}/>
           <Route path='/ParentsPortal' component={ParentsPortal}/>
           <Route path='/FeeForm' component={FeeForm}/>
-          <Route path='/StudentFeeForm' component={StudentFeeForm}/>
+          <Route path='/StudentSidebar' component={StudentSidebar}/>
+          <Route path='/TeacherSidebar' component={TeacherSidebar}/>
+          <Route path='/AdminSidebar' component={AdminSidebar}/>
+          <Route path='/StudentFeeForm' component={StudentFeeForm}/>         
           <Route path='/' component={Login}/>
         </Switch>
       </Router>
