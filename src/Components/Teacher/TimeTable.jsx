@@ -1,8 +1,9 @@
 import React from 'react'
 import '../Teacher/TimeTable.css';
-
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 const TimeTable = () => {
   return (
+    <TeacherSidebar>
     <div>
       <div className='timetable'>
         <h1 className='timetable-heading'>TimeTable</h1>
@@ -97,6 +98,7 @@ const TimeTable = () => {
         </div>       
      </div>
     </div>
+    </TeacherSidebar>
   )
 }
 
