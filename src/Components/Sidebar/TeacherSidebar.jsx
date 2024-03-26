@@ -52,7 +52,7 @@ const TeacherSidebar = ({ children }) => {
         <>
              <div className="menu-container">
                 <div className="menu-trigger">
-                    <h2>Welcome To Web</h2>
+                    <h2>Welcome</h2>
                     <div
                         className="user-icon-container"
                         onMouseEnter={() => setDropdownOpen(true)}
@@ -64,7 +64,7 @@ const TeacherSidebar = ({ children }) => {
                                 <ul>
                                     <li>
                                         <img className='user_icon' src={user_icon} alt="" />
-                                        <h3>Angle</h3>
+                                      <a href="/TeacherPersonal">Angle</a>  
                                     </li>
                                     <li onClick={handleLogout}>
                                     <img className='logout_icon' src={logout} alt="" />
