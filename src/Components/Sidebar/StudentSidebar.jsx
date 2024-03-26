@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
-import { MdFamilyRestroom } from 'react-icons/md';
-import { RiDatabase2Line } from 'react-icons/ri';
+import { FaGooglePay } from "react-icons/fa";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
@@ -16,6 +15,11 @@ const StudentSidebar = ({ children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const menuItem = [
+        // {
+        //     path: '/StudentPersonal',
+        //     name: 'Student Personal',
+        //     icon: <BiSolidUserDetail />
+        // },
         {
             path: '/Student',
             name: 'Student',
@@ -24,14 +28,9 @@ const StudentSidebar = ({ children }) => {
         {
             path: '/StudentFeeForm',
             name: 'StudentFeeForm',
-            icon: <MdFamilyRestroom />
+            icon: <FaGooglePay   />
         },
 
-        {
-            path: '/TimeTable',
-            name: 'TimeTable',
-            icon: <MdFamilyRestroom />
-        },
         {
             path: '/login',
             name: 'Logout',

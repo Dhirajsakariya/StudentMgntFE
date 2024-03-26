@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
-import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
-import { MdFamilyRestroom } from 'react-icons/md';
-import { RiDatabase2Line } from 'react-icons/ri';
+import { BiLogOut } from 'react-icons/bi';
+import { IoAddCircleOutline } from "react-icons/io5";
+import { FaGooglePay } from "react-icons/fa";
+
+import { MdFamilyRestroom } from "react-icons/md";
+import { PiStudentBold } from "react-icons/pi";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
@@ -17,22 +20,33 @@ const AdminSidebar = ({userName, children }) => {
     
 
     const menuItem = [
+        // {
+        //     path: '/UpdateUserdetail',
+        //     name: 'User Detail',
+        //     icon: <BiSolidUserDetail  />
+        // },
         {
-            path: '/UpdateUserdetail',
-            name: 'User Detail',
-            icon: <BiSolidUserDetail />
+            path: '/AddSubject',
+            name: 'AddSubject',
+            icon: <IoAddCircleOutline   />
         },
         {
-            path: '/Familydetail',
-            name: 'Family',
-            icon: <MdFamilyRestroom />
+            path: '/FeeForm',
+            name: 'FeeForm',
+            icon: <FaGooglePay  />
         },
         {
-            path: '/JsonData',
-            name: 'Json Data',
-            icon: <RiDatabase2Line />
+        path: '/ParentsPortal',
+            name: 'ParentsPortal',
+            icon: <MdFamilyRestroom  />
         },
         {
+            path: '/StudentForm',
+            name: 'Student Form',
+            icon: <PiStudentBold  />
+        },
+       
+            {
             path: '/login',
             name: 'Logout',
             icon: <BiLogOut />
@@ -76,8 +90,8 @@ const AdminSidebar = ({userName, children }) => {
                 <div style={{ width: isOpen ? '300px' : '60px' }} className="sidebar">
                     <div className="top-section">
                         <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
-                            {}
-                            <br /> <span>{}</span>
+                            Angle
+                            <br /> <span>Infotech</span>
                         </h1>
                         <div style={{ marginLeft: isOpen ? '30px' : '0px' }} className="bars">
                             <FaBars onClick={toggle} />
