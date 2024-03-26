@@ -16,7 +16,7 @@ const TimeTable = () => {
         standard: '',
         section: '',
         subject: '',
-      });
+      });   
 
       useEffect(() => {
         const fetchStandards = async () => {

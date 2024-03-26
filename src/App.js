@@ -27,7 +27,7 @@ import AdminSidebar from './Components/Sidebar/AdminSidebar';
 function App() {  
   return (
     <div>
-      <Router>
+      <Router>       
         <Switch>
           <Route path='/Familydetail' component={Familydetail}/>
           <Route path='/UpdateUserdetail' component={UpdateUserdetail}/>
