@@ -20,7 +20,7 @@ h1{
   .table {    
     margin-left: 310px;
     width:60%;
-    height: 400px;
+    height: 300px;
     table-layout: fixed;
     border: 1px solid black;
     text-align: center;   
@@ -37,3 +37,39 @@ td {
     background-color: hsl(107, 17%, 78%);
 }
 
+/* Standard dropdown */
+.formtable {
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .formtable p{
+    margin-left: 70px;
+  }
+  .labelofform {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-left: 70px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+  }
+  .inputform {
+    width: 300px;
+    margin-left: 70px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 5px;
+  }
+  input, .selectstd {
+    width: 300px;
+    margin-left: 30px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px;
+    border-radius: 5px;
+  }
+
+  
