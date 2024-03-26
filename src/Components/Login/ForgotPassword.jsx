@@ -33,7 +33,7 @@ const ForgotPassword = () => {
         }
 
         try {
-            const response = await fetch(`${config.ApiUrl}User/ChangePassword`, {
+            const response = await fetch(`${config.ApiUrl}AdminTeacher/ChangePassword`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,9 +54,12 @@ const ForgotPassword = () => {
                   }, 1500); 
                 localStorage.setItem('registeredEmail', email);
             } 
-            else if (result === "Email or BirthDate not Exist") {
-                toast.error('Email or Birthday Not Found!');
+            else if (result === "Email not Found") {
+                toast.error('Email not Found!');
             } 
+            else if (result === "Incorrect BirthDate") {
+                toast.error('Incorrect Birthdate!');
+            }
             else 
             {
                 toast.error('Failed to update password!');
@@ -82,10 +85,10 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className='containerF'>
+        <div id='containerF'>
             <form onSubmit={handleSubmit}>
-                <h2 className='signup'>Reset Password</h2>
-                <div className='form-groupF'>
+                <h2 id='signup'>Reset Password</h2>
+                <div id='form-groupF'>
                     <label className='labelF'>Email:</label>
                     <input
                         className='inputF'
@@ -96,12 +99,12 @@ const ForgotPassword = () => {
                         required
                     /> 
                 </div>
-                <CgMail className='icone'/>
-                <div className='form-groupF'>
+                <CgMail id='icone'/>
+                <div id='form-groupF'>
                     <label className='labelF'>Birthdate:</label>
                     <input className='inputF' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
                 </div>
-                <div className='form-groupF'>
+                <div id='form-groupF'>
                     <label className='labelFp'>New Password:</label>
                         <input 
                             className='inputF' 
@@ -113,24 +116,22 @@ const ForgotPassword = () => {
                             placeholder='Enter New Password' 
                             required 
                         />
-                        {showNewPassword ? <IoEyeOutline className='iconl' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleNewPasswordVisibility} />}
+                        {showNewPassword ? <IoEyeOutline id='iconle' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline id='iconle' onClick={toggleNewPasswordVisibility} />}
                 </div>
-                <div className='form-groupF'>
+                <div id='form-groupF'>
                     <label className='labelFp'>Confirm Password:</label>
                         <input 
                             className='inputF' 
                             type={showConfirmPassword ? 'text' : 'password'} 
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
-                            title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters" 
                             placeholder ='Confirm New Password' 
                             required 
                         />
-                        {showConfirmPassword ? <IoEyeOutline className='iconle' onClick={toggleConfirmPasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={toggleConfirmPasswordVisibility} />}
+                        {showConfirmPassword ? <IoEyeOutline id='iconle' onClick={toggleConfirmPasswordVisibility} /> : <IoEyeOffOutline id='iconle' onClick={toggleConfirmPasswordVisibility} />}
                       </div>
                 <div>
-                    <button type='submit' className='buttonF'>Reset Password</button>
+                    <button type='submit' id='buttonF'>Reset Password</button>
                 </div>
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />

@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import './Student.css';
-import Sidebar from '../Sidebar/Sidebar';
+import StudentSidebar from '../Sidebar/StudentSidebar';
 
 
 const Student = () => {
@@ -13,14 +13,14 @@ const Student = () => {
       }, []); 
      
   return (
-    <Sidebar>
+    <StudentSidebar>
         <div className='containeru'>
         <h2>Student Details</h2>
             <form>
                 <div className='form-groupu'>
                 {studentDetails && (
                     <>
-                        <label>Roll NO:</label>
+                        <label>Roll No:</label>
                         <p>{studentDetails.RollNo}</p>
                         <label>Name:</label>
                         <p>{studentDetails.Name}</p>
@@ -36,24 +36,21 @@ const Student = () => {
                         <p>{studentDetails.BloodGroup}</p>
                         <label>Address:</label>
                         <p>{studentDetails.Address}</p>
-                        <label>city:</label>
+                        <label>City:</label>
                         <p>{studentDetails.City}</p>
                         <label>District:</label>
                         <p>{studentDetails.District}</p>
-                        <label>state:</label>
+                        <label>State:</label>
                         <p>{studentDetails.state}</p>
                         <label>PinCode:</label>
                         <p>{studentDetails.PinCode}</p>
-
-
-
                     </>
                 )}
                 <button type='submit' className='next'> Next </button>
               </div>
             </form>
         </div>
-    </Sidebar>
+    </StudentSidebar>
   )
 }
 

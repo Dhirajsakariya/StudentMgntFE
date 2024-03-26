@@ -3,7 +3,7 @@ import moment from 'moment';
 import './StudentForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import {CgMail } from "react-icons/cg";
@@ -72,7 +72,7 @@ const StudentForm = () => {
     
    
   return (
-    <Sidebar>
+    <AdminSidebar>
   <>
     <div className='containerS'>
       <form onSubmit={handleSubmit}>
@@ -248,7 +248,7 @@ const StudentForm = () => {
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
   </>
-        </Sidebar>
+        </AdminSidebar>
   )
 }
 

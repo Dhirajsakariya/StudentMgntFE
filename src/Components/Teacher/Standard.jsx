@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Teacher/Standard.css';
 import config from '../Login/config';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 
 const Standard = () => {
   const [data, setData] = useState([]);
@@ -24,6 +25,7 @@ const Standard = () => {
   }, []);
 
   return (
+    <TeacherSidebar>
     <div>
       <div className='standard'>
         <h1 className='standard-heading'>Standard List</h1>
@@ -48,6 +50,7 @@ const Standard = () => {
         </div>
       </div>
     </div>
+    </TeacherSidebar>
   );
 };
 
