@@ -1,44 +1,44 @@
 
 import React,{useState,useEffect} from 'react';
-import './FamilyForm.css';
+import './ParentsPortal.css';
 //import moment from 'moment';
-import { BiMale ,BiFemale} from "react-icons/bi";
-import { SlCalender } from "react-icons/sl";
 import Sidebar from '../Sidebar/Sidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
-import { CgMail } from 'react-icons/cg';
+import { CgImport, CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import ocuupation from '../Assets/occupation.png'
 
-const FamilyForm = () => {
+const ParentsPortal = () => {
 
   const [userData, setUserData] = useState({id:'',email:''});
   const [editing, setEditing] = useState(false);
-
+  const [id, setId] = useState('');
+  const [studentId, setStudentId] = useState('');
   const [formData, setFormData] = useState({
     id: '',
     email:'',
     name: '',
     occupation: '',
     gender: '',
-    
     relation: '',
   });
+
+  const[idError,setIdError]=useState();
   const[emailError,setEmailError] =useState();
   const[nameError,setNameError] = useState();
   const [familyMembers, setFamilyMembers] = useState([]);
   const [occupationError, setOccupationError] = useState('');
   const [genderError,setGenderError] =useState('');
-  const[mobileNoError,setMobileNoError]=useState('');
-  const[mobileNo,setMobileNo] = useState('');
+  const[mobilenumberError,setMobileNumberError]=useState('');
+  const [mobilenumber, setMobileNumber] = useState('');
   const [relationError, setRelationError] = useState('');
-  
   const [isValidPhone, setIsValidPhone] = useState(false);
-
   const relations=[ "Father", "Mother"];
+
+
  useEffect(() => {
   const storedUserDetails = JSON.parse(localStorage.getItem('loggedEmail'));
   if(storedUserDetails){
@@ -49,20 +49,22 @@ const FamilyForm = () => {
   useEffect(() => {
       const fetchFamilyMembers = async () => {
           try {
-                const response = await fetch(`${config.ApiUrl}FamilyMember/GetByEmail?email=${userData.email}`);
+                const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetail`);
                 if (!response.ok) 
                 {
                   console.log('Failed to fetch family members');
                 }
                 const data = await response.json();
-                console.log(data);
+                setStudentId(data[0]?.studentId)
                 setFamilyMembers(data);
+                console.log(data);
               } 
               catch (error) 
               {
                 console.error('Error fetching family members:', error);
               }
       };
+      
       if(userData.email)
       {
         fetchFamilyMembers();
@@ -100,8 +102,8 @@ const FamilyForm = () => {
       setRelationError('Please select a Relation');
       return;
     }
-    else if(!mobileNo){
-      setMobileNoError('Please Select a Mobile Number');
+    else if(!mobilenumber){
+      setMobileNumberError('Please Select a Mobile Number');
       return;
     }
      
@@ -112,15 +114,15 @@ const FamilyForm = () => {
             FirstName: formData.name,
             Occupation: formData.occupation,
             Gender: formData.gender,
-            MobileNo: formData.mobileNo,
+            MobileNumber: mobilenumber,
             Relation: formData.relation,
-            UserId: userData.id
+            StudentId: studentId 
           };
       
           let response;
           if (editing) {
             familyMember.Id = formData.id; // Add member id for editing
-            response = await fetch(`${config.ApiUrl}FamilyMember/UpdateFamilyMember`, {
+            response = await fetch(`${config.ApiUrl}PutFamily/${formData.id}`, {
             method: 'PUT',  
             headers: {
               'Content-Type': 'application/json'
@@ -130,13 +132,21 @@ const FamilyForm = () => {
             Name: formData.name,
             Occupation: formData.occupation,
             Gender: formData.gender,
-            MobileNo: formData.mobileNo,
+            MobileNumber: mobilenumber,
             Relation: formData.relation,
             })
           });
-        } else {
-          response = await fetch(`${config.ApiUrl}FamilyMember/AddFamilyMember/${userData.id}`, {
-          method: 'POST',
+        } else {            
+          console.log('name',formData.name)
+          console.log('email',formData.email)
+          console.log('occupation',formData.occupation)
+          console.log ('gender',formData.gender)
+          console.log ('mobilenumber',mobilenumber)
+          console.log ('relation',formData.relation)
+          console.log ('studentid',studentId) 
+
+          response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
+          method: 'POST',                         
           headers: {
             'Content-Type': 'application/json'
           },
@@ -145,15 +155,17 @@ const FamilyForm = () => {
             Email: formData.email,
             Occupation: formData.occupation,
             Gender: formData.gender,
-            MobileNo: formData.mobileNo,
+            MobileNumber: mobilenumber,
             Relation: formData.relation,
-            UserId: userData.id
+            StudentId: studentId,
+            
             })
           });
         }
   
         if (response.ok) {
           const result = await response.json();
+          console.log(result);
           if (editing) {
             const updatedFamilyMembers = familyMembers.map(member => 
             member.id === result.id ? result : member);
@@ -171,8 +183,8 @@ const FamilyForm = () => {
           name: '',
           occupation: '',
           gender: '',
-          mobileNo: '',
           relation: '',
+          studentid:''
          });
         } 
         
@@ -188,12 +200,12 @@ const handleEdit = async (user) => {
 };
 
 const handlePhoneChange = (value) => {
-  setMobileNo(value);
+  setMobileNumber(value);
   const phoneRegex = /^[+]?[0-9]{8,}$/;
   if (!phoneRegex.test(value)) {
-    setMobileNoError('please enter valid Mobile Number');
+    setMobileNumberError('please enter valid Mobile Number');
   }else{
-    setMobileNoError('');//clear the error if the input is valid
+    setMobileNumberError('');//clear the error if the input is valid
   }
   setIsValidPhone(phoneRegex.test(value));
 };
@@ -211,7 +223,7 @@ const handleDelete = async (id) => {
   }).then(async (result)=> {
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`${config.ApiUrl}FamilyMember/DeleteFamilyMember/${id}`, {
+        const response = await fetch(`${config.ApiUrl}DeleteFamily{id:guid}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -243,9 +255,21 @@ const customToastStyle = {
       <div className='main'>
         <div className='containerf'>
           <form onSubmit={handleSubmit}>
-            <h2>Family Form</h2>
-
+            <h2>Parents Detail</h2>
+            <input type="hidden" name="id" value={studentId} onChange={(e) => setStudentId(e.target.value)}/>
             <div className='form-groupf'>
+
+            <label >StudentId:</label>
+                  <input 
+                          type='id' 
+                          value={formData.id} 
+                          placeholder='id'
+                          onChange={(e) => {setFormData({ ...formData, id: e.target.value });
+                          setIdError('');} }
+                required
+              />
+              {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
+
                 <label >Email:</label>
                   <input 
                           type='email' 
@@ -341,50 +365,28 @@ const customToastStyle = {
                 <div className='phone_number'>
                   <PhoneInput
                        country={'in'}
-                       value={mobileNo}
+                       value={mobilenumber}
                        onChange={handlePhoneChange}
-                       disableDropdown={true}
+                       disableDropdown={false}
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
                        containerStyle={{padding:'1px'}}
-                     
+                       
+                      
                   />
                 </div>
-                {mobileNoError && <p style={{ color:'red'}}>{mobileNoError}</p>}
+                {mobilenumberError && <p style={{ color:'red'}}>{mobilenumberError}</p>}
             </div>
-            
+          
             <button type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
           </form>
         </div>
       </div>
-      <div className='disp'>
-        {familyMembers.map((user) => {
-                console.log(familyMembers.length);
-                return(
-                  <div className= {editing && user.id === formData.id ?'display editing':'display'} key={user.id}>
-                     <h2>{user.relation}</h2>
-                    <div className="icon_f_m">
-                              {user.gender === 'male' ? (
-                                <BiMale  size='20px'/>
-                              ) : (
-                                <BiFemale size='20px' />
-                              )}
-                              <span>{user.firstName} {user.lastName}</span>
-                            </div>
-                            <div className="dob">
-                            <SlCalender />
-                                <span> {user.birthDate.split("-").reverse().join("-")} </span>
-                              </div>
-                     <button  onClick={() =>handleEdit(user)}>Edit</button>
-                    <button onClick={() =>handleDelete(user.id)}>Delete</button>
-                  </div>
-                );
-        })}
-      </div>
+    
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </Sidebar>
   );
 };
 
-export default FamilyForm;
+export default ParentsPortal;
 

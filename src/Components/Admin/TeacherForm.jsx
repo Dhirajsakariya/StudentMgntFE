@@ -30,7 +30,9 @@ const TeacherForm = () => {
     const [showPassword, setShowPassword] = useState(false); 
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
-  
+    const Subjects = ["Gujarati","Hindi"];
+    const [selectedSubject,setSelectedSubject] =useState("");
+    
       const handlePhoneChange = (value) => {
         setMobileNumber(value);
         const phoneRegex = /^[+]?[0-9]{8,}$/;
@@ -156,15 +158,26 @@ const TeacherForm = () => {
                 <label className='labels'>Join-Date:</label>
                 <input className='inputs' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
+            <div className="form-groupr">
+            <label className='labels'>Subject:</label>
+            <select
+              value={selectedSubject}
+              onChange={(e) => setSelectedSubject(e.target.value)}
+              className="inputs"
+            >
+              <option value="">Select Blood Group</option>
+              {Subjects.map((Subject, index) => (
+                <option key={index} value={Subject}>
+                  {Subject}
+                </option>
+              ))}
+            </select>
+          </div>       
+          
             </div>
-    
+
+            
         <div className='form-two'>        
-                
-            {/* <div className='form-grouph'>
-                <label className='labelh'>BLood Group:</label>
-                <input className='inputh' type='text' value={bloodGroup} onChange={(e)=> setBloodGroup(e.target.value)} placeholder='Blood-Group'
-                name='Blood-Group'  required />
-            </div> */}
 
             <div className='form-groupa'>
                 <label className='labels'>Address:</label>
@@ -220,7 +233,7 @@ const TeacherForm = () => {
                
         </div>
         </div>
-            <button className='btnnexts'onClick={()=>handleSubmit} type='submit'>Next</button>
+            <button className='btnnextT'onClick={()=>handleSubmit} type='submit'>Next</button>
          </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
