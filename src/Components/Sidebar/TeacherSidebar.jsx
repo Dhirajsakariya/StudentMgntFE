@@ -37,6 +37,11 @@ const TeacherSidebar = ({ children }) => {
             icon: <BiLogOut />
         },
         {
+            path: '/TeacherPersonal',
+            name: 'TeacherPersonal',
+            icon: <BiLogOut/>
+        },
+        {
             path: '/',
             name: 'Logout',
             icon: <BiLogOut />

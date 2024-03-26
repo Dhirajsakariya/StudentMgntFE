@@ -35,10 +35,11 @@
 }
 
 
-.form-groupl {
+.form-grouplogin {
   padding-top: 5px;
   margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: -19px;
+  
 }   
 
 .containerl h2{
@@ -222,6 +223,10 @@ button:hover {
 
 .labellogin{
   margin-left: 25px;
+}
+
+.inputlogin{
+
 }
 /* 
 #form-groupll{

@@ -108,7 +108,23 @@ const handleUserChange = (e) => {
             } else if (response.status === 401) {
                 const errorMessage = await response.text();
                 toast.error(errorMessage);
-            } else {
+            }
+            // else if (response.status === 401){
+            //     if(!role)
+            //     {
+            //     toast.error('please select role')
+            //     }
+            //     else if(!email)
+            //     {
+            //         toast.error('please valid email')
+            //     }
+            //     else{
+            //         toast.error('please valid password')
+            //     }
+            // } 
+            
+            
+            else {
                 toast.error('Login failed. Please try again later.');
             }
         } catch (error) {
@@ -128,10 +144,10 @@ const handleUserChange = (e) => {
             <form onSubmit={handleSubmit}>
                 <h2>Login Form</h2>
                 <input type='hidden' value={id}/>
-                <div className='form-groupl'>
+                <div className='form-grouplogin'>
                     <label className='labellogin'>User Role</label>
                     <div className='radio-group3'>
-                    <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
+                    <input className='inputlogin' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
                     <label htmlFor="administrator">Admin</label>
                     <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole('teacher')} />
                     <label htmlFor="staff">Teacher</label>
@@ -139,7 +155,7 @@ const handleUserChange = (e) => {
                     <label htmlFor="user">Student</label>
                     </div>
                 </div>
-                <div className='form-groupl'>
+                <div className='form-grouplogin'>
                     <label className='labell'>Email:</label>
                     <input
                         className='inputl'
@@ -151,7 +167,7 @@ const handleUserChange = (e) => {
                     /> 
                 </div>
                 <CgMail className='icone'/>
-                <div className='form-groupl'>
+                <div className='form-grouplogin'>
                     <label className='labell'>Password:</label>
                     <div className='password-input'>
                     <input className='inputl' type={showPassword ? 'text' : 'password'} value={password}     autoComplete="current-password"
