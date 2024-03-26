@@ -1,17 +1,17 @@
-import React ,{useState}from 'react'
+import React ,{useState, useEffect }from 'react'
 import moment from 'moment';
 import './TeacherForm.css'
 import {  useHistory } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import {toast,Toaster} from 'react-hot-toast';
 import { LuUserCircle2 } from "react-icons/lu";
 import { MdOutlineMail } from "react-icons/md";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import axios from 'axios';
-import Config from './Config';
+import config from '../Login/config';
 const TeacherForm = () => {
 
     const [name, setName ] = useState('');
@@ -30,25 +30,47 @@ const TeacherForm = () => {
     const [showPassword, setShowPassword] = useState(false); 
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
-    const Subjects = ["Gujarati","Hindi"];
-    const [selectedSubject,setSelectedSubject] =useState("");
-    
-      const handlePhoneChange = (value) => {
-        setMobileNumber(value);
-        const phoneRegex = /^[+]?[0-9]{8,}$/;
-        setIsValidPhone(phoneRegex.test(value));
-      };
-      const toggleNewPasswordVisibility = () => { 
-        setShowPassword(!showPassword);
-    };
-    const customToastStyle = { 
-      fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-      fontSize: '16px',
-      fontWeight: 'bold',
-    };
-    
-    const navigate=useHistory();
+    const[standard,setStandard]=useState('');
+    const[subject,setSubject]=useState('');
+    const[subjectError,setSubjectError]=useState('');
+    const[standardError,setStandardError]=useState('');
+    const [standarddata, setStandardData] = useState([]);
+    const [subjectdata, setSubjectData] = useState([]);
 
+    const fetchStandard = async () => {
+          try {
+            const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
+            setStandardData(response.data);
+          } 
+          catch (error) {
+            console.error("Record Not Found:", error);
+          }
+    };
+    const fetchSubject = async () => {
+        try {
+          const subjectresponse = await axios.get(`${config.ApiUrl}DropDown/Subject`);
+          setSubjectData(subjectresponse.data);
+        } 
+        catch (error) {
+          console.error("Record Not Found:", error);
+        }
+   };
+ 
+   useEffect(() => {
+     fetchStandard();
+     fetchSubject();
+   }, []);
+ 
+   const handleStandard = (e) => {
+      setStandard(e.target.value);
+      setStandardError('');
+    };
+   const handleSubject = (e) => {
+      setSubject(e.target.value);
+      setSubjectError('');
+  };
+     
+    const navigate=useHistory();
     const handleSubmit = async (e) => {
       e.preventDefault();
     
@@ -61,7 +83,7 @@ const TeacherForm = () => {
         return;
       }
       try {
-            const emailresponse =await axios.post(`${Config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
+            const emailresponse = await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
             Name : name,
             Email : email,
             Password : password,
@@ -96,41 +118,52 @@ const TeacherForm = () => {
       }
         return;
   };
-  
+  const handlePhoneChange = (value) => {
+    setMobileNumber(value);
+    const phoneRegex = /^[+]?[0-9]{8,}$/;
+    setIsValidPhone(phoneRegex.test(value));
+  };
+  const toggleNewPasswordVisibility = () => { 
+    setShowPassword(!showPassword);
+};
+const customToastStyle = { 
+  fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+  fontSize: '16px',
+  fontWeight: 'bold',
+};
 
-      
 
   return (
-    <Sidebar>   
+    <AdminSidebar>   
        <>
-    <div className='containerT'>
+       <div id = 'containerT'>
         <form onSubmit={handleSubmit}>
             <div>
-            <h2 className='teacher-form'>Teacher Form</h2>
+            <h2 id='title' className='teacher-form'>Teacher Form</h2>
             
-            <div className='form-groupa'>
-                <label className='labels'>Name:</label>
-                <input className='inputs' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
+            <div id='Form-GroupT'>
+                <label  className='labelT'>Name:</label>
+                <input  className='inputT' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
                 name='name'  required />
                  <LuUserCircle2 className = 'iconT' />
             </div>
-            <div className='form-groupa'>
-                <label className='labels'>Email:</label>
-                <input className='inputs' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
+            <div id='Form-GroupT' >
+                <label className='labelT'>Email:</label>
+                <input className='inputT' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
                 name='Email'  required />
                     <MdOutlineMail className = 'iconT' />
             </div>
-            <div className='form-groupa'>
-                <label className='labels'>Password:</label>
-                <input className='inputs' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
+            <div id='Form-GroupT'>
+                <label className='labelT'>Password:</label>
+                <input className='inputT' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                 name='Password'  required />
                {showPassword? <IoEyeOutline className='iconT' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconT' onClick={toggleNewPasswordVisibility}/>}
 
             </div>
-            <div className='form-groupa'>
-            <label className='labels'>Gender:</label>
+            <div id='Form-GroupT' >
+            <label className='labelT'>Gender:</label>
             <div className="radio-groupT">
-                   <input className='inputl'
+                   <input className='inputT'
                      type="radio"
                      value="male"
                  checked={gender === "male"}
@@ -150,50 +183,50 @@ const TeacherForm = () => {
                  {genderError && <p style={{color:'red'}}>{genderError}</p>}
 
             </div>
-            <div className='form-groupa'>
-                <label className='labels'>DOB:</label>
-                <input className='inputs' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
+            <div id='Form-GroupT' >
+                <label className='labelT'>DOB:</label>
+                <input className='inputT' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
             </div>
-            <div className='form-groupa'>
-                <label className='labels'>Join-Date:</label>
-                <input className='inputs' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
+            <div id='Form-GroupT' >
+                <label className='labelT'>Join-Date:</label>
+                <input className='inputT' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
-            <div className="form-groupr">
-            <label className='labels'>Subject:</label>
-            <select
-              value={selectedSubject}
-              onChange={(e) => setSelectedSubject(e.target.value)}
-              className="inputs"
-            >
-              <option value="">Select Blood Group</option>
-              {Subjects.map((Subject, index) => (
-                <option key={index} value={Subject}>
-                  {Subject}
-                </option>
-              ))}
-            </select>
-          </div>       
           
-            </div>
-
+            <div>
+                <label className='labelT'>Standard</label>
+                <select  id = 'inputD' title='Select Standard' value={standard} onChange={handleStandard}>
+                    {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
+                </select>
+                <label className='labelD'>Subject</label>
+                   <select  id = 'inputSD' value={subject} onChange={handleSubject}>
+                     {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
+                </select>
+              </div>
+              {standardError && <p style={{color:'red'}}>{standardError}</p>}
+              {subjectError  && <p style={{color:'red'}}>{subjectError}</p>}
+         </div>
             
-        <div className='form-two'>        
+        <div id='Form-Part-Two' >        
 
-            <div className='form-groupa'>
-                <label className='labels'>Address:</label>
-                <textarea className='inputs'  value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
+            <div id ='Form-GroupT'>
+                <label className='labelT'>Address:</label>
+                <textarea id='inputT'   value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
                 name='Address'  required />
             </div> 
-            <div className='form-groupa'>
-                <label className='labels'>City:</label>
-                <input className='inputs' type='text' value={city} onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your City'
+            <div  id ='Form-GroupT'>
+                <label className='labelT'>City:</label>
+                <input className='inputT' 
+                type='text' 
+                value={city}
+                onChange={(e)=> setCity(e.target.value)}
+                placeholder='Enter Your City'
                 name='city'  required />
             </div>
            
             <div className="form-groupr">
-            <label className='labelr'>District:</label>
+            <label className='labelT'>District:</label>
             <input
-              className="inputr"
+              className="inputT"
               id="district"
               name="district"
               value={districts}
@@ -202,29 +235,37 @@ const TeacherForm = () => {
               required
             />
           
-           <div className='form-groupa'>
-                <label className='labels'>State:</label>
-                <input className='inputs' type='text' value={state} onChange={(e)=> setState(e.target.value)}
+           <div id ='Form-GroupT'>
+                <label className='labelT'>State:</label>
+                <input className='inputT' 
+                type='text' 
+                value={state} 
+                placeholder='State'
+                onChange={(e)=> setState(e.target.value)}
                 name='state'  required />
             </div>
-            <div className='form-groupa'>
-                <label className='labels'>PinCode:</label>
-                <input className='inputs' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)}
+            <div  id ='Form-GroupT'>
+                <label className='labelT'>PinCode:</label>
+                <input className='inputT' 
+                type='text'
+                 value={pinCode} 
+                 placeholder='PinCode'
+                 onChange={(e)=> setPinCode(e.target.value)}
                 name='pincode'  required />
             </div>
 
            
-           <div className='form-groupa'>
-               <label className='labels'>Mobile Number:</label>
+           <div id ='Form-GroupT'>
+               <label className='labelT'>Mobile Number:</label>
                <div className='phone_numberT'>
                <PhoneInput
                    country={'in'}
                    value={mobileNumber}
+                   disableDropdown={true}
                    onChange={handlePhoneChange}
-                   enableSearch={true}
                    isValid={isValidPhone}
                    inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                   containerStyle={{padding:'1px'}}
+                   containerStyle={{padding:'1px',marginLeft:'15px'}}
                 />
                  </div>
                  {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
@@ -233,14 +274,14 @@ const TeacherForm = () => {
                
         </div>
         </div>
-            <button className='btnnextT'onClick={()=>handleSubmit} type='submit'>Next</button>
+            <button id ='Button-T'onClick={()=>handleSubmit} type='submit'>Next</button>
          </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
 
 
     </>
-    </Sidebar>
+    </AdminSidebar>
     
   )
 }
