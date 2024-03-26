@@ -53,10 +53,24 @@ const handleUserChange = (e) => {
         
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!role) {
-            toast.error('Please select your role!');
-            return;
-          }
+        // Check if role is not selected
+        
+    if (!role) {
+        toast.error('Please select your role!');
+        return;
+    }
+    
+    // Check if email is not filled
+    if (!email) {
+        toast.error('Please enter your email!');
+        return;
+    }
+
+    // Check if password is not filled
+    if (!password) {
+        toast.error('Please enter your password!');
+        return;
+    }
         
           try {
             const response = await fetch(`${config.ApiUrl}AdminTeacher/IsLogin`, {
@@ -73,13 +87,7 @@ const handleUserChange = (e) => {
                 const data = await response.json();
                 setPassword(data.password);
                 localStorage.setItem('loggedInEmail', email);
-                if (rememberMe) {
-                    localStorage.setItem('rememberedUser', email);
-                    localStorage.setItem('rememberedPassword', password);
-                } else {
-                    localStorage.removeItem('rememberedUser');
-                    localStorage.removeItem('rememberedPassword');
-                }
+             
 
                 setTimeout(() => {
                 switch (role) {
@@ -109,19 +117,6 @@ const handleUserChange = (e) => {
                 const errorMessage = await response.text();
                 toast.error(errorMessage);
             }
-            // else if (response.status === 401){
-            //     if(!role)
-            //     {
-            //     toast.error('please select role')
-            //     }
-            //     else if(!email)
-            //     {
-            //         toast.error('please valid email')
-            //     }
-            //     else{
-            //         toast.error('please valid password')
-            //     }
-            // } 
             
             
             else {
@@ -163,7 +158,7 @@ const handleUserChange = (e) => {
                         value={ email}
                         onChange={handleUserChange}
                         placeholder='Enter Your Email'
-                        required
+                        
                     /> 
                 </div>
                 <CgMail className='icone'/>
@@ -172,7 +167,7 @@ const handleUserChange = (e) => {
                     <div className='password-input'>
                     <input className='inputl' type={showPassword ? 'text' : 'password'} value={password}     autoComplete="current-password"
                             onChange={handlePasswordChange} placeholder='Enter Your Password'
-                         required />
+                          />
                         {showPassword ? <IoEyeOutline className='iconl' onClick={togglePasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={togglePasswordVisibility} />}
                     </div>
                 </div>
