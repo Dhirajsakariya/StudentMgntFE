@@ -56,6 +56,17 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 17px;
   }
+  .StandardSelection{
+    height: 25px;
+    margin-left: 25px;
+    width: fit-content;
+  }
+  .SubjectSelection{
+    height: 25px;
+    margin-left: 5px;
+    width: fit-content;
+  }
+  
   .phone_numberr {
     width: 400px;
     margin-left: 15px;
@@ -84,6 +95,13 @@
     position:relative;
     right: 25px;
     top: 50%;
+    transform: translateY(15%);
+  }
+
+  .iconeye {
+    position:relative;
+    right: 25px;
+    top: 4px;
     transform: translateY(15%);
   }
   .buttonr { 
