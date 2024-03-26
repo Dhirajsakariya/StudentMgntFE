@@ -33,13 +33,13 @@ const StudentForm = () => {
     const [error] = useState('');
     const [genderError,setGenderError] = useState('');
 
-
+      
      const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
      const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
 
-     const handleBloodGroupChange = (e) => {
-       setSelecteBloodGroup(e.target.value);
-     };
+    //  const handleBloodGroupChange = (e) => {
+    //    setSelecteBloodGroup(e.target.value);
+    //  };
 
     const toggle = () => {
       setVisible(!isVisible);
