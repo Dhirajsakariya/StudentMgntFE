@@ -34,7 +34,7 @@ useEffect(() => {
         const registeredEmail = localStorage.getItem('registeredEmail');
         if (registeredEmail) {
             setEmail(registeredEmail);
-            localStorage.removeItem('registeredEmail'); // Remove the email after fetching it
+            localStorage.removeItem('registeredEmail'); // Remove the email after fetching it           
         }
      }, []); // Empty dependency array means this effect runs only once when component mounts
     
@@ -71,8 +71,11 @@ const handleUserChange = (e) => {
             if (response.ok) {
 
                 const data = await response.json();
+                console.log('id',data.id);
+                setId(data.id);
                 setPassword(data.password);
                 localStorage.setItem('loggedInEmail', email);
+                localStorage.setItem('loggedInUserId',data.id)
                 if (rememberMe) {
                     localStorage.setItem('rememberedUser', email);
                     localStorage.setItem('rememberedPassword', password);
