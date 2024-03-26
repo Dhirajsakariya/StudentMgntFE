@@ -38,11 +38,39 @@ function Registration(props) {
   const[roleError,setRoleError]=useState('');
   const[genderError,setGenderError]=useState('');
   const[mobileError,setMobileError]=useState('');
-  const [toggleTeacher, setToggleTeacher] = useState(false)
+  const [toggleTeacher, setToggleTeacher] = useState(false);
+  // State to store the fetched data
+  const [data, setData] = useState([]);
   const[standard,setStandard]=useState('');
   const[subject,setSubject]=useState('');
   const[subjectError,setSubjectError]=useState('');
   const[standardError,setStandardError]=useState('');
+
+  const [standarddata, setStandardData] = useState([]);
+  const [subjectdata, setSubjectData] = useState([]);
+
+  const fetchStandardData = async () => {
+     try {
+       const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
+       setStandardData(response.data);
+     } catch (error) {
+       console.error("Error fetching data:", error);
+     }
+   };
+   const fetchSubjectdData = async () => {
+    try {
+      const subjectresponse = await axios.get(`${config.ApiUrl}DropDown/Subject`);
+      setSubjectData(subjectresponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+ 
+  useEffect(() => {
+    fetchStandardData();
+    fetchSubjectdData();
+  }, []);
+
   const toggle = () => {
       setVisible(!isVisible);
     };
@@ -193,17 +221,10 @@ return (
               <div>
                 <label className='labelr'>Standard Subject</label>
                 <select className='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
-                    <option value="8 - A"> 8 - A</option>
-                    <option value="8 - B"> 8 - B</option>
-                    <option value="9 - A"> 9 - A</option>
-                    <option value="9 - B"> 9 - B</option>
-                    <option value="10 - A">10 - A</option>
-                    <option value="10 - B">10 - B</option>
+                    {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
                 <select className='SubjectSelection' value={subject} onChange={handleSubject}>
-                    <option value="maths">Maths</option>
-                    <option value="science">Science</option>
-                    <option value="English">English</option>
+                  {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
               </div>
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
