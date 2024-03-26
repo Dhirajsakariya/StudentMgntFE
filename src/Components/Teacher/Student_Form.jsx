@@ -3,7 +3,7 @@ import moment from 'moment';
 import './Student_Form.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import Sidebar from '../Sidebar/Sidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 
 export const Student_Form = () => {
 
@@ -48,7 +48,7 @@ export const Student_Form = () => {
       
     
   return (
-  <Sidebar>
+  <TeacherSidebar>
     <>
     <div className='containerST'>
         <form>
@@ -105,8 +105,7 @@ export const Student_Form = () => {
             </div>
             </div>
     
-        <div className='div_two'>        
-                
+        <div className='div_two'>           
         <div>
             <label className='labelh' htmlFor="bloodgroup">Select a BloodGroup:</label>
                  <select className='inputh'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
@@ -116,9 +115,6 @@ export const Student_Form = () => {
                    ))}
                  </select>
            </div>
-          
-          
-
             <div className='form-grouph'>
                 <label className='labelh'>Address:</label>
                 <textarea className='inputh'  value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
@@ -159,18 +155,13 @@ export const Student_Form = () => {
                    containerStyle={{padding:'1px'}}
                    required />
                  </div>
-               </div>
-               
+               </div>  
         </div>
-       
-
-
-
             <button className='btnnexts' type='submit'>Next</button>
          </form>
     </div>
     </>
-     </Sidebar>
+     </TeacherSidebar>
     
   )
 }

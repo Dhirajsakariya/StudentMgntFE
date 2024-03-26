@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './FeeForm.css';
 import { FaRupeeSign } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 
 const FeeForm = () => {
   const [studentName, setStudentName] = useState('');
@@ -20,7 +20,7 @@ const FeeForm = () => {
   };
 
   return (
-    <Sidebar>
+    <AdminSidebar>
       <div className='containerfee'>
        <form onSubmit={handleSubmit}>
         <h2>Student Fee Form</h2>
@@ -69,7 +69,7 @@ const FeeForm = () => {
         <button type="submit">Confirm Payment</button>
        </form>
       </div>
-    </Sidebar>
+    </AdminSidebar>
   );
 };
 

@@ -3,6 +3,7 @@ import '../Teacher/SubjectTimeTableForm.css';
 import { toast, Toaster } from 'react-hot-toast';
 import config from '../Login/config';
 import { useHistory } from 'react-router-dom';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 
 const SubjectTimeTableForm = () => {
 const navigate = useHistory();
@@ -133,6 +134,7 @@ const navigate = useHistory();
   }
   
   return (
+    <TeacherSidebar>
     <div>
       <div className='subjectttableform'>
         <div className='formheading'>
@@ -251,6 +253,7 @@ const navigate = useHistory();
       </div>      
     </div>
   </div>
+  </TeacherSidebar>
   )
 };
 
