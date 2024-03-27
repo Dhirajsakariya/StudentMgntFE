@@ -27,7 +27,7 @@ const TeacherForm = () => {
     const [pinCode,setPinCode] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [isValidPhone, setIsValidPhone] = useState(false);
-    const [showPassword, setShowPassword] = useState(false); 
+    const [isVisible, setVisible] = useState(false);
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
     const[standard,setStandard]=useState('');
@@ -37,6 +37,10 @@ const TeacherForm = () => {
     const [standarddata, setStandardData] = useState([]);
     const [subjectdata, setSubjectData] = useState([]);
 
+    const toggle = () => {
+      setVisible(!isVisible);
+    };
+  
     const fetchStandard = async () => {
           try {
             const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
@@ -63,8 +67,12 @@ const TeacherForm = () => {
  
    const handleStandard = (e) => {
       setStandard(e.target.value);
-      setStandardError('');
+      setStandardError('');   
     };
+    const str =standard;
+    const parts = str.split("-");
+      
+
    const handleSubject = (e) => {
       setSubject(e.target.value);
       setSubjectError('');
@@ -82,6 +90,12 @@ const TeacherForm = () => {
         setMobileError('Enter Mobile Number');
         return;
       }
+      if(!standard){
+        setStandardError('Select Standard');
+      }
+      if(!subject){
+        setSubjectError('Select Subject');
+      }
       try {
             const emailresponse = await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
             Name : name,
@@ -96,8 +110,11 @@ const TeacherForm = () => {
             District : districts,
             State : state,
             PinCode : pinCode,
-          
-        });
+            SubjectName : subject,
+            StandardNumber : parts[0],
+            Section :parts[1]
+            });
+            
         const userERes = emailresponse.data;
         if(userERes === "email already exists")
         {
@@ -123,9 +140,7 @@ const TeacherForm = () => {
     const phoneRegex = /^[+]?[0-9]{8,}$/;
     setIsValidPhone(phoneRegex.test(value));
   };
-  const toggleNewPasswordVisibility = () => { 
-    setShowPassword(!showPassword);
-};
+  
 const customToastStyle = { 
   fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
   fontSize: '16px',
@@ -157,8 +172,9 @@ const customToastStyle = {
                 <label className='labelT'>Password:</label>
                 <input className='inputT' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                 name='Password'  required />
-               {showPassword? <IoEyeOutline className='iconT' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline className='iconT' onClick={toggleNewPasswordVisibility}/>}
-
+              <span className='iconeye' onClick={toggle}>
+                  {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}
+              </span>
             </div>
             <div id='Form-GroupT' >
             <label className='labelT'>Gender:</label>
@@ -191,7 +207,7 @@ const customToastStyle = {
                 <label className='labelT'>Join-Date:</label>
                 <input className='inputT' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
-          
+           
             <div>
                 <label className='labelT'>Standard</label>
                 <select  id = 'inputD' title='Select Standard' value={standard} onChange={handleStandard}>
@@ -203,7 +219,7 @@ const customToastStyle = {
                 </select>
               </div>
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
-              {subjectError  && <p style={{color:'red'}}>{subjectError}</p>}
+              {subjectError  && <p style={{color:'red', marginLeft:'192px',marginTop:'-25px'}}>{subjectError}</p>}
          </div>
             
         <div id='Form-Part-Two' >        
