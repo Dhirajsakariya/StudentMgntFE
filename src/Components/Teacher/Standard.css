@@ -1,9 +1,10 @@
- .standard{
+ #standard{
     padding: 20px;
+    width: 1300px;
 }
-.standard-heading{
+#standard-heading{
     max-width: 800px;
-    margin-left: 370px;
+    margin-left: 270px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 35pxs;
     font: bold;
@@ -17,16 +18,16 @@ h1{
     margin-bottom: 15px;
     padding: 10px;
   }
-.tables {    
-    margin-left: 570px;
+#tables {    
+    margin-left: 500px;
     width:28%;
-    height: 50px;
+    height: 300px;
     table-layout: fixed;
     border: 1px solid black;
     text-align: center;
     background-color: hsl(107, 17%, 78%);
 }
-
+ 
 table tr {
     background-color: #1f7a61;  
 
@@ -34,8 +35,8 @@ table tr {
 table th{
     color: white;
 }
-.tbl-content{    
-    height:300px;
+#tbl-content{    
+    height:600px;
     overflow-x:auto;
     margin-top: 0px;
 } 
