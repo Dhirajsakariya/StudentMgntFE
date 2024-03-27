@@ -13,23 +13,7 @@ const Login = () => {
     const [id, setId] = useState();
     const navigate = useHistory();
     const [role, setRole] = useState('');
-
-    const [rememberMe, setRememberMe] = useState(false); // Add rememberMe state
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('rememberedUser');
-        const storedPassword = localStorage.getItem('rememberedPassword');
-        if (storedUser && storedPassword) {
-            setEmail(storedUser);
-            setPassword(storedPassword);
-            setRememberMe(true); // Set rememberMe state when rememberedUser and rememberedPassword are found
-        }
-    }, []);
-
-    const handleRememberMeChange = () => {
-        setRememberMe(!rememberMe);
-    };
-
+    
 useEffect(() => {
         const registeredEmail = localStorage.getItem('registeredEmail');
         if (registeredEmail) {
@@ -37,12 +21,10 @@ useEffect(() => {
             localStorage.removeItem('registeredEmail'); // Remove the email after fetching it           
         }
      }, []); // Empty dependency array means this effect runs only once when component mounts
-    
 
 const handleUserChange = (e) => {
     setEmail(e.target.value);
-};
-    
+}; 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
@@ -57,7 +39,6 @@ const handleUserChange = (e) => {
             toast.error('Please select your role!');
             return;
           }
-        
           try {
             const response = await fetch(`${config.ApiUrl}AdminTeacher/IsLogin`, {
                 method: 'POST', 
@@ -66,24 +47,17 @@ const handleUserChange = (e) => {
                 },
                 body: JSON.stringify({Role:role ,email, password })
             });
-        
 
             if (response.ok) {
 
                 const data = await response.json();
-                console.log('id',data.id);
+                console.log('id',data);
+                console.log(typeof(data));
                 setId(data.id);
                 setPassword(data.password);
-                localStorage.setItem('loggedInEmail', email);
-                localStorage.setItem('loggedInUserId',data.id)
-                if (rememberMe) {
-                    localStorage.setItem('rememberedUser', email);
-                    localStorage.setItem('rememberedPassword', password);
-                } else {
-                    localStorage.removeItem('rememberedUser');
-                    localStorage.removeItem('rememberedPassword');
-                }
-
+        
+                var LoggedInUser ={id:data.id};
+                localStorage.setItem('LoggedInUser', JSON.stringify(LoggedInUser));
                 setTimeout(() => {
                 switch (role) {
                     case 'admin':
@@ -99,15 +73,8 @@ const handleUserChange = (e) => {
                         navigate.push('/'); 
                         break;
                 }
-               
                   }, 1500); 
-                
                 toast.success("Login Successfully!")
-                localStorage.setItem("loggedEmail",JSON.stringify({
-                    email,
-                    id
-                  }));
-        
             } else if (response.status === 401) {
                 const errorMessage = await response.text();
                 toast.error(errorMessage);
@@ -119,7 +86,6 @@ const handleUserChange = (e) => {
             toast.error('Login failed');
         }
     };
-
     const customToastStyle = {
         fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
         fontSize: '16px',
@@ -164,7 +130,7 @@ const handleUserChange = (e) => {
                     </div>
                 </div>
                 <div className='forgotl'>
-                     <input type='checkbox' checked={rememberMe} onChange={handleRememberMeChange} /><span>Remember me</span>
+                     <input type='checkbox' /><span>Remember me</span>
 
                     <a href='ForgotPassword' className='f'>Forgot Password?</a>
                 </div>

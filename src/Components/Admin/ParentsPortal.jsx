@@ -1,12 +1,12 @@
 
 import React,{useState,useEffect} from 'react';
 import './ParentsPortal.css';
-//import moment from 'moment';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
-import { CgImport, CgMail } from 'react-icons/cg';
+import { BiMale ,BiFemale} from "react-icons/bi";
+import { CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import ocuupation from '../Assets/occupation.png'
@@ -15,7 +15,6 @@ const ParentsPortal = () => {
 
   const [userData, setUserData] = useState({id:'',email:''});
   const [editing, setEditing] = useState(false);
-  const [id, setId] = useState('');
   const [studentId, setStudentId] = useState('');
   const [formData, setFormData] = useState({
     id: '',
@@ -38,13 +37,8 @@ const ParentsPortal = () => {
   const [isValidPhone, setIsValidPhone] = useState(false);
   const relations=[ "Father", "Mother"];
 
-
- useEffect(() => {
-  const storedUserDetails = JSON.parse(localStorage.getItem('loggedEmail'));
-  if(storedUserDetails){
-    setUserData({id:storedUserDetails.id,email:storedUserDetails.email});
-  }
-}, []); 
+  var LoggedInUser = localStorage.getItem('LoggedInUser');
+  console.log('LoggedInUser: ', JSON.parse(LoggedInUser));
 
   useEffect(() => {
       const fetchFamilyMembers = async () => {
@@ -76,14 +70,9 @@ const ParentsPortal = () => {
 
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(formData.email)) {
-       // toast.error('Please enter a valid email address!');
         setEmailError('Please Enter an Valid Email');
         return;
     }
-  //  if (!formData.email) {
-  //     setEmailError('please Enter an Email')
-  //     return;
-  //   }
     else if(!formData.name)
     {
       setNameError('Please Enter a Name');
@@ -106,8 +95,6 @@ const ParentsPortal = () => {
       setMobileNumberError('Please Select a Mobile Number');
       return;
     }
-     
-    
     try {
           const familyMember = {
             Id:formData.id,
@@ -116,7 +103,7 @@ const ParentsPortal = () => {
             Gender: formData.gender,
             MobileNumber: mobilenumber,
             Relation: formData.relation,
-            StudentId: studentId 
+            StudentId: userData.id 
           };
       
           let response;
@@ -137,14 +124,6 @@ const ParentsPortal = () => {
             })
           });
         } else {            
-          console.log('name',formData.name)
-          console.log('email',formData.email)
-          console.log('occupation',formData.occupation)
-          console.log ('gender',formData.gender)
-          console.log ('mobilenumber',mobilenumber)
-          console.log ('relation',formData.relation)
-          console.log ('studentid',studentId) 
-
           response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
           method: 'POST',                         
           headers: {
@@ -157,14 +136,12 @@ const ParentsPortal = () => {
             Gender: formData.gender,
             MobileNumber: mobilenumber,
             Relation: formData.relation,
-            StudentId: studentId,
-            
+            StudentId: userData.id,
             })
           });
         }
-  
         if (response.ok) {
-          const result = await response.json();
+          const result = await response.text();
           console.log(result);
           if (editing) {
             const updatedFamilyMembers = familyMembers.map(member => 
@@ -187,12 +164,10 @@ const ParentsPortal = () => {
           studentid:''
          });
         } 
-        
-  
         } catch (error) {
             toast.error(error.message || (editing ? 'Failed to edit family member' : 'Failed to add family member'));
         }
-        }
+    }
 
 const handleEdit = async (user) => {
   setFormData(user);
@@ -209,7 +184,6 @@ const handlePhoneChange = (value) => {
   }
   setIsValidPhone(phoneRegex.test(value));
 };
-
 
 const handleDelete = async (id) => {
   Swal.fire({
@@ -252,17 +226,15 @@ const customToastStyle = {
 
   return (
     <AdminSidebar>
-      <div className='main'>
-        <div className='containerf'>
+      <div id='mainp'>
+        <div id='containerf'>
           <form onSubmit={handleSubmit}>
             <h2>Parents Detail</h2>
-            <input type="hidden" name="id" value={studentId} onChange={(e) => setStudentId(e.target.value)}/>
-            <div className='form-groupf'>
-
-            <label >StudentId:</label>
+            <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => setStudentId(e.target.value)}/>
+            <div id='form-groupf'>
                   <input 
-                          type='id' 
-                          value={formData.id} 
+                          type='hidden' 
+                          value={userData.id} 
                           placeholder='id'
                           onChange={(e) => {setFormData({ ...formData, id: e.target.value });
                           setIdError('');} }
@@ -272,46 +244,45 @@ const customToastStyle = {
 
                 <label >Email:</label>
                   <input 
+                          id='input'
                           type='email' 
                           value={formData.email} 
                           placeholder='Email'
                           onChange={(e) => {setFormData({ ...formData, email: e.target.value });
                           setEmailError('');} }
                 required
-              /><CgMail className='familyformicon' />
-              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}
-                          
-                  
+              /><CgMail id='familyformicon' />
+              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
             </div>
-          
-            <div className='form-groupf'>
+            <div id='form-groupf'>
               <label>Name:</label>
                 <input
                         type="text"
+                        id='input'
                         value={formData.name}
                         placeholder='Full Name'
                         onChange={(e) => {setFormData({ ...formData, name: e.target.value });
                           setNameError('');} }
                 required
-              /> < FiUser className='familyformicon' />
+              /> < FiUser id='familyformicon' />
               {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
             </div>
-
-            <div className='form-groupf'>
+            <div id='form-groupf'>
               <label>Occupation:</label>
                 <input
+                        id='input'
                         type='text'
                         value={formData.occupation}
                         placeholder='Occupation'
                         onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
                         setOccupationError('');} }
               required
-            /><img src={ocuupation} className='familyformicon'/>
+            /><img src={ocuupation} id='familyformicon'/>
             {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
             </div>
-            <div className='form-groupf'>
+            <div id='form-groupf'>
               <label>Gender:</label>
-                <div className="radio-groupf">
+                <div id="radio-groupf">
                   <input
                           type="radio"
                           value="male"
@@ -322,7 +293,6 @@ const customToastStyle = {
                           }}
                           required
                         />
-                
               <label>Male</label>
                 <input
                         type="radio"
@@ -338,8 +308,7 @@ const customToastStyle = {
               </div>
               {genderError && <p style={{color: 'red'}}>{genderError}</p>}
             </div>
-           
-            <div className="form-groupf">
+            <div id="form-groupf">
               <label>Relation:</label>
                 <select
                         value={formData.relation}
@@ -359,10 +328,9 @@ const customToastStyle = {
                 </select>
                 {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
             </div>
-
-            <div className='form-groupa'>
+            <div id='form-groupa'>
               <label>Mobile Number:</label>
-                <div className='phone_number'>
+                <div id='phone_number'>
                   <PhoneInput
                        country={'in'}
                        value={mobilenumber}
@@ -370,19 +338,35 @@ const customToastStyle = {
                        disableDropdown={false}
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                       containerStyle={{padding:'1px'}}
-                       
-                      
+                       containerStyle={{padding:'1px'}} 
                   />
                 </div>
                 {mobilenumberError && <p style={{ color:'red'}}>{mobilenumberError}</p>}
             </div>
-          
-            <button type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
+            <div id='disp'>
+        {familyMembers.map((user) => {
+                console.log(familyMembers.length);
+                return(
+                  <div id= {editing && user.id === formData.id ?'display editing':'display'} key={user.id}>
+                     <h2>{user.relation}</h2>
+                    <div id="icon_f_m">
+                              {user.gender === 'male' ? (
+                                <BiMale  size='20px'/>
+                              ) : (
+                                <BiFemale size='20px' />
+                              )}
+                              <span>{user.firstName} {user.lastName}</span>
+                            </div>
+                     <button  onClick={() =>handleEdit(user)}>Edit</button>
+                    <button onClick={() =>handleDelete(user.id)}>Delete</button>
+                  </div>
+                );
+        })}
+      </div>
+            <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
           </form>
         </div>
       </div>
-    
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </AdminSidebar>
   );
