@@ -13,19 +13,18 @@ const FeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Perform form validation and submission logic here
-   
+    // Perform form validation and submission logic here  
 
     console.log('Form submitted:', { studentName, feeAmount, feeFrequency });
   };
 
   return (
     <AdminSidebar>
-      <div className='containerfee'>
+      <div id='containerfee'>
        <form onSubmit={handleSubmit}>
         <h2>Student Fee Form</h2>
-          <div className='form-groupa'>
-            <label htmlFor="studentName">Student Name:</label>
+          <div id='form-groupa'>
+            <label id="labelbox" htmlFor="studentName">Student Name:</label>
               <input
                       type="text"
                       id="studentName"
@@ -34,14 +33,14 @@ const FeeForm = () => {
                       onChange={(e) => setStudentName(e.target.value)}
                       required
               />
-              <PiStudentBold  className="feeformicon"/>
+              <PiStudentBold  id="feeformicon"/>
               <br />
           </div>
-          <div className="form-groupf">
-            <label>Fee Frequency:</label>
+          <div id="form-groupf">
+            <label id="labelbox">Fee Frequency:</label>
               <select
                       value={feeFrequency}
-                      className='relation'
+                      id='relation'
                       required
                       onChange={(e) => setFeeFrequency(e.target.value)}>
               
@@ -53,9 +52,9 @@ const FeeForm = () => {
                      ))}
               </select>
           </div>
-        <div className='form-groupa'>
-         <label htmlFor="feesAmount">Fees Amount:</label>
-           <input
+        <div id='form-groupa'>
+         <label id="labelbox" htmlFor="feesAmount">Fees Amount:</label>
+           <input 
                   type="text"
                   id="feeAmount"
                   value={feeAmount}
@@ -63,10 +62,10 @@ const FeeForm = () => {
                   onChange={(e) => setFeeAmount(e.target.value)}
                    required
           />
-          <FaRupeeSign className='feeformicon'/>
+          <FaRupeeSign id='feeformicon'/>
           <br />
         </div>
-        <button type="submit">Confirm Payment</button>
+        <button id="button" type="submit">Confirm Payment</button>
        </form>
       </div>
     </AdminSidebar>
