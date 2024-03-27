@@ -27,14 +27,14 @@ const Standard = () => {
   return (
     <TeacherSidebar>
     <div>
-      <div className='standard'>
-        <h1 className='standard-heading'>Standard List</h1>
+      <div id='standard'>
+        <h1 id='standard-heading'>Standard List</h1>
         <div>
-          <table className='tables'>
+          <table id='tables'>
             <thead> {/* Add thead element */}
               <tr>
                 <th>Standard</th>
-                <th>Section</th>
+                <th>Section</th> 
               </tr>
             </thead>
             <tbody> {/* Add tbody element */}
