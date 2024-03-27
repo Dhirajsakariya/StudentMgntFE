@@ -5,7 +5,6 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import {  useHistory } from 'react-router-dom';
-import AdminSidebar from '../Sidebar/AdminSidebar';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import {CgMail } from "react-icons/cg";
