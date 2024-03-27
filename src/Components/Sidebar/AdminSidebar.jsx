@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { IoAddCircleOutline } from "react-icons/io5";
 import { FaGooglePay } from "react-icons/fa";
-
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import { FaBars } from 'react-icons/fa';
@@ -46,6 +46,11 @@ const AdminSidebar = ({userName, children }) => {
             icon: <PiStudentBold  />
         },
        
+        {
+            path: '/TeacherForm',
+            name: 'Teacher Form',
+            icon: <LiaChalkboardTeacherSolid  />
+        },
             {
             path: '/login',
             name: 'Logout',
