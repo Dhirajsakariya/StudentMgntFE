@@ -21,27 +21,27 @@ const StudentFeeForm = () => {
 
   return (
     <StudentSidebar>
-      <div className='containerstudentfeeform'>
+      <div id='containerstudentfeeform'>
        <form onSubmit={handleSubmit}>
         <h2>Fee Form</h2>
-          <div className='form-groupa'>
-            <label htmlFor="studentName">Student Name:</label>
+          <div id='form-groupa'>
+            <label id="labelbox" htmlFor="studentName">Student Name:</label>
               <input
                       type="text"
-                      id="studentName"
+                      id="studentname"
                       placeholder='Student Name'
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
                       required
               />
-              <PiStudentBold  className="feeformicon"/>
+              <PiStudentBold  id="feeformicon"/>
               <br />
           </div>
           <div className="form-groupf">
-            <label>Fee Frequency:</label>
+            <label id="labelbox">Fee Frequency:</label>
               <select
                       value={feeFrequency}
-                      className='relation'
+                      id='relation'
                       required
                       onChange={(e) => setFeeFrequency(e.target.value)}>
               
@@ -54,7 +54,7 @@ const StudentFeeForm = () => {
               </select>
           </div>
         <div className='form-groupa'>
-         <label htmlFor="feesAmount">Fees Amount:</label>
+         <label id="labelbox" htmlFor="feesAmount">Fees Amount:</label>
            <input
                   type="text"
                   id="feeAmount"
@@ -63,10 +63,10 @@ const StudentFeeForm = () => {
                   onChange={(e) => setFeeAmount(e.target.value)}
                    required
           />
-          <FaRupeeSign className='feeformicon'/>
+          <FaRupeeSign id='feeformicon'/>
           <br />
         </div>
-        <button type="submit">Pay</button>
+        <button id="buttontype" type="submit">Pay</button>
        </form>
       </div>
     </StudentSidebar>
