@@ -104,6 +104,9 @@ function Registration(props) {
     setStandardError('');
   };
 
+  const str = standard;
+  const parts = str.split("-");
+  
   const handleSubject = (e) => {
     setSubject(e.target.value);
     setSubjectError('');
@@ -160,7 +163,10 @@ function Registration(props) {
           District : district,
           State : state,
           PinCode : pinCode,
-          IsAdmin : isAdmin
+          IsAdmin : isAdmin,
+          SubjectName: subject,
+          StandardNumber: parts[0],
+          Section : parts[1]
       });
       const userERes = emailresponse.data;
       if(userERes === "email already exists")
