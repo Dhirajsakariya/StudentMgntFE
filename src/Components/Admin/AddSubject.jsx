@@ -79,7 +79,7 @@
 
 import React, { useState } from 'react';
 import './FeeForm.css';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import { PiBookOpenTextLight } from "react-icons/pi";
 import standardicon from '../Assets/standardicon.png';
 import config from '../Login/config';
@@ -122,7 +122,7 @@ const AddSubject = () => {
   };
 
   return (
-    <Sidebar>
+    <AdminSidebar>
       <div className='containerfee'>
         <form onSubmit={handleSubmit}>
           <h2>Add Subject</h2>
@@ -158,7 +158,7 @@ const AddSubject = () => {
           <button style={{ marginTop: "40px" }} type="submit">Add Subject</button>
         </form>
       </div>
-    </Sidebar>
+    </AdminSidebar>
   );
 };
 

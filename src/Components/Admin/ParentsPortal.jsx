@@ -2,7 +2,7 @@
 import React,{useState,useEffect} from 'react';
 import './ParentsPortal.css';
 //import moment from 'moment';
-import Sidebar from '../Sidebar/Sidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
@@ -251,7 +251,7 @@ const customToastStyle = {
 };
 
   return (
-    <Sidebar>
+    <AdminSidebar>
       <div className='main'>
         <div className='containerf'>
           <form onSubmit={handleSubmit}>
@@ -384,7 +384,7 @@ const customToastStyle = {
       </div>
     
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
-    </Sidebar>
+    </AdminSidebar>
   );
 };
 

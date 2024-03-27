@@ -5,6 +5,11 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import {  useHistory } from 'react-router-dom';
+import AdminSidebar from '../Sidebar/AdminSidebar';
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
+import {CgMail } from "react-icons/cg";
+import {FaRegUserCircle} from "react-icons/fa";
 import {toast,Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import config from '../Login/config';
@@ -43,15 +48,15 @@ const StudentForm = () => {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     useEffect(() => {
       fetchStandardData();
     }, []);
-
-    const handleStandard = (e) =>{
+  
+    const handleStandard = (e) => {
       setStandard(e.target.value);
       setStandardError('');
-    }
+    };
   
     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
  
@@ -71,7 +76,10 @@ const StudentForm = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-       
+        if(!standard){
+          setStandardError('Select standard');
+          return;
+        }
         if(!gender){
           setGenderError('Select Gender');
           return;
@@ -96,7 +104,7 @@ const StudentForm = () => {
               District : district,
               State : state,
               PinCode : pinCode,
-            
+              Standard : standard
               
           });
           const userERes = emailresponse.data;
@@ -186,7 +194,10 @@ const StudentForm = () => {
                     <input id='inputstudentform' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
                   </div>
 
-                  <div className='subjectselection'>
+                 
+              <div>
+                <label id='labelstudentform'>Select Standard </label>
+                <div className='subjectselection'>
               <div>
                 <label className='labelr'>Standard Subject</label>
                 <select className='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
@@ -194,8 +205,10 @@ const StudentForm = () => {
                 </select>
               </div>
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
+            
            </div>
-                  
+           </div>
+        
            </div>       
             
               

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
-import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
-import { MdFamilyRestroom } from 'react-icons/md';
-import { RiDatabase2Line } from 'react-icons/ri';
+import {  BiLogOut } from 'react-icons/bi';
+import { PiUserListDuotone } from "react-icons/pi";
+import { FaWpforms } from "react-icons/fa";
+import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
@@ -16,28 +17,30 @@ const TeacherSidebar = ({ children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const menuItem = [
+        // {
+        //     path: '/TeacherPersonal',
+        //     name: 'TeacherPersonal',
+        //     icon: <PiUserListDuotone   />
+        // },
+        
         {
             path: '/Standard',
             name: 'Standard',
-            icon: <BiSolidUserDetail />
+            icon: <PiUserListDuotone   />
         },
         {
             path: '/Student_Form',
             name: 'Student Form',
-            icon: <MdFamilyRestroom />
+            icon: <FaWpforms   />
         },
-        {
-            path: '/SubjectForm',
-            name: 'Subject Form',
-            icon: <RiDatabase2Line />
-        },
+       
         {
             path: '/TimeTable',
             name: 'TimeTable',
-            icon: <BiLogOut />
+            icon: <FaTableCells  />
         },
         {
-            path: '/',
+            path: '/login',
             name: 'Logout',
             icon: <BiLogOut />
         }

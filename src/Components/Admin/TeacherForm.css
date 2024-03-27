@@ -1,10 +1,10 @@
 
-.containerT{
+#containerT{
   width: 750px;
   color:black;
   border-radius: 10px;
   padding: 30px 30px;
-  height:700px;
+  height:590px;
   background: transparent;
   border: 2px solid;
   background-color: hsl(107, 17%, 78%);
@@ -17,9 +17,10 @@
   margin-top: 15px;
   margin-bottom: 200px;
 }
-.form-groupa {
+#Form-GroupT {
   margin-bottom: 10px;
 }  
+
 .radio-groupT {
   display: inline-flex;
   align-items: center;
@@ -34,29 +35,14 @@
   width: 10%;
   padding: 0;
 } 
-.labels {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 8px;
-  margin-left: 40px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 17px;
-}
-.inputs {
-  width: 300px;
-  margin-left: 40px;
-  padding: 8px;
-  box-sizing: border-box;
-  margin-top: 5px;
-  border: 1px;
-  border-radius: 5px;
-}
-.containerT h2{
+
+#title{
       justify-content: center;
       color:#146a51;;
       text-align: center;
       font: bold;
       text-decoration: underline;
+      margin-top: -10px;
       padding-bottom: 8px;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
 }
@@ -69,7 +55,7 @@
   text-decoration: underline;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.labels {
+#Form-GroupT.labelT {
   display: block;
   margin-bottom: 5px;
   margin-top: 8px;
@@ -77,15 +63,8 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
 }
-.labell {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 8px;
-  margin-left: 25px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 17px;
-}
-.phone_numberT {
+
+.Phone_NumberT {
   width: 400px;
   margin-left: 15px;
   padding: 8px;
@@ -94,7 +73,7 @@
   border: 1px;
   border-radius: 8px;
 }
-.inputs {
+#Form-GroupT.inputT {
   width: 300px;
   margin-left: 25px;
   padding: 8px;
@@ -103,20 +82,45 @@
   border: 1px;
   border-radius: 5px;
 }
+#inputD{
+  margin-left: 16px;
+  width: 125px;
+  height: 30px;
+  border-radius: 5px;
+}
+.labelD{
+  margin-left: 192px;
+  margin-top: -55px;
+}
+#inputSD{
+  margin-left:192px;
+  height: 30px;
+  width: 125px;
+  border-radius: 5px;
+}
 
-.inputs::placeholder { 
+.inputT::placeholder { 
   color:gray;
   position:absolute;
 }
+#inputT::placeholder{
+  color:gray;
+  position:absolute;
+  margin-left: 7px;
+  margin-top: 8px;
+}
 textarea{
   height: 33px;
+  margin-left: 14px;
+  width:295px;
+  border-radius: 5px;
 }
 
 .iconT {
   margin-left:-20px ;
   margin-bottom: -4px;
 }
-.btnnextT { 
+#Button-T{ 
   width: 20%;
   height: 40px;
   border-radius: 10px;
@@ -126,175 +130,49 @@ textarea{
   justify-content: center;
   text-align: center;
   margin-left: 300px;
-  margin-top: 110px;
+  margin-top: 85px;
   margin-bottom: 15px;
   font-weight: 700;
   font-size: 18px;
   color: white;
 }
-.form-two{
+#Form-Part-Two{
   margin-left: 400px;
-  margin-top: -500px;
+  margin-top: -490px;
 }
 
-/* .containerT {
-    width: 800px;
-    color:black;
-    border-radius: 10px;
-    padding: 30px 30px;
-    height: 600px;
-    background: transparent;
-    border: 2px solid;
-    background-color:  hsl(107, 17%, 78%);
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    padding-top: 15px;
-  }
-  
-  .form-groupa {
-    margin-bottom: 10px;
-  }
-  .labels {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 8px;
-    margin-left: 40px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-  }
-  .inputs {
-    width: 300px;
-    margin-left: 40px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 5px;
-  }
-  .radio-groupT {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-  
-  .radio-groupT label {
-    margin-top: 5px;
-  }
-  
-  .radio-groupT input {
-    width: 10%;
-    padding: 0;
-  }
+#inputD,
+#inputSD {
+  position: relative;
+  cursor: pointer;
+}
 
-  .form-groupT {
-    margin-bottom: 10px;
-  }
-  .labelT {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 8px;
-    margin-left: 440px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-  }
-  .inputT {
-    width: 300px;
-    margin-left: 440px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 5px;
-  }
-  
-  
-  
-  .form-two{
-    margin-top: -430px;
-  }
-  
-  .teacher-form{
-  justify-content: center;
-  padding-top: 1px;
-  color:#146a51;;
-  text-align: center;
-  font: bold;
-  margin-top:10px;
-  margin-bottom:40px ;
-  text-decoration: underline;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+#inputD select,
+#inputSD select {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 2px); /* Adjust width if needed */
+  z-index: 1000; /* Ensure dropdown is above other content */
+  opacity: 0;
+  cursor: pointer;
+}
 
-  }
-  
-  .containera h2{
-      justify-content: center;
-      color:#146a51;;
-      text-align: center;
-      font: bold;
-      text-decoration: underline;
-      padding-bottom: 8px;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
-  }
-  
-  .country-code {
-    width: 20%;
-    margin-right: -9px;
-  }
-  
-  label,p {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-left: 15px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-  }
-  
-  p{
-    color:white;
-  }
-  
-  input {
-    width: 300px;
-    margin-left: 15px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 5px;
-  }
-  
-  .phone_numberT {
-    width: 400px;
-    margin-left: 430px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 8px;
-  }
-  .iconT{
-    margin-left:-20px ;
-    margin-bottom: -4px;
-    
-  }
-  
-.btnnexts{
-    width: 30%;
-    height: 40px;
-    border-radius: 10px;
-    outline: auto;
-    border: 1px;
-    background:#146a51;;
-    justify-content: center;
-    text-align: center;
-    margin-left: 300px;
-    margin-top: 80px;
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 18px;
-    color: white;
-} */
+#inputD select:focus,
+#inputSD select:focus {
+  outline: none;
+}
+
+#inputD select option,
+#inputSD select option {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Show dropdown menu when label is clicked */
+#inputD label,
+#inputSD label {
+  user-select: none;
+}
+
+
