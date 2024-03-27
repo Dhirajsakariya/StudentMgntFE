@@ -58,6 +58,10 @@ const handleUserChange = (e) => {
         
                 var LoggedInUser ={id:data.id};
                 localStorage.setItem('LoggedInUser', JSON.stringify(LoggedInUser));
+
+                var roles = {Role:role};
+                localStorage.setItem('LoggedInUserRole', JSON.stringify(roles));
+
                 setTimeout(() => {
                 switch (role) {
                     case 'admin':
