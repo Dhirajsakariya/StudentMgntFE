@@ -41,7 +41,6 @@ const TeacherForm = () => {
       setVisible(!isVisible);
     };
   
-  
     const fetchStandard = async () => {
           try {
             const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
