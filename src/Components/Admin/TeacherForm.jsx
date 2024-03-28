@@ -28,12 +28,12 @@ const TeacherForm = () => {
     const [mobileNumber, setMobileNumber] = useState('');
     const [isValidPhone, setIsValidPhone] = useState(false);
     const [isVisible, setVisible] = useState(false);
-    const[genderError,setGenderError]=useState('');
-    const[mobileError,setMobileError]=useState('');
-    const[standard,setStandard]=useState('');
-    const[subject,setSubject]=useState('');
-    const[subjectError,setSubjectError]=useState('');
-    const[standardError,setStandardError]=useState('');
+    const [genderError,setGenderError] = useState('');
+    const [mobileError,setMobileError] = useState('');
+    const [standard,setStandard] = useState('');
+    const [subject,setSubject] = useState('');
+    const [subjectError,setSubjectError] = useState('');
+    const [standardError,setStandardError] = useState('');
     const [standarddata, setStandardData] = useState([]);
     const [subjectdata, setSubjectData] = useState([]);
 
@@ -170,9 +170,9 @@ const customToastStyle = {
             </div>
             <div id='Form-GroupT'>
                 <label className='labelT'>Password:</label>
-                <input className='inputT' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
+                <input className='inputT' type={!isVisible ? "password":"text"} value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                 name='Password'  required />
-              <span className='iconeye' onClick={toggle}>
+              <span className='iconT' onClick={toggle}>
                   {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}
               </span>
             </div>
@@ -290,7 +290,7 @@ const customToastStyle = {
                
         </div>
         </div>
-            <button id ='Button-T'onClick={()=>handleSubmit} type='submit'>Next</button>
+            <button id ='Button-T'onClick={()=>handleSubmit} type='submit'>ADD</button>
          </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />

@@ -1,8 +1,8 @@
-.main{
+#main{
     align-items: center;
   }
   
-  .containerstudentfeeform {
+  #containerstudentfeeform {
     width: 325px;
     color:black;
     border-radius: 10px;
@@ -19,13 +19,13 @@
     padding-top: 15px;
   }
   
-  .form-groupf {
+  #form-groupf {
     margin-bottom: 10px;
   }
   
  
   
-  .containerstudentfeeform h2{
+  #containerstudentfeeform h2{
     justify-content: center;
     color:#146a51;;
     text-align: center;
@@ -35,7 +35,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
   }
   
-  label, p {
+  #labelbox, p {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -48,7 +48,7 @@
     color:white;
   }
   
-  input, .relation {
+  #studentname, #relation {
     width: 300px;
     margin-left: 15px;
     padding: 8px;
@@ -58,7 +58,7 @@
     border-radius: 5px;
   }
   
-  button {
+  #buttontype {
     display: inline;
     width: 200px;
     height: 40px;
@@ -78,7 +78,7 @@
     font-size: 17px;
   }
   
-  .feeformicon{
+  #feeformicon{
     margin-left: -30px;
     margin-bottom: -5px;
   }
