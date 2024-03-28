@@ -43,7 +43,7 @@ const AdminSidebar = ({userName, children }) => {
        {
             path: '/login',
             name: 'Logout',
-            icon: <BiLogOut />
+             icon: <BiLogOut />
         }
     ];
 

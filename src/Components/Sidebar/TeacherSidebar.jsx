@@ -23,12 +23,6 @@ const TeacherSidebar = ({ children }) => {
             name: 'TeacherPersonal',
             icon: <CiUser   />
         },
-        
-        {
-            path: '/Standard',
-            name: 'Standard',
-            icon: <PiUserListDuotone   />
-        },
         {
             path: '/Student_Form',
             name: 'Student Form',
@@ -55,7 +49,7 @@ const TeacherSidebar = ({ children }) => {
         localStorage.removeItem('loggedInEmail');
         navigate.push('/');
     };
-
+  
     return (
         <>
              <div className="menu-container">

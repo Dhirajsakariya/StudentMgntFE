@@ -42,7 +42,7 @@ function App() {
           <Route path='/TeacherPersonal' component={TeacherPersonal} />
           <Route path='/' component={Login} />
         </Switch>
-      </Router>
+      </Router>  
     </div>
   );
 }
