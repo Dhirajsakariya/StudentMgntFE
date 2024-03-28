@@ -104,6 +104,9 @@ function Registration(props) {
     setStandardError('');
   };
 
+  const str = standard;
+  const parts = str.split("-");
+  
   const handleSubject = (e) => {
     setSubject(e.target.value);
     setSubjectError('');
@@ -160,7 +163,10 @@ function Registration(props) {
           District : district,
           State : state,
           PinCode : pinCode,
-          IsAdmin : isAdmin
+          IsAdmin : isAdmin,
+          SubjectName: subject,
+          StandardNumber: parts[0],
+          Section : parts[1]
       });
       const userERes = emailresponse.data;
       if(userERes === "email already exists")
@@ -202,14 +208,14 @@ return (
               checked={role === "admin"}
               onChange={handleRole}
               required/>
-              <label htmlFor="administrator">Admin</label>
-              <input className="form-check-input" 
+              <label>Admin</label>
+              <input  
                 type="radio" 
                 value="teacher"
               checked={role === "teacher"}
               onChange={handleRole}
               required/>
-              <label htmlFor="staff">Teacher</label>
+              <label >Teacher</label>
               {/* <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
               <label htmlFor="user">Student</label> */}
             </div>
@@ -219,11 +225,12 @@ return (
           {toggleTeacher && (
              <div className='subjectselection'>
               <div>
-                <label className='labelr'>Standard Subject</label>
                 <select className='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
+                    <option value="" >Select Standard</option>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
                 <select className='SubjectSelection' value={subject} onChange={handleSubject}>
+                <option value="" >Select Subject</option>
                   {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
               </div>
@@ -290,10 +297,10 @@ return (
         </div>
         <div className='form-groupr2'>
         <div className='form-groupr'>
-          <label className='labelr'>Gender:</label>
+          <label className='labell'>Gender:</label>
           <div className="radio-groupa">
             <input
-              className='inputr'
+              className='inputl'
               type="radio"
               value="male"
               checked={gender === "male"}
@@ -317,13 +324,13 @@ return (
           <input className='inputl' type='date' value={joinDate} onChange={(e) => setJoinDate(e.target.value)} required />
         </div> 
           <div className='form-groupr'>
-            <lable className='labelr'>Address:</lable>
-            <textarea className="inputr" id="Address" name="address" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: 294/5, Sammanthurai" rows="2" required></textarea>
+            <lable className='labell'>Address:</lable>
+            <textarea className="inputl" id="Address" name="address" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: 294/5, Sammanthurai" rows="2" required></textarea>
           </div>
           <div className="form-groupr">
-            <label className='labelr'>State:</label>
+            <label className='labell'>State:</label>
             <input
-              className="inputr"
+              className="inputl"
               type="text"
               value={state}
               onChange={e => setState(e.target.value)}
@@ -331,9 +338,9 @@ return (
             required/>
           </div>
           <div className="form-groupr">
-            <label className='labelr'>District:</label>
+            <label className='labell'>District:</label>
             <input
-              className="inputr"
+              className="inputl"
               type="text"
               value={district}
               onChange={e => setDistrict(e.target.value)}
@@ -341,9 +348,9 @@ return (
             required/>
           </div>
           <div className="form-groupr">
-            <label className='labelr'>City:</label>
+            <label className='labell'>City:</label>
             <input
-              className="inputr"
+              className="inputl"
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -352,9 +359,9 @@ return (
             />
           </div>
           <div className="form-groupr">
-            <label className='labelr'>PinCode:</label>
+            <label className='labell'>PinCode:</label>
             <input
-              className="inputr"
+              className="inputl"
               id="pincode"
               name="pincode"
               value={pinCode}
