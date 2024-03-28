@@ -67,7 +67,7 @@
   padding: 8px;
   box-sizing: border-box;
   margin-top: 0.7%;
-  border: 6.5%;
+  border: 2px;
   border-radius: 5px;
 }
 #inputr::placeholder { 
