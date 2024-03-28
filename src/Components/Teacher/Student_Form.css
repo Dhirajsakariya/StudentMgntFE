@@ -1,9 +1,9 @@
 .containerST {
-    width: 780px;
+    width: 50%;
     color:black;
     border-radius: 10px;
     padding: 30px 30px;
-    height: 700px;
+    height: fit-content;
     background: transparent;
     border: 2px solid;
     background-color:  hsl(107, 17%, 78%);
@@ -11,57 +11,40 @@
     margin-right: auto;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 1%;
     padding-top: 15px;
   }
   
   #form-groupstudent_form {
     margin-bottom: 10px;
   }
-  #labelstudent_form {
+  #student_form {
     display: block;
-    margin-bottom: 5px;
-    margin-top: 8px;
-    margin-left: 80px;
+    margin-bottom: 0%;
+    margin-top: 2%;
+    margin-left: 2%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
+    font-size: 110%;
   }
   #inputstudent_form {
-    width: 300px;
+    width: 38%;
     padding: 8px;
     box-sizing: border-box;
     margin-top: 5px;
     border: 1px;
     border-radius: 5px;
+    margin-left: 10px;
   }
 
   #inputstudent_form2 {
-    width: 300px;
+    width: 110%;
     padding: 8px;
-    margin-left: -50px;
+    margin-left: -40%;
     box-sizing: border-box;
     margin-top: 5px;
     border: 1px;
     border-radius: 5px;
   }
-  .labelh {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 8px;
-    margin-left: 480px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-  }
-  .inputh {
-    width: 300px;
-    margin-left: 480px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 5px;
-  }
-  
   
   #radio-groupstd  {
     display: inline-flex;
@@ -78,10 +61,10 @@
     padding: 0;
   }
   #div_two{
-    margin-top: -500px;
-    margin-left: 500px;
+    margin-top: -65%;
+    margin-left: 65%;
   }
-  .student-form{
+  #student-form{
   justify-content: center;
   padding-top: 1px;
   color:#146a51;;
@@ -109,32 +92,23 @@
     margin-right: -9px;
   }
   
-  #student_form2,p {
+  #student_form2{
     display: block;
-    margin-bottom: 5px;
-    margin-top: 10px;
-    margin-left: -50px;
+    margin-bottom: 1%;
+    margin-top: 5%;
+    margin-left: -40%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
+    font-size: 110%;
   }
   
   p{
     color:white;
   }
   
-  input {
-    width: 300px;
-    margin-left: 15px;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    border: 1px;
-    border-radius: 5px;
-  }
   
   #phone_numberS {
-    width: 400px;
-    margin-left: -60px;
+    width: 10%;
+    margin-left: -110px;
     padding: 8px;
     box-sizing: border-box;
     margin-top: 5px;
@@ -152,7 +126,7 @@
     justify-content: center;
     text-align: center;
     margin-left: 300px;
-    margin-top: 80px;
+    margin-top: 70px;
     margin-bottom: 15px;
     font-weight: 700;
     font-size: 18px;

@@ -1,14 +1,14 @@
+import axios from 'axios';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import './Student_Form.css';
 
 export const Student_Form = () => {
 
-    const [GrNo, setGrNo] = useState('')
-    const [rollNo,setRollNo] =useState('');
     const [name, setName ] = useState('');
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -21,6 +21,30 @@ export const Student_Form = () => {
     const [state,setState] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [isValidPhone, setIsValidPhone] = useState(false);
+
+    const[standard,setStandard]=useState('');
+    const[standardError,setStandardError]=useState('');
+
+    const [standarddata, setStandardData] = useState([]);
+
+    const fetchStandardData = async () => {
+      try {
+        const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
+        setStandardData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchStandardData();
+    }, []);
+
+    const handleStandard = (e) => {
+      setStandard(e.target.value);
+      setStandardError('');
+    };
+
   
     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
     const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
@@ -45,6 +69,11 @@ export const Student_Form = () => {
         const phoneRegex = /^[+]?[0-9]{8,}$/;
         setIsValidPhone(phoneRegex.test(value));
       };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+
+      };
       
     
   return (
@@ -54,16 +83,7 @@ export const Student_Form = () => {
         <form>
             <div>
             <h2 id='student-form'>Student Detail</h2>
-            <div id='form-groupstudent_form'>
-                <label id='student_form'>Gr  No:</label>
-                <input id='inputstudent_form' type='text' value={GrNo} onChange={(e)=> setGrNo(e.target.value)} placeholder='Enter GrNo'
-                name='no'  required />
-            </div>
-            <div id='form-groupstudent_form'>
-                <label id='student_form'>Roll  No:</label>
-                <input id='inputstudent_form' type='text' value={rollNo} onChange={(e)=> setRollNo(e.target.value)} placeholder='Enter RollNo'
-                name='Rollno'  required />
-            </div>
+            
             <div id='form-groupstudent_form'>
                 <label id='student_form'>Name:</label>
                 <input id='inputstudent_form' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
@@ -109,9 +129,20 @@ export const Student_Form = () => {
                 <label id='student_form'>Join-Date:</label>
                 <input id='inputstudent_form' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
+
+            <div id='form-groupstudent_form'>
+                <label id='student_form'>Standard</label>
+                <select id='inputstudent_form' title='Select Standard' value={standard} onChange={handleStandard}>
+                    {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
+                </select>
+                
+              {standardError && <p style={{color:'red'}}>{standardError}</p>}
+           </div>
+
             </div>
     
-        <div id='div_two'>           
+        <div id='div_two'> 
+
         <div>
             <label id='student_form2' htmlFor="bloodgroup">Select a BloodGroup:</label>
                  <select id='inputstudent_form2'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
@@ -144,14 +175,14 @@ export const Student_Form = () => {
            </div>
            <div id='form-groupstudent_form'>
                 <label id='student_form2'>State:</label>
-                <input id='inputstudent_form2' type='text' value='Gujarat' onChange={(e)=> setState(e.target.value)}
+                <input id='inputstudent_form2' type='text' value={state} onChange={(e)=> setState(e.target.value)}
                 name='city'  required />
             </div>
            
            <div id='form-groupstudent_form'>
                <label id='student_form2'>Mobile Number:</label>
                <div id='phone_numberS'>
-               <PhoneInput
+               <PhoneInput id='phone_numberS'
                    country={'in'}
                    value={mobileNumber}
                    onChange={handlePhoneChange}
@@ -161,9 +192,9 @@ export const Student_Form = () => {
                    containerStyle={{padding:'1px'}}
                    required />
                  </div>
-               </div>  
+               </div> 
         </div>
-            <button id='btnnexts' type='submit'>Next</button>
+            <button id='btnnexts' type='submit'onClick={()=>handleSubmit}>Next</button>
          </form>
     </div>
     </>
