@@ -1,0 +1,33 @@
+
+  
+  .Admin-personal-info {
+    border: 2px solid skyblue;
+    background-color: beige;
+    border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 33%;
+    border-radius: 10%;
+    margin-left: 37%;
+    margin-top: 0;
+  }
+  
+  .Admin-personal-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .strong-Admin-personal-info {
+    width: 280px;
+  }
+  
+  .Admin-info {
+    margin-top: 10px;
+  }
+  
+  .Admin-info p {
+    margin: 5px 0;
+  }
+  
+  
