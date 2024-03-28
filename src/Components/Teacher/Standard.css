@@ -1,25 +1,24 @@
- #standard{
-    padding: 20px;
+#standard{
+    padding: 4%;
     width: 1300px;
 }
-#standard-heading{
-    max-width: 800px;
-    margin-left: 270px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 35pxs;
-    font: bold;
-    text-decoration: underline;
-}
-h1{
-    font-size: 30px;
+
+#stdheader{
     color:#146a51;
     font-weight: 300;
     text-align: center;
-    margin-bottom: 15px;
-    padding: 10px;
-  }
+    margin-bottom: 1.5%;
+    padding: 1px;
+    max-width: 80%;
+    margin-left: 8.5%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 200%;
+    font: bold;
+    text-decoration: underline;
+}
+
 #tables {    
-    margin-left: 500px;
+    margin-left: 35%;
     width:28%;
     height: 300px;
     table-layout: fixed;
@@ -27,31 +26,25 @@ h1{
     text-align: center;
     background-color: hsl(107, 17%, 78%);
 }
- 
-table tr {
-    background-color: #1f7a61;  
 
-}
-table th{
-    color: white;
-}
 #tbl-content{    
-    height:600px;
+    height:60%;
     overflow-x:auto;
-    margin-top: 0px;
 } 
-th{    
-    padding: 8px;
+
+#stdth {    
+    padding: 3%;
     text-align: center;
     vertical-align:middle;    
-    font-size: 18px;
-    color: black;
+    font-size: 130%;
+    color: white;
     background-color: #146a51;    
 }
-td{        
+
+#stdtd{        
     text-align: center;
     border: 1px solid black;
-    font-size: 18px;   
+    font-size: 130%;   
 }
 
 

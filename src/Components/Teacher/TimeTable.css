@@ -1,32 +1,30 @@
-#timetable{
-   
-    padding: 30px 30px;
+#timetable{   
+    padding: -1%;
     width: 1300px;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
     justify-content: center;
 }
-#timetable-heading{
-    max-width: 800px;
-    margin-left: 300px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 30px;
-    font: bold;
-    text-decoration: underline;
-}
-h1{
-    font-size: 30px;
+
+#h1{
     color:#146a51;
     font-weight: 300;
     text-align: center;
-    margin-bottom: 15px;
-    padding: 10px;
-  }
-  #table {    
-    margin-left: 300px;
+    margin-bottom: 2;
+    padding: -1%;
+    max-width: 80%;
+    margin-left: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 200%;
+    font: bold;
+    text-decoration: underline;
+}
+
+#table{    
+    margin-left: 20%;
     width:60%;
-    height: 300px;
+    height: 30%;
     table-layout: fixed;
     border: none;
     outline: none;
@@ -34,79 +32,89 @@ h1{
     text-align: center;   
     background-color: hsl(107, 17%, 78%);
 }
-td {
-	text-align: center;
-  border: none;
-  outline: none;
-	border: 1px solid black;
-  background-color: hsl(107, 17%, 78%);
+
+#th{
+  width: 50%;
+  height: 50px;
+  background:#146a51;;
+  color: white;
 }
-th{
-  width: 105px;
-  height: 30px;
-  background-color: #146a51;
-}
+
 #row{
   font-family: sans-serif;
-  width: 105px;
-  height: 35px;
+  width: 50%;
+  height: 17.5%;
 	font-weight: 400;
   background-color: hsl(107, 17%, 78%);
 }
+
 #sub {
 	font-family: sans-serif;
-  width: 105px;
-  height: 35px;
+  width: 98%;
+  height: 50px;
 	font-weight: 400;
   border: none;
   outline: none;
+  text-align: center;
+  border: 1px solid black;
+  background-color: hsl(107, 17%, 78%);
+}
+
+#break{
+  font-family: sans-serif;
+  /* font: bold; */
+  font-size: 130%;
+  height: 50px;
+	font-weight: 700;
+  border: none;
+  outline: none;
+  text-align: center;
+  border: 1px solid black;
   background-color: hsl(107, 17%, 78%);
 }
 
 /* Standard dropdown */
 #formtable {
-    margin-bottom: 10px;
-    margin-top: 5px;
+    margin-bottom: 1%;
+    margin-top: -1%;
   }
   #formtable p{
-    margin-left: 70px;
+    margin-left: 7%;
   }
   #labelofform {
     display: block;
-    margin-bottom: 5px;
-    margin-top: 8px;
-    margin-left: 310px;
+    margin-bottom: 1%;
+    margin-top: 2%;
+    margin-left: 20%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
+    font-size: 100%;
   }
     #inputforms {
-    width: 250px;
-    margin-left: 310px;
-    margin-bottom: 20px;
+    width: 15%;
+    margin-left: 20%;
+    margin-bottom: 1%;
     padding: 8px;
     box-sizing: border-box;
-    margin-top: 5px;
+    margin-top: 1%;
     border: none;
     outline: none;
     border: 2px solid rgba(0,0,0);
-    border-radius: 5px;
+    border-radius: 5%;
   }
 #btn{
-  /* width: 80px;
-  margin-left: 430px; */
   width: 10%;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 10%;
   outline: auto;
   border: 1px;
   background:#146a51;;
   justify-content: center;
   text-align: center;
-  margin-left: 460px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-left: 35%;
+  margin-top: 1%;
+  margin-bottom: 2%;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 110%;
   color: white;
 }
 

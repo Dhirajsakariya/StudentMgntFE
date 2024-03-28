@@ -28,21 +28,20 @@ const Standard = () => {
     <TeacherSidebar>
     <div>
       <div id='standard'>
-        <h1 id='standard-heading'>Standard List</h1>
+        <h1 id='stdheader'>Standard List</h1>
         <div>
           <table id='tables'>
-            <thead> {/* Add thead element */}
+            <thead> 
               <tr>
-                <th>Standard</th>
-                <th>Section</th> 
+                <th id='stdth'>Standard</th>
+                <th id='stdth'>Section</th> 
               </tr>
             </thead>
-            <tbody> {/* Add tbody element */}
-              {/* Map over your data array and render rows */}
+            <tbody> 
               {data.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.standardNumber}</td>
-                  <td>{item.section}</td>
+                  <td id='stdtd'>{item.standardNumber}</td>
+                  <td id='stdtd'>{item.section}</td>
                 </tr>
               ))}
             </tbody>

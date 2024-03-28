@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 const TimeTable = () => {
     const [standard, setStandard] = useState('');
     const [standardData, setStandardData] = useState([]);
-    const [toggle , setToggel] = useState(true);
+    //const [toggle , setToggel] = useState(true);
     const [standardError, setStandardError] = useState('');
     const [formData, setFormData] = useState({
         id:'',
@@ -54,6 +54,7 @@ const TimeTable = () => {
       const handleSave =async () =>{
         try{
           const timeTableCreateList = {
+            Id : formData.id,
             NoOfDay:dayInteger,
             StartTime:formData.startTime,
             EndTime: formData.endTime,
@@ -68,8 +69,9 @@ const TimeTable = () => {
               },
               body: JSON.stringify(timeTableCreateList)
           });
-           const result = response.json();
-           console.log("result",result);
+          console.log("response",response);
+          const result = response.json();
+          console.log("result",result);
           if (response.ok) {
               toast.success("SuccessFully Saved!");
               setTimeout(() => {
@@ -85,18 +87,18 @@ const TimeTable = () => {
         }
       }
 
-      const handleEdit =()=>{
-        setToggel(false);
-      }
+      // const handleEdit =()=>{
+      //   setToggel(false);
+      // }
     
   return (
     <>
     <TeacherSidebar>
     <div>
-      <div className='timetable' id='timetable'>
-        <h1 className='timetable-heading' id='timetable-heading'>TimeTable</h1>
-        <div className="formtable" id='formtable'>
-              <label className='labelofform' id='labelofform'>Standard:</label>
+      <div id='timetable'>
+        <h1 id='h1'>TimeTable</h1>
+        <div id='formtable'>
+              {/* <label className='labelofform' id='labelofform'>Standard:</label> */}
               
               <select
                 value={standard}
@@ -116,33 +118,25 @@ const TimeTable = () => {
                 ))}
               </select>
               {standardError && <p style={{ color: 'red' }}>{standardError}</p>}
-              {
+              <button id='btn' type='submit' onClick={handleSave}>Save</button>
+              {/* {
                   toggle ? <button id='btn' type='submit' onClick={handleEdit}>Edit</button> :
                   <button id='btn' type='submit' onClick={handleSave}>Save</button>
-              }               
+              }                */}
             </div>
         <div>
             <table className='table' id='table'>
                 <tr>
-                    <th>Day/Period</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
+                    <th id='th'>Day/Period</th>
+                    <th id='th'>Monday</th>
+                    <th id='th'>Tuesday</th>
+                    <th id='th'>Wednesday</th>
+                    <th id='th'>Thursday</th>
+                    <th id='th'>Friday</th>
+                    <th id='th'>Saturday</th>
                 </tr>
                 <tr id='row'>
-                  <td>7:30-8:30</td>
-                  <td><input id='sub' type='text'/></td>
-                  <td><input id='sub' type='text'/></td>
-                  <td><input id='sub' type='text'/></td>
-                  <td><input id='sub' type='text'/></td>
-                  <td><input id='sub' type='text'/></td>
-                  <td><input id='sub' type='text'/></td>
-                </tr>
-                <tr id='row'>
-                  <td>8:30-9:30</td>
+                  <td id='sub'>7:30-8:30</td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
@@ -151,11 +145,7 @@ const TimeTable = () => {
                   <td><input id='sub' type='text'/></td>
                 </tr>
                 <tr id='row'>
-                  <td>9:30-10:00</td>
-                  <td colspan="6" align="center"> Break</td>
-                </tr>
-                <tr id='row'>
-                  <td>10:00-11:00</td>
+                  <td id='sub'>8:30-9:30</td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
@@ -164,7 +154,20 @@ const TimeTable = () => {
                   <td><input id='sub' type='text'/></td>
                 </tr>
                 <tr id='row'>
-                  <td>11:00-12:00</td>
+                  <td id='sub'>9:30-10:00</td>
+                  <td id='break' colspan="6" align="center"> Break</td>
+                </tr>
+                <tr id='row'>
+                  <td id='sub'>10:00-11:00</td>
+                  <td><input id='sub' type='text'/></td>
+                  <td><input id='sub' type='text'/></td>
+                  <td><input id='sub' type='text'/></td>
+                  <td><input id='sub' type='text'/></td>
+                  <td><input id='sub' type='text'/></td>
+                  <td><input id='sub' type='text'/></td>
+                </tr>
+                <tr id='row'>
+                  <td id='sub'>11:00-12:00</td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
                   <td><input id='sub' type='text'/></td>
