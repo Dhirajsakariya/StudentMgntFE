@@ -1,0 +1,33 @@
+
+  
+  .teacher-personal-info {
+    border: 2px solid skyblue;
+    background-color: beige;
+    border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 33%;
+    border-radius: 10%;
+    margin-left: 37%;
+    margin-top: 0;
+  }
+  
+  .teacher-personal-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .strong-teacher-personal-info {
+    width: 280px;
+  }
+  
+  .teacher-info {
+    margin-top: 10px;
+  }
+  
+  .teacher-info p {
+    margin: 5px 0;
+  }
+  
+  
