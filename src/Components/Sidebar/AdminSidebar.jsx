@@ -20,38 +20,27 @@ const AdminSidebar = ({userName, children }) => {
     
 
     const menuItem = [
-        // {
-        //     path: '/UpdateUserdetail',
-        //     name: 'User Detail',
-        //     icon: <BiSolidUserDetail  />
-        // },
         {
-            path: '/AddSubject',
-            name: 'AddSubject',
-            icon: <IoAddCircleOutline   />
-        },
-        {
-            path: '/FeeForm',
-            name: 'FeeForm',
-            icon: <FaGooglePay  />
-        },
-        {
-        path: '/ParentsPortal',
-            name: 'ParentsPortal',
-            icon: <MdFamilyRestroom  />
+            path: '/TeacherForm',
+            name: 'Teacher Form',
+            icon: <LiaChalkboardTeacherSolid  />
         },
         {
             path: '/StudentForm',
             name: 'Student Form',
             icon: <PiStudentBold  />
         },
-       
         {
-            path: '/TeacherForm',
-            name: 'Teacher Form',
-            icon: <LiaChalkboardTeacherSolid  />
-        },
-            {
+            path: '/ParentsPortal',
+                name: 'ParentsPortal',
+                icon: <MdFamilyRestroom  />
+            },
+        {
+            path: '/FeeForm',
+            name: 'FeeForm',
+            icon: <FaGooglePay  />
+        }, 
+       {
             path: '/login',
             name: 'Logout',
             icon: <BiLogOut />

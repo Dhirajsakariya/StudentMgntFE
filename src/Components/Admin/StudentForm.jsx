@@ -4,6 +4,7 @@ import './StudentForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import {  useHistory } from 'react-router-dom';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdFormatListNumbered, MdOutlineFormatListNumberedRtl ,MdRealEstateAgent} from "react-icons/md";
@@ -16,10 +17,7 @@ import {toast,Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import config from '../Login/config';
 
-
-const StudentForm = () => {
-   
-    const [rollNo,setRollNo] =useState('');
+const StudentForm = () => {  
     const [name, setName ] = useState('');
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -27,7 +25,6 @@ const StudentForm = () => {
     const [birthday, setBirthday] = useState('');
     const [joinDate,setJoinDate] = useState('');
     const [grNo,setGrNo] = useState('');
-    //const [bloodGroup,setBloodGroup] = useState('');
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
@@ -105,7 +102,7 @@ const StudentForm = () => {
         }
         try {
               const emailresponse =await axios.post(`${config.ApiUrl}Student/PostStudent`,{
-              GrNo : grNo,
+              //GrNo : grNo,
               Name : name,
               Email : email,
               Password : password,
@@ -150,22 +147,7 @@ const StudentForm = () => {
                 
                   <h2 id='studentformh2studentform'>Student Detail</h2>
                   <div className='form-group1'>
-                  <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>Gr No:</label>
-                    <input id='inputstudentform' type='text' value={grNo} onChange={(e)=> setGrNo(e.target.value)} placeholder='Enter Gr No.'
-                      name='grno'  required />
-                      <MdFormatListNumbered id='iconstudentform' />
-                  </div>
-
-                  <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>Roll  No:</label>
-                    <input id='inputstudentform' type='text' value={rollNo} onChange={(e)=> setRollNo(e.target.value)} placeholder='Enter RollNo'
-                    name='Rollno'  required />
-                  <MdOutlineFormatListNumberedRtl id='iconstudentform'/>
-
-
-                  </div>
-
+                  
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Name:</label>
                     <input id='inputstudentform' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
@@ -216,9 +198,19 @@ const StudentForm = () => {
                   </div>
 
                   <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>DOB:</label>
+                    <label id='labelstudentform'>Date Of Birth:</label>
                     <input id='inputstudentform' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
                   </div>
+
+                  <div>
+                   <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
+                   <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
+                   <option value="">--Select BloodGroup--</option>
+                   {bloodGroup.map((bloodGroup, index) => (
+                   <option key={index} value={bloodGroup}>{bloodGroup}</option>
+                   ))}
+                  </select>
+                 </div>
                   
                   <div className='form-groupr'>
          
@@ -244,63 +236,58 @@ const StudentForm = () => {
           
            </div>
            </div>
+
+          
+
+                 
+              
            </div>       
            <div id='form-groupstudentform-2'>        
                     
-              <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>Join-Date:</label>
-                    <input id='inputstudentform' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
+           <div id='form-groupstudentform'>
+                    <label id='labelstudentform2'>Join-Date:</label>
+                    <input id='inputstudentform2' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
                   </div>
-
-                 <div>
-                   <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
-                   <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
-                   <option value="">--Select BloodGroup--</option>
-                   {bloodGroup.map((bloodGroup, index) => (
-                   <option key={index} value={bloodGroup}>{bloodGroup}</option>
-                   ))}
-                  </select>
-                 </div>
                 
                   <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>Address:</label>
+                    <label id='labelstudentform2'>Address:</label>
                     <input  type='textarea' id='inputtextarea'  value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
                     name='Address'  required />
                     <FaRegAddressCard  id='iconstudentform'/>
                  </div> 
                
                   <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>City:</label>
-                    <input id='inputstudentform' type='text' value={city} onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your City'
+                    <label id='labelstudentform2'>City:</label>
+                    <input id='inputstudentform2' type='text' value={city} onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your City'
                     name='city'  required />
                     <LiaCitySolid id='iconstudentform'/>
                   </div>
                
                   <div id='form-groupstudentform'>
-                  <label id='labelstudentform'>District:</label>
-                    <input id='inputstudentform' type='text' value={district} onChange={(e)=> setDistrict(e.target.value)} placeholder='Enter Your District'
+                  <label id='labelstudentform2'>District:</label>
+                    <input id='inputstudentform2' type='text' value={district} onChange={(e)=> setDistrict(e.target.value)} placeholder='Enter Your District'
                     name='district'  required />
                     <GrMapLocation id='iconstudentform' />
                   </div>   
                
                   <div id='form-groupstudentform'>
-                    <label id='labelstudentform'>State:</label>
-                    <input id='inputstudentform' type='text' value='Gujarat' onChange={(e)=> setState(e.target.value)}
+                    <label id='labelstudentform2'>State:</label>
+                    <input id='inputstudentform2' type='text' value={state} onChange={(e)=> setState(e.target.value)} placeholder='Enter Your State'
                     name='city'  required />
                     <MdRealEstateAgent id='iconstudentform' />
 
                   </div>
 
                   <div id='form-groupr'>
-                  <label id='labelstudentform'>PinCode:</label>
-                  <input id='inputstudentform' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)} placeholder='Enter PinCode'
+                  <label id='labelstudentform2'>PinCode:</label>
+                  <input id='inputstudentform2' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)} placeholder='Enter PinCode'
                   name='pincode'  required />
                   <TbMapPinCode id='iconstudentform'/>
 
                 </div>
 
                 <div id='form-groupstudentform'>
-                   <label id='labelstudentform'>Mobile Number:</label>
+                   <label id='labelstudentform2'>Mobile Number:</label>
                    <div id='phone_numberstudentform'>
                    <PhoneInput
                        country={'in'}

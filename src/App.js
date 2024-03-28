@@ -18,7 +18,6 @@ import TimeTable from './Components/Teacher/TimeTable';
 import Student from './Components/Student/Student';
 import FeeForm from './Components/Admin/FeeForm';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
-import AddSubject from './Components/Admin/AddSubject';
 import ParentsPortal from './Components/Admin/ParentsPortal';
 import StudentSidebar from './Components/Sidebar/StudentSidebar';
 import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
@@ -43,7 +42,6 @@ function App() {
           <Route path='/TimeTable' component={TimeTable}/>
           <Route path='/Standard' component={Standard}/>
           <Route path='/Student' component={Student}/>
-          <Route path='/AddSubject' component={AddSubject}/>
           <Route path='/ParentsPortal' component={ParentsPortal}/>
           <Route path='/FeeForm' component={FeeForm}/>
           <Route path='/StudentSidebar' component={StudentSidebar}/>

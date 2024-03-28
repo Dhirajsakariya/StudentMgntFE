@@ -15,11 +15,6 @@ const StudentSidebar = ({ children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const menuItem = [
-        // {
-        //     path: '/StudentPersonal',
-        //     name: 'Student Personal',
-        //     icon: <BiSolidUserDetail />
-        // },
         {
             path: '/Student',
             name: 'Student',

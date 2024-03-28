@@ -16,24 +16,17 @@ const TeacherSidebar = ({ children }) => {
     const navigate = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const menuItem = [
-        // {
-        //     path: '/TeacherPersonal',
-        //     name: 'TeacherPersonal',
-        //     icon: <PiUserListDuotone   />
-        // },
-        
-        {
-            path: '/Standard',
-            name: 'Standard',
-            icon: <PiUserListDuotone   />
-        },
+    const menuItem = [ 
         {
             path: '/Student_Form',
             name: 'Student Form',
             icon: <FaWpforms   />
         },
-       
+        {
+            path: '/Standard',
+            name: 'Standard',
+            icon: <PiUserListDuotone   />
+        },
         {
             path: '/TimeTable',
             name: 'TimeTable',
