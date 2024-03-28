@@ -157,64 +157,65 @@ const customToastStyle = {
             <h2 id='title' className='teacher-form'>Teacher Form</h2>
             
             <div id='Form-GroupT'>
-                <label  className='labelT'>Name:</label>
-                <input  className='inputT' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
+                <label  id='labelT'>Name:</label>
+                <input  id='inputT' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
                 name='name'  required />
                  <LuUserCircle2 className = 'iconT' />
             </div>
             <div id='Form-GroupT' >
-                <label className='labelT'>Email:</label>
-                <input className='inputT' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
+                <label id='labelT'>Email:</label>
+                <input id='inputT' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
                 name='Email'  required />
                     <MdOutlineMail className = 'iconT' />
             </div>
             <div id='Form-GroupT'>
-                <label className='labelT'>Password:</label>
-                <input className='inputT' type={!isVisible ? "password":"text"} value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
+                <label id='labelT'>Password:</label>
+                <input id='inputT' type={!isVisible ? "password":"text"} value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
                 name='Password'  required />
               <span className='iconT' onClick={toggle}>
                   {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}
               </span>
             </div>
             <div id='Form-GroupT' >
-            <label className='labelT'>Gender:</label>
+            <label id='labelT'>Gender:</label>
             <div className="radio-groupT">
-                   <input className='inputT'
+                   <input id='inputT'
                      type="radio"
                      value="male"
-                 checked={gender === "male"}
+                     checked={gender === "male"}
                      onChange={() => setGender("male")}
                      required
                    />
-                   <label>Male</label>
+                   <label className='labelm'>Male</label>
                    <input
+                     id= "inputFemale"
                      type="radio"
                      value="female"
                      checked={gender === "female"}
                      onChange={() => setGender("female")}
                      required
                    />
-                   <label>Female</label>
+                   <label className='labelf'>Female</label>
                  </div>
                  {genderError && <p style={{color:'red'}}>{genderError}</p>}
 
             </div>
             <div id='Form-GroupT' >
-                <label className='labelT'>DOB:</label>
-                <input className='inputT' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
+                <label id='labelT'>DOB:</label>
+                <input id='inputT' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
             </div>
             <div id='Form-GroupT' >
-                <label className='labelT'>Join-Date:</label>
-                <input className='inputT' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
+                <label id='labelT'>Join-Date:</label>
+                <input id='inputT' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
            
             <div>
-                <label className='labelT'>Standard</label>
+                <label id='labelT'>Standard</label>
                 <select  id = 'inputD' title='Select Standard' value={standard} onChange={handleStandard}>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
                 <label className='labelD'>Subject</label>
-                   <select  id = 'inputSD' value={subject} onChange={handleSubject}>
+                   <select  id ='inputSD' value={subject} onChange={handleSubject}>
                      {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
               </div>
@@ -225,13 +226,13 @@ const customToastStyle = {
         <div id='Form-Part-Two' >        
 
             <div id ='Form-GroupT'>
-                <label className='labelT'>Address:</label>
-                <textarea id='inputT'   value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
+                <label id='labelT'>Address:</label>
+                <textarea id='inputText'   value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
                 name='Address'  required />
             </div> 
             <div  id ='Form-GroupT'>
-                <label className='labelT'>City:</label>
-                <input className='inputT' 
+                <label id='labelT'>City:</label>
+                <input id='inputT' 
                 type='text' 
                 value={city}
                 onChange={(e)=> setCity(e.target.value)}
@@ -240,10 +241,10 @@ const customToastStyle = {
             </div>
            
             <div className="form-groupr">
-            <label className='labelT'>District:</label>
+            <label id='labelT'>District:</label>
             <input
-              className="inputT"
-              id="district"
+              id="inputT"
+              //id="district"
               name="district"
               value={districts}
               onChange={(e) => setDistrict(e.target.value)}
@@ -252,8 +253,8 @@ const customToastStyle = {
             />
           
            <div id ='Form-GroupT'>
-                <label className='labelT'>State:</label>
-                <input className='inputT' 
+                <label id='labelT'>State:</label>
+                <input id='inputT' 
                 type='text' 
                 value={state} 
                 placeholder='State'
@@ -261,8 +262,8 @@ const customToastStyle = {
                 name='state'  required />
             </div>
             <div  id ='Form-GroupT'>
-                <label className='labelT'>PinCode:</label>
-                <input className='inputT' 
+                <label id='labelT'>PinCode:</label>
+                <input id='inputT' 
                 type='text'
                  value={pinCode} 
                  placeholder='PinCode'
@@ -272,7 +273,7 @@ const customToastStyle = {
 
            
            <div id ='Form-GroupT'>
-               <label className='labelT'>Mobile Number:</label>
+               <label id='labelT'>Mobile Number:</label>
                <div className='phone_numberT'>
                <PhoneInput
                    country={'in'}
