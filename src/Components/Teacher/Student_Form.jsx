@@ -31,6 +31,7 @@ export const Student_Form = () => {
       try {
         const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
         setStandardData(response.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -131,6 +132,7 @@ export const Student_Form = () => {
             </div>
 
             <div id='form-groupstudent_form'>
+             
                 <label id='student_form'>Standard</label>
                 <select id='inputstudent_form' title='Select Standard' value={standard} onChange={handleStandard}>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
@@ -138,7 +140,7 @@ export const Student_Form = () => {
                 
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
            </div>
-
+           
             </div>
     
         <div id='div_two'> 
@@ -182,7 +184,8 @@ export const Student_Form = () => {
            <div id='form-groupstudent_form'>
                <label id='student_form2'>Mobile Number:</label>
                <div id='phone_numberS'>
-               <PhoneInput id='phone_numberS'
+               <PhoneInput
+                   id='phone'
                    country={'in'}
                    value={mobileNumber}
                    onChange={handlePhoneChange}
