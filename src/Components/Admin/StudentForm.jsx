@@ -7,7 +7,7 @@ import {  useHistory } from 'react-router-dom';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { MdFormatListNumbered, MdOutlineFormatListNumberedRtl ,MdRealEstateAgent} from "react-icons/md";
+import {MdRealEstateAgent} from "react-icons/md";
 import { LiaCitySolid } from "react-icons/lia";
 import { GrMapLocation } from "react-icons/gr";
 import { TbMapPinCode } from "react-icons/tb";
@@ -24,7 +24,7 @@ const StudentForm = () => {
     const [gender,setGender] = useState('');
     const [birthday, setBirthday] = useState('');
     const [joinDate,setJoinDate] = useState('');
-    const [grNo,setGrNo] = useState('');
+    
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
@@ -36,13 +36,11 @@ const StudentForm = () => {
     const[genderError,setGenderError]=useState('');
     const[mobileError,setMobileError]=useState('');
     const [isVisible, setVisible] = useState(false);
-  const [isDisable, setDisable] = useState(false);
+    const [isDisable, setDisable] = useState(false);
     const [standard,setStandard] = useState('');
     const[standardError,setStandardError]=useState('');
-   const [standardData, setStandardData] = useState([]);
+    const [standardData, setStandardData] = useState([]);
 
- 
-   
     useEffect(() => {
       const fetchStandards = async () => {
         try {
@@ -61,7 +59,7 @@ const StudentForm = () => {
       fetchStandards();
     }, []);
   
-    const toggle = () => {
+  const toggle = () => {
       setVisible(!isVisible);
     };
   
@@ -69,24 +67,24 @@ const StudentForm = () => {
       setDisable(!isDisable);
     };
   
-   const str = standard;
-    const parts = str.split("-");
+  const str = standard;
+  const parts = str.split("-");
   
-    const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
+  const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
  
-    const handleBloodGroupChange = (e) => {
-      setSelectedBloodGroup(e.target.value);
-    };
+  const handleBloodGroupChange = (e) => {
+     setSelectedBloodGroup(e.target.value);
+  };
 
-    const handlePhoneChange = (value) => {
-        setMobileNumber(value);
-        const phoneRegex = /^[+]?[0-9]{8,}$/;
-        setIsValidPhone(phoneRegex.test(value));
-      };
+  const handlePhoneChange = (value) => {
+    setMobileNumber(value);
+    const phoneRegex = /^[+]?[0-9]{8,}$/;
+    setIsValidPhone(phoneRegex.test(value));
+  };
       
-    const navigate=useHistory();
+  const navigate=useHistory();
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
         e.preventDefault();
         if(!standard){
           setStandardError('Select standard');
@@ -102,7 +100,6 @@ const StudentForm = () => {
         }
         try {
               const emailresponse =await axios.post(`${config.ApiUrl}Student/PostStudent`,{
-              //GrNo : grNo,
               Name : name,
               Email : email,
               Password : password,
@@ -133,47 +130,63 @@ const StudentForm = () => {
             toast.success("Registration Successfull!")
           }
   
-      } catch {
+          } catch {
           toast.error('Signup failed. Please try again later.');
         }
-          return;
-    };
+        return;
+};
   
-    return (
+   return (
     <AdminSidebar>
-    <>
+      <>
         <div id='containerstudentform'>
             <form onSubmit={handleSubmit}>
                 
-                  <h2 id='studentformh2studentform'>Student Detail</h2>
-                  <div className='form-group1'>
+              <h2 id='studentformh2studentform'>Student Detail</h2>
+                  
+                <div className='form-group1'>
                   
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Name:</label>
-                    <input id='inputstudentform' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Enter Name'
-                    name='name'  required />
+                      <input 
+                      id='inputstudentform'
+                      type='text' value={name} 
+                      onChange={(e)=> setName(e.target.value)} 
+                      placeholder='Enter Full Name'
+                     name='name'  
+                     required />
                     <FaRegUserCircle id='iconstudentform'/>
                   </div>
                 
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Email:</label>
-                    <input id='inputstudentform' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
+                    <input 
+                    id='inputstudentform' 
+                    type='email' 
+                    value={email} 
+                    onChange={(e)=> setEmail(e.target.value)} 
+                    placeholder='Enter Email'
                     name='Email'  required />
                     <CgMail id='iconstudentform'/>
                   </div>
                 
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Password:</label>
-                    <input id='inputstudentform'  type={!isVisible ? "password" : "text"} name='password' placeholder='Password' 
-              value={password} onChange={(e)=> setPassword(e.target.value)}
-              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
-              title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
-              autoComplete='current-password'
-              required/>
-            <span id='iconstudentform' onClick={toggle}>
-              {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />
-              }</span>
-          </div>
+                    <input 
+                    id='inputstudentform'  
+                    type={!isVisible ? "password" : "text"} 
+                    name='password' 
+                    placeholder='Password' 
+                    value={password} 
+                    onChange={(e)=> setPassword(e.target.value)}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
+                    title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
+                    autoComplete='current-password'
+                    required/>
+                    <span id='iconstudentform' onClick={toggle}>
+                    {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}</span>
+                  </div>
+
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Gender:</label>
                       <div id="radio-groupa">
@@ -182,134 +195,158 @@ const StudentForm = () => {
                          value="male"
                          checked={gender === "male"}
                          onChange={() => setGender("male")}
-                         required
-                       />
+                         required/>
                        <label>Male</label>
                        <input
                          type="radio"
                          value="female"
                          checked={gender === "female"}
                          onChange={() => setGender("female")}
-                         required
-                       />
+                         required/>
                        <label>Female</label>
-                      </div>
+                     </div>
                       {genderError && <p style={{color:'red'}}>{genderError}</p>}
                   </div>
 
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Date Of Birth:</label>
-                    <input id='inputstudentform' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
+                     <input 
+                      id='inputstudentform' 
+                      type='date' 
+                      value={birthday} 
+                      max={moment().format("YYYY-MM-DD")} 
+                      onChange={(e) => setBirthday(e.target.value)} 
+                      required />  
                   </div>
 
                   <div>
-                   <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
-                   <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
-                   <option value="">--Select BloodGroup--</option>
-                   {bloodGroup.map((bloodGroup, index) => (
-                   <option key={index} value={bloodGroup}>{bloodGroup}</option>
-                   ))}
-                  </select>
-                 </div>
+                    <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
+                     <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
+                      <option value="">--Select BloodGroup--</option>
+                        {bloodGroup.map((bloodGroup, index) => (
+                          <option key={index} value={bloodGroup}>{bloodGroup}</option>
+                          ))}
+                    </select>
+                  </div>
                   
-                  <div className='form-groupr'>
-         
-             <div className='subjectselection'>
-              <div>
-                <label className='labelr'>Standard</label>
-                <select
-                value={standard}
-                id='inputstudentform'
-                required
-                onChange={(e) => setStandard(e.target.value)}
-              >
-                <option value="">Select Standard</option>
-                {standardData.map((standard) => (
-                  <option key={standard} value={standard}>
-                    {standard}
-                  </option>
-                ))}
-              </select>
-                
-              </div>
-              {standardError && <p style={{color:'red'}}>{standardError}</p>}
-          
-           </div>
-           </div>
+                 <div className='form-groupr'>
+                  <div className='subjectselection'>
+                   <div>
+                    <label className='labelr'>Standard</label>
+                    <select
+                      value={standard}
+                      id='inputstudentform'
+                      required
+                      onChange={(e) => setStandard(e.target.value)}>
+                      <option value="">Select Standard</option>
+                        {standardData.map((standard) => (
+                      <option key={standard} value={standard}>
+                       {standard}
+                      </option>
+                       ))}
+                    </select>
+                    </div>
+                    {standardError && <p style={{color:'red'}}>{standardError}</p>}
+                  </div>
+                </div>
+            </div>     
 
-          
 
-                 
-              
-           </div>       
            <div id='form-groupstudentform-2'>        
                     
-           <div id='form-groupstudentform'>
-                    <label id='labelstudentform2'>Join-Date:</label>
-                    <input id='inputstudentform2' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
-                  </div>
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>Join-Date:</label>
+                <input 
+                id='inputstudentform' 
+                type='date' 
+                value={joinDate} max={moment().format("YYYY-MM-DD")} 
+                onChange={(e) => setJoinDate(e.target.value)} 
+                required />
+            </div>
                 
-                  <div id='form-groupstudentform'>
-                    <label id='labelstudentform2'>Address:</label>
-                    <input  type='textarea' id='inputtextarea'  value={address} onChange={(e)=> setAddress(e.target.value)} placeholder='Address'
-                    name='Address'  required />
-                    <FaRegAddressCard  id='iconstudentform'/>
-                 </div> 
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform'>Address:</label>
+                <input 
+                type='textarea' 
+                id='inputtextarea'  
+                value={address} 
+                onChange={(e)=> setAddress(e.target.value)} 
+                placeholder='Address'
+                name='Address'  required />
+                <FaRegAddressCard  id='iconstudentform'/>
+            </div> 
                
-                  <div id='form-groupstudentform'>
-                    <label id='labelstudentform2'>City:</label>
-                    <input id='inputstudentform2' type='text' value={city} onChange={(e)=> setCity(e.target.value)} placeholder='Enter Your City'
-                    name='city'  required />
-                    <LiaCitySolid id='iconstudentform'/>
-                  </div>
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>City:</label>
+                <input 
+                id='inputstudentform' 
+                type='text' 
+                value={city} 
+                onChange={(e)=> setCity(e.target.value)} 
+                placeholder='Enter Your City'
+                name='city'
+                required />
+                <LiaCitySolid id='iconstudentform'/>
+            </div>
                
-                  <div id='form-groupstudentform'>
-                  <label id='labelstudentform2'>District:</label>
-                    <input id='inputstudentform2' type='text' value={district} onChange={(e)=> setDistrict(e.target.value)} placeholder='Enter Your District'
-                    name='district'  required />
-                    <GrMapLocation id='iconstudentform' />
-                  </div>   
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>District:</label>
+                <input
+                id='inputstudentform' 
+                type='text' 
+                value={district} 
+                onChange={(e)=> setDistrict(e.target.value)} 
+                placeholder='Enter Your District'
+                name='district'  required />
+                <GrMapLocation id='iconstudentform' />
+            </div>   
                
-                  <div id='form-groupstudentform'>
-                    <label id='labelstudentform2'>State:</label>
-                    <input id='inputstudentform2' type='text' value={state} onChange={(e)=> setState(e.target.value)} placeholder='Enter Your State'
-                    name='city'  required />
-                    <MdRealEstateAgent id='iconstudentform' />
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>State:</label>
+                <input 
+                id='inputstudentform' 
+                type='text' 
+                value={state} 
+                onChange={(e)=> setState(e.target.value)} 
+                placeholder='Enter Your State'
+                name='city'  required />
+                <MdRealEstateAgent id='iconstudentform' />
+            </div>
 
-                  </div>
+            <div id='form-groupr'>
+              <label id='labelstudentform2'>PinCode:</label>
+                <input 
+                id='inputstudentform' 
+                type='text' 
+                value={pinCode} 
+                onChange={(e)=> setPinCode(e.target.value)}
+                placeholder='Enter PinCode'
+                name='pincode'  
+                required />
+                <TbMapPinCode id='iconstudentform'/>
+            </div>
 
-                  <div id='form-groupr'>
-                  <label id='labelstudentform2'>PinCode:</label>
-                  <input id='inputstudentform2' type='text' value={pinCode} onChange={(e)=> setPinCode(e.target.value)} placeholder='Enter PinCode'
-                  name='pincode'  required />
-                  <TbMapPinCode id='iconstudentform'/>
-
-                </div>
-
-                <div id='form-groupstudentform'>
-                   <label id='labelstudentform2'>Mobile Number:</label>
-                   <div id='phone_numberstudentform'>
-                   <PhoneInput
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform'>Mobile Number:</label>
+                <div id='phone_numberstudentform'>
+                  <PhoneInput
                        country={'in'}
                        value={mobileNumber}
                        onChange={handlePhoneChange}
                        disableDropdown={true}
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                       containerStyle={{padding:'1px'}}
-                    />
-                   </div>
-                  {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
-                 </div>
-                   
+                       containerStyle={{padding:'1px'}}/>
                 </div>
-                <button id='btnnextstudentform' type='submit'>Next</button>
-                </form>
+                {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
             </div>
-            
-            <Toaster/>
-          </>
-          </AdminSidebar>
+          </div>
+          <button id='btnnextstudentform' type='submit'>Next</button>
+        </form>
+      </div>
+      <Toaster/>
+    </>
+  </AdminSidebar>
   )
 }
 export default StudentForm
