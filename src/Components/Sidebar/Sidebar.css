@@ -15,7 +15,7 @@ main{
 .top-section{
   display: flex;
   align-items: center;
-  padding: 15px 15px;
+  padding: 10% 8%;
 }
 .logo{
   font-size: 20px;
@@ -83,14 +83,14 @@ background-color: hsl(107, 17%, 78%);
 }
 .menu-trigger img{
 position: absolute;
-top:2.8px;
-height: 65px;
-right: -10px;
-width: 65px;
+top:6%;
+height: 88%;
+right: -4%;
+width: 5%;
 border-radius: 60%;
 overflow: hidden;
 cursor: pointer;
-margin-right: 90px;
+margin-right: 6%;
 }
 .menu-trigger h2{
 padding: 15px;
@@ -102,9 +102,9 @@ font-size: xx-large;
 
 .dropdown-menu {
 background-color: white;
-border: 2px solid #ccc;
+border: 2% solid red;
 border-radius: 5px;
-padding: 10px;
+padding: 1%;
 padding-top: 5px;
 margin-top: 30px;
 padding-bottom: 0;
@@ -138,25 +138,25 @@ opacity: 1;
 cursor: pointer;
 }
 .dropdown-menu ul li img {
-  width:15px; 
-  height: 15px;
+  width:15%; 
+  height: 15%;
   border-radius: 50%;
-  margin-top: 128px;
-  margin-right:190px;
+  margin-top: 18%;
+  margin-right:19%;
 }
 .dropdown-menu ul li .user_icon{
-height: 20px;
-width: 20px;
-margin-top: 80px;
-margin-right: 125px;
+height: 50%;
+width: 2%;
+margin-top: 5.2%;
+margin-right: 12%;
 }
 
 .dropdown-menu ul li .logout_icon{
 
-height: 20px;
-width: 20px;
-margin-top: 117px;
-margin-right: 125px;
+height: 50%;
+width: 2%;
+margin-top: 8%;
+margin-right: 12%;
 }
 /* 
 .dropdown-menu h3:hover{
@@ -166,9 +166,9 @@ font-weight: 800;
 
 }  */
 .dropdown-menu li a{
-margin-bottom: 5px;
-margin-left: 25px;
-margin-right: 7px;
+margin-bottom: 5%;
+margin-left: 25%;
+margin-right: 7%;
 transition: 500ms;
 color: black;
 transition: 0.5s;
@@ -190,7 +190,7 @@ font-size: 25px;
 .dropdownItem {
   display: flex;
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 5% 10%;
 }
 
 .dropdownItem:hover {

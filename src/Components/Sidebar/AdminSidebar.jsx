@@ -79,7 +79,7 @@ const AdminSidebar = ({userName, children }) => {
                                 <ul>
                                     <li>
                                         <img className='user_icon' src={user_icon} alt="" />
-                                        <a href="/AdminPersonal">Angle</a>
+                                        <a href="/TeacherPersonal">Angle</a>
                                     </li>
                                     <li onClick={handleLogout}>
                                     <img className='logout_icon' src={logout} alt="" />
