@@ -79,7 +79,7 @@ const Login = () => {
                 setTimeout(() => {
                     switch (role) {
                         case 'admin':
-                            navigate.push('/AdminSidebar');
+                            navigate.push('/AdminPersonal');
                             break;
                         case 'teacher':
                             navigate.push('/TeacherPersonal');
