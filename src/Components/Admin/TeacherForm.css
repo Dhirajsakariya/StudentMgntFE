@@ -3,32 +3,32 @@
   width: 750px;
   color:black;
   border-radius: 10px;
-  padding: 30px 30px;
-  height:620px;
+  padding: 3% 3%;
+  height:62%;
   background: transparent;
   border: 2px solid;
   background-color: hsl(107, 17%, 78%);
   margin-left: auto;
   padding-top: auto;
-  padding-bottom: 30px;
+  padding-bottom: 1%;
   margin-right: auto;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
-  margin-bottom: 200px;
+  margin-top: 2%;
+  margin-bottom: 20%;
 }
 #Form-GroupT {
-  margin-bottom: 10px;
+  margin-bottom: 1.4%;
 }  
 
 .radio-groupT {
   display: inline-flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 1%;
 }
 
 .radio-groupT label {
-  margin-top: 5px;
+  margin-top: 3%;
 }
 
 .radio-groupT input {
@@ -42,13 +42,13 @@
       text-align: center;
       font: bold;
       text-decoration: underline;
-      margin-top: -10px;
-      padding-bottom: 8px;
+      margin-top: -1%;
+      padding-bottom: 1%;
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
 }
 .signup{
   justify-content: center;
-  padding-top: 1px;
+  padding-top: 1%;
   color:#146a51;;
   text-align: center;
   font: bold;
@@ -83,19 +83,19 @@
   border-radius: 5px;
 }
 #inputD{
-  margin-left: 16px;
-  width: 90px;
+  margin-left: 2%;
+  width: 14%;
   height: 30px;
   border-radius: 5px;
 }
 .labelD{
-  margin-left: 192px;
-  margin-top: -55px;
+  margin-left: 25%;
+  margin-top: -7.3%;
 }
 #inputSD{
-  margin-left:192px;
+  margin-left:25%;
   height: 30px;
-  width: 125px;
+  width: 17%;
   border-radius: 5px;
 }
 
@@ -112,34 +112,35 @@
 textarea{
   height: 33px;
   margin-left: 14px;
-  width:295px;
+  width:86%;
   padding-left: 8px;
   border-radius: 5px;
 }
 
 .iconT {
-  margin-left:-20px ;
-  margin-bottom: -4px;
+  margin-left:-3% ;
+  margin-bottom: -0.6%;
 }
+
 #Button-T{ 
   width: 20%;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 5%;
   outline: auto;
   border: 1px;
   background:#146a51;;
   justify-content: center;
   text-align: center;
-  margin-left: 300px;
-  margin-top: 110px;
-  margin-bottom: 15px;
+  margin-left: 40%;
+  margin-top: 15%;
+  margin-bottom: 15%;
   font-weight: 700;
   font-size: 18px;
   color: white;
 }
 #Form-Part-Two{
-  margin-left: 400px;
-  margin-top: -485px;
+  margin-left: 55%;
+  margin-top: -65%;
 }
 
 #inputD,
