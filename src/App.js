@@ -18,6 +18,7 @@ import StudentSidebar from './Components/Sidebar/StudentSidebar';
 import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
 import AdminSidebar from './Components/Sidebar/AdminSidebar';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
+import AdminPersonal from './Components/Admin/AdminPersonal';
 
 function App() {
   return (
@@ -40,9 +41,10 @@ function App() {
           <Route path='/AdminSidebar' component={AdminSidebar} />
           <Route path='/StudentFeeForm' component={StudentFeeForm} />
           <Route path='/TeacherPersonal' component={TeacherPersonal} />
+          <Route path='/AdminPersonal' component={AdminPersonal} />
           <Route path='/' component={Login} />
         </Switch>
-      </Router>  
+      </Router>
     </div>
   );
 }
