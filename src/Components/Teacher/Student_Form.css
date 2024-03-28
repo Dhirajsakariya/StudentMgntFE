@@ -103,7 +103,7 @@
     margin-right: -9px;
   }
   
-  label,p {
+  .labelstd,p {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -116,7 +116,7 @@
     color:white;
   }
   
-  input {
+  .inputstd {
     width: 300px;
     margin-left: 15px;
     padding: 8px;
