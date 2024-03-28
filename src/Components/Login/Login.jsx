@@ -121,14 +121,14 @@ const Login = () => {
     };
 
     return (
-        <div className='containerl'>
+        <div className='containerlogin'>
             <form onSubmit={handleSubmit}>
                 <h2>Login Form</h2>
                 <input type='hidden' value={id} onChange={() => {}} /> {/* Add onChange event handler to prevent uncontrolled input warning */}
-                <div className='form-groupl'>
+                <div className='form-grouplogin'>
                     <label className='labellogin'>User Role</label>
-                    <div className='radio-group3'>
-                        <input className='inputr' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
+                    <div className='radio-group-login'>
+                        <input className='inputlogin' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
                         <label htmlFor="administrator">Admin</label>
                         <input className="form-check-input" type="radio" name="role" id="teacher" value={2} onChange={e => setRole('teacher')} />
                         <label htmlFor="staff">Teacher</label>
@@ -136,10 +136,10 @@ const Login = () => {
                         <label htmlFor="user">Student</label>
                     </div>
                 </div>
-                <div className='form-groupl'>
-                    <label className='labell'>Email:</label>
+                <div className='form-grouplogin'>
+                    <label className='labelloginlable'>Email:</label>
                     <input
-                        className='inputl'
+                        className='inputlogin'
                         type='email'
                         value={email}
                         onChange={handleUserChange}
@@ -148,19 +148,19 @@ const Login = () => {
                     /> 
                 </div>
                 <CgMail className='icone'/>
-                <div className='form-groupl'>
-                    <label className='labell'>Password:</label>
+                <div className='form-grouplogin'>
+                    <label className='labelloginlable'>Password:</label>
                     <div className='password-input'>
-                        <input className='inputl' type={showPassword ? 'text' : 'password'} value={password} onChange={handlePasswordChange} placeholder='Enter Your Password' required />
+                        <input className='inputlogin' type={showPassword ? 'text' : 'password'} value={password} onChange={handlePasswordChange} placeholder='Enter Your Password' required />
                         {showPassword ? <IoEyeOutline className='iconl' onClick={togglePasswordVisibility} /> : <IoEyeOffOutline className='iconl' onClick={togglePasswordVisibility} />}
                     </div>
                 </div>
-                <div className='forgotl'>
+                <div className='forgotlogin'>
                     <input type='checkbox' checked={rememberMe} onChange={handleRememberMeChange} /><span>Remember me</span>
-                    <a href='ForgotPassword' className='f'>Forgot Password?</a>
+                    <a href='ForgotPassword' className='forgetpassword-login'>Forgot Password?</a>
                 </div>
                 <div>
-                    <button type='submit' className='button'> Login </button>
+                    <button type='submit' className='buttonlogin'> Login </button>
                 </div>
                 <div className='register-link'>
                     <p className='p'>Don't have an account? <a href='Registration' className='f'>Register</a></p>
