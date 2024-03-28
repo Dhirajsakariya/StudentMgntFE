@@ -41,17 +41,17 @@
     padding-bottom: 8px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
   }
-  label, p {
+  /* label, p {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
     margin-left: 15px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 17px;
-  }
+  } 
   p{
     color:white;
-  }
+  } */
   #input, .relation {
     width: 300px;
     margin-left: 15px;

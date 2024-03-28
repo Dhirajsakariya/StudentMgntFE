@@ -202,20 +202,20 @@ return (
         <div className='form-groupr'>
             <label className='labelr'>Role</label>
             <div className='radio-groupa'>
-              <input className='inputr'
+              <input
                 type="radio" 
                 value="admin"
               checked={role === "admin"}
               onChange={handleRole}
               required/>
-              <label>Admin</label>
+              <label  id='lradio'>Admin</label>
               <input  
                 type="radio" 
                 value="teacher"
               checked={role === "teacher"}
               onChange={handleRole}
               required/>
-              <label >Teacher</label>
+              <label  id='lradio'>Teacher</label>
               {/* <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
               <label htmlFor="user">Student</label> */}
             </div>
@@ -297,17 +297,16 @@ return (
         </div>
         <div className='form-groupr2'>
         <div className='form-groupr'>
-          <label className='labell'>Gender:</label>
+          <label className='labell'>Gender</label>
           <div className="radio-groupa">
             <input
-              className='inputl'
               type="radio"
               value="male"
               checked={gender === "male"}
               onChange={handleGender}
               required
             />
-            <label>Male</label>
+            <label id='lradio'>Male</label>
             <input
               type="radio"
               value="female"
@@ -315,7 +314,7 @@ return (
               onChange={handleGender}
               required
             />
-            <label>Female</label>
+            <label  id='lradio'>Female</label>
           </div>
           {genderError && <p style={{color:'red'}}>{genderError}</p>}
         </div>
