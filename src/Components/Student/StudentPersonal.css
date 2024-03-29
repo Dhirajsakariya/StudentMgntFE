@@ -2,11 +2,11 @@
   
   .student-personal-info {
     border: 2px solid skyblue;
-    background-color: beige;
+    background-color: hsl(107, 17%, 78%);
     border-radius: 2px;
     padding: 20px;
     margin-bottom: 20px;
-    width: 40%;
+    width: 28%;
     border-radius: 10%;
     margin-left: 30%;
     margin-top: 8%;
@@ -20,6 +20,7 @@
   
   .strong-student-personal-info {
     width: 500px;
+    margin-left: 13%;
   }
   
   .student-info {
@@ -35,6 +36,8 @@
   }
   
  .strong-student {
-    width: 150px; /* Adjust the width based on your design */
+    width: 150px;
     display: inline-block;
+    margin-bottom: 2%;
+
   }
