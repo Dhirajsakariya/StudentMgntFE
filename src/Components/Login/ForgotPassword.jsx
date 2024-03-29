@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState} from 'react';
 import './ForgotPassword.css';
 import { useHistory } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
@@ -87,11 +87,11 @@ const ForgotPassword = () => {
     return (
         <div id='containerF'>
             <form onSubmit={handleSubmit}>
-                <h2 id='signup'>Reset Password</h2>
+                <h2>Reset Password</h2>
                 <div id='form-groupF'>
-                    <label className='labelF'>Email:</label>
+                    <label id='labelF'>Email:</label>
                     <input
-                        className='inputF'
+                        id='inputF'
                         type='email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -101,13 +101,13 @@ const ForgotPassword = () => {
                 </div>
                 <CgMail id='icone'/>
                 <div id='form-groupF'>
-                    <label className='labelF'>Birthdate:</label>
-                    <input className='inputF' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
+                    <label id='labelF'>Birthdate:</label>
+                    <input id='inputF' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
                 </div>
                 <div id='form-groupF'>
-                    <label className='labelFp'>New Password:</label>
+                    <label id='labelFp'>New Password:</label>
                         <input 
-                            className='inputF' 
+                            id='inputF' 
                             type={showNewPassword ? 'text' : 'password'} 
                             value={newPassword} 
                             onChange={(e) => setNewPassword(e.target.value)} 
@@ -119,9 +119,9 @@ const ForgotPassword = () => {
                         {showNewPassword ? <IoEyeOutline id='iconle' onClick={toggleNewPasswordVisibility} /> : <IoEyeOffOutline id='iconle' onClick={toggleNewPasswordVisibility} />}
                 </div>
                 <div id='form-groupF'>
-                    <label className='labelFp'>Confirm Password:</label>
+                    <label id='labelFp'>Confirm Password:</label>
                         <input 
-                            className='inputF' 
+                            id='inputF' 
                             type={showConfirmPassword ? 'text' : 'password'} 
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)}

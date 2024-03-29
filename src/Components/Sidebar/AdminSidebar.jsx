@@ -11,7 +11,7 @@ import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 
-const AdminSidebar = ({userName, children }) => {
+const AdminSidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
@@ -48,11 +48,6 @@ const AdminSidebar = ({userName, children }) => {
         }
     ];
 
-    const handleLogout = () => {
-        localStorage.removeItem('loggedInEmail');
-        navigate.push('/');
-    };
-
     return (
         <>
              <div id="menu-container">
@@ -69,7 +64,7 @@ const AdminSidebar = ({userName, children }) => {
                                     <li>
                                         <a href="/AdminPersonal" ><LuUserCircle2 className='icon' />Admin </a>
                                     </li>
-                                    <li onClick={handleLogout}>
+                                    <li>
                                     <a href="/"><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
