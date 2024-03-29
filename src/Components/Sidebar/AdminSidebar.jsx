@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
-import { CiUser } from "react-icons/ci";
 import { FaGooglePay } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { MdFamilyRestroom } from "react-icons/md";
@@ -20,12 +19,7 @@ const AdminSidebar = ({userName, children }) => {
     
 
     const menuItem = [
-       {
-        path: '/AdminPersonal',
-        name: 'AdminPersonal',
-        icon:  <CiUser/>
-       },
-       
+      
        
         {
             path: '/TeacherForm',

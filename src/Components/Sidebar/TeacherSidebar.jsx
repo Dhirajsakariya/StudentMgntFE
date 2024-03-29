@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
-import { CiUser } from "react-icons/ci";
 import {  BiLogOut } from 'react-icons/bi';
 import { PiUserListDuotone } from "react-icons/pi";
 import { FaWpforms } from "react-icons/fa";
@@ -18,11 +17,7 @@ const TeacherSidebar = ({ children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const menuItem = [
-        {
-            path: '/TeacherPersonal',
-            name: 'TeacherPersonal',
-            icon: <CiUser   />
-        },
+        
         {
             path: '/Student_Form',
             name: 'Student Form',

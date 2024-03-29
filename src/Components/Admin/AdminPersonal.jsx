@@ -46,16 +46,56 @@ const AdminPersonal = () => {
     <div className='Admin-personal-info'>
       <h2 className='Admin-personal-info-h2'>Admin Details</h2>
       <div className='strong-Admin-personal-info'>
-       <label> <strong className='strong-Admin'>Name: </strong> {Admin.name}</label><br />
-       <label> <strong>Email: </strong> {Admin.email} </label> <br />
-        {/* <label> <strong>Birthdate: </strong> {Admin.birthdate} <br /> </label> */}
-        <label> <strong className='strong-Admin'>Mobile Number: </strong> {Admin.mobileNumber} </label> <br />
-        <label> <strong className='strong-Admin'>Gender: </strong> {Admin.gender} </label> <br />
-        <label> <strong className='strong-Admin'>Address: </strong> {Admin.address} </label> <br />
-        <label><strong className='strong-Admin'>City: </strong> {Admin.city} </label> <br />
-        <label> <strong className='strong-Admin'>District: </strong> {Admin.district} </label> <br />
-        <label> <strong className='strong-Admin'>State: </strong> {Admin.state} </label> <br />
-        <label> <strong className='strong-Admin'>Pin Code: </strong> {Admin.pinCode} </label> <br />
+
+        <label>
+        <strong className='strong-Admin'> Name: </strong> 
+        {Admin.name}
+        </label><br />
+
+       <label>
+       <strong className='strong-Admin'> Email: </strong>
+       {Admin.email}
+       </label> <br />
+
+        {/* <label> 
+        <strong className="strong-Admin"> Birthdate: </strong>
+        {Admin.birthdate}
+        <br /> </label> */}
+        
+        <label>
+        <strong className='strong-Admin'> Mobile Number: </strong>
+        {Admin.mobileNumber}
+        </label> <br />
+       
+        <label> 
+        <strong className='strong-Admin'> Gender: </strong> 
+        {Admin.gender}
+        </label> <br />
+        
+        <label>
+        <strong className='strong-Admin'> Address: </strong> 
+        {Admin.address} 
+        </label> <br />
+
+        <label>
+        <strong className='strong-Admin'> City: </strong> 
+        {Admin.city} 
+        </label> <br />
+        
+        <label>
+        <strong className='strong-Admin'> District: </strong> 
+        {Admin.district}
+        </label> <br />
+       
+        <label> 
+        <strong className='strong-Admin'> State: </strong> 
+        {Admin.state} 
+        </label> <br />
+        
+        <label> 
+        <strong className='strong-Admin'> Pin Code: </strong>
+        {Admin.pinCode} 
+        </label> <br />
 
       </div>
     </div>

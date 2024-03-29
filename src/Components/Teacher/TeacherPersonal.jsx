@@ -96,16 +96,55 @@ const TeacherPersonal = () => {
     <div className='teacher-personal-info'>
       <h2 className='teacher-personal-info-h2'>Teacher Details</h2>
       <div className='strong-teacher-personal-info'>
-       <label> <strong className='strong-teacher'>Name: </strong> {teacher.name}</label><br />
-       <label> <strong>Email: </strong> {teacher.email} </label> <br />
-        {/* <label> <strong>Birthdate: </strong> {teacher.birthdate} <br /> </label> */}
-        <label> <strong className='strong-teacher'>Mobile Number: </strong> {teacher.mobileNumber} </label> <br />
-        <label> <strong className='strong-teacher'>Gender: </strong> {teacher.gender} </label> <br />
-        <label> <strong className='strong-teacher'>Address: </strong> {teacher.address} </label> <br />
-        <label><strong className='strong-teacher'>City: </strong> {teacher.city} </label> <br />
-        <label> <strong className='strong-teacher'>District: </strong> {teacher.district} </label> <br />
-        <label> <strong className='strong-teacher'>State: </strong> {teacher.state} </label> <br />
-        <label> <strong className='strong-teacher'>Pin Code: </strong> {teacher.pinCode} </label> <br />
+      
+      <label>
+      <strong className='strong-teacher'> Name: </strong> 
+      {teacher.name}
+      </label><br />
+
+       <label> 
+       <strong className='strong-teacher'> Email: </strong> 
+       {teacher.email} 
+       </label> <br />
+
+        {/* <label>
+        <strong className='strong-teacher'> Birthdate: </strong> 
+        {teacher.birthdate} 
+        <br /> </label> */}
+
+        <label> 
+        <strong className='strong-teacher'> Mobile Number: </strong> 
+        {teacher.mobileNumber} 
+        </label> <br />
+
+        <label> 
+        <strong className='strong-teacher'> Gender: </strong> 
+        {teacher.gender} 
+        </label> <br />
+
+        <label> 
+        <strong className='strong-teacher'> Address: </strong> 
+        {teacher.address}
+        </label> <br />
+
+        <label>
+        <strong className='strong-teacher'> City: </strong> 
+        {teacher.city} 
+        </label> <br />
+
+        <label> 
+        <strong className='strong-teacher'> District: </strong>
+        {teacher.district} 
+        </label> <br />
+
+        <label> 
+        <strong className='strong-teacher'> State: </strong> 
+        {teacher.state} 
+        </label> <br />
+
+        <label>
+        <strong className='strong-teacher'> Pin Code: </strong>
+        {teacher.pinCode} </label> <br />
 
       </div>
     </div>
