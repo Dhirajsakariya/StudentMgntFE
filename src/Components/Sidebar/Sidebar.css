@@ -9,6 +9,7 @@ main{
   color: #000;
   height: 131.9vh;
   transition:all 0.5s;
+  background-color: white;
 }
 .top-section{
   display: flex;
