@@ -52,6 +52,7 @@
 // export default TeacherPersonal;
 import React, { useState, useEffect } from 'react';
 import './TeacherPersonal.css';
+import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 
 const TeacherPersonal = () => {
@@ -67,7 +68,7 @@ const TeacherPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`https://localhost:7157/api/AdminTeacher/GetAdminTeacher${storedId}`);
+         const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching teacher details: ${response.status} ${response.statusText}`);

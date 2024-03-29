@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AdminPersonal.css';
+import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 
 
@@ -17,7 +18,7 @@ const AdminPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`https://localhost:7157/api/AdminTeacher/GetAdminTeacher${storedId}`);
+        const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching Admin details: ${response.status} ${response.statusText}`);
