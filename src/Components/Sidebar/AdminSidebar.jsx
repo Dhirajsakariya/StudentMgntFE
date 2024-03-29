@@ -20,11 +20,7 @@ const AdminSidebar = ({ children }) => {
     const [Admin, setAdmin] = useState(null);
     const [error, setError] = useState(null);
 
-    
-
     const menuItem = [
-      
-       
         {
             path: '/TeacherForm',
             name: 'Teacher Form',
@@ -37,8 +33,8 @@ const AdminSidebar = ({ children }) => {
         },
         {
             path: '/ParentsPortal',
-                name: 'ParentsPortal',
-                icon: <MdFamilyRestroom  />
+            name: 'ParentsPortal',
+            icon: <MdFamilyRestroom  />
             },
         {
             path: '/FeeForm',
@@ -113,13 +109,12 @@ const AdminSidebar = ({ children }) => {
             <div className="containers">
                 <div style={{ width: isOpen ? '300px' : '60px' }} className="sidebar">
                     <div className="top-section">
-                        <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
-                            
-                            {Admin.name}
-                        </h1>
-                        <div style={{ marginLeft: isOpen ? '30px' : '0px' }} className="bars">
+                        <div style={{ marginLeft: isOpen ? '-33px' : '5px' }} className="bars">
                             <FaBars onClick={toggle} />
                         </div>
+                        <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
+                            {Admin.name}
+                        </h1>
                     </div>
                     {menuItem.map((item, index) => (
                         <NavLink to={item.path} key={index} className="link" activeClassName="active">

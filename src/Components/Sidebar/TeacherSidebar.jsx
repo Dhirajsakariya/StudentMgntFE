@@ -19,9 +19,7 @@ const TeacherSidebar = ({ children }) => {
     const [teacher, setTeacher] = useState(null);
     const [error, setError] = useState(null);
 
-
     const menuItem = [
-        
         {
             path: '/Student_Form',
             name: 'Student Form',
@@ -44,7 +42,6 @@ const TeacherSidebar = ({ children }) => {
         }
     ];
   
-
     useEffect(() => {
         const fetchTeacherDetails = async () => {
           try {
@@ -78,7 +75,6 @@ const TeacherSidebar = ({ children }) => {
         return <div>Loading...</div>;
       }
 
-
     return (
         <>
              <div id="menu-container">
@@ -107,12 +103,12 @@ const TeacherSidebar = ({ children }) => {
             <div className="containers">
                 <div style={{ width: isOpen ? '300px' : '60px' }} className="sidebar">
                     <div className="top-section">
+                    <div style={{ marginLeft: isOpen ? '-33px' : '5px' }} className="bars">
+                            <FaBars onClick={toggle} />
+                        </div>
                         <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
                            {teacher.name}
                         </h1>
-                        <div style={{ marginLeft: isOpen ? '30px' : '0px' }} className="bars">
-                            <FaBars onClick={toggle} />
-                        </div>
                     </div>
                     {menuItem.map((item, index) => (
                         <NavLink to={item.path} key={index} className="link" activeClassName="active">
