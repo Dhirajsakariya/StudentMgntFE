@@ -13,7 +13,9 @@ const Login = () => {
     const [id, setId] = useState('');
     const navigate = useHistory();
     const [role, setRole] = useState('');
+    const [selectrole,setSelectrole] = useState(false)
     const [loginSuccessMessageShown, setLoginSuccessMessageShown] = useState(false); 
+    const [notloginSuccessMessageShown, setNotloginSuccessMessageShown] = useState(false)
 
     useEffect(() => {
         const registeredEmail = localStorage.getItem('registeredEmail');
@@ -38,7 +40,11 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!role) {
-            toast.error('Please select your role!');
+            if(!selectrole){
+                toast.error('Please select your role!');
+                setSelectrole(true);
+            }
+            
             return;
         }
         
@@ -93,9 +99,14 @@ const Login = () => {
             } else if (response.status === 401) {
                 const errorMessage = await response.text();
                 toast.error(errorMessage);
-            } else {
-                toast.error('Login failed. Please try again later.');
             }
+            else{
+            if (!notloginSuccessMessageShown)
+             {
+                toast.error('Login failed. Please try again later.');
+                setNotloginSuccessMessageShown(true)
+             }
+                }
         } catch (error) {
             console.error('Login failed:', error);
             toast.error('Login failed');
