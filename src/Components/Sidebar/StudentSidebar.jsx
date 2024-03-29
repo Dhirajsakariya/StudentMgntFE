@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import './Sidebar.css';
+import config from '../Login/config';
 import { NavLink } from 'react-router-dom';
 import { LuUserCircle2 } from "react-icons/lu";
 import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
@@ -14,7 +15,7 @@ const StudentSidebar = ({ children }) => {
     const navigate = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [Student, setStudent] = useState(null);
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
 
     const menuItem = [
@@ -45,7 +46,7 @@ const StudentSidebar = ({ children }) => {
               throw new Error('User ID not found in local storage');
             }
     
-            const response = await fetch(`https://localhost:7157/api/Student/GetStudent${storedId}`);
+            const response = await fetch(`${config.ApiUrl}Student/GetStudent${storedId}`);
             
             if (!response.ok) {
               throw new Error(`Error fetching Student details: ${response.status} ${response.statusText}`);

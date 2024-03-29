@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './StudentPersonal.css';
+import config from '../Login/config';
 import StudentSidebar from '../Sidebar/StudentSidebar'
 
 
@@ -17,7 +18,7 @@ const StudentPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`https://localhost:7157/api/Student/GetStudent${storedId}`);
+        const response = await fetch(`${config.ApiUrl}Student/GetStudent${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching Student details: ${response.status} ${response.statusText}`);

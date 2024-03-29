@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import './Sidebar.css';
+import config from '../Login/config';
 import { NavLink } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
@@ -17,7 +18,7 @@ const AdminSidebar = ({ children }) => {
     const navigate = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [Admin, setAdmin] = useState(null);
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
     
 
@@ -60,7 +61,7 @@ const AdminSidebar = ({ children }) => {
               throw new Error('User ID not found in local storage');
             }
     
-            const response = await fetch(`https://localhost:7157/api/AdminTeacher/GetAdminTeacher${storedId}`);
+            const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
             
             if (!response.ok) {
               throw new Error(`Error fetching Admin details: ${response.status} ${response.statusText}`);
