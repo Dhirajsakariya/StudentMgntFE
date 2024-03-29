@@ -1,0 +1,53 @@
+#main{
+    margin-left: 320px;
+    margin-top:40px;
+    width: 60%;
+}
+#heading{
+    background-color:hsl(110, 9%, 87%);
+    height: 40px;
+}
+#model_Details{
+    color: rgb(163, 30, 30);
+}
+#teacherinfo{
+    color: black;
+    margin-left: 50px;
+}
+#btn-view {
+    cursor: pointer;
+    width: 50px;
+    border: none;
+}
+#pop-up{
+    margin-left:330px;
+    background-color:hsl(110, 9%, 87%);
+    margin-top: 100px;
+    width: 40%;
+    height: 400px;
+    border-radius: 10px;
+}
+#pop-up #pop-heading{
+    margin-left:530px;
+    
+}
+#detail_heading{
+    margin-left: 200px;
+}
+  
+#btn-view:hover {
+    background-color: lightgray;
+    border: none;
+  }
+#btn-edit{
+    color:black;
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 50px;
+}
+#btn-delete{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 50px;
+}

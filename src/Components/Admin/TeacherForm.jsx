@@ -212,6 +212,7 @@ const customToastStyle = {
             <div>
                 <label id='labelT'>Standard</label>
                 <select  id = 'inputD' title='Select Standard' value={standard} onChange={handleStandard}>
+                    <option disabled={true}>--Select--</option>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
                 <label className='labelD'>Subject</label>
