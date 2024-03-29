@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
-import './StudentFeeForm.css';
-import { FaRupeeSign } from "react-icons/fa";
-import { PiStudentBold } from "react-icons/pi";
-import StudentSidebar from '../Sidebar/StudentSidebar';
 import axios from 'axios';
+import React, { useState } from 'react';
+import { FaRupeeSign } from "react-icons/fa";
+import StudentSidebar from '../Sidebar/StudentSidebar';
+import './StudentFeeForm.css';
 
 
 const StudentFeeForm = () => {
  
   const [feeAmount, setFeeAmount] = useState('');
   const [feeFrequency, setFeeFrequency] = useState('');
-  
- 
   const feeFrequencies = ["quarterly", "annually"];
 
   const handleFrequencyChange = async (e) => {
     const selectedFrequency = e.target.value;
-
-  
-    const studentObject = JSON.parse(localStorage.getItem('LoggedInUser'));
-    const fullId = studentObject.id;
-
-   
 
     // Fetch fee amount from backend based on selected frequency
     const response = await fetch(`https://localhost:7157/api/Fees/GetFeeAmount/${fullId}?frequency=${selectedFrequency}`, {
@@ -38,15 +29,14 @@ const StudentFeeForm = () => {
       console.error('fetching fee amount:', response.statusText);
     }
   };
-  
+  const studentObject = JSON.parse(localStorage.getItem('loggedInUserId'));
+    const fullId =studentObject;
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      const studentObject = JSON.parse(localStorage.getItem('LoggedInUser'));
-      const fullId = studentObject.id;
-   
+      
       
       const response = await axios.post(`https://localhost:7157/api/Fees/PostFees`,{
         StudentId:fullId,
