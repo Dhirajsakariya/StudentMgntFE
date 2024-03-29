@@ -123,10 +123,10 @@ const Login = () => {
     return (
         <div className='containerlogin'>
             <form onSubmit={handleSubmit}>
-                <h2>Login Form</h2>
+                <h2>Login</h2>
                 <input type='hidden' value={id} onChange={() => {}} /> {/* Add onChange event handler to prevent uncontrolled input warning */}
                 <div className='form-grouplogin'>
-                    <label className='labellogin'>User Role</label>
+                    <label className='labelloginlable'>Role</label>
                     <div className='radio-group-login'>
                         <input className='inputlogin' type="radio" name="role" id="admin" value={1} onChange={e => setRole('admin')} />
                         <label htmlFor="administrator">Admin</label>
@@ -163,7 +163,7 @@ const Login = () => {
                     <button type='submit' className='buttonlogin'> Login </button>
                 </div>
                 <div className='register-link'>
-                    <p className='p'>Don't have an account? <a href='Registration' className='f'>Register</a></p>
+                    <p className='p'>Don't have an account? <a  href='Registration' className='f'>Register</a></p>
                 </div>
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />

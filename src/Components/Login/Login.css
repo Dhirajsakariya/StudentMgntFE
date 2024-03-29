@@ -15,25 +15,6 @@
   justify-content: center;
   margin-top: 120px;
 }
-.containerr{
-  width: 345px;
-  color:black;
-  border-radius: 10px;
-  padding: 30px 30px;
-  height:450px;
-  background: transparent;
-  border: 2px solid;
-  background-color: hsl(107, 17%, 78%);
-  margin-left: auto;
-  padding-top: auto;
-  padding-bottom: 10px;
-  margin-right: auto;
-  align-items: center;
-  justify-content: center;
-  margin-top: 100px;
-  margin-bottom: 200px;
-}
-
 
 .form-grouplogin {
   padding-top: 5px;
@@ -48,25 +29,16 @@
   text-align: center;
   font: bold;
   margin-top: -10px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   text-decoration: underline;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.signup{
-  justify-content: center;
-  padding-top: 1px;
-  color:#146a51;;
-  text-align: center;
-  font: bold;
-  
-  text-decoration: underline;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
+
 .labelloginlable {
   display: block;
   margin-bottom: 5px;
   margin-top: -22px;
-  margin-left: 8%;
+  margin-left: 7%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
 }
@@ -93,22 +65,11 @@
   transform: translateY(15%);
 }
 
-.iconll {
-  position: relative;
-  right:-300px;
-  top:-25px;
-}
 .icone {
   position: relative;
   right:42px;
   top:-30px;
   margin-left:342px;
-}
-
-.iconle {
-  position: relative;
-  right:25px;
-  top:5px;
 }
 
 .forgotlogin {
@@ -122,6 +83,7 @@
   margin-left: 2px;
   margin-top: 5px;
 }
+
 .pass{
   margin-left: 25px;
   color: red;
@@ -143,6 +105,7 @@ buttonlogin:hover {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
 }
+
 .register-link{
     font-size: 12px;
     text-align: center;
@@ -152,7 +115,7 @@ buttonlogin:hover {
   display: inline;
   justify-content: space-between;
   font-size: 15px;
-  margin-left: 25px;
+  margin-left: 22px;
 }
 
 .forgotlogin label input{
@@ -161,13 +124,16 @@ buttonlogin:hover {
   margin-right: 2px;
   top: 20%;
 }
+
 .forgetpassword-login{
   color: blue;
   text-decoration: underline;
 }
+
 .p{
   color: black;
 }
+
 .buttonlogin {
   width: 50%;
   height: 40px;
@@ -184,22 +150,7 @@ buttonlogin:hover {
   font-size: 18px;
   color: white;
 }
-.buttonf {
-  width: 50%;
-  height: 40px;
-  border-radius: 10px;
-  outline: auto;
-  border: 1px;
-  background:#146a51;;
-  justify-content: center;
-  text-align: center;
-  margin-left: 80px;
-  margin-top: 25px;
-  margin-bottom: 15 px;
-  font-weight: 700;
-  font-size: 18px;
-  color: white;
-}
+
 .radio-group-login  {
   display: inline-flex;
   align-items: center;
@@ -220,13 +171,6 @@ buttonlogin:hover {
   margin-bottom: 5px;
 }
 
-.labellogin{
-  margin-left: 8%;
-}
-
-
-
-
 .inputlogin {
   width: 300px;
   margin-left: 7.2%;
@@ -235,6 +179,8 @@ buttonlogin:hover {
   margin-top: 5px;
   border: 1px;
   border-radius: 5px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .inputlogin::placeholder { 
@@ -242,18 +188,22 @@ buttonlogin:hover {
   position:absolute;
 }
 
-
-/* 
-#form-groupll{
-  margin-bottom: -15px;
+#teacher.form-check-input{
+  margin-bottom: 0%;
 }
 
-#iconemaill{
-  
-  position: relative;
-  right:25px;
-  top:-10px;
-  margin-left:325px;
+#student.form-check-input{
+  margin-bottom: 0%;
+}
 
-}  
- */
+.f{
+  color: blue;
+}
+
+.forgetpassword-login:hover {
+  color: rgb(14, 97, 221);
+}
+.f:hover{
+  color: rgb(14, 97, 221); ;
+}
+
