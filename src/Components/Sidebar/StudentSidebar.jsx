@@ -33,11 +33,6 @@ const StudentSidebar = ({ children }) => {
         }
     ];
 
-    const handleLogout = () => {
-        localStorage.removeItem('loggedInEmail');
-        navigate.push('/');
-    };
-
     return (
         <>
              <div id="menu-container">
@@ -54,7 +49,7 @@ const StudentSidebar = ({ children }) => {
                                     <li>
                                         <a href="/StudentPersonal" ><LuUserCircle2 className='icon' />Admin </a>
                                     </li>
-                                    <li onClick={handleLogout}>
+                                    <li>
                                     <a href="/"><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
