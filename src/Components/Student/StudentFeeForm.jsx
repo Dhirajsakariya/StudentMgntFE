@@ -3,74 +3,113 @@ import './StudentFeeForm.css';
 import { FaRupeeSign } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import StudentSidebar from '../Sidebar/StudentSidebar';
+import axios from 'axios';
+
 
 const StudentFeeForm = () => {
-  const [studentName, setStudentName] = useState('');
+ 
   const [feeAmount, setFeeAmount] = useState('');
-  const [feeFrequency,setFeeFrequency] = useState('');
+  const [feeFrequency, setFeeFrequency] = useState('');
+  
+ 
+  const feeFrequencies = ["quarterly", "annually"];
 
-  const feeFrequencies=[ "Monthly", "Quaterly","Annually"];
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFrequencyChange = async (e) => {
+    const selectedFrequency = e.target.value;
 
-    // Perform form validation and submission logic here
+  
+    const studentObject = JSON.parse(localStorage.getItem('LoggedInUser'));
+    const fullId = studentObject.id;
+
    
 
-    console.log('Form submitted:', { studentName, feeAmount, feeFrequency });
+    // Fetch fee amount from backend based on selected frequency
+    const response = await fetch(`https://localhost:7157/api/Fees/GetFeeAmount/${fullId}?frequency=${selectedFrequency}`, {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setFeeAmount(data);
+    } else {
+      console.error('fetching fee amount:', response.statusText);
+    }
   };
+  
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const studentObject = JSON.parse(localStorage.getItem('LoggedInUser'));
+      const fullId = studentObject.id;
+   
+      
+      const response = await axios.post(`https://localhost:7157/api/Fees/PostFees`,{
+        StudentId:fullId,
+        FeeFrequency:feeFrequency,
+    Amount:feeAmount
+
+    
+
+      });
+      console.log(response.data); 
+      
+      setFeeFrequency(''); 
+      setFeeAmount(''); 
+      
+    } catch (error) {
+      console.error('Error submitting fee:', error);
+      
+    }
+  };
+
 
   return (
     <StudentSidebar>
       <div id='containerstudentfeeform'>
-       <form onSubmit={handleSubmit}>
-        <h2>Fee Form</h2>
-          <div id='form-groupa'>
-            <label id="labelbox" htmlFor="studentName">Student Name:</label>
-              <input
-                      type="text"
-                      id="studentname"
-                      placeholder='Student Name'
-                      value={studentName}
-                      onChange={(e) => setStudentName(e.target.value)}
-                      required
-              />
-              <PiStudentBold  id="feeformicon"/>
-              <br />
-          </div>
+        <form onSubmit={handleSubmit}>
+         <br></br> <h2>Fee Form</h2><br></br>
+          
+         
+          
           <div className="form-groupf">
-            <label id="labelbox">Fee Frequency:</label>
-              <select
-                      value={feeFrequency}
-                      id='relation'
-                      required
-                      onChange={(e) => setFeeFrequency(e.target.value)}>
-              
-                     <option value="">Select Fee Frequency</option>
-                        {feeFrequencies.map((feeFrequency) => (
-                         <option key={feeFrequency} value={feeFrequency}>
-                         {feeFrequency}
-                      </option>
-                     ))}
-              </select>
+            <label id="labelboxFee">Fee Frequency:</label>
+            <select
+              value={feeFrequency}
+              id='relation'
+              required
+              onChange={(e) => { setFeeFrequency(e.target.value); handleFrequencyChange(e); }}>
+              <option value="">Select Fee Frequency</option>
+              {feeFrequencies.map((feeFrequency) => (
+                <option key={feeFrequency} value={feeFrequency}>
+                  {feeFrequency}
+                </option>
+              ))}
+            </select>
           </div>
-        <div className='form-groupa'>
-         <label id="labelbox" htmlFor="feesAmount">Fees Amount:</label>
-           <input
-                  type="text"
-                  id="feeAmount"
-                  value={feeAmount}
-                  placeholder='Fee Amount'
-                  onChange={(e) => setFeeAmount(e.target.value)}
-                   required
-          />
-          <FaRupeeSign id='feeformicon'/>
-          <br />
-        </div>
-        <button id="buttontype" type="submit">Pay</button>
-       </form>
+          <div className='form-groupa'>
+            <label id="labelboxFee" htmlFor="feesAmount">Fees Amount:</label>
+            <input
+              type="text"
+              id="feeAmount"
+              value={feeAmount}
+              placeholder='Fee Amount'
+              readOnly // Ensure the input is read-only to display the fetched amount
+              required
+            />
+            <FaRupeeSign id='feeformicon' />
+            <br />
+          </div>
+          <button id="buttontypee" type="submit" onSubmit={handleSubmit}>Pay</button>
+        </form>
       </div>
     </StudentSidebar>
   );
 };
 
 export default StudentFeeForm;
+
