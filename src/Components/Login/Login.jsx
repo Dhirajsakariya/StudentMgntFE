@@ -14,21 +14,6 @@ const Login = () => {
     const navigate = useHistory();
     const [role, setRole] = useState('');
     const [loginSuccessMessageShown, setLoginSuccessMessageShown] = useState(false); 
-    const [rememberMe, setRememberMe] = useState(false); // Add rememberMe state
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('rememberedUser');
-        const storedPassword = localStorage.getItem('rememberedPassword');
-        if (storedUser && storedPassword) {
-            setEmail(storedUser);
-            setPassword(storedPassword);
-            setRememberMe(true); // Set rememberMe state when rememberedUser and rememberedPassword are found
-        }
-    }, []);
-
-    const handleRememberMeChange = () => {
-        setRememberMe(!rememberMe);
-    };
 
     useEffect(() => {
         const registeredEmail = localStorage.getItem('registeredEmail');
@@ -71,8 +56,11 @@ const Login = () => {
                 const data = await response.json();
                 console.log('id', data.id);
                 setId(data.id);
+
                 localStorage.setItem('loggedInEmail', JSON.stringify(data.email));
+
                 localStorage.setItem('loggedInUserId', JSON.stringify(data.id));
+                
                 localStorage.setItem('loggedInRole', JSON.stringify(data.role));
 
                
@@ -156,7 +144,7 @@ const Login = () => {
                     </div>
                 </div>
                 <div className='forgotlogin'>
-                    <input type='checkbox' checked={rememberMe} onChange={handleRememberMeChange} /><span>Remember me</span>
+                    <input type='checkbox' /><span>Remember me</span>
                     <a href='ForgotPassword' className='forgetpassword-login'>Forgot Password?</a>
                 </div>
                 <div>
