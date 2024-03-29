@@ -6,16 +6,16 @@ main{
   padding: 20px;
 }
 .sidebar{
-  background:white;
   color: #000;
   height: 131.9vh;
-  width: 300px;
   transition:all 0.5s;
 }
 .top-section{
   display: flex;
   align-items: center;
-  padding: 10% 8%;
+  padding: 10% 0%;
+  margin-left: 20%;
+  
 }
 
 .logo{
@@ -33,6 +33,7 @@ main{
   margin-left: 60px;
 }
 .link{
+  margin-left: -5px;
   display: flex;
   color: #000;
   padding: 10px 15px;
@@ -50,7 +51,7 @@ main{
 }
 .icons{
   font-size: 25px;
-  margin-left: 4px;
+  margin-left: 0px;
 }
 .link-text{
   font-size: 20px;

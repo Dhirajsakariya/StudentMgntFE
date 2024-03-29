@@ -6,10 +6,10 @@
     border-radius: 2px;
     padding: 20px;
     margin-bottom: 20px;
-    width: 33%;
+    width: 40%;
     border-radius: 10%;
-    margin-left: 37%;
-    margin-top: 0;
+    margin-left: 30%;
+    margin-top: 8%;
   }
   
   .teacher-personal-info h2 {
@@ -19,7 +19,7 @@
   }
   
   .strong-teacher-personal-info {
-    width: 350px;
+    width: 500px;
   }
   
   .teacher-info {

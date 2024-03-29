@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { LuUserCircle2 } from "react-icons/lu";
@@ -13,6 +13,9 @@ const StudentSidebar = ({ children }) => {
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [Student, setStudent] = useState(null);
+  const [error, setError] = useState(null);
+
 
     const menuItem = [
         {
@@ -33,11 +36,46 @@ const StudentSidebar = ({ children }) => {
         }
     ];
 
+    useEffect(() => {
+        const fetchstudentDetails = async () => {
+          try {
+            const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+    
+            if (!storedId) {
+              throw new Error('User ID not found in local storage');
+            }
+    
+            const response = await fetch(`https://localhost:7157/api/Student/GetStudent${storedId}`);
+            
+            if (!response.ok) {
+              throw new Error(`Error fetching Student details: ${response.status} ${response.statusText}`);
+            }
+    
+            const responseData = await response.json();
+            setStudent(responseData);
+          } catch (fetchError) {
+            setError(fetchError.message);
+          }
+        };
+    
+        fetchstudentDetails();
+      }, []);
+    
+      if (error) {
+        return <div>Error: {error}</div>;
+      }
+    
+      if (!Student) {
+        return <div>Loading...</div>;
+      }
+    
+    
+
     return (
         <>
              <div id="menu-container">
                 <div id="menu-trigger">
-                    <h2 id='h2'>Welcome </h2>
+                    <h2 id='h2'>Welcome {Student.name}</h2>
                     <div
                         onMouseEnter={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
@@ -47,7 +85,7 @@ const StudentSidebar = ({ children }) => {
                             <div id="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
                                 <ul>
                                     <li>
-                                        <a href="/StudentPersonal" ><LuUserCircle2 className='icon' />Admin </a>
+                                        <a href="/StudentPersonal" ><LuUserCircle2 className='icon' /> {Student.name} </a>
                                     </li>
                                     <li>
                                     <a href="/"><BiLogOut className='icon' />Logout</a>
@@ -62,8 +100,8 @@ const StudentSidebar = ({ children }) => {
                 <div style={{ width: isOpen ? '300px' : '60px' }} className="sidebar">
                     <div className="top-section">
                         <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
-                            Angle
-                            <br /> <span>Infotech</span>
+                           
+                            {Student.name}
                         </h1>
                         <div style={{ marginLeft: isOpen ? '30px' : '0px' }} className="bars">
                             <FaBars onClick={toggle} />
