@@ -18,19 +18,22 @@
     padding-top: 15px;
   }
   #form-groupf {
-    margin-bottom: 10px;
+    margin-bottom: 10%;
   }
   #radio-groupf  {
     display: inline-flex;
     align-items: center;
-    margin-left: 1px;
+    margin-left: 7%;
   }
   #radio-groupf label {
-    margin-top: 5px;
+    margin-top: 1%;
+    margin-right: 49%;
   }
   #radio-groupf input {
-    width: 10%;
+    width: 15%;
     padding: 0;
+    margin-top: -1%;
+    margin-left: -12%;
   }
   #containerf h2{
     justify-content: center;
@@ -41,7 +44,7 @@
     padding-bottom: 8px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
   }
-  /* label, p {
+   #label, p {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -51,7 +54,7 @@
   } 
   p{
     color:white;
-  } */
+  } 
   #input, .relation {
     width: 300px;
     margin-left: 15px;
@@ -97,9 +100,9 @@
     background: transparent;
     border: 2px solid;
     background-color:  hsl(107, 17%, 78%);
-    margin-left: 560px;
-    margin-top: -526px;
-    margin-bottom: 525px;
+    margin-left: 350%;
+    margin-top: -200%;
+    margin-bottom: 100%;
   }
   #editing{
     background-color: hsl(120, 62%, 96%);
