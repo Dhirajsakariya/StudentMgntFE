@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
+import { LuUserCircle2 } from "react-icons/lu";
 import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
-import logout from '../Assets/logout.png';
 
 const StudentSidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -40,25 +40,22 @@ const StudentSidebar = ({ children }) => {
 
     return (
         <>
-             <div className="menu-container">
-                <div className="menu-trigger">
-                    <h2>Welcome</h2>
+             <div id="menu-container">
+                <div id="menu-trigger">
+                    <h2 id='h2'>Welcome </h2>
                     <div
-                        className="user-icon-container"
                         onMouseEnter={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
                     >
-                        <img src={user_icon} alt="" />
+                        <img id="user-icon-container" src={user_icon} alt="" />
                         {dropdownOpen && (
-                            <div className="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
+                            <div id="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
                                 <ul>
                                     <li>
-                                        <img className='user_icon' src={user_icon} alt="" />
-                                        <a href="/StudentPersonal">Angle</a>
+                                        <a href="/StudentPersonal" ><LuUserCircle2 className='icon' />Admin </a>
                                     </li>
                                     <li onClick={handleLogout}>
-                                    <img className='logout_icon' src={logout} alt="" />
-                                    <a href="/">Logout</a>
+                                    <a href="/"><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
                             </div>

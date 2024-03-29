@@ -3,13 +3,13 @@ import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
+import { LuUserCircle2 } from "react-icons/lu";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
-import logout from '../Assets/logout.png';
 
 const AdminSidebar = ({userName, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -55,25 +55,22 @@ const AdminSidebar = ({userName, children }) => {
 
     return (
         <>
-             <div className="menu-container">
-                <div className="menu-trigger">
-                    <h2>Welcome </h2>
+             <div id="menu-container">
+                <div id="menu-trigger">
+                    <h2 id='h2'>Welcome </h2>
                     <div
-                        className="user-icon-container"
                         onMouseEnter={() => setDropdownOpen(true)}
                         onMouseLeave={() => setDropdownOpen(false)}
                     >
-                        <img src={user_icon} alt="" />
+                        <img id="user-icon-container" src={user_icon} alt="" />
                         {dropdownOpen && (
-                            <div className="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
+                            <div id="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
                                 <ul>
                                     <li>
-                                        <img className='user_icon' src={user_icon} alt="" />
-                                        <a href="/TeacherPersonal">Angle</a>
+                                        <a href="/AdminPersonal" ><LuUserCircle2 className='icon' />Admin </a>
                                     </li>
                                     <li onClick={handleLogout}>
-                                    <img className='logout_icon' src={logout} alt="" />
-                                    <a href="/">Logout</a>
+                                    <a href="/"><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
                             </div>
