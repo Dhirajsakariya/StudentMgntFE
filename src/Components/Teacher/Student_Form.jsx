@@ -1,8 +1,11 @@
 import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { useHistory } from 'react-router-dom';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import './Student_Form.css';
@@ -19,27 +22,45 @@ export const Student_Form = () => {
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
+    const[district,setDistrict] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [isValidPhone, setIsValidPhone] = useState(false);
 
-    const[standard,setStandard]=useState('');
+    const [isVisible, setVisible] = useState(false);
+    const [isDisable, setDisable] = useState(false);
+
+    const[standard,setStandard]=useState("");
     const[standardError,setStandardError]=useState('');
-
     const [standarddata, setStandardData] = useState([]);
+    const [pinCode,setPinCode] = useState('');
+    const[genderError,setGenderError]=useState('');
+    const[mobileError,setMobileError]=useState('');
 
-    const fetchStandardData = async () => {
-      try {
-        const response = await axios.get(`${config.ApiUrl}DropDown/Standard`);
-        setStandardData(response.data);
-
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
 
     useEffect(() => {
-      fetchStandardData();
-    }, []);
+        const fetchStandards = async () => {
+          try {
+            const response = await fetch(`${config.ApiUrl}DropDown/Standard`);
+            if (response.ok) {
+              const data = await response.json();
+              setStandardData(data);
+              console.log(data);
+            } else {
+              throw new Error('Failed to fetch standard');
+            }
+          } catch (error) {
+            console.error('Error fetching standard:', error);
+          }
+        };  
+        fetchStandards();
+      }, []);
+
+      const toggle = () => {
+        setVisible(!isVisible);
+      };
+    
+    const str = standard;
+    const parts = str.split("-");
 
     const handleStandard = (e) => {
       setStandard(e.target.value);
@@ -71,17 +92,71 @@ export const Student_Form = () => {
         setIsValidPhone(phoneRegex.test(value));
       };
 
+      const handleGender = (e) =>{
+        setGender(e.target.value)
+        setGenderError('');
+      }
+
+      const navigate=useHistory();
+
       const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if(!standard){
+          setStandardError('Select standard');
+          return;
+        }
+        if(!gender){
+          setGenderError('Select Gender');
+          return;
+        }
+        if(!mobileNumber){
+          setMobileError('Enter Mobile Number');
+          return;
+        }
+        try {
+              const emailresponse =await axios.post(`${config.ApiUrl}Student/PostStudent`,{
+              Name : name,
+              Email : email,
+              Password : password,
+              Gender : gender,
+              BirthDate : birthday,
+              MobileNumber : mobileNumber,
+              JoinDate : joinDate,
+              BloodGroup : selectedBloodGroup,
+              Address : address,
+              City : city,
+              District : district,
+              State : state,
+              PinCode : pinCode,
+             StandardNumber: parts[0],
+             Section : parts[1]
+              
+              });
+          const userERes = emailresponse.data;
+          if(userERes === "email already exists")
+          {
+                toast.error("User already exist !!!");
+                return;
+          }
+          else{
+            setTimeout(() => {
+              navigate.push('/FamilyForm') 
+              }, 1500);
+            toast.success("Registration Successfull!")
+          }
+  
+          } catch {
+          toast.error('Signup failed. Please try again later.');
+        }
+        return;
       };
       
-    
+    console.log('standarddata',standarddata);
   return (
   <TeacherSidebar>
     <>
     <div className='containerST'>
-        <form>
+      <form onSubmit={handleSubmit}>
             <div>
             <h2 id='student-form'>Student Detail</h2>
             
@@ -95,11 +170,24 @@ export const Student_Form = () => {
                 <input id='inputstudent_form' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Enter Email'
                 name='Email'  required />
             </div>
+
+
             <div id='form-groupstudent_form'>
                 <label id='student_form'>Password:</label>
-                <input id='inputstudent_form' type='password' value={password} onChange={(e)=> setPassword(e.target.value)} placeholder='Password'
-                name='Password'  required />
+                <input id='inputstudent_form' type={!isVisible ? "password" : "text"} 
+                    name='password' 
+                    placeholder='Password' 
+                    value={password} 
+                    onChange={(e)=> setPassword(e.target.value)}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
+                    title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
+                    autoComplete='current-password'
+                    required/>
+                    <span id='iconeye_student_form' onClick={toggle}>
+                    {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}</span>
             </div>
+
+
             <div id='form-groupstudent_form'>
             <label id='student_form'>Gender:</label>
             <div id="radio-groupstd">
@@ -107,7 +195,7 @@ export const Student_Form = () => {
                      type="radio"
                      value="male"
                  checked={gender === "male"}
-                     onChange={() => setGender("male")}
+                     onChange={handleGender}
                      required
                    />
                    <label>Male</label>
@@ -115,12 +203,14 @@ export const Student_Form = () => {
                      type="radio"
                      value="female"
                      checked={gender === "female"}
-                     onChange={() => setGender("female")}
+                     onChange={handleGender}
                      required
                    />
                    <label>Female</label>
                  </div>
             </div>
+
+
             <div id='form-groupstudent_form'>
                 <label id='student_form'>DOB:</label>
                 <input id='inputstudent_form' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />  
@@ -132,16 +222,18 @@ export const Student_Form = () => {
             </div>
 
             <div id='form-groupstudent_form'>
-             
                 <label id='student_form'>Standard</label>
-                <select id='inputstudent_form' title='Select Standard' value={standard} onChange={handleStandard}>
-                    {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
-                </select>
+                <select id='inputstudent_form'  value={standard} onChange={handleStandard}>
+                 <option value="">--Select Standard--</option>
+                  {standarddata.map((standard, index) => (
+                  <option key={index} value={standard}>{standard}</option>
+                   ))}
+                 </select>
                 
+                </div>
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
            </div>
            
-            </div>
     
         <div id='div_two'> 
 
@@ -177,7 +269,7 @@ export const Student_Form = () => {
            </div>
            <div id='form-groupstudent_form'>
                 <label id='student_form2'>State:</label>
-                <input id='inputstudent_form2' type='text' value={state} onChange={(e)=> setState(e.target.value)}
+                <input id='inputstudent_form2' type='text' value={state} onChange={(e)=> setState(e.target.value)} placeholder='Enter Your State'
                 name='city'  required />
             </div>
            
