@@ -30,4 +30,11 @@
     margin: 5px 0;
   }
   
+  .label-student {
+    margin-bottom: 5px;
+  }
   
+ .strong-student {
+    width: 150px; /* Adjust the width based on your design */
+    display: inline-block;
+  }

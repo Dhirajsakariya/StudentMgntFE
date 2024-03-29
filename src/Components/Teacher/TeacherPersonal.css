@@ -19,7 +19,7 @@
   }
   
   .strong-teacher-personal-info {
-    width: 280px;
+    width: 350px;
   }
   
   .teacher-info {
@@ -30,4 +30,7 @@
     margin: 5px 0;
   }
   
-  
+  .strong-teacher {
+    width: 150px; 
+    display: inline-block;
+  }
