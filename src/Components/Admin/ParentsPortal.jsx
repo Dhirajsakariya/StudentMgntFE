@@ -1,11 +1,10 @@
-
 import React,{useState,useEffect} from 'react';
 import './ParentsPortal.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
-import { BiMale ,BiFemale} from "react-icons/bi";
+//import { BiMale ,BiFemale} from "react-icons/bi";
 import { CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
@@ -23,7 +22,7 @@ const ParentsPortal = () => {
     occupation: '',
     gender: '',
     relation: '',
-  });
+   });
 
   const[idError,setIdError]=useState();
   const[emailError,setEmailError] =useState();
@@ -39,11 +38,11 @@ const ParentsPortal = () => {
 
   var LoggedInUser = localStorage.getItem('LoggedInUser');
   console.log('LoggedInUser: ', JSON.parse(LoggedInUser));
-
+console.log("student",studentId)
   useEffect(() => {
       const fetchFamilyMembers = async () => {
           try {
-                const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetail`);
+                const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetail/FF878E89-BDCA-4848-8E79-1A8BF894AAEA`);
                 if (!response.ok) 
                 {
                   console.log('Failed to fetch family members');
@@ -59,11 +58,11 @@ const ParentsPortal = () => {
               }
       };
       
-      if(userData.email)
+      if(formData.id)
       {
         fetchFamilyMembers();
       }
-  }, [userData.email]); 
+  },[]); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,7 +108,7 @@ const ParentsPortal = () => {
           let response;
           if (editing) {
             familyMember.Id = formData.id; // Add member id for editing
-            response = await fetch(`${config.ApiUrl}PutFamily/${formData.id}`, {
+            response = await fetch(`https://localhost:7157/api/Family/PutFamily`, {
             method: 'PUT',  
             headers: {
               'Content-Type': 'application/json'
@@ -136,13 +135,13 @@ const ParentsPortal = () => {
             Gender: formData.gender,
             MobileNumber: mobilenumber,
             Relation: formData.relation,
-            StudentId: userData.id,
+            StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
             })
           });
         }
         if (response.ok) {
           const result = await response.text();
-          console.log(result);
+          console.log('result',result);
           if (editing) {
             const updatedFamilyMembers = familyMembers.map(member => 
             member.id === result.id ? result : member);
@@ -161,15 +160,26 @@ const ParentsPortal = () => {
           occupation: '',
           gender: '',
           relation: '',
-          studentid:''
+          studentid:'',
+          mobilenumber:''
          });
+         setMobileNumber('');
         } 
         } catch (error) {
             toast.error(error.message || (editing ? 'Failed to edit family member' : 'Failed to add family member'));
         }
     }
 
-const handleEdit = async (user) => {
+const handleEdit = (user) => {
+  // Set the form data based on the properties of the user object
+  // setFormData({
+  //   id: user.Id,
+  //   email: user.Email,
+  //   name: user.FirstName,
+  //   occupation: user.Occupation,
+  //   gender: user.Gender,
+  //   relation: user.Relation,
+  // });
   setFormData(user);
   setEditing(true);
 };
@@ -197,7 +207,7 @@ const handleDelete = async (id) => {
   }).then(async (result)=> {
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`${config.ApiUrl}DeleteFamily{id:guid}`, {
+        const response = await fetch(`https://localhost:7157/api/Family/DeleteFamily/`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -230,86 +240,20 @@ const customToastStyle = {
         <div id='containerf'>
           <form onSubmit={handleSubmit}>
             <h2>Parents Detail</h2>
-            <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => setStudentId(e.target.value)}/>
+            <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => {setFormData({ ...formData, id: e.target.value });
+                          setIdError('');} }/>
             <div id='form-groupf'>
                   <input 
                           type='hidden' 
-                          value={userData.id} 
+                          value={studentId} 
                           placeholder='id'
-                          onChange={(e) => {setFormData({ ...formData, id: e.target.value });
+                          onChange={(e) => {setStudentId({ ...formData, id: e.target.value });
                           setIdError('');} }
                 required
               />
               {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
-
-                <label >Email:</label>
-                  <input 
-                          id='input'
-                          type='email' 
-                          value={formData.email} 
-                          placeholder='Email'
-                          onChange={(e) => {setFormData({ ...formData, email: e.target.value });
-                          setEmailError('');} }
-                required
-              /><CgMail id='familyformicon' />
-              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
-            </div>
-            <div id='form-groupf'>
-              <label>Name:</label>
-                <input
-                        type="text"
-                        id='input'
-                        value={formData.name}
-                        placeholder='Full Name'
-                        onChange={(e) => {setFormData({ ...formData, name: e.target.value });
-                          setNameError('');} }
-                required
-              /> < FiUser id='familyformicon' />
-              {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
-            </div>
-            <div id='form-groupf'>
-              <label>Occupation:</label>
-                <input
-                        id='input'
-                        type='text'
-                        value={formData.occupation}
-                        placeholder='Occupation'
-                        onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
-                        setOccupationError('');} }
-              required
-            /><img src={ocuupation} id='familyformicon'/>
-            {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
-            </div>
-            <div id='form-groupf'>
-              <label>Gender:</label>
-                <div id="radio-groupf">
-                  <input
-                          type="radio"
-                          value="male"
-                          checked={formData.gender === "male" }
-                          onChange={(e) => {
-                            setFormData({...formData, gender: e.target.value});
-                            setGenderError('');
-                          }}
-                          required
-                        />
-              <label>Male</label>
-                <input
-                        type="radio"
-                        value="female"
-                        checked={formData.gender === "female"}
-                        onChange={(e) => {
-                          setFormData({...formData, gender: e.target.value});
-                          setGenderError('');
-                        }}
-                        required
-                      />
-              <label>Female</label>
-              </div>
-              {genderError && <p style={{color: 'red'}}>{genderError}</p>}
-            </div>
-            <div id="form-groupf">
-              <label>Relation:</label>
+              <div id="form-groupf">
+              <label id='lbl'>Relation:</label>
                 <select
                         value={formData.relation}
                         className='relation'
@@ -328,8 +272,74 @@ const customToastStyle = {
                 </select>
                 {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
             </div>
+                <label id='lbl' >Email:</label>
+                  <input 
+                          id='input'
+                          type='email' 
+                          value={formData.email} 
+                          placeholder='Email'
+                          onChange={(e) => {setFormData({ ...formData, email: e.target.value });
+                          setEmailError('');} }
+                required
+              /><CgMail id='familyformicon' />
+              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
+            </div>
+            <div id='form-groupf'>
+              <label id='lbl'>Name:</label>
+                <input
+                        type="text"
+                        id='input'
+                        value={formData.name}
+                        placeholder='Full Name'
+                        onChange={(e) => {setFormData({ ...formData, name: e.target.value });
+                          setNameError('');} }
+                required
+              /> < FiUser id='familyformicon' />
+              {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
+            </div>
+            <div id='form-groupf'>
+              <label id='lbl'>Occupation:</label>
+                <input
+                        id='input'
+                        type='text'
+                        value={formData.occupation}
+                        placeholder='Occupation'
+                        onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
+                        setOccupationError('');} }
+              required
+            /><img src={ocuupation} id='familyformicon'/>
+            {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
+            </div>
+            <div id='form-groupf'>
+              <label id='lbl'>Gender:</label>
+                <div id="radio-groupf">
+                  <input
+                          type="radio"
+                          value="male"
+                          checked={formData.gender === "male" }
+                          onChange={(e) => {
+                            setFormData({...formData, gender: e.target.value});
+                            setGenderError('');
+                          }}
+                          required
+                        />
+              <label id='lbl'>Male</label>
+                <input
+                        type="radio"
+                        value="female"
+                        checked={formData.gender === "female"}
+                        onChange={(e) => {
+                          setFormData({...formData, gender: e.target.value});
+                          setGenderError('');
+                        }}
+                        required
+                      />
+              <label id='lbl'>Female</label>
+              </div>
+              {genderError && <p style={{color: 'red'}}>{genderError}</p>}
+            </div>
             <div id='form-groupa'>
-              <label>Mobile Number:</label>
+              <label id='lbl'>Mobile Number:</label>
                 <div id='phone_number'>
                   <PhoneInput
                        country={'in'}
@@ -339,33 +349,32 @@ const customToastStyle = {
                        isValid={isValidPhone}
                        inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
                        containerStyle={{padding:'1px'}} 
+                       required
                   />
                 </div>
-                {mobilenumberError && <p style={{ color:'red'}}>{mobilenumberError}</p>}
+               {/*mobilenumberError && <p style={{ color:'red'}}>{mobilenumberError}</p>*/}
             </div>
-            <div id='disp'>
+            <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
+          </form>
+        </div>
+      </div>
+      <div id='disp'>
         {familyMembers.map((user) => {
                 console.log(familyMembers.length);
                 return(
                   <div id= {editing && user.id === formData.id ?'display editing':'display'} key={user.id}>
-                     <h2>{user.relation}</h2>
-                    <div id="icon_f_m">
-                              {user.gender === 'male' ? (
-                                <BiMale  size='20px'/>
-                              ) : (
-                                <BiFemale size='20px' />
-                              )}
-                              <span>{user.firstName} {user.lastName}</span>
-                            </div>
-                     <button  onClick={() =>handleEdit(user)}>Edit</button>
-                    <button onClick={() =>handleDelete(user.id)}>Delete</button>
+                  
+                       <h2>{user.Relation}</h2>
+                    <p><strong>Name:</strong> {user.name}</p>
+                    <p><strong>Gender:</strong> {user.gender}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                    <p><strong>Occupation:</strong> {user.occupation}</p>
+                
+                <button onClick={() => handleEdit(user)}>Edit</button>
+                <button onClick={() => handleDelete(user.id)}>Delete</button>
                   </div>
                 );
         })}
-      </div>
-            <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
-          </form>
-        </div>
       </div>
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </AdminSidebar>
