@@ -20,6 +20,7 @@ import AdminSidebar from './Components/Sidebar/AdminSidebar';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import AdminPersonal from './Components/Admin/AdminPersonal';
 import StudentPersonal from './Components/Student/StudentPersonal';
+import Search_Teacher from './Components/Admin/Search_Teacher';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path='/TeacherPersonal' component={TeacherPersonal} />
           <Route path='/AdminPersonal' component={AdminPersonal} />
           <Route path='/StudentPersonal' component={StudentPersonal} />
+          <Route path='/Search_Teacher' component={Search_Teacher}/>
           <Route path='/' component={Login} />
         </Switch>
       </Router>
