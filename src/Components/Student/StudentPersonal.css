@@ -1,15 +1,20 @@
 
   
   .student-personal-info {
-    border: 2px solid skyblue;
-    background-color: hsl(107, 17%, 78%);
-    border-radius: 2px;
-    padding: 20px;
-    margin-bottom: 20px;
     width: 390px;
-    border-radius: 10%;
-    margin-left: 30%;
-    margin-top: 8%;
+    background-color: hsl(107, 17%, 78%);
+    border-radius: 5%;
+    padding: 30px 30px;
+    height: 310px;
+    background: transparent;
+    border: 2px solid skyblue;
+    background-color:  hsl(107, 17%, 78%);
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 86px;
+    padding-top: 15px;
   }
   
   .student-personal-info h2 {
