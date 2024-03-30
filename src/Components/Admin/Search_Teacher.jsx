@@ -1,6 +1,4 @@
-
 import React, { Fragment, useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import config from '../Login/config';
 import './Search_Teacher.css'
@@ -8,8 +6,6 @@ import AdminSidebar from '../Sidebar/AdminSidebar';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
-
-
 
 const Search_Teacher = () => {
   const [standards, setStandards] = useState({});
