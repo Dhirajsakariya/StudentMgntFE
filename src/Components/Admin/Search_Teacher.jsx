@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import config from '../Login/config';
 import './Search_Teacher.css'
@@ -85,7 +86,7 @@ const Search_Teacher = () => {
     getData();
   }, []);
 
-  
+
   const customToastStyle = { 
     fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
     fontSize: '16px',
