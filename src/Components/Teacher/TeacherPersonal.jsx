@@ -108,15 +108,20 @@ const TeacherPersonal = () => {
        {teacher.email} 
        </label> <br />
 
-        {/* <label>
+        <label>
         <strong className='strong-teacher'> Birthdate: </strong> 
-        {teacher.birthdate} 
-        <br /> </label> */}
+        {teacher.birthDate} 
+        <br /> </label>
 
         <label> 
         <strong className='strong-teacher'> Mobile Number: </strong> 
         {teacher.mobileNumber} 
         </label> <br />
+
+        <label>
+        <strong className='strong-teacher'>Join Date:</strong>
+        {teacher.joinDate}
+        </label><br />
 
         <label> 
         <strong className='strong-teacher'> Gender: </strong> 

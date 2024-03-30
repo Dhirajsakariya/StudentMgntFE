@@ -63,10 +63,10 @@ const StudentPersonal = () => {
        {Student.email} 
        </label> <br />
 
-        {/* <label >
+        <label >
          <strong className='strong-student'>Birthdate: </strong>
-         {student.birthdate} 
-         <br /> </label> */}
+         {Student.birthDate} 
+         <br /> </label>
         
         <label> 
         <strong className='strong-student'>Mobile Number: </strong>
@@ -77,6 +77,11 @@ const StudentPersonal = () => {
         <strong className='strong-student'>Gender: </strong>
         {Student.gender} 
         </label> <br />
+
+        <label>
+          <strong className='strong-student'>Join Date:</strong>
+          {Student.joinDate}
+        </label><br />
 
         <label className="label-student">
         <strong className='strong-student'>bloodGroup: </strong>

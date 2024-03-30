@@ -58,16 +58,21 @@ const AdminPersonal = () => {
        {Admin.email}
        </label> <br />
 
-        {/* <label> 
+        <label> 
         <strong className="strong-Admin"> Birthdate: </strong>
-        {Admin.birthdate}
-        <br /> </label> */}
+        {Admin.birthDate}
+        <br /> </label>
         
         <label>
         <strong className='strong-Admin'> Mobile Number: </strong>
         {Admin.mobileNumber}
         </label> <br />
        
+        <label>
+        <strong className='strong-Admin'>Join Date:</strong>
+        {Admin.joinDate}
+        </label><br />
+
         <label> 
         <strong className='strong-Admin'> Gender: </strong> 
         {Admin.gender}
