@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
 import { LuUserCircle2 } from "react-icons/lu";
+import { RiUserSearchLine } from "react-icons/ri";
+import { FaSearch } from 'react-icons/fa';
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
@@ -27,9 +29,19 @@ const AdminSidebar = ({ children }) => {
             icon: <LiaChalkboardTeacherSolid  />
         },
         {
+            path: '/Search_Teacher',
+            name: 'Search Teacher',
+            icon: <RiUserSearchLine />
+        },
+        {
             path: '/StudentForm',
             name: 'Student Form',
             icon: <PiStudentBold  />
+        },
+        {
+            path: '/Search_Student',
+            name: 'Search Student',
+            icon: <FaSearch />
         },
         {
             path: '/ParentsPortal',
