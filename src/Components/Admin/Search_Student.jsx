@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
+
 import './Search_Student.css'
 import axios from 'axios';
 import config from '../Login/config';
@@ -119,7 +119,7 @@ const Search_Student = () => {
   return (
     <AdminSidebar>
     <Fragment>
-      <Table striped bordered hover id='main' >
+      <Table striped bordered hover id='mainsearchstudent' >
         <thead>
           <tr id='trsearchstudent'>
             <th>ID</th>
