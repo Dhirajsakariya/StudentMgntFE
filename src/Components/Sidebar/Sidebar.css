@@ -14,16 +14,16 @@ main{
 .top-section{
   display: flex;
   align-items: center;
-  padding: 10% 0%;
+  padding: 1% 0%;
   margin-left: 20%;
-  
+  margin-bottom: 5%;
 }
-
 .logo{
   font-size: 20px;
   color: hsl(107, 10%, 72%);
   font: bolder;
-  margin-left: 10px;
+  margin-left: 12px;
+  margin-top: 5%;
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .logo span{
@@ -33,6 +33,7 @@ main{
   display: flex;
   font-size: 25px;
   margin-left: 80px;
+  margin-top:10px;
 }
 .link{
   margin-left: -5px;
@@ -57,6 +58,7 @@ main{
 }
 .link-text{
   font-size: 20px;
+  margin-top: 1%;
   margin-left: -2px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 17px;
