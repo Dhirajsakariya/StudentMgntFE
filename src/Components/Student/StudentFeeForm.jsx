@@ -9,7 +9,7 @@ const StudentFeeForm = () => {
  
   const [feeAmount, setFeeAmount] = useState('');
   const [feeFrequency, setFeeFrequency] = useState('');
-  const feeFrequencies = ["quarterly", "annually"];
+  const feeFrequencies = ["Quarterly", "Annually","Semi-Annually "];
 
   const handleFrequencyChange = async (e) => {
     const selectedFrequency = e.target.value;
@@ -68,24 +68,25 @@ const StudentFeeForm = () => {
           
           <div className="form-groupf">
             <label id="labelboxFee">Fee Frequency:</label>
-            <select
+            <select  
+            
               value={feeFrequency}
               id='relation'
               required
               onChange={(e) => { setFeeFrequency(e.target.value); handleFrequencyChange(e); }}>
-              <option value="">Select Fee Frequency</option>
+               <option value="" disabled hidden>Select Fee Frequency</option>
               {feeFrequencies.map((feeFrequency) => (
                 <option key={feeFrequency} value={feeFrequency}>
                   {feeFrequency}
                 </option>
               ))}
             </select>
-          </div>
+          </div><br></br>
           <div className='form-groupa'>
             <label id="labelboxFee" htmlFor="feesAmount">Fees Amount:</label>
             <input
               type="text"
-              id="feeAmount"
+              id="input_feeAmount"
               value={feeAmount}
               placeholder='Fee Amount'
               readOnly // Ensure the input is read-only to display the fetched amount
