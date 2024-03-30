@@ -13,6 +13,7 @@ const Search_Student = () => {
   const [selectedStandard, setSelectedStandard] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
+  
   function handleView(id) {
     axios
       .get(`${config.ApiUrl}Student/GetStudent${id}`)

@@ -21,6 +21,7 @@ import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import AdminPersonal from './Components/Admin/AdminPersonal';
 import StudentPersonal from './Components/Student/StudentPersonal';
 import Search_Teacher from './Components/Admin/Search_Teacher';
+import Search_Student from './Components/Admin/Search_Student';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path='/AdminPersonal' component={AdminPersonal} />
           <Route path='/StudentPersonal' component={StudentPersonal} />
           <Route path='/Search_Teacher' component={Search_Teacher}/>
+          <Route path='/Search_Student' component={Search_Student}/>
           <Route path='/' component={Login} />
         </Switch>
       </Router>
