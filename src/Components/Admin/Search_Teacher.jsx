@@ -85,6 +85,7 @@ const Search_Teacher = () => {
     getData();
   }, []);
 
+  
   const customToastStyle = { 
     fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
     fontSize: '16px',

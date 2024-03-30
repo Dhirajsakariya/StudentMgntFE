@@ -23,7 +23,6 @@ import StudentPersonal from './Components/Student/StudentPersonal';
 import Search_Teacher from './Components/Admin/Search_Teacher';
 import Search_Student from './Components/Admin/Search_Student';
 
-
 function App() {
   return (
     <div>
