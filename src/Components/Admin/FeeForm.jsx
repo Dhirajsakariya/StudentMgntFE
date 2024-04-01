@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import './FeeForm.css';
 import { FaRupeeSign } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
@@ -72,4 +72,4 @@ const FeeForm = () => {
   );
 };
 
-export default FeeForm;
+export default FeeForm;*/
