@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Registration from './Components/Login/Registration';
 import ForgotPassword from './Components/Login/ForgotPassword';
@@ -22,33 +22,37 @@ import AdminPersonal from './Components/Admin/AdminPersonal';
 import StudentPersonal from './Components/Student/StudentPersonal';
 import Search_Teacher from './Components/Admin/Search_Teacher';
 import Search_Student from './Components/Admin/Search_Student';
+import PrivateRoute from './Components/Login/PrivateRoute';
 
 function App() {
+
+
   return (
     <div>
       <Router>
         <Switch>
-          <Route path='/Sidebar' component={Sidebar} />
+          <PrivateRoute path='/Sidebar' component={Sidebar} />
           <Route path='/ForgotPassword' component={ForgotPassword} />
           <Route path='/Registration' component={Registration} />
-          <Route path='/StudentForm' component={StudentForm} />
-          <Route path='/TeacherForm' component={TeacherForm} />
-          <Route path='/Student_Form' component={Student_Form} />
-          <Route path='/TimeTable' component={TimeTable} />
-          <Route path='/Standard' component={Standard} />
-          <Route path='/Student' component={Student} />
-          <Route path='/ParentsPortal' component={ParentsPortal} />
-          <Route path='/FeeForm' component={FeeForm} />
-          <Route path='/StudentSidebar' component={StudentSidebar} />
-          <Route path='/TeacherSidebar' component={TeacherSidebar} />
-          <Route path='/AdminSidebar' component={AdminSidebar} />
-          <Route path='/StudentFeeForm' component={StudentFeeForm} />
-          <Route path='/TeacherPersonal' component={TeacherPersonal} />
-          <Route path='/AdminPersonal' component={AdminPersonal} />
-          <Route path='/StudentPersonal' component={StudentPersonal} />
-          <Route path='/Search_Teacher' component={Search_Teacher}/>
-          <Route path='/Search_Student' component={Search_Student}/>
+          <PrivateRoute path='/StudentForm' component={StudentForm} />
+          <PrivateRoute path='/TeacherForm' component={TeacherForm} />
+          <PrivateRoute path='/Student_Form' component={Student_Form} />
+          <PrivateRoute path='/TimeTable' component={TimeTable} />
+          <PrivateRoute path='/Standard' component={Standard} />
+          <PrivateRoute path='/Student' component={Student} />
+          <PrivateRoute path='/ParentsPortal' component={ParentsPortal} />
+          <PrivateRoute path='/FeeForm' component={FeeForm} />
+          <PrivateRoute path='/StudentSidebar' component={StudentSidebar} />
+          <PrivateRoute path='/TeacherSidebar' component={TeacherSidebar} />
+          <PrivateRoute path='/AdminSidebar' component={AdminSidebar} />
+          <PrivateRoute path='/StudentFeeForm' component={StudentFeeForm} />
+          <PrivateRoute path='/TeacherPersonal' component={TeacherPersonal} />
+          <PrivateRoute path='/AdminPersonal' component={AdminPersonal} />
+          <PrivateRoute path='/StudentPersonal' component={StudentPersonal} />
+          <PrivateRoute path='/Search_Teacher' component={Search_Teacher} />
+          <PrivateRoute path='/Search_Student' component={Search_Student} />
           <Route path='/' component={Login} />
+          <Redirect to="/" />
         </Switch>
       </Router>
     </div>

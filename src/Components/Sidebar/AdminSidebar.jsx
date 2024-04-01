@@ -14,7 +14,7 @@ import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 
-const AdminSidebar = ({ children }) => {
+const AdminSidebar = ({handleLogout, children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
@@ -53,11 +53,11 @@ const AdminSidebar = ({ children }) => {
             name: 'FeeForm',
             icon: <FaGooglePay  />
         }, 
-       {
-            path: '/login',
-            name: 'Logout',
-             icon: <BiLogOut />
-        }
+    //    {
+    //         path: '/login',
+    //         name: 'Logout',
+    //          icon: <BiLogOut />
+    //     }
     ];
 
     useEffect(() => {
@@ -84,6 +84,13 @@ const AdminSidebar = ({ children }) => {
     
         fetchAdminDetails();
       }, []);
+
+      const handleLogoutClick = () => {
+        localStorage.removeItem('loggedInEmail');
+        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('loggedInRole');
+        navigate.push('/');
+        };
     
       if (error) {
         return <div>Error: {error}</div>;
@@ -107,10 +114,12 @@ const AdminSidebar = ({ children }) => {
                             <div id="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
                                 <ul>
                                     <li>
-                                        <a href="/AdminPersonal" ><LuUserCircle2 className='icon' />{Admin.name} </a>
+                                        <a href="/AdminPersonal" ><LuUserCircle2 className='personalicone' />{Admin.name} </a>
                                     </li>
                                     <li>
-                                    <a href="/"><BiLogOut className='icon' />Logout</a>
+                                        <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
+                                    </li>
+                                    <li>
                                 </li>
                                 </ul>
                             </div>
