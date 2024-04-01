@@ -10,8 +10,8 @@ const TimeTable = () => {
     const [standardData, setStandardData] = useState([]);
     //const [toggle , setToggel] = useState(true);
     const [standardError, setStandardError] = useState('');
-    const [subject1, setSubject1] = useState('');
     const [subjectData, setSubjectData] = useState([]);
+    const [subject1, setSubject1] = useState('');
     const [subject2, setSubject2] = useState('');
     const [subject3, setSubject3] = useState('');
     const [subject4, setSubject4] = useState('');
@@ -36,7 +36,6 @@ const TimeTable = () => {
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
 
-
     const [formData, setFormData] = useState({
         id:'',
         day: '',
@@ -46,17 +45,6 @@ const TimeTable = () => {
         section: '',
         subject: '',
       });
-
-      const dayMap = {
-        Sunday : 0,
-        Monday : 1,
-        Tuesday : 2,
-        Wednesday :3,
-        Thursday : 4,
-        Friday : 5,
-        Saturday : 6
-      };
-      const dayInteger = dayMap[formData.day];
 
       const str = standard;
       const parts = str.split("-");
@@ -96,15 +84,40 @@ const TimeTable = () => {
 
       const handleSave =async () =>{
         try{
-          const timeTableCreateList = {
-            Id : formData.id,
-            NoOfDay:dayInteger,
-            StartTime:formData.startTime,
-            EndTime: formData.endTime,
-            SubjectName: formData.subject,
-            StandardNumber: parts[0],
-            Section : parts[1]
-          };
+          const timeTableCreateList = [{
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 1,
+            SubjectName : subject1
+            // Schedules:[
+            //   {"NoOfDay":1,SubjectName:subject1},
+            //   {"NoOfDay":2,SubjectName:subject2},
+            //   {"NoOfDay":3,SubjectName:subject3},
+            //   {"NoOfDay":4,SubjectName:subject4},
+            //   {"NoOfDay":5,SubjectName:subject5},
+            //   {"NoOfDay":6,SubjectName:subject6},
+            // ]              
+          },
+          {
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 2,
+            SubjectName : subject2
+          },
+          {
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 3,
+            SubjectName : subject3
+          }
+        ]
+          
           const response = await fetch(`${config.ApiUrl}TimeTable/PostTimeTable`, {
               method: 'POST',
               headers: {
@@ -113,7 +126,7 @@ const TimeTable = () => {
               body: JSON.stringify(timeTableCreateList)
           });
           console.log("response",response);
-          const result = response.json();
+          const result = response;
           console.log("result",result);
           if (response.ok) {
               toast.success("SuccessFully Saved!");
@@ -178,7 +191,7 @@ const TimeTable = () => {
                     <th id='th'>Saturday</th>
                 </tr>
                 <tr id='row'>
-                  <td id='sub'>7:30-8:30</td>
+                  <td id='sub'>07:30-08:30</td>
                   <td>
                   <select
                       value={subject1}
@@ -187,7 +200,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject1(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject1) => (
                       <option key={subject1} value={subject1}>
                       {subject1}
@@ -203,7 +216,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject2(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject2) => (
                       <option key={subject2} value={subject2}>
                       {subject2}
@@ -219,7 +232,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject3(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject3) => (
                       <option key={subject3} value={subject3}>
                       {subject3}
@@ -235,7 +248,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject4(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject4) => (
                       <option key={subject4} value={subject4}>
                       {subject4}
@@ -251,7 +264,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject5(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject5) => (
                       <option key={subject5} value={subject5}>
                       {subject5}
@@ -267,7 +280,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject6(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject6) => (
                       <option key={subject6} value={subject6}>
                       {subject6}
@@ -277,7 +290,7 @@ const TimeTable = () => {
                   </td>
                 </tr>
                 <tr id='row'>
-                  <td id='sub'>8:30-9:30</td>
+                  <td id='sub'>08:30-09:30</td>
                   <td>
                   <select
                       value={subject7}
@@ -286,7 +299,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject7(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject7) => (
                       <option key={subject7} value={subject7}>
                       {subject7}
@@ -302,7 +315,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject8(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject8) => (
                       <option key={subject8} value={subject8}>
                       {subject8}
@@ -318,7 +331,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject9(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject9) => (
                       <option key={subject9} value={subject9}>
                       {subject9}
@@ -334,7 +347,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject10(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject10) => (
                       <option key={subject10} value={subject10}>
                       {subject10}
@@ -350,7 +363,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject11(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject11) => (
                       <option key={subject11} value={subject11}>
                       {subject11}
@@ -366,7 +379,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject12(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject12) => (
                       <option key={subject12} value={subject12}>
                       {subject12}
@@ -376,7 +389,7 @@ const TimeTable = () => {
                   </td>
                 </tr>
                 <tr id='row'>
-                  <td id='sub'>9:30-10:00</td>
+                  <td id='sub'>09:30-10:00</td>
                   <td id='break' colspan="6" align="center"> Break</td>
                 </tr>
                 <tr id='row'>
@@ -389,7 +402,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject13(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject13) => (
                       <option key={subject13} value={subject13}>
                       {subject13}
@@ -405,7 +418,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject14(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject14) => (
                       <option key={subject14} value={subject14}>
                       {subject14}
@@ -421,7 +434,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject15(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject15) => (
                       <option key={subject15} value={subject15}>
                       {subject15}
@@ -437,7 +450,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject16(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject16) => (
                       <option key={subject16} value={subject16}>
                       {subject16}
@@ -453,7 +466,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject17(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject17) => (
                       <option key={subject17} value={subject17}>
                       {subject17}
@@ -469,7 +482,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject18(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject18) => (
                       <option key={subject18} value={subject18}>
                       {subject18}
@@ -488,7 +501,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject19(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject19) => (
                       <option key={subject19} value={subject19}>
                       {subject19}
@@ -504,7 +517,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject20(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject20) => (
                       <option key={subject20} value={subject20}>
                       {subject20}
@@ -520,7 +533,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject21(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject21) => (
                       <option key={subject21} value={subject21}>
                       {subject21}
@@ -536,7 +549,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject22(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject22) => (
                       <option key={subject22} value={subject22}>
                       {subject22}
@@ -552,7 +565,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject23(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject23) => (
                       <option key={subject23} value={subject23}>
                       {subject23}
@@ -568,7 +581,7 @@ const TimeTable = () => {
                       onChange={(e) => {
                       setSubject24(e.target.value);
                       }} >
-                    <option disabled={true}>Select</option>
+                    <option disabled={true} value="">Select</option>
                     {subjectData.map((subject24) => (
                       <option key={subject24} value={subject24}>
                       {subject24}
