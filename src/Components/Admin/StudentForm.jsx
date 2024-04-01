@@ -18,6 +18,7 @@ import axios from 'axios';
 import config from '../Login/config';
 import { useParams } from 'react-router-dom';
 
+
 const StudentForm = () => {  
     const [name, setName ] = useState('');
     const [email, setEmail] = useState('');
@@ -126,7 +127,7 @@ const StudentForm = () => {
           }
           else{
             setTimeout(() => {
-              navigate.push('/FamilyForm') 
+              navigate.push('/ParentsPortal') 
               }, 1500);
             toast.success("Registration Successfull!")
           }

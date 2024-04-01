@@ -115,7 +115,170 @@ const TimeTable = () => {
             Section : parts[1],
             NoOfDay : 3,
             SubjectName : subject3
-          }
+          },
+          {
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 4,
+            SubjectName : subject4
+          },
+          {
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 5,
+            SubjectName : subject5
+          },
+          {
+            StartTime : "07:30",
+            EndTime : "08:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 6,
+            SubjectName : subject6
+          },
+          {
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 1,
+            SubjectName : subject7
+          },  
+          {
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 2,
+            SubjectName : subject8
+          },         
+          {
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 3,
+            SubjectName : subject9
+          },{
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 4,
+            SubjectName : subject10
+          },
+          {
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 5,
+            SubjectName : subject11
+          },
+          {
+            StartTime : "08:30",
+            EndTime : "09:30",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 6,
+            SubjectName : subject12
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 1,
+            SubjectName : subject13
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 2,
+            SubjectName : subject14
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 3,
+            SubjectName : subject15
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 4,
+            SubjectName : subject16
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 5,
+            SubjectName : subject17
+          },
+          {
+            StartTime : "10:00",
+            EndTime : "11:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 6,
+            SubjectName : subject18
+          },
+          {
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 1,
+            SubjectName : subject19
+          },
+          {
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 2,
+            SubjectName : subject20
+          },{
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 3,
+            SubjectName : subject21
+          },{
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 4,
+            SubjectName : subject22
+          },{
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 5,
+            SubjectName : subject23
+          },{
+            StartTime : "11:00",
+            EndTime : "12:00",
+            StandardNumber : parts[0],
+            Section : parts[1],
+            NoOfDay : 6,
+            SubjectName : subject24
+          },
         ]
           
           const response = await fetch(`${config.ApiUrl}TimeTable/PostTimeTable`, {
