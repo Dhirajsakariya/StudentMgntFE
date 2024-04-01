@@ -16,6 +16,7 @@ import {FaRegUserCircle,FaRegAddressCard} from "react-icons/fa";
 import {toast,Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import config from '../Login/config';
+import { useParams } from 'react-router-dom';
 
 const StudentForm = () => {  
     const [name, setName ] = useState('');
@@ -136,6 +137,25 @@ const StudentForm = () => {
         return;
 };
   
+
+const { id } = useParams();
+  useEffect(() => {
+    if (id) {
+      // Fetch student details based on ID
+      axios.get(`${config.ApiUrl}Student/GetStudent${id}`)
+        .then((response) => {
+          const studentData = response.data;
+          // Set the fetched student data into state variables to pre-fill the form fields
+          setName(studentData.name);
+          setEmail(studentData.email);
+          // Similarly, set other state variables as needed
+        })
+        .catch((error) => {
+          console.error('Error fetching student details:', error);
+          // Handle error fetching student details
+        });
+    }
+  }, [id]);
    return (
     <AdminSidebar>
       <>
@@ -183,7 +203,7 @@ const StudentForm = () => {
                     title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
                     autoComplete='current-password'
                     required/>
-                    <span id='iconstudentform' onClick={toggle}>
+                    <span id='iconstudentformeye' onClick={toggle}>
                     {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}</span>
                   </div>
 
@@ -257,7 +277,7 @@ const StudentForm = () => {
             <div id='form-groupstudentform'>
               <label id='labelstudentform2'>Join-Date:</label>
                 <input 
-                id='inputstudentform' 
+                id='inputstudentform2' 
                 type='date' 
                 value={joinDate} max={moment().format("YYYY-MM-DD")} 
                 onChange={(e) => setJoinDate(e.target.value)} 
@@ -265,7 +285,7 @@ const StudentForm = () => {
             </div>
                 
             <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Address:</label>
+              <label id='labelstudentform2'>Address:</label>
                 <input 
                 type='textarea' 
                 id='inputtextarea'  
@@ -279,7 +299,7 @@ const StudentForm = () => {
             <div id='form-groupstudentform'>
               <label id='labelstudentform2'>City:</label>
                 <input 
-                id='inputstudentform' 
+                id='inputstudentform2' 
                 type='text' 
                 value={city} 
                 onChange={(e)=> setCity(e.target.value)} 
@@ -292,7 +312,7 @@ const StudentForm = () => {
             <div id='form-groupstudentform'>
               <label id='labelstudentform2'>District:</label>
                 <input
-                id='inputstudentform' 
+                id='inputstudentform2' 
                 type='text' 
                 value={district} 
                 onChange={(e)=> setDistrict(e.target.value)} 
@@ -304,7 +324,7 @@ const StudentForm = () => {
             <div id='form-groupstudentform'>
               <label id='labelstudentform2'>State:</label>
                 <input 
-                id='inputstudentform' 
+                id='inputstudentform2' 
                 type='text' 
                 value={state} 
                 onChange={(e)=> setState(e.target.value)} 
@@ -316,7 +336,7 @@ const StudentForm = () => {
             <div id='form-groupr'>
               <label id='labelstudentform2'>PinCode:</label>
                 <input 
-                id='inputstudentform' 
+                id='inputstudentform2' 
                 type='text' 
                 value={pinCode} 
                 onChange={(e)=> setPinCode(e.target.value)}
@@ -327,7 +347,7 @@ const StudentForm = () => {
             </div>
 
             <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Mobile Number:</label>
+              <label id='labelstudentform2'>Mobile Number:</label>
                 <div id='phone_numberstudentform'>
                   <PhoneInput
                        country={'in'}
