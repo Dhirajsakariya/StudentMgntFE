@@ -18,7 +18,7 @@ const StudentPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`${config.ApiUrl}Student/GetStudent${storedId}`);
+        const response = await fetch(`${config.ApiUrl}Student/GetStudent/${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching Student details: ${response.status} ${response.statusText}`);

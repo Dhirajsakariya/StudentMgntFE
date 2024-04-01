@@ -127,7 +127,34 @@ main{
   font-weight: bold;
 }
 
-#dropdown-menu ul li .icon {
+#dropdown-menu ul li .personalicone {
   margin-right: 5%;
   font-size: 20px;
 }
+
+#dropdown-menu ul li .logouticone {
+  margin-right: 5%;
+  font-size: 20px;
+  width: 80px;
+  height: 15px;
+
+}
+
+.logouticone:hover{
+  color: #146a51;
+  font-weight: bold;
+
+}
+
+
+/* #button-adminsidebar{
+  border: none;
+  color: pink
+} */
+#adminsidebarbutton{
+  border: none;
+}
+
+#adminsidebarbutton:hover
+{color: #146a51;
+  font-weight: bold;}

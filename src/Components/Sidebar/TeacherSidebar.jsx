@@ -10,8 +10,9 @@ import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
+import Logout from '../Login/Logout';
 
-const TeacherSidebar = ({ children }) => {
+const TeacherSidebar = ({ handleLogout,children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
@@ -36,9 +37,11 @@ const TeacherSidebar = ({ children }) => {
             icon: <FaTableCells  />
         },
         {
-            path: '/login',
+            path: '/Logout',
             name: 'Logout',
-            icon: <BiLogOut />
+            icon: <BiLogOut />,
+            component: <Logout />
+            
         }
     ];
   
@@ -66,6 +69,12 @@ const TeacherSidebar = ({ children }) => {
     
         fetchTeacherDetails();
       }, []);
+      const handleLogoutClick = () => {
+        localStorage.removeItem('loggedInEmail');
+        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('loggedInRole');
+        navigate.push('/');
+        };
     
       if (error) {
         return <div>Error: {error}</div>;
@@ -92,7 +101,8 @@ const TeacherSidebar = ({ children }) => {
                                         <a href="/TeacherPersonal" ><LuUserCircle2 className='icon' />{teacher.name} </a>
                                     </li>
                                     <li>
-                                    <a href="/"><BiLogOut className='icon' />Logout</a>
+                                    <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
+
                                 </li>
                                 </ul>
                             </div>

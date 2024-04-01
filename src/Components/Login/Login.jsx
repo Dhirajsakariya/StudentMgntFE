@@ -16,16 +16,15 @@ const Login = () => {
     const [selectrole,setSelectrole] = useState(false)
     const [loginSuccessMessageShown, setLoginSuccessMessageShown] = useState(false); 
     const [notloginSuccessMessageShown, setNotloginSuccessMessageShown] = useState(false)
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
 
     useEffect(() => {
         const registeredEmail = localStorage.getItem('registeredEmail');
         if (registeredEmail) {
             setEmail(registeredEmail);
-            localStorage.removeItem('registeredEmail');    
+            localStorage.removeItem('registeredEmail'); // Remove the email after fetching it           
         }
-    }, []); 
+    }, []); // Empty dependency array means this effect runs only once when component mounts
+
     const handleUserChange = (e) => {
         setEmail(e.target.value);
     };
@@ -40,8 +39,6 @@ const Login = () => {
         
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isSubmitting) return; 
-        setIsSubmitting(true);
         if (!role) {
             if(!selectrole){
                 toast.error('Please select your role!');
@@ -82,7 +79,7 @@ const Login = () => {
                             navigate.push('/TeacherPersonal');
                             break;
                         case 'student':
-                            navigate.push('/StudentSidebar');
+                            navigate.push('/StudentPersonal');
                             break;
                         default:
                             navigate.push('/'); 
@@ -113,9 +110,6 @@ const Login = () => {
         } catch (error) {
             console.error('Login failed:', error);
             toast.error('Login failed');
-        }
-        finally {
-            setIsSubmitting(false); 
         }
     };
 
@@ -165,7 +159,7 @@ const Login = () => {
                     <a href='ForgotPassword' className='forgetpassword-login'>Forgot Password?</a>
                 </div>
                 <div>
-                    <button type='submit' className='buttonlogin' disabled={isSubmitting}> Login </button>
+                    <button type='submit' className='buttonlogin'> Login </button>
                 </div>
                 <div className='register-link'>
                     <p className='p'>Don't have an account? <a  href='Registration' className='f'>Register</a></p>

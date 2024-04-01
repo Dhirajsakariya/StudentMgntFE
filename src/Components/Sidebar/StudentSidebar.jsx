@@ -9,7 +9,7 @@ import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 
-const StudentSidebar = ({ children }) => {
+const StudentSidebar = ({ handleLogout,children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useHistory();
@@ -29,11 +29,7 @@ const StudentSidebar = ({ children }) => {
             icon: <FaGooglePay   />
         },
 
-        {
-            path: '/login',
-            name: 'Logout',
-            icon: <BiLogOut />
-        }
+        
     ];
 
     useEffect(() => {
@@ -45,7 +41,7 @@ const StudentSidebar = ({ children }) => {
               throw new Error('User ID not found in local storage');
             }
     
-            const response = await fetch(`${config.ApiUrl}Student/GetStudent${storedId}`);
+            const response = await fetch(`${config.ApiUrl}Student/GetStudent/${storedId}`);
             
             if (!response.ok) {
               throw new Error(`Error fetching Student details: ${response.status} ${response.statusText}`);
@@ -60,6 +56,13 @@ const StudentSidebar = ({ children }) => {
     
         fetchstudentDetails();
       }, []);
+      const handleLogoutClick = () => {
+        localStorage.removeItem('loggedInEmail');
+        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('loggedInRole');
+        navigate.push('/');
+        };
+    
     
       if (error) {
         return <div>Error: {error}</div>;
@@ -86,7 +89,7 @@ const StudentSidebar = ({ children }) => {
                                         <a href="/StudentPersonal" ><LuUserCircle2 className='icon' /> {Student.name} </a>
                                     </li>
                                     <li>
-                                    <a href="/"><BiLogOut className='icon' />Logout</a>
+                                    <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
                                 </li>
                                 </ul>
                             </div>
