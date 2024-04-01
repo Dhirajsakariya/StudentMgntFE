@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import Table from 'react-bootstrap/Table';
 import './Search_Student.css'
 import axios from 'axios';
 import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+
 const Search_Student = () => {
 
   const [standards, setStandards] = useState({});
@@ -11,8 +13,7 @@ const Search_Student = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedStandard, setSelectedStandard] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-
+  const history = useHistory();
   
   function handleView(id) {
     axios
@@ -36,9 +37,7 @@ const Search_Student = () => {
         alert('Failed to fetch student details.');
       });
   }
-  const handleEdit = (name) => {
-    alert(name)
-  };
+ 
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure to delete this student?')) {
@@ -79,11 +78,27 @@ const Search_Student = () => {
               console.log(error);
             });
         });
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const handleEdit = (id) => {
+    //history.push(`/StudentForm`);
+    axios
+      .get(`${config.ApiUrl}Student/GetStudent${id}`)
+      .then((response) => {
+        setData(response.data);
+      history.push(`/StudentForm/${id}`);
+    })
+    .catch((error) => {
+      console.error('Error fetching student details:', error);
+      alert('Failed to fetch student details.');
+    });
+
+   };
 
   useEffect(() => {
     getData();
@@ -159,7 +174,7 @@ const Search_Student = () => {
                   <td colSpan={2}>
                     <button
                       id='btneditsearchstudent'
-                      onClick={() => handleEdit(item.name)}>
+                      onClick={() => handleEdit(item.id)}>
                       Edit
                     </button>{' '}
                     &nbsp;
@@ -187,3 +202,5 @@ const Search_Student = () => {
   );
 };
 export default Search_Student;
+
+

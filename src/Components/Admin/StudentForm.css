@@ -13,7 +13,7 @@
   margin-right: auto;
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 15px;
   margin-bottom: 15%;
 }
 #form-groupstudentform {
@@ -70,6 +70,15 @@
   border: 2px;
   border-radius: 5px;
 }
+#inputstudentform2 {
+  width: 300px;
+  margin-left: 4%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 1.4%;
+  border: 2px;
+  border-radius: 5px;
+}
 #inputr::placeholder { 
   color:gray;
   position:absolute;
@@ -78,6 +87,12 @@
   position:relative;
   right: 25px;
   top: 50%;
+  transform: translateY(15%);
+}
+#iconstudentformeye{
+  position:relative;
+  right: 25px;
+  top: 4px;
   transform: translateY(15%);
 }
 #inputtextarea{
@@ -125,11 +140,12 @@ border-radius: 5px;
   #radio-groupa label {
     margin-top: 1%;
     margin-right: 49%;
+
   }
   #radio-groupa input {
     width: 15%;
     padding: 0;
     margin-top: -1%;
-    margin-left: -12%;
+    margin-left: -14%;
   }
  
