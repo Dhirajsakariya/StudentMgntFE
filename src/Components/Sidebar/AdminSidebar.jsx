@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { FaBars, FaGooglePay, FaSearch } from "react-icons/fa";
+import { FaBars, FaGooglePay, FaMarkdown, FaSearch } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { LuUserCircle2 } from "react-icons/lu";
 import { MdFamilyRestroom } from "react-icons/md";
@@ -53,7 +53,7 @@ const AdminSidebar = ({handleLogout, children }) => {
         {
             path: '/StudentMarks',
             name: 'Student Marks',
-            icon: <FaGooglePay  />
+            icon: <FaMarkdown />
         },
     //    {
     //         path: '/login',

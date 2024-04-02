@@ -1,9 +1,9 @@
 #containerStudentMarks{
-    width: 400px;
+    width: 350px;
     color:black;
-    border-radius: 1%;
+    border-radius: 2%;
     padding: 30px 30px;
-    height:450px;
+    height:400px;
     background: transparent;
     border: 2px solid;
     background-color: hsl(107, 17%, 78%);
@@ -34,13 +34,13 @@
     margin-top: 1%;
   }
   #form-groupstudentMarks{
-    margin-left: 10%;
+    margin-left: 4%;
     margin-top: 1%;
   }
 
   #label_student_marks {
     display: block;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     margin-top: 1%;
     margin-left:4%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -67,7 +67,7 @@
     justify-content: center;
     text-align: center;
     margin-left: 36%;
-    margin-top: 4%;
+    margin-top: 5%;
     margin-bottom: 5%;
     font-weight: 700;
     font-size: 18px;

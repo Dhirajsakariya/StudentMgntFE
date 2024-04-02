@@ -9,13 +9,11 @@ const StudentMarks = () => {
   const [subjectId, setSubjectId] = useState('');
   const [totalMarks, setTotalMarks] = useState('');
   const [marksObtained, setMarksObtained] = useState('');
-  
-  const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', { studentId, examId, examType, subjectId, totalMarks, marksObtained, status });
+    console.log('Form submitted:', { studentId, examId, examType, subjectId, totalMarks, marksObtained });
   };
 
   return (
@@ -33,6 +31,7 @@ const StudentMarks = () => {
           type="number"
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
+          placeholder='Enter Student Id'
           required
         />
       </div>
@@ -46,6 +45,7 @@ const StudentMarks = () => {
           type="number"
           value={examId}
           onChange={(e) => setExamId(e.target.value)}
+          placeholder='Enter Exam Id'
           required
         />
       </div>
@@ -58,6 +58,7 @@ const StudentMarks = () => {
           id='input_studentmarks'
           value={examType}
           onChange={(e) => setExamType(e.target.value)}
+          placeholder='Select Exam Type'
           required
         >
           <option value="">Select Exam Type</option>
@@ -75,6 +76,7 @@ const StudentMarks = () => {
           type="text"
           value={subjectId}
           onChange={(e) => setSubjectId(e.target.value)}
+          placeholder='Enter Subject Id'
           required
         />
       </div>
@@ -88,6 +90,7 @@ const StudentMarks = () => {
           type="number"
           value={totalMarks}
           onChange={(e) => setTotalMarks(e.target.value)}
+          placeholder='Enter Total Marks'
           required
         />
       </div>
@@ -101,26 +104,12 @@ const StudentMarks = () => {
           type="number"
           value={marksObtained}
           onChange={(e) => setMarksObtained(e.target.value)}
+          placeholder='Enter Marks Obtained'
           required
         />
       </div>
       </div>
       
-      <div>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Status:</label>
-        <select
-          id='input_studentmarks'
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        >
-          <option value="">Select Status</option>
-          <option value="Pass">Pass</option>
-          <option value="Fail">Fail</option>
-        </select>
-      </div>
-      </div>
       <button type="submit" id='btnaddstudentmarks'>Submit</button>
     </form>
     </div>
