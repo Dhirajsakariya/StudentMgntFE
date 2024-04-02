@@ -11,6 +11,7 @@ import StudentMarks from './Components/Admin/StudentMarks';
 import TeacherForm from './Components/Admin/TeacherForm';
 import ForgotPassword from './Components/Login/ForgotPassword';
 import Login from './Components/Login/Login';
+import Logout from './Components/Login/Logout';
 import PrivateRoute from './Components/Login/PrivateRoute';
 import Registration from './Components/Login/Registration';
 import AdminSidebar from './Components/Sidebar/AdminSidebar';
@@ -24,10 +25,6 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
-import Search_Teacher from './Components/Admin/Search_Teacher';
-import Search_Student from './Components/Admin/Search_Student';
-import PrivateRoute from './Components/Login/PrivateRoute';
-import Logout from './Components/Login/Logout';
 
 function App() {
 
