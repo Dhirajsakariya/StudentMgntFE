@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../Login/config';
+import Popup from 'reactjs-popup';
 import './Search_Teacher.css'
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { FiEdit } from "react-icons/fi";
@@ -9,177 +10,119 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
 
 const Search_Teacher = () => {
-  const [standards, setStandards] = useState({});
-  const [subjects,setSubject] = useState({});
-  const [data, setData] = useState([]);
-  const [selectedTeacher, setSelectedTeacher] = useState(null);
-  const [showModal,setShowModel] =useState([]);
+       const history = useHistory();
+       const [data, setData] = useState(null);
+       const [selectedTeacher,setSelectedTeacher] =useState("");
+       const [standardString, setStandardString] = useState("");
 
-
-  const handleEdit = (name) =>{
-    alert(name);
-  }
-
-  const handleView = (teacher) =>{
-    setSelectedTeacher(teacher);
-  }
-
-  const handleDelete = (id) => {
-    if (window.confirm('Are You Sure To Delete This Teacher')) {
-    axios 
-    .delete(`${config.ApiUrl}AdminTeacher/DeleteAdminTeacher${id}`)
-    .then((response) =>{
-      if(response.status===200){
-       setData((prevData) => prevData.filter((teacher) => teacher.id !== id));
-        toast.success('Teacher Deleted Successfully');
-      }
-      else{
-        toast.error('Failed to delete Teacher');
-      }
-    })
-    .catch((error) => {
-      console.error('Error Deleting Teacher :',error);
-      toast.error('failed to Delete Teacher');
-    });
-    }
-  };
-
-  const getData = () => {
-    axios
-      .get(`${config.ApiUrl}AdminTeacher/GetTeachers`)
-      .then((result) => {
-        setData(result.data);
-        // Fetch standard details for each student
-        result.data.forEach((teacher) => {
-          axios
-            .get(`${config.ApiUrl}Standard/GetStandard${teacher.standardId}`)
-            .then((response) => {
-              setStandards((prevStandards) => ({
-                ...prevStandards,
-                [teacher.standardId]: response.data,
-              }));
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+     
+      
+      
+    //TEACHER GET
+    const getData = () => {
+      axios
+        .get(`${config.ApiUrl}AdminTeacher/GetTeachers`)
+        .then((result) => {
+          setData(result.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        result.data.forEach((subject) => {
-            axios
-              .get(`${config.ApiUrl}Subject/GetSubject${subject.subjectId}`)
-              .then((response) => {
-                setSubject((prevSubject) => ({
-                  ...prevSubject,
-                  [subject.subjectId]: response.data,
-                }));
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+     };
 
-  useEffect(() => {
-    getData();
-  }, []);
+     //PopUp Details
+     const getTeacherDetails = (id) => {
+      console.log("Getting Teacher details for ID:", id);
+      axios
+        .get(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${id}`)
+        .then((result) => {
+          setSelectedTeacher(result.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    useEffect(() => {
+      getData();
+      getTeacherDetails();
+    }, []);
 
+    //EDIT TEACHER
+      const handleEdit = (id) => {
+      history.push('/TeacherForm');
 
-  const customToastStyle = { 
-    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-    fontSize: '16px',
-    fontWeight: 'bold',
-  };
+      };
 
- const TeacherModel =({ teacher,onclose})=>{
-  return(
-    <div>
-      <div id='pop-up'>
-            <span id='pop-heading'onClick={onclose}>&times;</span>
-            <h2 id='detail_heading'>Details of {teacher.name}</h2>
-            <p id='teacherinfo'>Email:&nbsp; {teacher.email}</p>
-            <p id='teacherinfo'>Gender:&nbsp; {teacher.gender}</p>
-            <p id='teacherinfo'>Birth-Date:&nbsp;{teacher.birthDate}</p>
-            <p id='teacherinfo'>MobileNo: &nbsp;{teacher.mobileNumber}</p>
-            <p id='teacherinfo'>Join-Date:&nbsp;{teacher.joinDate}</p>
-            <p id='teacherinfo'>Address:&nbsp;{teacher.address}</p>
-            <p id='teacherinfo'>City:&nbsp;{teacher.city}</p>
-            <p id='teacherinfo'>District:&nbsp;{teacher.district}</p>
-            <p id='teacherinfo'>State: &nbsp;{teacher.state}</p>
-            <p id='teacherinfo'>PinCode: &nbsp;{teacher.pinCode}</p>
-            <p id='teacherinfo'>Standard: &nbsp;{standards[teacher.standardId]? standards[teacher.standardId].standardNumber:'N/A'}</p>
-            <p id='teacherinfo'>Section:&nbsp;{standards[teacher.standardId]? standards[teacher.standardId].section:'N/A'}</p>
-            <p id='teacherinfo'>Subject:&nbsp;{subjects[teacher.subjectId]? subjects[teacher.subjectId].name:'N/A'}</p>
+      //DELETE TEACHER
+      const handleDelete = (id) => {
+        if (window.confirm('Are You Sure To Delete This Teacher')) {
+        axios 
+        .delete(`${config.ApiUrl}AdminTeacher/DeleteAdminTeacher${id}`)
+        .then((response) =>{
+          if(response.status===200){
+          setData((prevData) => prevData.filter((teacher) => teacher.id !== id));
+            toast.success('Teacher Deleted Successfully');
+          }
+          else{
+            toast.error('Failed to delete Teacher');
+          }
+        })
+        .catch((error) => {
+          console.error('Error Deleting Teacher :',error);
+          toast.error('failed to Delete Teacher');
+        });
+        }
+      };
+      
 
 
-      </div>
-    </div>
-  )
- } 
+      const customToastStyle = { 
+        fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+        fontSize: '16px',
+        fontWeight: 'bold',
+      };
 
-
+ 
   return (
     <AdminSidebar>   
-    
     <>
+
     <Fragment>
-      <Table id='main'>
+      <table id='main'>
         <thead>
           <tr id='heading'>
             <th>ID</th>
-            <th>Name</th>
+            <th id='th-name'> Name</th>
             <th>Email</th>
             <th>Gender</th>
             <th>Mobile Number</th>
             <th>Standard</th>
-            <th>Section</th>
             <th>Subject</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data && data.length > 0 ? (
-            data.map((item, index) => {
+            data.map((teacher, index) => {
               return (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>
-                    <button
-                      id='btn-view'
-                      onClick={() => handleView(item)}>
-                      {item.name}
-                    </button>
-                  </td>
-                  <td>{item.email}</td>
-                  <td>{item.gender}</td>
-                  <td>{item.mobileNumber}</td>
-                  <td>
-                    {standards[item.standardId]
-                      ? standards[item.standardId].standardNumber
-                      : ''}
-                  </td>
-                  <td>
-                    {standards[item.standardId]
-                      ? standards[item.standardId].section
-                      : ''}
-                  </td>
-                  <td>
-                    {subjects[item.subjectId]
-                      ? subjects[item.subjectId].name
-                      : ''}
-                  </td>
-                 <td colSpan={2}>
+                  <td id='td-align'>{index + 1}</td>
+                  <td id='td-align' ><button id='btn-view' onClick={() => getTeacherDetails(teacher.id)}>{teacher.name}</button></td>
+                  <td id='td-align'>{teacher.email}</td>
+                  <td id='td-align'>{teacher.gender}</td>
+                  <td id='td-align'>{teacher.mobileNumber}</td>
+                  <td id='td-align'>{(teacher.standard)}</td>
+                  <td id='td-align'>{teacher.subject}</td>
+                  <td colSpan={2} id='td-align'>
                     <button
                       id='btn-edit'
-                      onClick={() => handleEdit(item.name)}>
+                      onClick={() => handleEdit(teacher.id)}>
                       <FiEdit />
-                    </button>{' '}
-                    &nbsp;
+                    </button>     &nbsp;
+
                     <button
                       id='btn-delete'
-                      onClick={() => handleDelete(item.id)}>
+                      onClick={() => handleDelete(teacher.id)}>
                       <RiDeleteBin6Line />
 
                     </button>
@@ -193,10 +136,40 @@ const Search_Teacher = () => {
             </tr>
           )}
         </tbody>
-      </Table>
-      {showModal && selectedTeacher && (
-        <TeacherModel teacher={selectedTeacher} onclose={() => setShowModel(false)}/>
-      )}      
+      </table>
+      <Popup
+           
+          open={selectedTeacher!== null}
+          onClose={() => {
+            setSelectedTeacher(null);
+            setStandardString(''); 
+          }}
+          closeOnDocumentClick
+          >
+         
+             
+        {selectedTeacher &&(
+          
+            <div id='pop-up-title'>
+               <button id='btn-close' onClick={()=> setSelectedTeacher(null)} >X</button>
+              <h2 id='title-name'>Details of {selectedTeacher.name}</h2>
+              <p id='pop-field'>Email: {selectedTeacher.email}</p>
+              <p id='pop-field'>Gender: {selectedTeacher.gender}</p>
+              <p id='pop-field'>Mobile Number: {selectedTeacher.mobileNumber}</p>
+              <p id='pop-field'>BirthDate: {selectedTeacher.birthDate}</p>
+              <p id='pop-field'>JoinDate: {selectedTeacher.joinDate}</p>
+              <p id='pop-field'>Address: {selectedTeacher.address}</p>
+              <p id='pop-field'>City: {selectedTeacher.city}</p>
+              <p id='pop-field'>District: {selectedTeacher.district}</p>
+              <p id='pop-field'>State: {selectedTeacher.state}</p>
+              <p id='pop-field'>Pincode: {selectedTeacher.pinCode}</p>
+              <p id='pop-field'>Standard: {selectedTeacher.standard}</p>
+              <p id='pop-field'>Subject: {selectedTeacher.subjectName}</p>
+              
+            </div>
+          )}
+        </Popup>
+            
     </Fragment>
         <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
       
