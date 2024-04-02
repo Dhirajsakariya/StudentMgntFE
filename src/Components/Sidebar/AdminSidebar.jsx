@@ -68,12 +68,11 @@ const AdminSidebar = ({handleLogout, children }) => {
     //         name: 'Logout',
     //          icon: <BiLogOut />
     //     }
-        }, 
        {
             path: '/',
             name: 'Logout',
             icon: <BiLogOut />,
-            onClick: handleLogoutClick 
+            onClick: handleLogoutClick
         }
     ];
 
