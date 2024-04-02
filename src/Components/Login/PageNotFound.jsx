@@ -1,14 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import pagenotfound from '../Assets/pagenotfound.png'
+import pagenotfound1 from '../Assets/pagenotfound1.png'
+import './PageNotFound.css';
+
 
 const PageNotFound = () => {
   return (
     <div>
-      <h1>404 - Page Not Found</h1>
-      <img src={pagenotfound} alt="Page Not Found" />
-      <p>The page you are looking for might have been removed or is temporarily unavailable.</p>
-      <Link to="/">Go to Home Page</Link>
+      <h1 className='h1pagenotfound'>404 - Page Not Found</h1>
+      <Link  to="/"  className="pagenot-fount-redirect">Go to Home Page</Link>
+      <div>
+      <img src={pagenotfound1} alt="Page Not Found" className='image-pagenotfound'/>
+      </div>
+      {/* <div className='pagenotfountd-message'>
+        The page you are looking for might have been removed or is temporarily unavailable.
+    </div> */}
     </div>
   );
 };

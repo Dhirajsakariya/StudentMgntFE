@@ -1,0 +1,28 @@
+.pagenotfountd-message{
+    color: red;
+    font-size: large;
+
+}
+
+.image-pagenotfound{
+background-position: center;
+margin-left: 500px;
+height: 550px;
+}
+    
+.pagenot-fount-redirect{
+    font-size: large;
+    border: 2px solid green;
+    margin-top: 10px    
+    
+    
+}
+
+.pagenot-fount-redirect:hover{
+    background-color: burlywood;
+
+}
+
+.h1pagenotfound{
+    margin-left: 500px;
+}
