@@ -23,6 +23,7 @@ import StudentPersonal from './Components/Student/StudentPersonal';
 import Search_Teacher from './Components/Admin/Search_Teacher';
 import Search_Student from './Components/Admin/Search_Student';
 import PrivateRoute from './Components/Login/PrivateRoute';
+import Logout from './Components/Login/Logout';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Switch>
           <PrivateRoute path='/Sidebar' component={Sidebar} />
           <Route path='/ForgotPassword' component={ForgotPassword} />
+          <Route path='/Logout' component={Logout} />
           <Route path='/Registration' component={Registration} />
           <PrivateRoute path='/StudentForm' component={StudentForm} />
           <PrivateRoute path='/TeacherForm' component={TeacherForm} />
