@@ -12,6 +12,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import axios from 'axios';
 import config from '../Login/config';
+
 const TeacherForm = () => {
 
     const [name, setName ] = useState('');
@@ -36,7 +37,14 @@ const TeacherForm = () => {
     const [standardError,setStandardError] = useState('');
     const [standarddata, setStandardData] = useState([]);
     const [subjectdata, setSubjectData] = useState([]);
+    const [userDetails, setUserDetails] = useState(null);
 
+    useEffect(() => {
+    const storedteacherDetails = JSON.parse(localStorage.getItem('teacherdetails'));
+    setUserDetails(storedteacherDetails);
+    }, []); 
+
+    
     const toggle = () => {
       setVisible(!isVisible);
     };
@@ -79,6 +87,7 @@ const TeacherForm = () => {
   };
      
     const navigate=useHistory();
+
     const handleSubmit = async (e) => {
       e.preventDefault();
     
@@ -125,7 +134,7 @@ const TeacherForm = () => {
         }
         else{
           setTimeout(() => {
-            navigate.push('/') 
+            navigate.push('/Search_Teacher') 
             }, 1500);
           toast.success("Registration Successfull!")
         }
@@ -212,11 +221,12 @@ const customToastStyle = {
             <div>
                 <label id='labelT'>Standard</label>
                 <select  id = 'inputD' title='Select Standard' value={standard} onChange={handleStandard}>
-                    <option disabled={true}>--Select--</option>
+                    <option value='' disabled={true}>--Select--</option>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
                 <label className='labelD'>Subject</label>
                    <select  id ='inputSD' value={subject} onChange={handleSubject}>
+                   <option value='' disabled={true}>--Select--</option>
                      {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
               </div>
@@ -245,7 +255,6 @@ const customToastStyle = {
             <label id='labelT'>District:</label>
             <input
               id="inputT"
-              //id="district"
               name="district"
               value={districts}
               onChange={(e) => setDistrict(e.target.value)}

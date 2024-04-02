@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
-import Table from 'react-bootstrap/Table';
 import './Search_Student.css'
 import axios from 'axios';
 import config from '../Login/config';
@@ -134,7 +133,7 @@ const Search_Student = () => {
   return (
     <AdminSidebar>
     <Fragment>
-      <Table striped bordered hover id='main' >
+      <table striped bordered hover id='main' >
         <thead>
           <tr id='trsearchstudent'>
             <th>ID</th>
@@ -193,7 +192,7 @@ const Search_Student = () => {
             </tr>
           )}
         </tbody>
-      </Table>
+      </table>
       {showModal && selectedStudent && (
         <StudentModal   student={selectedStudent} onClose={() => setShowModal(false)} />
       )}
