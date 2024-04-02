@@ -17,6 +17,7 @@ import {toast,Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import config from '../Login/config';
 import { useParams } from 'react-router-dom';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const StudentForm = () => {  
@@ -42,6 +43,13 @@ const StudentForm = () => {
     const [standard,setStandard] = useState('');
     const[standardError,setStandardError]=useState('');
     const [standardData, setStandardData] = useState([]);
+    const [role, setRole] = useState('');
+
+ 
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
 
     useEffect(() => {
       const fetchStandards = async () => {
@@ -157,6 +165,11 @@ const { id } = useParams();
         });
     }
   }, [id]);
+
+  if (role !== 'admin') {
+    return <Redirect to="/PageNotFound" />;
+  }
+
    return (
     <AdminSidebar>
       <>

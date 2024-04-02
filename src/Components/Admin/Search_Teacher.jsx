@@ -7,6 +7,7 @@ import AdminSidebar from '../Sidebar/AdminSidebar';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Search_Teacher = () => {
   const [standards, setStandards] = useState({});
@@ -14,6 +15,13 @@ const Search_Teacher = () => {
   const [data, setData] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [showModal,setShowModel] =useState([]);
+  const [role, setRole] = useState('');
+
+ 
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
 
 
   const handleEdit = (name) =>{
@@ -118,6 +126,10 @@ const Search_Teacher = () => {
     </div>
   )
  } 
+
+ if (role !== 'admin') {
+  return <Redirect to="/PageNotFound" />;
+}
 
 
   return (

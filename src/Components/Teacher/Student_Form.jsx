@@ -1,9 +1,10 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import moment from 'moment';
 import './Student_Form.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const Student_Form = () => {
 
@@ -24,6 +25,15 @@ export const Student_Form = () => {
   
     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
     const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
+    const [role, setRole] = useState('');
+
+    useEffect(() => {
+      
+      setRole('teacher');
+    }, []);
+  
+  
+
 
     const handleBloodGroupChange = (e) => {
       setSelecteBloodGroup(e.target.value);
@@ -46,6 +56,9 @@ export const Student_Form = () => {
         setIsValidPhone(phoneRegex.test(value));
       };
       
+      if (role !== 'teacher') {
+        return <Redirect to="/PageNotFound" />;
+      }
     
   return (
   <TeacherSidebar>

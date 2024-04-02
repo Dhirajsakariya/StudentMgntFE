@@ -60,17 +60,17 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('id', data.id);
+                console.log('id', data.id); 
                 setId(data.id);
 
                 localStorage.setItem('loggedInEmail', JSON.stringify(data.email));
 
                 localStorage.setItem('loggedInUserId', JSON.stringify(data.id));
                 
-                localStorage.setItem('loggedInRole', JSON.stringify(data.role));
-
+                localStorage.setItem('loggedInRole', data.role);
+                console.log('loggedInRole');
                
-                setTimeout(() => {
+                setTimeout(() => {  
                     switch (role) {
                         case 'admin':
                             navigate.push('/AdminPersonal');

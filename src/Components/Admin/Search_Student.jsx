@@ -5,6 +5,7 @@ import './Search_Student.css'
 import axios from 'axios';
 import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Search_Student = () => {
 
@@ -14,7 +15,9 @@ const Search_Student = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedStandard, setSelectedStandard] = useState('');
   const history = useHistory();
-  
+  const [role, setRole] = useState('');
+
+ 
   function handleView(id) {
     axios
       .get(`${config.ApiUrl}Student/GetStudent${id}`)
@@ -100,6 +103,12 @@ const Search_Student = () => {
 
    };
 
+   
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+  
   useEffect(() => {
     getData();
   }, []);
@@ -131,6 +140,10 @@ const Search_Student = () => {
     );
   };
  
+  if (role !== 'admin') {
+    return <Redirect to="/PageNotFound" />;
+  }
+
   return (
     <AdminSidebar>
     <Fragment>

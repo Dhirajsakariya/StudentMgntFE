@@ -9,6 +9,7 @@ import { CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import ocuupation from '../Assets/occupation.png'
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ParentsPortal = () => {
 
@@ -35,10 +36,18 @@ const ParentsPortal = () => {
   const [relationError, setRelationError] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
   const relations=[ "Father", "Mother"];
+  const [role, setRole] = useState('');
 
   var LoggedInUser = localStorage.getItem('LoggedInUser');
   console.log('LoggedInUser: ', JSON.parse(LoggedInUser));
 console.log("student",studentId)
+
+
+useEffect(() => {
+    
+  setRole('admin');
+}, []);
+
   useEffect(() => {
       const fetchFamilyMembers = async () => {
           try {
@@ -233,6 +242,9 @@ const customToastStyle = {
   fontSize: '16px',
   fontWeight: 'bold',
 };
+if (role !== 'admin') {
+  return <Redirect to="/PageNotFound" />;
+}
 
   return (
     <AdminSidebar>

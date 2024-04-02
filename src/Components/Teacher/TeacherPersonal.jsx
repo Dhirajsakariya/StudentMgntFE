@@ -54,10 +54,19 @@ import React, { useState, useEffect } from 'react';
 import './TeacherPersonal.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const TeacherPersonal = () => {
   const [teacher, setTeacher] = useState(null);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('teacher');
+  }, []);
+
+
 
   useEffect(() => {
     const fetchTeacherDetails = async () => {
@@ -90,6 +99,10 @@ const TeacherPersonal = () => {
 
   if (!teacher) {
     return <div>Loading...</div>;
+  }
+
+  if (role !== 'teacher') {
+    return <Redirect to="/PageNotFound" />;
   }
 
   return (
