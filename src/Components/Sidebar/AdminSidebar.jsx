@@ -1,18 +1,15 @@
-import React, { useState,useEffect } from 'react';
-import './Sidebar.css';
-import config from '../Login/config';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { FaGooglePay } from "react-icons/fa";
-import { LuUserCircle2 } from "react-icons/lu";
-import { RiUserSearchLine } from "react-icons/ri";
-import { FaSearch } from 'react-icons/fa';
+import { FaBars, FaGooglePay, FaMarkdown, FaSearch } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import { LuUserCircle2 } from "react-icons/lu";
 import { MdFamilyRestroom } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import { FaBars } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import { RiUserSearchLine } from "react-icons/ri";
+import { NavLink, useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
+import config from '../Login/config';
+import './Sidebar.css';
 
 const AdminSidebar = ({handleLogout, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,13 +49,25 @@ const AdminSidebar = ({handleLogout, children }) => {
         },
         {
             path: '/ParentsPortal',
-            name: 'ParentsPortal',
+            name: 'Parents Portal',
             icon: <MdFamilyRestroom  />
             },
         {
             path: '/FeeForm',
             name: 'FeeForm',
             icon: <FaGooglePay  />
+
+        },
+        {
+            path: '/StudentMarks',
+            name: 'Student Marks',
+            icon: <FaMarkdown />
+        },
+    //    {
+    //         path: '/login',
+    //         name: 'Logout',
+    //          icon: <BiLogOut />
+    //     }
         }, 
        {
             path: '/',
