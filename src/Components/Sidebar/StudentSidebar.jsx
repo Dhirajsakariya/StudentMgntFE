@@ -89,7 +89,8 @@ const StudentSidebar = ({ handleLogout,children }) => {
                                         <a href="/StudentPersonal" ><LuUserCircle2 className='icon' /> {Student.name} </a>
                                     </li>
                                     <li>
-                                    <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
+                                        
+                                    <a onClick={handleLogoutClick}><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
                             </div>
