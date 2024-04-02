@@ -114,10 +114,10 @@ const AdminSidebar = ({handleLogout, children }) => {
                             <div id="dropdown-menu" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
                                 <ul>
                                     <li>
-                                        <a href="/AdminPersonal" ><LuUserCircle2 className='personalicone' />{Admin.name} </a>
+                                    <a href="/AdminPersonal" ><LuUserCircle2 className='icon' />{Admin.name} </a>
                                     </li>
                                     <li>
-                                        <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
+                                    <a onClick={handleLogoutClick}><BiLogOut className='icon' />Logout</a>
                                     </li>
                                     <li>
                                 </li>

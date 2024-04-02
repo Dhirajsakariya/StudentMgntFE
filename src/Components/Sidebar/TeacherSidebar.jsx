@@ -35,14 +35,14 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             path: '/TimeTable',
             name: 'TimeTable',
             icon: <FaTableCells  />
-        },
-        {
-            path: '/Logout',
-            name: 'Logout',
-            icon: <BiLogOut />,
-            component: <Logout />
-            
         }
+        // {
+        //     path: '/Logout',
+        //     name: 'Logout',
+        //     icon: <BiLogOut />,
+        //     component: <Logout />
+            
+        // }
     ];
   
     useEffect(() => {
@@ -101,8 +101,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
                                         <a href="/TeacherPersonal" ><LuUserCircle2 className='icon' />{teacher.name} </a>
                                     </li>
                                     <li>
-                                    <a onClick={handleLogoutClick} ><BiLogOut className='personalicone' />Logout </a>
-
+                                    <a onClick={handleLogoutClick}><BiLogOut className='icon' />Logout</a>
                                 </li>
                                 </ul>
                             </div>
