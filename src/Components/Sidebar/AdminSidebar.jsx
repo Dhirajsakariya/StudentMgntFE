@@ -22,6 +22,13 @@ const AdminSidebar = ({handleLogout, children }) => {
     const [Admin, setAdmin] = useState(null);
     const [error, setError] = useState(null);
 
+    const handleLogoutClick = () => {
+        localStorage.removeItem('loggedInEmail');
+        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('loggedInRole');
+        navigate.push('/');
+        };
+    
     const menuItem = [
         {
             path: '/TeacherForm',
@@ -53,11 +60,12 @@ const AdminSidebar = ({handleLogout, children }) => {
             name: 'FeeForm',
             icon: <FaGooglePay  />
         }, 
-    //    {
-    //         path: '/login',
-    //         name: 'Logout',
-    //          icon: <BiLogOut />
-    //     }
+       {
+            path: '/',
+            name: 'Logout',
+            icon: <BiLogOut />,
+            onClick: handleLogoutClick 
+        }
     ];
 
     useEffect(() => {
@@ -85,13 +93,6 @@ const AdminSidebar = ({handleLogout, children }) => {
         fetchAdminDetails();
       }, []);
 
-      const handleLogoutClick = () => {
-        localStorage.removeItem('loggedInEmail');
-        localStorage.removeItem('loggedInUserId');
-        localStorage.removeItem('loggedInRole');
-        navigate.push('/');
-        };
-    
       if (error) {
         return <div>Error: {error}</div>;
       }
@@ -138,13 +139,13 @@ const AdminSidebar = ({handleLogout, children }) => {
                         </h1>
                     </div>
                     {menuItem.map((item, index) => (
-                        <NavLink to={item.path} key={index} className="link" activeClassName="active">
-                            <div className="icons">{item.icon}</div>
-                            <div style={{ display: isOpen ? 'block' : 'none' }} className="link-text">
-                                {item.name}
-                            </div>
-                        </NavLink>
-                    ))}
+    <NavLink to={item.path} key={index} className="link" activeClassName="active" onClick={item.onClick}>
+        <div className="icons">{item.icon}</div>
+        <div style={{ display: isOpen ? 'block' : 'none' }} className="link-text">
+            {item.name}
+        </div>
+    </NavLink>
+))}
                 </div>
                 <main>{children}</main>
             </div>
