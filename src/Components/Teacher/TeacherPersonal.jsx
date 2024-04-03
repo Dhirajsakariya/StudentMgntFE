@@ -76,7 +76,7 @@ const TeacherPersonal = () => {
   useEffect(() => {
     const fetchTeacherDetails = async () => {
       try {
-        const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
+        const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
 
         if (!storedId) {
           throw new Error('User ID not found in local storage');
