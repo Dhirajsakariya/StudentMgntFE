@@ -63,7 +63,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
               throw new Error('User ID not found in local storage');
             }
     
-            const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
+            const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${storedId}`);
             
             if (!response.ok) {
               throw new Error(`Error fetching teacher details: ${response.status} ${response.statusText}`);
