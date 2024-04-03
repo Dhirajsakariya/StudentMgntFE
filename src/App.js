@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
 import AdminPersonal from './Components/Admin/AdminPersonal';
-import FeeForm from './Components/Admin/FeeForm';
 import ParentsPortal from './Components/Admin/ParentsPortal';
 import Search_Student from './Components/Admin/Search_Student';
 import Search_Teacher from './Components/Admin/Search_Teacher';
@@ -44,7 +43,6 @@ function App() {
           <PrivateRoute path='/Standard' component={Standard} />
           <PrivateRoute path='/Student' component={Student} />
           <PrivateRoute path='/ParentsPortal' component={ParentsPortal} />
-          <PrivateRoute path='/FeeForm' component={FeeForm} />
           <PrivateRoute path='/StudentSidebar' component={StudentSidebar} />
           <PrivateRoute path='/TeacherSidebar' component={TeacherSidebar} />
           <PrivateRoute path='/AdminSidebar' component={AdminSidebar} />
