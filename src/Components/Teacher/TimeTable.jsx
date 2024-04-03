@@ -43,13 +43,32 @@ const TimeTable = () => {
       const str = standard;
       const parts = str.split("-");
 
-      useEffect(() => {
-        const userRole = localStorage.getItem('loggedInRole');
-        if (userRole !== 'teacher') {
-          setRedirectToNotFound(false);
-        }
-        })
+      // useEffect(() => {
+      //   const userRole =JSON.parse( localStorage.getItem('loggedInRole'));
+      //   console.log('loggedInRole for time table',localStorage.getItem('loggedInRole'), userRole.Role);
+      //   if (userRole.Role !== 'teacher') {
+      //     setRedirectToNotFound(true);
+      //   }
+      //             return <Redirect to="/PageNotFound" />;
+
+      //   })
         
+      useEffect(() => {
+        const userRoleString = localStorage.getItem('loggedInRole');
+        if (userRoleString) {
+          const userRole = JSON.parse(userRoleString);
+          console.log('loggedInRole for time table', userRole.Role);
+          if (userRole.Role !== 'teacher') {
+            setRedirectToNotFound(true);
+          }
+        } else {
+          console.error('loggedInRole not found in localStorage');
+        }
+      }, []);
+      
+     
+      // Your component JSX continues here...
+      
       useEffect(() => {
         const fetchStandards = async () => {
           try {
@@ -321,10 +340,13 @@ const TimeTable = () => {
         setIsDisable(true);
       }
 
+      // if (redirectToNotFound) {
+      //   return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+      // }
       if (redirectToNotFound) {
-        return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+        return <Redirect to="/PageNotFound" />;
       }
-    
+      
     
   return (
     <>

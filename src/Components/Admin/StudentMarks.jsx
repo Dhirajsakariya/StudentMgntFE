@@ -17,12 +17,18 @@ const StudentMarks = () => {
   //   setRole('admin');
   // }, []);
   useEffect(() => {
-    const userRole = localStorage.getItem('loggedInRole');
-    if (userRole !== 'admin') {
-      setRedirectToNotFound(false);
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      console.log('loggedInRole for time table', userRole.Role);
+      if (userRole.Role !== 'admin') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
     }
-  })
-
+  }, []);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission

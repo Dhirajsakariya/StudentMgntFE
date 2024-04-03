@@ -21,13 +21,18 @@ const AdminSidebar = ({handleLogout, children }) => {
     const [error, setError] = useState(null);
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
- 
     useEffect(() => {
-        const userRole = localStorage.getItem('loggedInRole');
-        if (userRole !== 'admin') {
-          setRedirectToNotFound(false);
+        const userRoleString = localStorage.getItem('loggedInRole');
+        if (userRoleString) {
+          const userRole = JSON.parse(userRoleString);
+          console.log('loggedInRole for time table', userRole.Role);
+          if (userRole.Role !== 'admin') {
+            setRedirectToNotFound(true);
+          }
+        } else {
+          console.error('loggedInRole not found in localStorage');
         }
-      })
+      }, []);
     
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -117,7 +122,7 @@ const AdminSidebar = ({handleLogout, children }) => {
     //     return <Redirect to="/PageNotFound" />;
     //   }
     if (redirectToNotFound) {
-        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+        return <Redirect to="/PageNotFound" />; 
       }
       
     return (

@@ -50,12 +50,17 @@ console.log("student",studentId)
 // }, []);
 
 useEffect(() => {
-  const userRole = localStorage.getItem('loggedInRole');
-  if (userRole !== 'admin') {
-    setRedirectToNotFound(false);
+  const userRoleString = localStorage.getItem('loggedInRole');
+  if (userRoleString) {
+    const userRole = JSON.parse(userRoleString);
+    console.log('loggedInRole for time table', userRole.Role);
+    if (userRole.Role !== 'admin') {
+      setRedirectToNotFound(true);
+    }
+  } else {
+    console.error('loggedInRole not found in localStorage');
   }
-})
-
+}, []);
   useEffect(() => {
       const fetchFamilyMembers = async () => {
           try {

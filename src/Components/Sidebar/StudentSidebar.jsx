@@ -23,11 +23,17 @@ const StudentSidebar = ({ handleLogout,children }) => {
     //   setRole('student');
     // }, []);
     useEffect(() => {
-        const userRole = localStorage.getItem('loggedInRole');
-        if (userRole !== 'student') {
-          setRedirectToNotFound(false);
+        const userRoleString = localStorage.getItem('loggedInRole');
+        if (userRoleString) {
+          const userRole = JSON.parse(userRoleString);
+          console.log('loggedInRole for time table', userRole.Role);
+          if (userRole.Role !== 'student') {
+            setRedirectToNotFound(true);
+          }
+        } else {
+          console.error('loggedInRole not found in localStorage');
         }
-        })
+      }, []);
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -93,8 +99,9 @@ const StudentSidebar = ({ handleLogout,children }) => {
     //     return <Redirect to="/PageNotFound" />;
     //   }
     if (redirectToNotFound) {
-        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+        return <Redirect to="/PageNotFound" />; 
       }
+      
     return (
         <>
              <div id="menu-container">
