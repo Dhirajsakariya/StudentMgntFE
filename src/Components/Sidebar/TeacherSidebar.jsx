@@ -51,7 +51,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             icon: <FaTableCells  />
         },
         {
-            path: '/Logout',
+            path: '/',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick 

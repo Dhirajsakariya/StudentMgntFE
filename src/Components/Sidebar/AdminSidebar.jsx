@@ -21,11 +21,7 @@ const AdminSidebar = ({handleLogout, children }) => {
     const [error, setError] = useState(null);
     const [role, setRole] = useState('');
 
-  useEffect(() => {
-    
-    setRole('admin');
-  }, []);
-
+ 
    
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -66,12 +62,16 @@ const AdminSidebar = ({handleLogout, children }) => {
             icon: <FaMarkdown />
         },
         {
-            path: '/Logout',
+            path: '/',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick
         }
     ];
+    useEffect(() => {
+    
+        setRole('admin');
+      }, []);
     
 
     useEffect(() => {

@@ -42,7 +42,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
             icon: <FaGooglePay   />
         },
         {
-            path: '/Logout',
+            path: '/',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick
