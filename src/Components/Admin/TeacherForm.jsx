@@ -39,13 +39,18 @@ const TeacherForm = () => {
     const [standarddata, setStandardData] = useState([]);
     const [subjectdata, setSubjectData] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
-    const [role, setRole] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('admin');
   // }, []);
-
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'admin') {
+      setRedirectToNotFound(false);
+    }
+  })
 
     useEffect(() => {
     const storedteacherDetails = JSON.parse(localStorage.getItem('teacherdetails'));
@@ -167,6 +172,9 @@ const customToastStyle = {
 // if (role !== 'admin') {
 //   return <Redirect to="/PageNotFound" />;
 // }
+if (redirectToNotFound) {
+  return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+}
 
   return (
     <AdminSidebar>   

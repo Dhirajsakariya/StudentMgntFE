@@ -66,10 +66,16 @@ const Login = () => {
                 localStorage.setItem('loggedInEmail', JSON.stringify(data.email));
 
                 localStorage.setItem('loggedInUserId', JSON.stringify(data.id));
-                
-                localStorage.setItem('loggedInRole', JSON.stringify(data.role));
 
-               
+                var roles = {Role:role};
+                localStorage.setItem('loggedInRole', JSON.stringify(roles));
+                // localStorage.setItem('loggedInRole', JSON.stringify(data.role));
+
+               console.log('loggedInEmail',data.email);
+               console.log('loggedInUserId',data.id);
+               console.log('loggedInRole',roles);
+
+
                 setTimeout(() => {
                     switch (role) {
                         case 'admin':

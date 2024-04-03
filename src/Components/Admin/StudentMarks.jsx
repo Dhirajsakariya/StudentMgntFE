@@ -10,13 +10,18 @@ const StudentMarks = () => {
   const [subjectId, setSubjectId] = useState('');
   const [totalMarks, setTotalMarks] = useState('');
   const [marksObtained, setMarksObtained] = useState('');
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('admin');
   // }, []);
-  
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'admin') {
+      setRedirectToNotFound(false);
+    }
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +32,10 @@ const StudentMarks = () => {
   // if (role !== 'admin') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+  }
 
   return (
     <AdminSidebar>
