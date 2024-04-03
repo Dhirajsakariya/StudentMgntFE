@@ -66,17 +66,25 @@ const TeacherPersonal = () => {
   //   setRole('teacher');
   // }, []);
   useEffect(() => {
-    const userRole = localStorage.getItem('loggedInRole');
-    if (userRole !== 'teacher') {
-      setRedirectToNotFound(false);
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      console.log('loggedInRole for time table', userRole.Role);
+      if (userRole.Role !== 'teacher') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
     }
-  })
+  }, []);
+  
+ 
   
 
   useEffect(() => {
     const fetchTeacherDetails = async () => {
       try {
-        const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
+        const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
 
         if (!storedId) {
           throw new Error('User ID not found in local storage');
@@ -112,8 +120,9 @@ const TeacherPersonal = () => {
   //   return <Redirect to="/PageNotFound" />;
   // }
   if (redirectToNotFound) {
-    return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+    return <Redirect to="/PageNotFound" />;
   }
+  
 
   return (
     <TeacherSidebar>

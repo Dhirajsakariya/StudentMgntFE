@@ -49,12 +49,17 @@ const StudentForm = () => {
   //   setRole('admin');
   // }, []);
   useEffect(() => {
-    const userRole = localStorage.getItem('loggedInRole');
-    if (userRole !== 'admin') {
-      setRedirectToNotFound(false);
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      console.log('loggedInRole for time table', userRole.Role);
+      if (userRole.Role !== 'admin') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
     }
-  })
-  
+  }, []);
 
     useEffect(() => {
       const fetchStandards = async () => {
@@ -175,7 +180,7 @@ const { id } = useParams();
   //   return <Redirect to="/PageNotFound" />;
   // }
   if (redirectToNotFound) {
-    return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+    return <Redirect to="/PageNotFound" />; 
   }
 
 

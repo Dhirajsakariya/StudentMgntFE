@@ -16,12 +16,17 @@ const StudentPersonal = () => {
   //   setRole('student');
   // }, []);
   useEffect(() => {
-		const userRole = localStorage.getItem('loggedInRole');
-		if (userRole !== 'student') {
-		  setRedirectToNotFound(false);
-		}
-	  })
-	  
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      console.log('loggedInRole for time table', userRole.Role);
+      if (userRole.Role !== 'student') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
+    }
+  }, []);
 
   useEffect(() => {
     const fetchstudentDetails = async () => {

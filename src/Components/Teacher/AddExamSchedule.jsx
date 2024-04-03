@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import '../Teacher/AddExamSchedule.css';
+import { Redirect } from 'react-router-dom';
 
 
 const AddExamSchedule = () => {
@@ -21,6 +22,23 @@ const AddExamSchedule = () => {
   const [subjectData, setSubjectData] = useState([]);
 
   const [selectedExamSchedule, setSelectedExamSchedule] = useState(null);
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+
+
+
+  useEffect(() => {
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      console.log('loggedInRole for time table', userRole.Role);
+      if (userRole.Role !== 'teacher') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
+    }
+  }, []);
+  
 
   useEffect(() => {
     const fetchStandards = async () => {
@@ -96,6 +114,10 @@ const AddExamSchedule = () => {
     
   };
 
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />;
+  }
+  
   return (
     <TeacherSidebar>
     <div>
