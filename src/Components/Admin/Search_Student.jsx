@@ -1,186 +1,158 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom';
-import './Search_Student.css'
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../Login/config';
+import Popup from 'reactjs-popup';
+import './Search_Student.css'
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import {toast,Toaster} from 'react-hot-toast';
+import { FaSearch } from "react-icons/fa";
+
 
 const Search_Student = () => {
+       const history = useHistory();
+       const [data, setData] = useState(null);
+       const [selectedStudent,setSelectedStudent] =useState(null);
+       const [searchQuery, setSearchQuery] = useState('');
+       const [editedStudent, setEditedStudent] = useState(null);
 
-  const [standards, setStandards] = useState({});
-  const [data, setData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [selectedStandard, setSelectedStandard] = useState('');
-  const history = useHistory();
-  
-  function handleView(id) {
-    axios
-      .get(`${config.ApiUrl}Student/GetStudent${id}`)
-      .then((response) => {
-        setSelectedStudent(response.data);
-        // Fetch standard details corresponding to the student's standard ID
-        axios
-          .get(`${config.ApiUrl}Standard/GetStandard${response.data.standardId}`)
-          .then((standardResponse) => {
-            setSelectedStandard(standardResponse.data);
-            setShowModal(true);
-          })
-          .catch((error) => {
-            console.error('Error fetching standard details:', error);
-            alert('Failed to fetch standard details.');
-          });
-      })
-      .catch((error) => {
-        console.error('Error fetching student details:', error);
-        alert('Failed to fetch student details.');
-      });
-  }
- 
-
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure to delete this student?')) {
+    //TEACHER GET
+    const getData = () => {
       axios
+        .get(`${config.ApiUrl}Student/GetStudents`)
+        .then((result) => {
+          setData(result.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+     };
+
+
+     const getStudentDetails = (id) => {
+      console.log("Getting student details for ID:", id);
+      axios
+        .get(`${config.ApiUrl}Student/GetStudent/${id}`)
+        .then((result) => {
+          setSelectedStudent(result.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+   
+    useEffect(() => {
+      getData();
+      getStudentDetails();
+    }, []);
+
+ 
+    const handleEdit = (id) => {
+     
+    };
+      //DELETE TEACHER
+      const handleDelete = (id) => {
+        if (window.confirm('Are You Sure To Delete This Student')) {
+        axios 
         .delete(`${config.ApiUrl}Student/DeleteStudent${id}`)
-        .then((response) => {
-          if (response.status === 200) {
-            // Remove the deleted student from the data state
-            setData((prevData) => prevData.filter((student) => student.id !== id));
-            alert('Student deleted successfully.');
-          } else {
-            alert('Failed to delete student.');
+        .then((response) =>{
+          if(response.status===200){
+          setData((prevData) => prevData.filter((student) => student.id !== id));
+            toast.success('Student Deleted Successfully');
+          }
+          else{
+            toast.error('Failed to delete Student');
           }
         })
         .catch((error) => {
-          console.error('Error deleting student:', error);
-          alert('Failed to delete student.');
+          console.error('Error Deleting Student :',error);
+          toast.error('failed to Delete Student');
         });
-    }
-  };
+        }
+      };
+      
+     
 
-  const getData = () => {
-    axios
-      .get(`${config.ApiUrl}Student/GetStudentDetail`)
-      .then((result) => {
-        setData(result.data);
-        // Fetch standard details for each student
-        result.data.forEach((student) => {
-          axios
-            .get(`${config.ApiUrl}Standard/GetStandard${student.standardId}`)
-            .then((response) => {
-              setStandards((prevStandards) => ({
-                ...prevStandards,
-                [student.standardId]: response.data,
-              }));
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        });
+      const handleSearch = () => {
+        // Filter data based on search query
+        const filteredData = data.filter((student) =>
+          student.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setData(filteredData);
+      };
+      
+      useEffect(() => {
+        // If searchQuery becomes empty, reset data to its original state
+        if (searchQuery === '') {
+          getData();
+        } else {
+          handleSearch();
+        }
+      }, [searchQuery]);
+      
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
-  const handleEdit = (id) => {
-    //history.push(`/StudentForm`);
-    axios
-      .get(`${config.ApiUrl}Student/GetStudent${id}`)
-      .then((response) => {
-        setData(response.data);
-      history.push(`/StudentForm/${id}`);
-    })
-    .catch((error) => {
-      console.error('Error fetching student details:', error);
-      alert('Failed to fetch student details.');
-    });
+      const customToastStyle = { 
+        fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+        fontSize: '16px',
+        fontWeight: 'bold',
+      };
 
-   };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const StudentModal = ({ student, onClose }) => {
-    return (
-
-      <div className="modal">
-        <div id='studentdetailpopup' className="modal-content">
-          <span className="close" onClick={onClose}>&times;</span>
-          <h2>Details of {student.name}</h2>
-          <p id='psearchstudent'>Email: {student.email}</p>
-          <p id='psearchstudent'>Gender: {student.gender}</p>
-          <p id='psearchstudent'>Birth Date: {student.birthDate}</p>
-          <p id='psearchstudent'>Mobile Number: {student.mobileNumber}</p>
-          <p id='psearchstudent'>Join Date: {student.joinDate}</p>
-          <p id='psearchstudent'>Blood Group: {student.bloodGroup}</p>
-          <p id='psearchstudent'>Address: {student.address}</p>
-          <p id='psearchstudent'>City: {student.city}</p>
-          <p id='psearchstudent'>District: {student.district}</p>
-          <p id='psearchstudent'>State: {student.state}</p>
-          <p id='psearchstudent'>Pincode: {student.pinCode}</p>
-          <p id='psearchstudent'>Standard Number: {selectedStandard ? selectedStandard.standardNumber : ''}</p>
-          <p id='psearchstudent'>Section: {selectedStandard ? selectedStandard.section : ''}</p>
-          
-          {/* Add other details as needed */}
-        </div>
-      </div>
-    );
-  };
  
   return (
-    <AdminSidebar>
+    <AdminSidebar>   
+    
+    <>
     <Fragment>
-      <table striped bordered hover id='main' >
+    <div id="search-container">
+            <input
+            id='searchstudent'
+              type="text"
+              placeholder="Search By Name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <FaSearch id='iconsearchstudent'/>
+          </div>
+      <table id='mainsearchstudent'>
         <thead>
           <tr id='trsearchstudent'>
             <th>ID</th>
             <th>Name</th>
-            <th >Email</th>
-            <th >Gender</th>
-            <th >Mobile Number</th>
-            <th >Standard Number</th>
-            <th >Section</th>
-            <th >Actions</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Mobile Number</th>
+            <th>Standard</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data && data.length > 0 ? (
-            data.map((item, index) => {
+            data.map((student, index) => {
               return (
-                <tr key={index}  id='datasearchstudent'>
+                <tr key={index} id='tr1searchstudent'>
                   <td>{index + 1}</td>
-                  <td>
-                    <button id="btnviewsearchstudent" onClick={() => handleView(item.id)}>
-                      {item.name}
-                    </button>
-                  </td>
-                  <td>{item.email}</td>
-                  <td>{item.gender}</td>
-                  <td>{item.mobileNumber}</td>
-                  <td>
-                    {standards[item.standardId]
-                      ? standards[item.standardId].standardNumber
-                      : ''}
-                  </td>
-                  <td>
-                    {standards[item.standardId]
-                      ? standards[item.standardId].section
-                      : ''}
-                  </td>
+                  <td ><button onClick={() => getStudentDetails(student.id)}>{student.name}</button></td>
+                  <td>{student.email}</td>
+                  <td>{student.gender}</td>
+                  <td>{student.mobileNumber}</td>
+                  <td>{(student.standard)}</td>
+                  <td>{student.subject}</td>
                   <td colSpan={2}>
                     <button
                       id='btneditsearchstudent'
-                      onClick={() => handleEdit(item.id)}>
-                      Edit
-                    </button>{' '}
-                    &nbsp;
+                      onClick={() => handleEdit(student.id)}>
+                      <FiEdit />
+                    </button>     &nbsp;
+
                     <button
                       id='btndeletesearchstudent'
-                      onClick={() => handleDelete(item.id)}>
-                      Delete
+                      onClick={() => handleDelete(student.id)}>
+                      <RiDeleteBin6Line />
+
                     </button>
                   </td>
                 </tr>
@@ -193,13 +165,41 @@ const Search_Student = () => {
           )}
         </tbody>
       </table>
-      {showModal && selectedStudent && (
-        <StudentModal   student={selectedStudent} onClose={() => setShowModal(false)} />
-      )}
+      <Popup
+  open={selectedStudent !== null}
+  onClose={() => setSelectedStudent(null)}
+>
+  {selectedStudent && (
+    <div id='studentdetailpopup'>
+      <button className="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
+      <h2 id='headingpopup'>Details of  {selectedStudent.name}</h2>
+      <p id='psearchstudent'>Standard: {selectedStudent.standard}</p>
+      <p id='psearchstudent'>Roll No: {selectedStudent.rollNo}</p>
+      <p id='psearchstudent'>Email: {selectedStudent.email}</p>
+      <p id='psearchstudent'>Gender: {selectedStudent.gender}</p>
+      <p id='psearchstudent'>Birth Date: {selectedStudent.birthDate}</p>
+      <p id='psearchstudent'>Mobile Number: {selectedStudent.mobileNumber}</p>
+      <p id='psearchstudent'>Join Date: {selectedStudent.joinDate}</p>
+      <p id='psearchstudent'>Blood Group: {selectedStudent.bloodGroup}</p>
+      <p id='psearchstudent'>Address: {selectedStudent.address}</p>
+      <p id='psearchstudent'>City: {selectedStudent.city}</p>
+      <p id='psearchstudent'>District: {selectedStudent.district}</p>
+      <p id='psearchstudent'>State: {selectedStudent.state}</p>
+      <p id='psearchstudent'>PinCode: {selectedStudent.pinCode}</p>
+      {/* Add more details as needed */}
+    </div>  
+  )}
+</Popup>
+<>
+
+</>
+            
     </Fragment>
-    </AdminSidebar>
+        <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      
+        
+</>
+  </AdminSidebar>
   );
 };
 export default Search_Student;
-
-
