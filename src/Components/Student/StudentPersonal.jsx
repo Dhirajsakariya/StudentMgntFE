@@ -11,10 +11,10 @@ const StudentPersonal = () => {
   const [error, setError] = useState(null);
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('student');
-  }, []);
+  //   setRole('student');
+  // }, []);
 
 
   useEffect(() => {
@@ -51,9 +51,9 @@ const StudentPersonal = () => {
   }
 
   
-  if (role !== 'student') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'student') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
   return (
     <StudentSidebar>

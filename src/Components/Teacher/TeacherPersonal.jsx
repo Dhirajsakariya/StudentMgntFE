@@ -61,10 +61,10 @@ const TeacherPersonal = () => {
   const [error, setError] = useState(null);
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('teacher');
-  }, []);
+  //   setRole('teacher');
+  // }, []);
 
 
   useEffect(() => {
@@ -102,9 +102,9 @@ const TeacherPersonal = () => {
 
   
 
-  if (role !== 'teacher') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'teacher') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
   return (
     <TeacherSidebar>

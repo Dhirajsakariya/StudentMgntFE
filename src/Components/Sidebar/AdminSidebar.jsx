@@ -68,10 +68,10 @@ const AdminSidebar = ({handleLogout, children }) => {
             onClick: handleLogoutClick
         }
     ];
-    useEffect(() => {
+    // useEffect(() => {
     
-        setRole('admin');
-      }, []);
+    //     setRole('admin');
+    //   }, []);
     
 
     useEffect(() => {
@@ -107,9 +107,9 @@ const AdminSidebar = ({handleLogout, children }) => {
         return <div>Loading...</div>;
       }
 
-      if (role !== 'admin') {
-        return <Redirect to="/PageNotFound" />;
-      }
+    //   if (role !== 'admin') {
+    //     return <Redirect to="/PageNotFound" />;
+    //   }
       
     return (
         <>

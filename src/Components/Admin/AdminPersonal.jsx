@@ -9,10 +9,10 @@ const AdminPersonal = () => {
   const [error, setError] = useState(null);
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('admin');
-  }, []);
+  //   setRole('admin');
+  // }, []);
 
 
   useEffect(() => {
@@ -47,9 +47,9 @@ const AdminPersonal = () => {
   if (!Admin) {
     return <div>Loading...</div>;
   }
-  if (role !== 'admin') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'admin') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
 
   return (

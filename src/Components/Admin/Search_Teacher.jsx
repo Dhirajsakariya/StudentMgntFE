@@ -28,10 +28,10 @@ const Search_Teacher = () => {
       };
       
       
-      useEffect(() => {
+      // useEffect(() => {
          
-        setRole('admin');
-      }, []);
+      //   setRole('admin');
+      // }, []);
       
       useEffect(() => {
         if (searchTerm === '') {
@@ -103,9 +103,9 @@ const Search_Teacher = () => {
         fontWeight: 'bold',
       };
 
-      if (role !== 'admin') {
-        return <Redirect to="/PageNotFound" />;
-      }
+      // if (role !== 'admin') {
+      //   return <Redirect to="/PageNotFound" />;
+      // }
     
   return (
     <AdminSidebar>   

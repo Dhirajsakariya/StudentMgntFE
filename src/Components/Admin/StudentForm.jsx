@@ -44,10 +44,10 @@ const StudentForm = () => {
     const [standardData, setStandardData] = useState([]);
     const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('admin');
-  }, []);
+  //   setRole('admin');
+  // }, []);
 
     useEffect(() => {
       const fetchStandards = async () => {
@@ -164,9 +164,9 @@ const { id } = useParams();
     }
   }, [id]);
 
-  if (role !== 'admin') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'admin') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
    return (
     <AdminSidebar>

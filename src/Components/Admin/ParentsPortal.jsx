@@ -44,10 +44,10 @@ const ParentsPortal = () => {
   console.log('LoggedInUser: ', JSON.parse(LoggedInUser));
 console.log("student",studentId)
 
-useEffect(() => {
+// useEffect(() => {
     
-  setRole('admin');
-}, []);
+//   setRole('admin');
+// }, []);
 
   useEffect(() => {
       const fetchFamilyMembers = async () => {
@@ -244,9 +244,9 @@ const customToastStyle = {
   fontWeight: 'bold',
 };
 
-if (role !== 'admin') {
-  return <Redirect to="/PageNotFound" />;
-}
+// if (role !== 'admin') {
+//   return <Redirect to="/PageNotFound" />;
+// }
 
   return (
     <AdminSidebar>

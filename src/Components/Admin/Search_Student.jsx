@@ -19,10 +19,10 @@ const Search_Student = () => {
        const [editedStudent, setEditedStudent] = useState(null);
        const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('admin');
-  }, []);
+  //   setRole('admin');
+  // }, []);
   
 
     //TEACHER GET
@@ -108,9 +108,9 @@ const Search_Student = () => {
         fontWeight: 'bold',
       };
 
-      if (role !== 'admin') {
-        return <Redirect to="/PageNotFound" />;
-      }
+      // if (role !== 'admin') {
+      //   return <Redirect to="/PageNotFound" />;
+      // }
     
  
   return (

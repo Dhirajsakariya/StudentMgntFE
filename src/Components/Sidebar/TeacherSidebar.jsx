@@ -21,10 +21,10 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     const [error, setError] = useState(null);
     const [role, setRole] = useState('');
 
-    useEffect(() => {
+    // useEffect(() => {
       
-      setRole('teacher');
-    }, []);
+    //   setRole('teacher');
+    // }, []);
   
 
     const handleLogoutClick = () => {
@@ -94,9 +94,9 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         return <div>Loading...</div>;
       }
 
-      if (role !== 'teacher') {
-        return <Redirect to="/PageNotFound" />;
-      }
+    //   if (role !== 'teacher') {
+    //     return <Redirect to="/PageNotFound" />;
+    //   }
 
     return (
         <>
