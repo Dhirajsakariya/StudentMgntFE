@@ -2,7 +2,8 @@
     margin-top:60px;
     margin-left:auto;
     margin-right: auto;
-    width: 90%;
+    width: 100%;
+    height: 50%;
 }
 #searchstudentbutton{
     width:400px;
@@ -14,10 +15,12 @@
     margin-left: 70px;
     font-size: 15px;
     margin-top: 15px;
-    
+    text-align: center;
 }
-#searchstudent{
-   
+#searchstudenttable{
+    background-color: #b7c4cb;
+}
+#searchstudent{ 
     width:320px;
     margin-left : auto;
     margin-right: auto;
@@ -25,8 +28,17 @@
     border: 2px solid black;
     border-radius: 5px;
     font-size: 15px;
-    margin-top: 15px;
-    
+    margin-top: 15px;  
+}
+#butnnameview {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+#butnnameview:hover {
+    background-color: lightgray;
 }
 #iconsearchstudent{
     margin-left: -25px;
@@ -54,9 +66,10 @@
 }
 #psearchstudent{
     color: black;
+    margin-left: 75px ;
 }
 #trsearchstudent{
-    background-color: lightgray;
+    background-color: rgb(209, 204, 204);
     height: 35px;
 }
 #tr1searchstudent{
@@ -82,7 +95,7 @@
     background-color: #0d6efd;
     border-color: #0d6efd;
     width:50px;
-    margin-left: -110px;
+    margin-left: -123px;
 }
 #btndeletesearchstudent {
     color: #fff;
@@ -90,21 +103,73 @@
     border-color: #dc3545;
     width:50px
 }
-.close-btn {
+#close-btn {
     position: absolute;
     top: 0px;
     right: 10px;
     width:30px;
     background-color: transparent;
-    border: 2px solid black;
+    border: none;
     color: black;
     font-size: 20px;
     cursor: pointer;
+    margin-top: 5px;
   }
-  
-  .close-btn:hover {
+  #close-btn:hover {
     color: white;
     background-color: red; /* Change color on hover if desired */
   }
-  
-  
+  #headingpopup{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: #007bff;
+  }
+  #edit-popup {
+    padding: 20px;
+  }
+  #edit-popuppart1{
+    margin-left:50px ;
+  }
+  #edit-popup label {
+    display: block;
+    margin-bottom: -5px;
+  }
+  #edit-popuppart2{
+    margin-left: 400px;
+    margin-top: -443px;
+  }
+  #edit-popup1  {
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 35px; 
+  } 
+   #edit-popup2  {
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 35px; 
+  }
+  #edit-popupbtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 330px;
+    margin-top: 30px;
+  }
+  #edit-popupbtn:hover {
+    background-color: #0056b3;
+  }
