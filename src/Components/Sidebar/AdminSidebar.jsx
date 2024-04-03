@@ -51,24 +51,13 @@ const AdminSidebar = ({handleLogout, children }) => {
             path: '/ParentsPortal',
             name: 'Parents Portal',
             icon: <MdFamilyRestroom  />
-            },
-        {
-            path: '/FeeForm',
-            name: 'FeeForm',
-            icon: <FaGooglePay  />
-
         },
         {
             path: '/StudentMarks',
             name: 'Student Marks',
             icon: <FaMarkdown />
         },
-    //    {
-    //         path: '/login',
-    //         name: 'Logout',
-    //          icon: <BiLogOut />
-    //     }
-       {
+        {
             path: '/login',
             name: 'Logout',
             icon: <BiLogOut />,
