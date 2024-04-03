@@ -3,7 +3,6 @@ import '../Teacher/TimeTable.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import toast, { Toaster } from 'react-hot-toast';
-import { Redirect } from 'react-router-dom';
 
 const TimeTable = () => {
 
@@ -37,16 +36,9 @@ const TimeTable = () => {
     const [subject22, setSubject22] = useState('');
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
-    const [role, setRole] = useState('');
 
-  
       const str = standard;
       const parts = str.split("-");
-
-      useEffect(() => {
-      
-        setRole('teacher');
-      }, []);
 
       useEffect(() => {
         const fetchStandards = async () => {
@@ -318,11 +310,6 @@ const TimeTable = () => {
       const handleEdit =()=>{
         setIsDisable(true);
       }
-
-      if (role !== 'teacher') {
-        return <Redirect to="/PageNotFound" />;
-      }
-    
     
   return (
     <>
@@ -386,7 +373,7 @@ const TimeTable = () => {
                   </select> : <input id='sub' value={subject1} onChange={(e) => subject1(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject2}
                       id='sub'
                       required
@@ -399,10 +386,10 @@ const TimeTable = () => {
                       {subject2}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject2} onChange={(e) => subject2(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject3}
                       id='sub'
                       required
@@ -415,10 +402,10 @@ const TimeTable = () => {
                       {subject3}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject3} onChange={(e) => subject3(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject4}
                       id='sub'
                       required
@@ -431,10 +418,10 @@ const TimeTable = () => {
                       {subject4}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject4} onChange={(e) => subject4(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject5}
                       id='sub'
                       required
@@ -447,10 +434,10 @@ const TimeTable = () => {
                       {subject5}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject5} onChange={(e) => subject5(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject6}
                       id='sub'
                       required
@@ -463,13 +450,13 @@ const TimeTable = () => {
                       {subject6}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject6} onChange={(e) => subject6(e.target.value)}/> }
                   </td>
                 </tr>
                 <tr id='row'>
                   <td id='sub'>08:30-09:30</td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject7}
                       id='sub'
                       required
@@ -482,10 +469,10 @@ const TimeTable = () => {
                       {subject7}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject7} onChange={(e) => subject7(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject8}
                       id='sub'
                       required
@@ -498,10 +485,10 @@ const TimeTable = () => {
                       {subject8}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject8} onChange={(e) => subject8(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject9}
                       id='sub'
                       required
@@ -514,10 +501,10 @@ const TimeTable = () => {
                       {subject9}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject9} onChange={(e) => subject9(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject10}
                       id='sub'
                       required
@@ -530,10 +517,10 @@ const TimeTable = () => {
                       {subject10}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject10} onChange={(e) => subject10(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject11}
                       id='sub'
                       required
@@ -546,10 +533,10 @@ const TimeTable = () => {
                       {subject11}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject11} onChange={(e) => subject11(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject12}
                       id='sub'
                       required
@@ -562,7 +549,7 @@ const TimeTable = () => {
                       {subject12}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject12} onChange={(e) => subject12(e.target.value)}/> }
                   </td>
                 </tr>
                 <tr id='row'>
@@ -572,7 +559,7 @@ const TimeTable = () => {
                 <tr id='row'>
                   <td id='sub'>10:00-11:00</td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject13}
                       id='sub'
                       required
@@ -585,10 +572,10 @@ const TimeTable = () => {
                       {subject13}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject13} onChange={(e) => subject13(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject14}
                       id='sub'
                       required
@@ -601,10 +588,10 @@ const TimeTable = () => {
                       {subject14}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject14} onChange={(e) => subject14(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject15}
                       id='sub'
                       required
@@ -617,10 +604,10 @@ const TimeTable = () => {
                       {subject15}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject15} onChange={(e) => subject15(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject16}
                       id='sub'
                       required
@@ -633,10 +620,10 @@ const TimeTable = () => {
                       {subject16}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject16} onChange={(e) => subject16(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject17}
                       id='sub'
                       required
@@ -649,10 +636,10 @@ const TimeTable = () => {
                       {subject17}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject17} onChange={(e) => subject17(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject18}
                       id='sub'
                       required
@@ -665,13 +652,13 @@ const TimeTable = () => {
                       {subject18}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject18} onChange={(e) => subject18(e.target.value)}/> }
                   </td>
                 </tr>
                 <tr id='row'>
                   <td id='sub'>11:00-12:00</td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject19}
                       id='sub'
                       required
@@ -684,10 +671,10 @@ const TimeTable = () => {
                       {subject19}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject19} onChange={(e) => subject19(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject20}
                       id='sub'
                       required
@@ -700,10 +687,10 @@ const TimeTable = () => {
                       {subject20}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject20} onChange={(e) => subject20(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject21}
                       id='sub'
                       required
@@ -716,10 +703,10 @@ const TimeTable = () => {
                       {subject21}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject21} onChange={(e) => subject21(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject22}
                       id='sub'
                       required
@@ -732,10 +719,10 @@ const TimeTable = () => {
                       {subject22}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject22} onChange={(e) => subject22(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject23}
                       id='sub'
                       required
@@ -748,10 +735,10 @@ const TimeTable = () => {
                       {subject23}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject23} onChange={(e) => subject23(e.target.value)}/> }
                   </td>
                   <td>
-                  <select
+                  {isDisable ?<select
                       value={subject24}
                       id='sub'
                       required
@@ -764,7 +751,7 @@ const TimeTable = () => {
                       {subject24}
                     </option>
                     ))}
-                  </select>
+                  </select>: <input id='sub' value={subject24} onChange={(e) => subject24(e.target.value)}/> }
                   </td>
                 </tr>
               </table>
