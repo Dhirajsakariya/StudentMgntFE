@@ -3,8 +3,10 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../Login/config';
 import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import './Search_Teacher.css'
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import { FaSearch } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
@@ -14,10 +16,24 @@ const Search_Teacher = () => {
        const [data, setData] = useState(null);
        const [selectedTeacher,setSelectedTeacher] =useState("");
        const [standardString, setStandardString] = useState("");
+       const [searchTerm,setSearchTerm] = useState("");
 
-     
+       const handleSearch = () => {
+        const filteredData = data.filter((teacher) =>
+          teacher.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setData(filteredData);
+      };
       
-      
+      useEffect(() => {
+        if (searchTerm === '') {
+          getData();
+        } else {
+          handleSearch();
+        }
+      }, [searchTerm]);
+
+
     //TEACHER GET
     const getData = () => {
       axios
@@ -41,23 +57,23 @@ const Search_Teacher = () => {
         .catch((error) => {
           console.log(error);
         });
-    };
-    useEffect(() => {
+      };
+      useEffect(() => {
       getData();
       getTeacherDetails();
     }, []);
 
+
     //EDIT TEACHER
       const handleEdit = (id) => {
       history.push('/TeacherForm');
-
-      };
+       };
 
       //DELETE TEACHER
       const handleDelete = (id) => {
         if (window.confirm('Are You Sure To Delete This Teacher')) {
         axios 
-        .delete(`${config.ApiUrl}AdminTeacher/DeleteAdminTeacher${id}`)
+        .delete(`${config.ApiUrl}AdminTeacher/DeleteAdminTeacher/${id}`)
         .then((response) =>{
           if(response.status===200){
           setData((prevData) => prevData.filter((teacher) => teacher.id !== id));
@@ -73,9 +89,6 @@ const Search_Teacher = () => {
         });
         }
       };
-      
-
-
       const customToastStyle = { 
         fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
         fontSize: '16px',
@@ -86,9 +99,19 @@ const Search_Teacher = () => {
   return (
     <AdminSidebar>   
     <>
+        <Fragment>
+        <div id="search-container">
+            <input
+            id='search'
+              type="text"
+              placeholder="Search By Name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <FaSearch  id='teachersearchicon'/>
+          </div>
 
-    <Fragment>
-      <table id='main'>
+        <table id='main'>
         <thead>
           <tr id='heading'>
             <th>ID</th>
@@ -137,34 +160,31 @@ const Search_Teacher = () => {
           )}
         </tbody>
       </table>
-      <Popup
-           
+      <Popup contentStyle={{width:'450px',borderRadius:'10px',background:'lightGray'}}
           open={selectedTeacher!== null}
           onClose={() => {
             setSelectedTeacher(null);
             setStandardString(''); 
           }}
           closeOnDocumentClick
-          >
-         
-             
+          > 
         {selectedTeacher &&(
           
             <div id='pop-up-title'>
                <button id='btn-close' onClick={()=> setSelectedTeacher(null)} >X</button>
               <h2 id='title-name'>Details of {selectedTeacher.name}</h2>
-              <p id='pop-field'>Email: {selectedTeacher.email}</p>
-              <p id='pop-field'>Gender: {selectedTeacher.gender}</p>
-              <p id='pop-field'>Mobile Number: {selectedTeacher.mobileNumber}</p>
-              <p id='pop-field'>BirthDate: {selectedTeacher.birthDate}</p>
-              <p id='pop-field'>JoinDate: {selectedTeacher.joinDate}</p>
-              <p id='pop-field'>Address: {selectedTeacher.address}</p>
-              <p id='pop-field'>City: {selectedTeacher.city}</p>
-              <p id='pop-field'>District: {selectedTeacher.district}</p>
-              <p id='pop-field'>State: {selectedTeacher.state}</p>
-              <p id='pop-field'>Pincode: {selectedTeacher.pinCode}</p>
-              <p id='pop-field'>Standard: {selectedTeacher.standard}</p>
-              <p id='pop-field'>Subject: {selectedTeacher.subjectName}</p>
+              <p id='pop-field'><b>Email:</b>{selectedTeacher.email}</p>
+              <p id='pop-field'><b>Gender:</b> {selectedTeacher.gender}</p>
+              <p id='pop-field'><b>Mobile Number:</b> {selectedTeacher.mobileNumber}</p>
+              <p id='pop-field'><b>BirthDate: </b>{selectedTeacher.birthDate}</p>
+              <p id='pop-field'><b>JoinDate:</b> {selectedTeacher.joinDate}</p>
+              <p id='pop-field'><b>Address:</b> {selectedTeacher.address}</p>
+              <p id='pop-field'><b>City: </b>{selectedTeacher.city}</p>
+              <p id='pop-field'><b>District:</b> {selectedTeacher.district}</p>
+              <p id='pop-field'><b>State:</b> {selectedTeacher.state}</p>
+              <p id='pop-field'><b>Pincode:</b> {selectedTeacher.pinCode}</p>
+              <p id='pop-field'><b>Standard:</b> {selectedTeacher.standard}</p>
+              <p id='pop-field'><b>Subject:</b> {selectedTeacher.subjectName}</p>
               
             </div>
           )}
@@ -173,7 +193,6 @@ const Search_Teacher = () => {
     </Fragment>
         <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
       
-        
 </>
   </AdminSidebar>
   );
