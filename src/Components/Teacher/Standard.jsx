@@ -8,10 +8,10 @@ const Standard = () => {
   const [data, setData] = useState([]);
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('teacher');
-  }, []);
+  //   setRole('teacher');
+  // }, []);
 
 
 
@@ -33,9 +33,9 @@ const Standard = () => {
     fetchData();
   }, []);
 
-  if (role !== 'teacher') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'teacher') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
   return (
     <TeacherSidebar>

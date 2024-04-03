@@ -9,10 +9,10 @@ const Student = () => {
     const [studentDetails, setStudentDetails] = useState(null);
     const [role, setRole] = useState('');
    
-       useEffect(() => {
+      //  useEffect(() => {
          
-         setRole('student');
-       }, []);
+      //    setRole('student');
+      //  }, []);
      
 
     useEffect(() => {
@@ -20,9 +20,9 @@ const Student = () => {
         setStudentDetails(storedStudentDetails);
       }, []); 
      
-      if (role !== 'student') {
-        return <Redirect to="/PageNotFound" />;
-      }
+      // if (role !== 'student') {
+      //   return <Redirect to="/PageNotFound" />;
+      // }
 
 
   return (

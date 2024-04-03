@@ -27,10 +27,10 @@ export const Student_Form = () => {
     const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
     const [role, setRole] = useState('');
 
-    useEffect(() => {
+    // useEffect(() => {
       
-      setRole('teacher');
-    }, []);
+    //   setRole('teacher');
+    // }, []);
   
 
     const handleBloodGroupChange = (e) => {
@@ -54,9 +54,9 @@ export const Student_Form = () => {
         setIsValidPhone(phoneRegex.test(value));
       };
 
-      if (role !== 'teacher') {
-        return <Redirect to="/PageNotFound" />;
-      }
+      // if (role !== 'teacher') {
+      //   return <Redirect to="/PageNotFound" />;
+      // }
     
     
   return (

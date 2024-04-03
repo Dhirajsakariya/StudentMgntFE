@@ -12,10 +12,10 @@ const StudentFeeForm = () => {
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('student');
-  }, []);
+  //   setRole('student');
+  // }, []);
 
 
 
@@ -78,9 +78,9 @@ const StudentFeeForm = () => {
     fontWeight: 'bold',
   };
 
-  if (role !== 'student') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'student') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
   return (
     <StudentSidebar>

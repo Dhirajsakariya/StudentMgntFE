@@ -41,10 +41,10 @@ const TeacherForm = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('admin');
-  }, []);
+  //   setRole('admin');
+  // }, []);
 
 
     useEffect(() => {
@@ -164,9 +164,9 @@ const customToastStyle = {
   fontWeight: 'bold',
 };
 
-if (role !== 'admin') {
-  return <Redirect to="/PageNotFound" />;
-}
+// if (role !== 'admin') {
+//   return <Redirect to="/PageNotFound" />;
+// }
 
   return (
     <AdminSidebar>   

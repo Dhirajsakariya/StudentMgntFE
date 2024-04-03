@@ -12,10 +12,10 @@ const StudentMarks = () => {
   const [marksObtained, setMarksObtained] = useState('');
   const [role, setRole] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    setRole('admin');
-  }, []);
+  //   setRole('admin');
+  // }, []);
   
 
   const handleSubmit = (e) => {
@@ -24,9 +24,9 @@ const StudentMarks = () => {
     console.log('Form submitted:', { studentId, examId, examType, subjectId, totalMarks, marksObtained });
   };
 
-  if (role !== 'admin') {
-    return <Redirect to="/PageNotFound" />;
-  }
+  // if (role !== 'admin') {
+  //   return <Redirect to="/PageNotFound" />;
+  // }
 
   return (
     <AdminSidebar>

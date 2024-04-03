@@ -18,10 +18,10 @@ const StudentSidebar = ({ handleLogout,children }) => {
     const [error, setError] = useState(null);
     const [role, setRole] = useState('');
 
-    useEffect(() => {
+    // useEffect(() => {
       
-      setRole('student');
-    }, []);
+    //   setRole('student');
+    // }, []);
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -83,9 +83,9 @@ const StudentSidebar = ({ handleLogout,children }) => {
         return <div>Loading...</div>;
       }
 
-      if (role !== 'student') {
-        return <Redirect to="/PageNotFound" />;
-      }
+    //   if (role !== 'student') {
+    //     return <Redirect to="/PageNotFound" />;
+    //   }
     return (
         <>
              <div id="menu-container">
