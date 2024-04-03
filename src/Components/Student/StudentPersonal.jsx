@@ -3,11 +3,19 @@ import React, { useState, useEffect } from 'react';
 import './StudentPersonal.css';
 import config from '../Login/config';
 import StudentSidebar from '../Sidebar/StudentSidebar'
+import { Redirect } from 'react-router-dom';
 
 
 const StudentPersonal = () => {
   const [Student, setStudent] = useState(null);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('student');
+  }, []);
+
 
   useEffect(() => {
     const fetchstudentDetails = async () => {
@@ -40,6 +48,11 @@ const StudentPersonal = () => {
 
   if (!Student) {
     return <div>Loading...</div>;
+  }
+
+  
+  if (role !== 'student') {
+    return <Redirect to="/PageNotFound" />;
   }
 
   return (

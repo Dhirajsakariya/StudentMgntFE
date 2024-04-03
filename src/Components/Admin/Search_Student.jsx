@@ -9,7 +9,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
 import { FaSearch } from "react-icons/fa";
-
+import { Redirect } from 'react-router-dom';
 
 const Search_Student = () => {
        const history = useHistory();
@@ -17,6 +17,13 @@ const Search_Student = () => {
        const [selectedStudent,setSelectedStudent] =useState(null);
        const [searchQuery, setSearchQuery] = useState('');
        const [editedStudent, setEditedStudent] = useState(null);
+       const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+  
 
     //TEACHER GET
     const getData = () => {
@@ -101,6 +108,10 @@ const Search_Student = () => {
         fontWeight: 'bold',
       };
 
+      if (role !== 'admin') {
+        return <Redirect to="/PageNotFound" />;
+      }
+    
  
   return (
     <AdminSidebar>   

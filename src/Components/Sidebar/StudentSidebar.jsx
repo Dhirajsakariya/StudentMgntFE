@@ -6,7 +6,7 @@ import { LuUserCircle2 } from "react-icons/lu";
 import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
 import { FaBars } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Redirect } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 
 const StudentSidebar = ({ handleLogout,children }) => {
@@ -16,6 +16,12 @@ const StudentSidebar = ({ handleLogout,children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [Student, setStudent] = useState(null);
     const [error, setError] = useState(null);
+    const [role, setRole] = useState('');
+
+    useEffect(() => {
+      
+      setRole('student');
+    }, []);
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -36,7 +42,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
             icon: <FaGooglePay   />
         },
         {
-            path: '/login',
+            path: '/Logout',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick
@@ -77,6 +83,9 @@ const StudentSidebar = ({ handleLogout,children }) => {
         return <div>Loading...</div>;
       }
 
+      if (role !== 'student') {
+        return <Redirect to="/PageNotFound" />;
+      }
     return (
         <>
              <div id="menu-container">

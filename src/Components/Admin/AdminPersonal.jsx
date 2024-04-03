@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './AdminPersonal.css';
 import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
-
-
+import { Redirect } from 'react-router-dom';
 
 const AdminPersonal = () => {
   const [Admin, setAdmin] = useState(null);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -18,7 +24,7 @@ const AdminPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${storedId}`);
+        const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching Admin details: ${response.status} ${response.statusText}`);
@@ -41,6 +47,10 @@ const AdminPersonal = () => {
   if (!Admin) {
     return <div>Loading...</div>;
   }
+  if (role !== 'admin') {
+    return <Redirect to="/PageNotFound" />;
+  }
+
 
   return (
     <AdminSidebar>

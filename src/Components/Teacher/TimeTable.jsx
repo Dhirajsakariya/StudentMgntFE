@@ -3,6 +3,7 @@ import '../Teacher/TimeTable.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import toast, { Toaster } from 'react-hot-toast';
+import { Redirect } from 'react-router-dom';
 
 const TimeTable = () => {
 
@@ -36,9 +37,16 @@ const TimeTable = () => {
     const [subject22, setSubject22] = useState('');
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
+    const [role, setRole] = useState('');
 
+  
       const str = standard;
       const parts = str.split("-");
+
+      useEffect(() => {
+      
+        setRole('teacher');
+      }, []);
 
       useEffect(() => {
         const fetchStandards = async () => {
@@ -310,6 +318,11 @@ const TimeTable = () => {
       const handleEdit =()=>{
         setIsDisable(true);
       }
+
+      if (role !== 'teacher') {
+        return <Redirect to="/PageNotFound" />;
+      }
+    
     
   return (
     <>

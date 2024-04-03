@@ -3,7 +3,7 @@ import moment from 'moment';
 import './StudentForm.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import {  useHistory } from 'react-router-dom';
+import {  useHistory,Redirect } from 'react-router-dom';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -42,6 +42,12 @@ const StudentForm = () => {
     const [standard,setStandard] = useState('');
     const[standardError,setStandardError]=useState('');
     const [standardData, setStandardData] = useState([]);
+    const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
 
     useEffect(() => {
       const fetchStandards = async () => {
@@ -157,6 +163,11 @@ const { id } = useParams();
         });
     }
   }, [id]);
+
+  if (role !== 'admin') {
+    return <Redirect to="/PageNotFound" />;
+  }
+
    return (
     <AdminSidebar>
       <>
