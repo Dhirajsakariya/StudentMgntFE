@@ -26,8 +26,6 @@ const Search_Student = () => {
     }
   })
 
-
-
   // GET Student
   const getData = () => {
     axios
