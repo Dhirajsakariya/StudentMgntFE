@@ -11,6 +11,7 @@ import TeacherForm from './Components/Admin/TeacherForm';
 import ForgotPassword from './Components/Login/ForgotPassword';
 import Login from './Components/Login/Login';
 import Logout from './Components/Login/Logout';
+import PageNotFound from './Components/Login/PageNotFound';
 import PrivateRoute from './Components/Login/PrivateRoute';
 import Registration from './Components/Login/Registration';
 import AdminSidebar from './Components/Sidebar/AdminSidebar';
@@ -20,11 +21,11 @@ import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
 import Student from './Components/Student/Student';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
 import StudentPersonal from './Components/Student/StudentPersonal';
+import AddExamSchedule from './Components/Teacher/AddExamSchedule';
 import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
-import PageNotFound from './Components/Login/PageNotFound';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
           <PrivateRoute path='/Search_Teacher' component={Search_Teacher} />
           <PrivateRoute path='/Search_Student' component={Search_Student} />
           <PrivateRoute path='/StudentMarks' component={StudentMarks} />
+          <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
           <Route path='/' component={Login} />
           <Redirect to="/" />
         </Switch>
