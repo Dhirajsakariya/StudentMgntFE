@@ -12,6 +12,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import axios from 'axios';
 import config from '../Login/config';
+import { Redirect } from 'react-router-dom';
 
 const TeacherForm = () => {
 
@@ -38,6 +39,13 @@ const TeacherForm = () => {
     const [standarddata, setStandardData] = useState([]);
     const [subjectdata, setSubjectData] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
+    const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+
 
     useEffect(() => {
     const storedteacherDetails = JSON.parse(localStorage.getItem('teacherdetails'));
@@ -156,6 +164,9 @@ const customToastStyle = {
   fontWeight: 'bold',
 };
 
+if (role !== 'admin') {
+  return <Redirect to="/PageNotFound" />;
+}
 
   return (
     <AdminSidebar>   
