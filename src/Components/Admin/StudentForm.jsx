@@ -42,12 +42,19 @@ const StudentForm = () => {
     const [standard,setStandard] = useState('');
     const[standardError,setStandardError]=useState('');
     const [standardData, setStandardData] = useState([]);
-    const [role, setRole] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('admin');
   // }, []);
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'admin') {
+      setRedirectToNotFound(false);
+    }
+  })
+  
 
     useEffect(() => {
       const fetchStandards = async () => {
@@ -167,6 +174,10 @@ const { id } = useParams();
   // if (role !== 'admin') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+  }
+
 
    return (
     <AdminSidebar>

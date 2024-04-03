@@ -19,17 +19,22 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [teacher, setTeacher] = useState(null);
     const [error, setError] = useState(null);
-    const [role, setRole] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
     // useEffect(() => {
       
     //   setRole('teacher');
     // }, []);
-  
+    useEffect(() => {
+        const userRole = localStorage.getItem('loggedInRole');
+        if (userRole !== 'teacher') {
+          setRedirectToNotFound(false);
+        }
+      })
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
-        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('LoggedInUser');
         localStorage.removeItem('loggedInRole');
         navigate.push('/');
         };
@@ -97,6 +102,9 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     //   if (role !== 'teacher') {
     //     return <Redirect to="/PageNotFound" />;
     //   }
+    if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+      }
 
     return (
         <>

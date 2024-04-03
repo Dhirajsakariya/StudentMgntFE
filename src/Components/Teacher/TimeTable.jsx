@@ -3,6 +3,7 @@ import '../Teacher/TimeTable.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import toast, { Toaster } from 'react-hot-toast';
+import { Redirect } from 'react-router-dom';
 
 const TimeTable = () => {
 
@@ -36,10 +37,19 @@ const TimeTable = () => {
     const [subject22, setSubject22] = useState('');
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+
 
       const str = standard;
       const parts = str.split("-");
 
+      useEffect(() => {
+        const userRole = localStorage.getItem('loggedInRole');
+        if (userRole !== 'teacher') {
+          setRedirectToNotFound(false);
+        }
+        })
+        
       useEffect(() => {
         const fetchStandards = async () => {
           try {
@@ -310,6 +320,11 @@ const TimeTable = () => {
       const handleEdit =()=>{
         setIsDisable(true);
       }
+
+      if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+      }
+    
     
   return (
     <>

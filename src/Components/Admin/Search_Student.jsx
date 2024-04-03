@@ -17,12 +17,18 @@ const Search_Student = () => {
        const [selectedStudent,setSelectedStudent] =useState(null);
        const [searchQuery, setSearchQuery] = useState('');
        const [editedStudent, setEditedStudent] = useState(null);
-       const [role, setRole] = useState('');
+       const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('admin');
   // }, []);
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'admin') {
+      setRedirectToNotFound(false);
+    }
+  })
   
 
     //TEACHER GET
@@ -111,6 +117,9 @@ const Search_Student = () => {
       // if (role !== 'admin') {
       //   return <Redirect to="/PageNotFound" />;
       // }
+      if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+      }
     
  
   return (

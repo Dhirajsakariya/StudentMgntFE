@@ -10,13 +10,19 @@ const StudentFeeForm = () => {
   const [feeAmount, setFeeAmount] = useState('');
   const [feeFrequency, setFeeFrequency] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('student');
   // }, []);
-
+  useEffect(() => {
+		const userRole = localStorage.getItem('loggedInRole');
+		if (userRole !== 'student') {
+		  setRedirectToNotFound(false);
+		}
+	  })
+	  
 
 
   const handleFrequencyChange = async (e) => {
@@ -81,6 +87,9 @@ const StudentFeeForm = () => {
   // if (role !== 'student') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not student
+  }
 
   return (
     <StudentSidebar>

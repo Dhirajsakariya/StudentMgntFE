@@ -7,12 +7,19 @@ import { Redirect } from 'react-router-dom';
 const Standard = () => {
   const [data, setData] = useState([]);
   const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('teacher');
   // }, []);
 
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'teacher') {
+      setRedirectToNotFound(false);
+    }
+  })
 
 
   useEffect(() => {
@@ -36,6 +43,11 @@ const Standard = () => {
   // if (role !== 'teacher') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+
+  
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+  }
 
   return (
     <TeacherSidebar>

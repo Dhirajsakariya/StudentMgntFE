@@ -16,16 +16,22 @@ const StudentSidebar = ({ handleLogout,children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [Student, setStudent] = useState(null);
     const [error, setError] = useState(null);
-    const [role, setRole] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
     // useEffect(() => {
       
     //   setRole('student');
     // }, []);
+    useEffect(() => {
+        const userRole = localStorage.getItem('loggedInRole');
+        if (userRole !== 'student') {
+          setRedirectToNotFound(false);
+        }
+        })
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
-        localStorage.removeItem('loggedInUserId');
+        localStorage.removeItem('LoggedInUser');
         localStorage.removeItem('loggedInRole');
         navigate.push('/');
         };
@@ -53,7 +59,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
     useEffect(() => {
         const fetchstudentDetails = async () => {
           try {
-            const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+            const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
     
             if (!storedId) {
               throw new Error('User ID not found in local storage');
@@ -86,6 +92,9 @@ const StudentSidebar = ({ handleLogout,children }) => {
     //   if (role !== 'student') {
     //     return <Redirect to="/PageNotFound" />;
     //   }
+    if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+      }
     return (
         <>
              <div id="menu-container">
