@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import '../Teacher/TimeTable.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
-import toast from 'react-hot-toast';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 const TimeTable = () => {
+
     const [standard, setStandard] = useState('');
     const [standardData, setStandardData] = useState([]);
     //const [toggle , setToggel] = useState(true);
+    const [isDisable , setIsDisable] = useState(true);
     const [standardError, setStandardError] = useState('');
     const [subjectData, setSubjectData] = useState([]);
     const [subject1, setSubject1] = useState('');
@@ -35,16 +36,6 @@ const TimeTable = () => {
     const [subject22, setSubject22] = useState('');
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
-
-    const [formData, setFormData] = useState({
-        id:'',
-        day: '',
-        startTime: '',    
-        endTime: '',
-        standard: '',
-        section: '',
-        subject: '',
-      });
 
       const str = standard;
       const parts = str.split("-");
@@ -163,7 +154,8 @@ const TimeTable = () => {
             Section : parts[1],
             NoOfDay : 3,
             SubjectName : subject9
-          },{
+          },
+          {
             StartTime : "08:30",
             EndTime : "09:30",
             StandardNumber : parts[0],
@@ -250,28 +242,32 @@ const TimeTable = () => {
             Section : parts[1],
             NoOfDay : 2,
             SubjectName : subject20
-          },{
+          },
+          {
             StartTime : "11:00",
             EndTime : "12:00",
             StandardNumber : parts[0],
             Section : parts[1],
             NoOfDay : 3,
             SubjectName : subject21
-          },{
+          },
+          {
             StartTime : "11:00",
             EndTime : "12:00",
             StandardNumber : parts[0],
             Section : parts[1],
             NoOfDay : 4,
             SubjectName : subject22
-          },{
+          },
+          {
             StartTime : "11:00",
             EndTime : "12:00",
             StandardNumber : parts[0],
             Section : parts[1],
             NoOfDay : 5,
             SubjectName : subject23
-          },{
+          },
+          {
             StartTime : "11:00",
             EndTime : "12:00",
             StandardNumber : parts[0],
@@ -280,7 +276,7 @@ const TimeTable = () => {
             SubjectName : subject24
           },
         ]
-          
+          setIsDisable(false);
           const response = await fetch(`${config.ApiUrl}TimeTable/PostTimeTable`, {
               method: 'POST',
               headers: {
@@ -294,7 +290,6 @@ const TimeTable = () => {
           if (response.ok) {
               toast.success("SuccessFully Saved!");
               setTimeout(() => {
-                // navigate.push('/Userdetail') 
               }, 1500);
            } 
            else{
@@ -306,9 +301,15 @@ const TimeTable = () => {
         }
       }
 
-      // const handleEdit =()=>{
-      //   setToggel(false);
-      // }
+      const customToastStyle = {
+        fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+        fontSize: '16px',
+        fontWeight: 'bold',
+      };
+
+      const handleEdit =()=>{
+        setIsDisable(true);
+      }
     
   return (
     <>
@@ -317,7 +318,6 @@ const TimeTable = () => {
       <div id='timetable'>
         <h1 id='h1'>TimeTable</h1>
         <div id='formtable'>
-              {/* <label className='labelofform' id='labelofform'>Standard:</label> */}              
               <select
                 value={standard}
                 className='inputform' id='inputforms'
@@ -328,7 +328,7 @@ const TimeTable = () => {
                   setStandardError('');
                 }}
               >
-                <option value="">Select Standard</option>
+                <option value="" disabled={true}>Select Standard</option>
                 {standardData.map((standard) => (
                   <option key={standard} value={standard}>
                     {standard}
@@ -336,6 +336,7 @@ const TimeTable = () => {
                 ))}
               </select>
               {standardError && <p style={{ color: 'red' }}>{standardError}</p>}
+              <button id='btn1' type='submit' onClick={handleEdit}>Edit</button>
               <button id='btn' type='submit' onClick={handleSave}>Save</button>
               {/* {
                   toggle ? <button id='btn' type='submit' onClick={handleEdit}>Edit</button> :
@@ -356,7 +357,7 @@ const TimeTable = () => {
                 <tr id='row'>
                   <td id='sub'>07:30-08:30</td>
                   <td>
-                  <select
+                  {isDisable ? <select
                       value={subject1}
                       id='sub'
                       required
@@ -369,7 +370,7 @@ const TimeTable = () => {
                       {subject1}
                     </option>
                     ))}
-                  </select>
+                  </select> : <input id='sub' value={subject1} onChange={(e) => subject1(e.target.value)}/> }
                   </td>
                   <td>
                   <select
@@ -756,6 +757,7 @@ const TimeTable = () => {
               </table>
         </div>       
       </div>
+      <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </div>
      </TeacherSidebar>
     </>
