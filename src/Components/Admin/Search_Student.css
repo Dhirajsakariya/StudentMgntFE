@@ -1,11 +1,56 @@
 #mainsearchstudent{
-    margin-top:200px;
-    margin-left:300px
+    margin-top:60px;
+    margin-left:auto;
+    margin-right: auto;
+    width: 90%;
 }
+#searchstudentbutton{
+    width:400px;
+    margin-left : auto;
+    margin-right: auto;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-left: 70px;
+    font-size: 15px;
+    margin-top: 15px;
+    
+}
+#searchstudent{
+   
+    width:320px;
+    margin-left : auto;
+    margin-right: auto;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 15px;
+    
+}
+#iconsearchstudent{
+    margin-left: -25px;
+    margin-bottom: -3px;
+}
+
 #studentdetailpopup{
     color:black;
     width:290px;
+    height: 400px;
+    background-color: lightgray;
+}
+#studentdetailpopup1{
+    color:black;
+    width:290px;
+    height: 400px;
+    background-color: lightgray;
+    margin-left: -430px;
+}
+#popup-student{
+    color:black;
+    width:290px;
     margin-top: -300px;
+    background-color: aqua;
 }
 #psearchstudent{
     color: black;
@@ -13,6 +58,9 @@
 #trsearchstudent{
     background-color: lightgray;
     height: 35px;
+}
+#tr1searchstudent{
+    text-align: center;
 }
 #datasearchstudent{
     height:30px
@@ -33,7 +81,8 @@
     color: #fff;
     background-color: #0d6efd;
     border-color: #0d6efd;
-    width:50px
+    width:50px;
+    margin-left: -110px;
 }
 #btndeletesearchstudent {
     color: #fff;
@@ -41,3 +90,21 @@
     border-color: #dc3545;
     width:50px
 }
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width:30px;
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: white;
+    background-color: red; /* Change color on hover if desired */
+  }
+  
+  
