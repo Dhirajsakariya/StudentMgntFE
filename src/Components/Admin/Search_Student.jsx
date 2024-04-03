@@ -11,33 +11,30 @@ import { toast, Toaster } from 'react-hot-toast';
 import { FaSearch } from 'react-icons/fa';
 import { Redirect } from 'react-router-dom';
 const Search_Student = () => {
+       const history = useHistory();
+       const [data, setData] = useState(null);
+       const [selectedStudent,setSelectedStudent] =useState(null);
+       const [searchQuery, setSearchQuery] = useState('');
+       const [editedStudent, setEditedStudent] = useState(null);
+       const [role, setRole] = useState('');
+
+  // useEffect(() => {
+    
+  //   setRole('admin');
+  // }, []);
   
-  const [originalData, setOriginalData] = useState([]);
-  const [data, setData] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [editedStudent, setEditedStudent] = useState(null);
- const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
- useEffect(() => {
-    const userRole = localStorage.getItem('loggedInRole');
-    if (userRole !== 'admin') {
-      setRedirectToNotFound(false);
-    }
-  })
-
-  // GET Student
-  const getData = () => {
-    axios
-      .get(`${config.ApiUrl}Student/GetStudents`)
-      .then((result) => {
-        setOriginalData(result.data);
-        setData(result.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    //TEACHER GET
+    const getData = () => {
+      axios
+        .get(`${config.ApiUrl}Student/GetStudents`)
+        .then((result) => {
+          setData(result.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+     };
 
   //popup view details
   const getStudentDetails = (id) => {
@@ -137,10 +134,11 @@ const Search_Student = () => {
     fontWeight: 'bold',
   };
 
-  if (redirectToNotFound) {
-        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
-      }
-
+      // if (role !== 'admin') {
+      //   return <Redirect to="/PageNotFound" />;
+      // }
+    
+ 
   return (
     <AdminSidebar>
       <>

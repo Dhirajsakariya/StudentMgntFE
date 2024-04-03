@@ -26,12 +26,20 @@ export const Student_Form = () => {
     const bloodGroup = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
     const [selectedBloodGroup,setSelecteBloodGroup] = useState("");
     const [role, setRole] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+
 
     // useEffect(() => {
       
     //   setRole('teacher');
     // }, []);
-  
+    useEffect(() => {
+      const userRole = localStorage.getItem('loggedInRole');
+      if (userRole !== 'teacher') {
+        setRedirectToNotFound(false);
+      }
+    })
+    
 
     const handleBloodGroupChange = (e) => {
       setSelecteBloodGroup(e.target.value);
@@ -58,6 +66,9 @@ export const Student_Form = () => {
       //   return <Redirect to="/PageNotFound" />;
       // }
     
+      if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+      }
     
   return (
   <TeacherSidebar>

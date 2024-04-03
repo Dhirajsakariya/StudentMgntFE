@@ -59,18 +59,24 @@ import { Redirect } from 'react-router-dom';
 const TeacherPersonal = () => {
   const [teacher, setTeacher] = useState(null);
   const [error, setError] = useState(null);
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('teacher');
   // }, []);
-
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'teacher') {
+      setRedirectToNotFound(false);
+    }
+  })
+  
 
   useEffect(() => {
     const fetchTeacherDetails = async () => {
       try {
-        const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+        const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
 
         if (!storedId) {
           throw new Error('User ID not found in local storage');
@@ -105,6 +111,9 @@ const TeacherPersonal = () => {
   // if (role !== 'teacher') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
+  }
 
   return (
     <TeacherSidebar>

@@ -18,7 +18,7 @@ const Search_Teacher = () => {
        const [selectedTeacher,setSelectedTeacher] =useState("");
        const [standardString, setStandardString] = useState("");
        const [searchTerm,setSearchTerm] = useState("");
-       const [role, setRole] = useState('');
+       const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
        const handleSearch = () => {
         const filteredData = data.filter((teacher) =>
@@ -32,7 +32,13 @@ const Search_Teacher = () => {
          
       //   setRole('admin');
       // }, []);
-      
+      useEffect(() => {
+        const userRole = localStorage.getItem('loggedInRole');
+        if (userRole !== 'admin') {
+          setRedirectToNotFound(false);
+        }
+      })
+
       useEffect(() => {
         if (searchTerm === '') {
           getData();
@@ -106,6 +112,10 @@ const Search_Teacher = () => {
       // if (role !== 'admin') {
       //   return <Redirect to="/PageNotFound" />;
       // }
+      if (redirectToNotFound) {
+        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+      }
+    
     
   return (
     <AdminSidebar>   

@@ -7,13 +7,19 @@ import { Redirect } from 'react-router-dom';
 const AdminPersonal = () => {
   const [Admin, setAdmin] = useState(null);
   const [error, setError] = useState(null);
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('admin');
   // }, []);
 
+  useEffect(() => {
+    const userRole = localStorage.getItem('loggedInRole');
+    if (userRole !== 'admin') {
+      setRedirectToNotFound(false);
+    }
+  },[])
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -51,6 +57,9 @@ const AdminPersonal = () => {
   //   return <Redirect to="/PageNotFound" />;
   // }
 
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+  }
 
   return (
     <AdminSidebar>

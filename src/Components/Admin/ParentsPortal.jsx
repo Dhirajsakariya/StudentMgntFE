@@ -36,7 +36,7 @@ const ParentsPortal = () => {
   const [relationError, setRelationError] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
   const relations=[ "Father", "Mother"];
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   
 
@@ -48,6 +48,13 @@ console.log("student",studentId)
     
 //   setRole('admin');
 // }, []);
+
+useEffect(() => {
+  const userRole = localStorage.getItem('loggedInRole');
+  if (userRole !== 'admin') {
+    setRedirectToNotFound(false);
+  }
+})
 
   useEffect(() => {
       const fetchFamilyMembers = async () => {
@@ -247,6 +254,10 @@ const customToastStyle = {
 // if (role !== 'admin') {
 //   return <Redirect to="/PageNotFound" />;
 // }
+if (redirectToNotFound) {
+  return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
+}
+
 
   return (
     <AdminSidebar>

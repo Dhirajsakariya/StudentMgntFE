@@ -9,18 +9,24 @@ import { Redirect } from 'react-router-dom';
 const StudentPersonal = () => {
   const [Student, setStudent] = useState(null);
   const [error, setError] = useState(null);
-  const [role, setRole] = useState('');
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
   // useEffect(() => {
     
   //   setRole('student');
   // }, []);
-
+  useEffect(() => {
+		const userRole = localStorage.getItem('loggedInRole');
+		if (userRole !== 'student') {
+		  setRedirectToNotFound(false);
+		}
+	  })
+	  
 
   useEffect(() => {
     const fetchstudentDetails = async () => {
       try {
-        const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+        const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
 
         if (!storedId) {
           throw new Error('User ID not found in local storage');
@@ -54,6 +60,10 @@ const StudentPersonal = () => {
   // if (role !== 'student') {
   //   return <Redirect to="/PageNotFound" />;
   // }
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />; // Redirect if user role is not student
+  }
+
 
   return (
     <StudentSidebar>
