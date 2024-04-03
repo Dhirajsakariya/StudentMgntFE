@@ -1,11 +1,71 @@
+// import React, { useState, useEffect } from 'react';
+// import './TeacherPersonal.css';
+
+// const TeacherPersonal = () => {
+//   const [teacher, setTeacher] = useState(null);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     const fetchTeacherDetails = async () => {
+//       try {
+//         const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+
+//         if (!storedId) {
+//           throw new Error('User ID not found in local storage');
+//         }
+
+//         const response = await fetch(`https://localhost:7157/api/AdminTeacher/GetAdminTeacher${storedId}`);
+        
+//         if (!response.ok) {
+//           throw new Error(`Error fetching teacher details: ${response.status} ${response.statusText}`);
+//         }
+
+//         const responseData = await response.json();
+//         setTeacher(responseData);
+//       } catch (fetchError) {
+//         setError(fetchError.message);
+//       }
+//     };
+
+//     fetchTeacherDetails();
+//   }, []);
+
+//   if (error) {
+//     return <div>Error: {error}</div>;
+//   }
+
+//   if (!teacher) {
+//     return <div>Loading...</div>;
+//   }
+
+//   return (
+//     <div className='teacher-personal-info'>
+//       <h2 className='teacher-personal-info-h2'>Teacher Details</h2>
+//       <div className='teacher-info'>
+//         <p>Name: {teacher.Name}</p>
+//         <p>Email: {teacher.Email}</p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TeacherPersonal;
 import React, { useState, useEffect } from 'react';
 import './TeacherPersonal.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
+import { Redirect } from 'react-router-dom';
 
 const TeacherPersonal = () => {
   const [teacher, setTeacher] = useState(null);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('teacher');
+  }, []);
+
 
   useEffect(() => {
     const fetchTeacherDetails = async () => {
@@ -16,7 +76,7 @@ const TeacherPersonal = () => {
           throw new Error('User ID not found in local storage');
         }
 
-         const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${storedId}`);
+         const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher${storedId}`);
         
         if (!response.ok) {
           throw new Error(`Error fetching teacher details: ${response.status} ${response.statusText}`);
@@ -38,6 +98,12 @@ const TeacherPersonal = () => {
 
   if (!teacher) {
     return <div>Loading...</div>;
+  }
+
+  
+
+  if (role !== 'teacher') {
+    return <Redirect to="/PageNotFound" />;
   }
 
   return (

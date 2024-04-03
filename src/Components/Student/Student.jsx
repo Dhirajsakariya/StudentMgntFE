@@ -1,17 +1,30 @@
 import React,{useState, useEffect} from 'react';
 import './Student.css';
 import StudentSidebar from '../Sidebar/StudentSidebar';
+import { Redirect } from 'react-router-dom';
 
 
 const Student = () => {
 
     const [studentDetails, setStudentDetails] = useState(null);
+    const [role, setRole] = useState('');
+   
+       useEffect(() => {
+         
+         setRole('student');
+       }, []);
+     
 
     useEffect(() => {
         const storedStudentDetails = JSON.parse(localStorage.getItem('studentDetails'));
         setStudentDetails(storedStudentDetails);
       }, []); 
      
+      if (role !== 'student') {
+        return <Redirect to="/PageNotFound" />;
+      }
+
+
   return (
     <StudentSidebar>
         <div className='containeru'>

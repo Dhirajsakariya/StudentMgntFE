@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Admin/StudentMarks.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import { Redirect } from 'react-router-dom';
 
 const StudentMarks = () => {
   const [studentId, setStudentId] = useState('');
@@ -9,12 +10,23 @@ const StudentMarks = () => {
   const [subjectId, setSubjectId] = useState('');
   const [totalMarks, setTotalMarks] = useState('');
   const [marksObtained, setMarksObtained] = useState('');
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', { studentId, examId, examType, subjectId, totalMarks, marksObtained });
   };
+
+  if (role !== 'admin') {
+    return <Redirect to="/PageNotFound" />;
+  }
 
   return (
     <AdminSidebar>

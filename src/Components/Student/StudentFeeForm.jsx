@@ -1,14 +1,23 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRupeeSign } from "react-icons/fa";
 import StudentSidebar from '../Sidebar/StudentSidebar';
 import './StudentFeeForm.css';
 import { toast, Toaster } from 'react-hot-toast';
+import { Redirect } from 'react-router-dom';
 
 const StudentFeeForm = () => {
   const [feeAmount, setFeeAmount] = useState('');
   const [feeFrequency, setFeeFrequency] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('student');
+  }, []);
+
+
 
   const handleFrequencyChange = async (e) => {
     const selectedFrequency = e.target.value;
@@ -68,6 +77,10 @@ const StudentFeeForm = () => {
     fontSize: '16px',
     fontWeight: 'bold',
   };
+
+  if (role !== 'student') {
+    return <Redirect to="/PageNotFound" />;
+  }
 
   return (
     <StudentSidebar>

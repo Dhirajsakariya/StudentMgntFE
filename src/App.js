@@ -24,6 +24,7 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
+import PageNotFound from './Components/Login/PageNotFound';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Switch>
           <PrivateRoute path='/Sidebar' component={Sidebar} />
           <Route path='/ForgotPassword' component={ForgotPassword} />
+          <Route path='/PageNotFound' component={PageNotFound} />
           <Route path='/Logout' component={Logout} />
           <Route path='/Registration' component={Registration} />
           <PrivateRoute path='/StudentForm' component={StudentForm} />

@@ -2,9 +2,18 @@ import React, { useEffect, useState } from 'react';
 import '../Teacher/Standard.css';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
+import { Redirect } from 'react-router-dom';
 
 const Standard = () => {
   const [data, setData] = useState([]);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    
+    setRole('teacher');
+  }, []);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +32,10 @@ const Standard = () => {
 
     fetchData();
   }, []);
+
+  if (role !== 'teacher') {
+    return <Redirect to="/PageNotFound" />;
+  }
 
   return (
     <TeacherSidebar>

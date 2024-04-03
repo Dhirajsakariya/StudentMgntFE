@@ -8,7 +8,7 @@ import { PiUserListDuotone } from "react-icons/pi";
 import { FaWpforms } from "react-icons/fa";
 import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Redirect} from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import Logout from '../Login/Logout';
 
@@ -19,6 +19,13 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [teacher, setTeacher] = useState(null);
     const [error, setError] = useState(null);
+    const [role, setRole] = useState('');
+
+    useEffect(() => {
+      
+      setRole('teacher');
+    }, []);
+  
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
@@ -44,7 +51,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             icon: <FaTableCells  />
         },
         {
-            path: '/login',
+            path: '/Logout',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick 
@@ -85,6 +92,10 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     
       if (!teacher) {
         return <div>Loading...</div>;
+      }
+
+      if (role !== 'teacher') {
+        return <Redirect to="/PageNotFound" />;
       }
 
     return (

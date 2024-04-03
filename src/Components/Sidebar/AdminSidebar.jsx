@@ -10,6 +10,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import config from '../Login/config';
 import './Sidebar.css';
+import { Redirect } from 'react-router-dom';
 
 const AdminSidebar = ({handleLogout, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,14 @@ const AdminSidebar = ({handleLogout, children }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [Admin, setAdmin] = useState(null);
     const [error, setError] = useState(null);
+    const [role, setRole] = useState('');
 
+  useEffect(() => {
+    
+    setRole('admin');
+  }, []);
+
+   
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
         localStorage.removeItem('loggedInUserId');
@@ -58,12 +66,13 @@ const AdminSidebar = ({handleLogout, children }) => {
             icon: <FaMarkdown />
         },
         {
-            path: '/login',
+            path: '/Logout',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick
         }
     ];
+    
 
     useEffect(() => {
         const fetchAdminDetails = async () => {
@@ -98,6 +107,10 @@ const AdminSidebar = ({handleLogout, children }) => {
         return <div>Loading...</div>;
       }
 
+      if (role !== 'admin') {
+        return <Redirect to="/PageNotFound" />;
+      }
+      
     return (
         <>
              <div id="menu-container">
