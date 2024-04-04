@@ -1,103 +1,255 @@
 #main{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:40px;
-    width: 90%;
-    padding: 30px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:40px;
+  width: 100%;
+  height: 40%;
+  padding: 30px 30px;
+}
+#action{
+  width: 120px;
 }
 #heading{
-    background-color:hsl(110, 9%, 87%);
-    height: 40px;
-    
+  background-color: hsl(107, 17%, 78%);
+  color: white;
+  height: 40px;
+  
 }
+#table_body{
+ background-color:#dbdddf;
+} 
 #div-details{
-    color: black;
-    background-color:lightgray;
-    height: 400px;
-    border-radius: 15px;
-    width: 300px;
-    margin-top: 10px;
+  color: black;
+  background-color:lightgray;
+  height: 400px;
+  border-radius: 15px;
+  width: 300px;
+  margin-top: 10px;
 }
 #search{
-    width: 400px;
-    height: 30px;
-    border-radius: 10px;
-    font-size: 18px;
-    margin-left: 100px;
-    padding-left: 20px;
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-left: 40px;
+  padding-left: 20px;
 }
- #teachersearchicon{
-    margin-left:-30px;
-    margin-bottom: -2px;
+#teachersearchicon{
+  margin-left:-30px;
+  margin-bottom: -2px;
 
 }
 #btn-view{
-    border: none;
+  border: none;
+  background-color: transparent;
+  transition: box-shadow 0.7s ease;
+}
+#btn-view:hover{
+box-shadow: 0 0 10px rgba(52, 28, 205, 0.5);
+width: auto;
 }
 #close{
-    margin-left: 280px;
+  margin-left: 280px;
 }
 
 #title-name{
-    margin-left: 40px;
-    padding-top: 20px;
-    padding-bottom: 15px;
-    font-size: 28px;
-    color: blue;
+  margin-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-size: 28px;
+  color: #007bff;
 }
 #pop-field{
-    margin-left: 10px;
-    color: black;
+  margin-left: 10px;
+  color: black;
 }
 #pop-up-title{
-    width: 400px;
-    height: 400px;
-    border-radius: 20px;
-    align-items: center;
-    margin-left: 75px;
-    margin-bottom: 20px;
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  align-items: center;
+  margin-left: 75px;
+  margin-bottom: 20px;
 }
 #teacherinfo{
-    color: black;
-    margin-left: 50px;
+  color: black;
+  margin-left: 50px;
 }
 #btn-view {
-    cursor: pointer;
-    width: 50px;
-    border: none;
+  cursor: pointer;
+  width: 50px;
+  border: none;
 }
 #detail_heading{
-    margin-left: 200px;
+  margin-left: 200px;
 }
- 
+
 #btn-edit{
-    color:black;
-    background-color: #007bff;
-    border-color: #007bff;
-    width: 50px;
+  color:black;
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 50px;
 }
 #btn-close{
-    position: absolute;
-    margin-top: 8px;
-    margin-left: 330px;
-    z-Index: 9999; 
-    width: 30px;
-    border: none;
-    border-radius: 6px;
-    height: 30px;
-    font-size:10px;
-    cursor: pointer;
+  position: absolute;
+  margin-top: 8px;
+  margin-left: 330px;
+  z-Index: 9999; 
+  width: 30px;
+  border: none;
+  border-radius: 6px;
+  height: 30px;
+  font-size:10px;
+  cursor: pointer;
 }
 #btn-close:hover{
-    background-color:rgb(44, 44, 128);
+  background-color:rgb(156, 127, 127);
 
 }
 #btn-delete{
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-    width: 50px;
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  width: 50px;
 }
 #td-align{
-    text-align: center;
+  text-align: center;
+}
+
+
+/*POP UP SECOND*/
+#headingpopup {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  color: #007bff;
+}
+#First-div-editPopup{
+  margin-left: 50px;
+  margin-top: 15px;
+}
+#Second-div-editPopup{
+ margin-left: 400px;
+ margin-top: -520px;
+}
+#teacheredit{
+  width: 300px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: 35px;
+}
+#teachereditAddress{
+  width: 300px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-left: 0px;
+  box-sizing: border-box;
+  height: 35px;
+  position: relative;
+}
+
+#teacheredit2{
+  width: 300px;
+  padding: 10px;
+  margin-top:-2px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: 35px;
+}
+
+#First-div-editPopup_label {
+  display: block;
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+#Second-div-editPopup_label{
+  display: block;
+  margin-bottom: 15px;
+}
+#filter_data{
+  margin-left: 130px;
+  background-color: #b7c4cb;
+  width: 0px;
+}
+
+#popup-edit{
+  background-color: #0d5aa7;
+  margin-left: 340px;
+  margin-top: 70px;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+/*Swal Libarary CSS*/
+.swal2-popup{
+box-shadow: 0 3px 20px -10px #4a4a4a;
+background:white;
+height: 215px;
+width: fit-content;
+position: relative;
+margin-left: 150px;
+margin-top: 30px;
+box-shadow: 0 3px 20px -10px #4a4a4a;
+background: white;
+box-sizing: border-box;
+grid-template-columns: minmax(0, 100%);
+padding: 0 0 1.25em;
+font-size: 14px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.swal2-icon {
+height: 50px;
+width:50px;
+margin-top: 20px;
+position: relative;
+justify-content: center;
+margin: 8px auto -9px;
+border: 2px solid white;
+border-color: white;
+}
+
+.swal2-title{
+font-size: 17px;
+height: 1px;
+font-size: 16px;
+color: black;
+font-weight: 500;
+padding: 1px;
+}
+
+.swal2-cancel, .swal2-confirm{
+width: 135px;
+margin-top: -70px;
+margin-bottom: -55px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.swal2-success{
+border-color: #a5dc86;
+color: #a5dc86;
+height:70px;
+width: 70px;
+margin-top: 10px;
 }
