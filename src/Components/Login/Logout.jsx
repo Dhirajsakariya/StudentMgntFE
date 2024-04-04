@@ -11,7 +11,7 @@ const Logout = () => {
     localStorage.removeItem('loggedInEmail');
     localStorage.removeItem('loggedInUserId');
     localStorage.removeItem('loggedInRole');
-    navigate.push('/');
+    navigate.push('/Login');
 };
 
   return (

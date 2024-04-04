@@ -43,7 +43,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         localStorage.removeItem('loggedInEmail');
         localStorage.removeItem('LoggedInUser');
         localStorage.removeItem('loggedInRole');
-        navigate.push('/');
+        navigate.push('/Login');
         };
 
     const menuItem = [
@@ -63,7 +63,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             icon: <FaTableCells  />
         },
         {
-            path: '/',
+            path: '/Login',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick 

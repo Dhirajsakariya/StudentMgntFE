@@ -88,7 +88,7 @@ const Login = () => {
                             navigate.push('/StudentPersonal');
                             break;
                         default:
-                            navigate.push('/'); 
+                            navigate.push('/Login'); 
                             break;
                     }
                 }, 1500); 

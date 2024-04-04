@@ -38,7 +38,7 @@ const AdminSidebar = ({handleLogout, children }) => {
         localStorage.removeItem('loggedInEmail');
         localStorage.removeItem('loggedInUserId');
         localStorage.removeItem('loggedInRole');
-        navigate.push('/');
+        navigate.push('/Login');
         };
     
     const menuItem = [
@@ -73,7 +73,7 @@ const AdminSidebar = ({handleLogout, children }) => {
             icon: <FaMarkdown />
         },
         {
-            path: '/',
+            path: '/Login',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick

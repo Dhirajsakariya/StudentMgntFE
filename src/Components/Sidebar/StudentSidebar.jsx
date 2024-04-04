@@ -39,7 +39,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
         localStorage.removeItem('loggedInEmail');
         localStorage.removeItem('LoggedInUser');
         localStorage.removeItem('loggedInRole');
-        navigate.push('/');
+        navigate.push('/Login');
         };
     
     const menuItem = [
@@ -54,7 +54,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
             icon: <FaGooglePay   />
         },
         {
-            path: '/',
+            path: '/Login',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick

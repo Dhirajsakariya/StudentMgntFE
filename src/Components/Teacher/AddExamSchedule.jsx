@@ -93,7 +93,7 @@ const AddExamSchedule = () => {
     }
     else{
       setTimeout(() => {
-        navigate.push('/') 
+        navigate.push('/Login') 
         }, 1500);
       toast.success("Added Exam Time")
     }
