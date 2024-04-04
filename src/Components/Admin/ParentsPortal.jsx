@@ -34,6 +34,7 @@ const ParentsPortal = () => {
   const [mobilenumber, setMobileNumber] = useState('');
   const [relationError, setRelationError] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
   const relations=[ "Father", "Mother"];
 
   useEffect(() => {
