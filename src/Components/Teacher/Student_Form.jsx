@@ -37,7 +37,7 @@ export const Student_Form = () => {
       const userRoleString = localStorage.getItem('loggedInRole');
       if (userRoleString) {
         const userRole = JSON.parse(userRoleString);
-        console.log('loggedInRole for time table', userRole.Role);
+        console.log('loggedInRole for Student form', userRole.Role);
         if (userRole.Role !== 'teacher') {
           setRedirectToNotFound(true);
         }
