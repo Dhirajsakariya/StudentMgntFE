@@ -29,7 +29,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for time table', userRole.Role);
+          console.log('loggedInRole for Teacher Sidebar', userRole.Role);
           if (userRole.Role !== 'teacher') {
             setRedirectToNotFound(true);
           }

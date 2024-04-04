@@ -18,7 +18,7 @@ const AdminPersonal = () => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
       const userRole = JSON.parse(userRoleString);
-      console.log('loggedInRole for time table', userRole.Role);
+      console.log('loggedInRole for Admin Personal', userRole.Role);
       if (userRole.Role !== 'admin') {
         setRedirectToNotFound(true);
       }

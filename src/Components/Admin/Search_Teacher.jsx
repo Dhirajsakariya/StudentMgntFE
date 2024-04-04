@@ -25,7 +25,7 @@ const Search_Teacher = () => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for time table', userRole.Role);
+          console.log('loggedInRole for Search Teacher', userRole.Role);
           if (userRole.Role !== 'admin') {
             setRedirectToNotFound(true);
           }

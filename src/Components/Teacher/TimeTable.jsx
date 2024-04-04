@@ -57,7 +57,7 @@ const TimeTable = () => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for time table', userRole.Role);
+          console.log('loggedInRole for Time table', userRole.Role);
           if (userRole.Role !== 'teacher') {
             setRedirectToNotFound(true);
           }
