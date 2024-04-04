@@ -10,6 +10,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { toast, Toaster } from 'react-hot-toast';
 import { FaSearch } from 'react-icons/fa';
 import { Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Search_Student = () => {
   
   const [originalData, setOriginalData] = useState([]);
@@ -19,14 +20,25 @@ const Search_Student = () => {
   const [editedStudent, setEditedStudent] = useState(null);
  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
- useEffect(() => {
-    const userRole = localStorage.getItem('loggedInRole');
-    if (userRole !== 'admin') {
-      setRedirectToNotFound(false);
+//  useEffect(() => {
+//     const userRole = localStorage.getItem('loggedInRole');
+//     if (userRole !== 'admin') {
+//       setRedirectToNotFound(false);
+//     }
+//   })
+
+useEffect(() => {
+  const userRoleString = localStorage.getItem('loggedInRole');
+  if (userRoleString) {
+    const userRole = JSON.parse(userRoleString);
+    console.log('loggedInRole for time table', userRole.Role);
+    if (userRole.Role !== 'admin') {
+      setRedirectToNotFound(true);
     }
-  })
-
-
+  } else {
+    console.error('loggedInRole not found in localStorage');
+  }
+}, []);
 
   // GET Student
   const getData = () => {
@@ -95,10 +107,21 @@ const Search_Student = () => {
   };
   
   //To Delete the Student
-  const handleDelete = (id) => {
-    if (window.confirm('Are You Sure To Delete This Student')) {
+  
+    const handleDelete = (id) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this user!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#29c2a6',
+        cancelButtonColor: '#ee8686',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result)=> {
+       
+    if (result.isConfirmed) {
       axios
-        .delete(`${config.ApiUrl}Student/DeleteStudent${id}`)
+        .delete(`${config.ApiUrl}Student/DeleteStudent/${id}`)
         .then((response) => {
           if (response.status === 200) {
             setData((prevData) => prevData.filter((student) => student.id !== id));
@@ -111,7 +134,9 @@ const Search_Student = () => {
           console.error('Error Deleting Student :', error);
           toast.error('failed to Delete Student');
         });
+        
     }
+  });
   };
 
  // Function to filter data based on search query
@@ -140,8 +165,8 @@ const Search_Student = () => {
   };
 
   if (redirectToNotFound) {
-        return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
-      }
+    return <Redirect to="/PageNotFound" />; 
+  }
 
   return (
     <AdminSidebar>
@@ -166,7 +191,7 @@ const Search_Student = () => {
                 <th>Gender</th>
                 <th>Mobile Number</th>
                 <th>Standard</th>
-                <th>Actions</th>
+                <th id='actionth'>Actions</th>
               </tr>
             </thead>
            
@@ -211,7 +236,7 @@ const Search_Student = () => {
                          onClose={() => setSelectedStudent(null)}
                          closeOnDocumentClick={false} // Prevents closing on document click
                          closeOnEscape={false} // Prevents closing on escape key press
->
+                         >
                     {selectedStudent && (
                       <div >
                         <button id="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
@@ -249,7 +274,7 @@ const Search_Student = () => {
               
                               <div id='edit-popuppart1'>
 
-                                <label>Standard:</label>
+                                <label id='edit-popuplabel'>Standard:</label>
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -258,7 +283,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, standard: e.target.value })}
                                     /> 
 
-                                <label>Roll No.:</label>
+                                <label id='edit-popuplabel'>Roll No.:</label>
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -267,7 +292,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, rollNo: e.target.value })}
                                     /> 
       
-                                <label>Name:</label> 
+                                <label id='edit-popuplabel'>Name:</label> 
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -276,7 +301,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, name: e.target.value })}
                                     /> 
      
-                                <label>Email:</label> 
+                                <label id='edit-popuplabel'>Email:</label> 
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -285,7 +310,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, email: e.target.value })}
                                     /> 
 
-                                <label>Gender:</label> 
+                                <label id='edit-popuplabel'>Gender:</label> 
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -294,7 +319,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, email: e.target.value })}
                                     /> 
 
-                                <label>Birth Date:</label> 
+                                <label id='edit-popuplabel'>Birth Date:</label> 
                                     <input
                                         id="edit-popup1"
                                         type="text"
@@ -303,7 +328,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, birthDate: e.target.value })}
                                     /> 
      
-                                 <label>Mobile No:</label> 
+                                 <label id='edit-popuplabel'>Mobile No:</label> 
                                      <input
                                          id="edit-popup1"
                                          type="text"
@@ -315,7 +340,7 @@ const Search_Student = () => {
 
                               <div id="edit-popuppart2">
 
-                                <label>Join Date:</label> 
+                                <label id='edit-popuplabel'>Join Date:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -324,7 +349,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, joinDate: e.target.value })}
                                     /> 
       
-                                <label>Blood Group:</label> 
+                                <label id='edit-popuplabel'>Blood Group:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -333,7 +358,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, bloodGroup: e.target.value })}
                                     /> 
       
-                                <label>Address:</label> 
+                                <label id='edit-popuplabel'>Address:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -342,7 +367,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, address: e.target.value })}
                                     /> 
      
-                                <label>City:</label> 
+                                <label id='edit-popuplabel'>City:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -351,7 +376,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, city: e.target.value })}
                                     /> 
       
-                                <label>District:</label> 
+                                <label id='edit-popuplabel'>District:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -360,7 +385,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, district: e.target.value })}
                                     /> 
       
-                                <label>State:</label> 
+                                <label id='edit-popuplabel'>State:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -369,7 +394,7 @@ const Search_Student = () => {
                                         setEditedStudent({ ...editedStudent, state: e.target.value })}
                                 /> 
                                 
-                                <label>PinCode:</label> 
+                                <label id='edit-popuplabel'>PinCode:</label> 
                                     <input
                                         id="edit-popup2"
                                         type="text"
@@ -384,7 +409,7 @@ const Search_Student = () => {
                     </Popup>
           </>
         </Fragment>
-        <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+         <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
       </>
     </AdminSidebar>
   );
