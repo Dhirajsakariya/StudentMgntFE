@@ -37,7 +37,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
 
     const handleLogoutClick = () => {
         localStorage.removeItem('loggedInEmail');
-        localStorage.removeItem('LoggedInUser');
+        localStorage.removeItem('loggedInUserId');
         localStorage.removeItem('loggedInRole');
         navigate.push('/Login');
         };
@@ -65,7 +65,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
     useEffect(() => {
         const fetchstudentDetails = async () => {
           try {
-            const storedId = JSON.parse(localStorage.getItem('LoggedInUser'));
+            const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
     
             if (!storedId) {
               throw new Error('User ID not found in local storage');
