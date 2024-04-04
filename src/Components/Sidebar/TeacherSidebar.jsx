@@ -10,6 +10,7 @@ import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { useHistory,Redirect} from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
+import { MdEditCalendar } from "react-icons/md";
 import Logout from '../Login/Logout';
 
 const TeacherSidebar = ({ handleLogout,children }) => {
@@ -61,6 +62,11 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             path: '/TimeTable',
             name: 'TimeTable',
             icon: <FaTableCells  />
+        },
+        {
+            path: '/AddExamSchedule',
+            name: 'Exam Schedule',
+            icon: <MdEditCalendar />
         },
         {
             path: '/Login',
