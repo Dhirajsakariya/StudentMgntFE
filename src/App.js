@@ -57,8 +57,8 @@ function App() {
           <PrivateRoute path='/Search_Student' component={Search_Student} />
           <PrivateRoute path='/StudentMarks' component={StudentMarks} />
           <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
-          <Route path='/' component={Login} />
-          <Redirect to="/" />
+          <Route path='/Login' component={Login} />
+          <Redirect to="/Login" />
         </Switch>
       </Router>
     </div>

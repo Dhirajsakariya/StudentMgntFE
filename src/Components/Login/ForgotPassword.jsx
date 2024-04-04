@@ -50,7 +50,7 @@ const ForgotPassword = () => {
             {      
                 toast.success("Changed  Password Successfully!");     
                 setTimeout(() => {
-                    navigate.push('/') 
+                    navigate.push('/Login') 
                   }, 1500); 
                 localStorage.setItem('registeredEmail', email);
             } 

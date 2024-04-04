@@ -18,7 +18,7 @@
     text-align: center;
 }
 #searchstudenttable{
-    background-color: #b7c4cb;
+    background-color: #dbdddf;
 }
 #searchstudent{ 
     width:320px;
@@ -68,7 +68,7 @@
     margin-left: 75px ;
 }
 #trsearchstudent{
-    background-color: rgb(209, 204, 204);
+    background-color: hsl(107, 17%, 78%);
     height: 35px;
 }
 #tr1searchstudent{
