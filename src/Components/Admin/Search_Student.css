@@ -44,7 +44,6 @@
     margin-left: -25px;
     margin-bottom: -3px;
 }
-
 #studentdetailpopup{
     color:black;
     width:290px;
@@ -79,14 +78,15 @@
     height:30px
 }
 #btnviewsearchstudent {
-    color: black;
-    
+    color: black;   
     border: none;
     width:50px
 }
+#actionth{
+  width: 130px;
+}
 #btnviewsearchstudent:hover {
-    color: black;
-    
+    color: black;    
     border: none;
     width:50px
 }
@@ -95,15 +95,19 @@
     background-color: #0d6efd;
     border-color: #0d6efd;
     width:50px;
-    margin-left: -123px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-left: -134px;   
 }
 #btndeletesearchstudent {
     color: #fff;
     background-color: #dc3545;
     border-color: #dc3545;
-    width:50px
+    width:50px ;
+    margin-left: 5px;
 }
 #close-btn {
+
     position: absolute;
     top: 0px;
     right: 10px;
@@ -131,7 +135,7 @@
   #edit-popuppart1{
     margin-left:50px ;
   }
-  #edit-popup label {
+  #edit-popuplabel {
     display: block;
     margin-bottom: -5px;
   }
@@ -170,6 +174,57 @@
     margin-left: 330px;
     margin-top: 30px;
   }
-  #edit-popupbtn:hover {
+ #edit-popupbtn:hover {
     background-color: #0056b3;
+}
+.swal2-popup{
+    box-shadow: 0 3px 20px -10px #4a4a4a;
+    background:white;
+    height: 215px;
+    width: fit-content;
+    position: relative;
+    margin-left: 30px;
+    margin-top: 30px;
+    box-shadow: 0 3px 20px -10px #4a4a4a;
+    background: white;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 100%);
+    padding: 0 0 1.25em;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .swal2-icon {
+    height: 50px;
+    width:50px;
+    margin-top: 20px;
+    position: relative;
+    justify-content: center;
+    margin: 8px auto -9px;
+    border: 2px solid white;
+    border-color: white;
+  }
+  
+  .swal2-title{
+    font-size: 17px;
+    height: 1px;
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+    padding: 1px;
+  }
+  
+  .swal2-cancel, .swal2-confirm{
+    width: 135px;
+    margin-top: -70px;
+    margin-bottom: -55px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .swal2-success{
+    border-color: #a5dc86;
+    color: #a5dc86;
+    height:70px;
+    width: 70px;
+    margin-top: 10px;
   }
