@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import { FaRupeeSign } from "react-icons/fa";
 import StudentSidebar from '../Sidebar/StudentSidebar';
 import './StudentFeeForm.css';
-import { toast, Toaster } from 'react-hot-toast';
 
 const StudentFeeForm = () => {
   const [feeAmount, setFeeAmount] = useState('');
@@ -117,7 +117,7 @@ const StudentFeeForm = () => {
           </div>
           <button id="buttontypee" type="submit">Pay</button>
           <br /><br />
-          <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 13000, }} position="top-center" reverseOrder={false} />
+          <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500, }} position="top-center" reverseOrder={false} />
         </form>
       </div>
     </StudentSidebar>
