@@ -95,7 +95,10 @@ const AddExamSchedule = () => {
       toast.error('Failed to add exam schedule. Please try again later.');
       console.error('Error adding exam schedule:', error);
     }
-
+    
+    const updatedExamSchedule = await axios.get(`${config.ApiUrl}Exam/GetExams`);
+    setExamSchedules(updatedExamSchedule.data);
+          
     // Reset form fields
     setExamType('');
     setStandard('');
@@ -164,12 +167,12 @@ const AddExamSchedule = () => {
             <table id='student-table'>
               <tbody>
                 <tr>
-                  <td id='student-exam-th'>Standard:</td>
-                  <td id='student-exam-th'>Subject:</td>
-                  <td id='student-exam-th'>Exam Type:</td>
-                  <td id='student-exam-th'>Exam Date:</td>
-                  <td id='student-exam-th'>Start Time:</td>
-                  <td id='student-exam-th'>End Time:</td>
+                  <td id='student-exam-th'>Standard</td>
+                  <td id='student-exam-th'>Subject</td>
+                  <td id='student-exam-th'>Exam Type</td>
+                  <td id='student-exam-th'>Exam Date</td>
+                  <td id='student-exam-th'>Start Time</td>
+                  <td id='student-exam-th'>End Time</td>
                 </tr>
                 <tr id='student-exam-row'>
                   <td>
@@ -179,7 +182,7 @@ const AddExamSchedule = () => {
                       required
                       onChange={(e) => setStandard(e.target.value)}
                     >
-                      <option value="" disabled hidden>Select Standard</option>
+                      <option value="" disabled={true}>Select Standard</option>
                       {standardData.map((standard) => (
                         <option key={standard} value={standard}>
                           {standard}
@@ -194,7 +197,7 @@ const AddExamSchedule = () => {
                       required
                       onChange={(e) => setSubject(e.target.value)}
                     >
-                      <option value="" disabled hidden>Select Subject</option>
+                      <option value="" disabled={true}>Select Subject</option>
                       {subjectData.map((subject) => (
                         <option key={subject} value={subject}>
                           {subject}
@@ -209,8 +212,8 @@ const AddExamSchedule = () => {
                       onChange={(e) => setExamType(e.target.value)}
                       required
                     >
-                      <option value="" disabled hidden>Select Exam Type</option>
-                      <option value="Midterm">Midterm</option>
+                      <option value="" disabled={true}>Select Exam Type</option>
+                      <option value="Midterm">Mid-Term</option>
                       <option value="Final">Final</option>
                     </select>
                   </td>
