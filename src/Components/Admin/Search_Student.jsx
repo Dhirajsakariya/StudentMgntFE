@@ -263,7 +263,7 @@ useEffect(() => {
               )}
             </tbody>
           </table>
-                 <Popup  contentStyle={{width: "400px",background:'lightgray'}}
+                 <Popup  contentStyle={{width: "400px",borderRadius:'10px',background:'#f7f9fb'}}
                          open={selectedStudent !== null}
                          onClose={() => setSelectedStudent(null)}
                          closeOnDocumentClick={false} // Prevents closing on document click
