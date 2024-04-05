@@ -137,12 +137,12 @@ const TeacherPersonal = () => {
 
        <label> 
        <strong className='strong-teacher'> Email: </strong> 
-       {teacher.email} 
+       {teacher.email}
        </label> <br />
 
         <label>
-        <strong className='strong-teacher'> Birthdate: </strong> 
-        {teacher.birthDate} 
+        <strong className='strong-teacher'> Birthdate: </strong>
+        {teacher.birthDate.split("-").reverse().join("-")} 
         <br /> </label>
 
         <label> 
@@ -152,7 +152,7 @@ const TeacherPersonal = () => {
 
         <label>
         <strong className='strong-teacher'>Join Date:</strong>
-        {teacher.joinDate}
+        {teacher.joinDate.split("-").reverse().join("-")}
         </label><br />
 
         <label> 

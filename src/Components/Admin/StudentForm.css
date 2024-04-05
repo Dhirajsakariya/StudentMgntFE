@@ -132,7 +132,7 @@ border-radius: 5px;
   text-decoration: underline;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
-  #radio-groupa  {
+  #radio-groupa  { 
     display: inline-flex;
     align-items: center;
     margin-left: 7%;
@@ -140,7 +140,7 @@ border-radius: 5px;
   #radio-groupa label {
     margin-top: 1%;
     margin-right: 49%;
-
+    margin-left: 10px;
   }
   #radio-groupa input {
     width: 15%;

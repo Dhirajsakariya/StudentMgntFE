@@ -71,7 +71,7 @@ const AdminPersonal = () => {
     <AdminSidebar>
     <div className='Admin-personal-info'>
       <h2 className='Admin-personal-info-h2'>Admin Details</h2>
-      <div className='strong-Admin-personal-info'>
+      <div className='strong-Admin-personal-info'> 
 
         <label>
         <strong className='strong-Admin'> Name: </strong> 
@@ -81,11 +81,11 @@ const AdminPersonal = () => {
        <label>
        <strong className='strong-Admin'> Email: </strong>
        {Admin.email}
-       </label> <br />
+       </label><br />
 
         <label> 
         <strong className="strong-Admin"> Birthdate: </strong>
-        {Admin.birthDate}
+        {Admin.birthDate.split("-").reverse().join("-")}
         <br /> </label>
         
         <label>
@@ -95,7 +95,7 @@ const AdminPersonal = () => {
        
         <label>
         <strong className='strong-Admin'>Join Date:</strong>
-        {Admin.joinDate}
+        {Admin.joinDate.split("-").reverse().join("-")}
         </label><br />
 
         <label> 

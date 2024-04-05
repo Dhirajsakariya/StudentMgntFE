@@ -93,8 +93,8 @@ const StudentPersonal = () => {
 
         <label >
          <strong className='strong-student'>Birthdate: </strong>
-         {Student.birthDate} 
-         <br /> </label>
+         {Student.birthDate.split("-").reverse().join("-")} 
+         <br /> </label> 
         
         <label> 
         <strong className='strong-student'>Mobile Number: </strong>
@@ -108,7 +108,7 @@ const StudentPersonal = () => {
 
         <label>
           <strong className='strong-student'>Join Date:</strong>
-          {Student.joinDate}
+          {Student.joinDate.split("-").reverse().join("-")} 
         </label><br />
 
         <label className="label-student">

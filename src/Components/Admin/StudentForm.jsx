@@ -26,7 +26,6 @@ const StudentForm = () => {
     const [gender,setGender] = useState('');
     const [birthday, setBirthday] = useState('');
     const [joinDate,setJoinDate] = useState('');
-    
     const [address,setAddress] = useState('');
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
@@ -245,7 +244,7 @@ const { id } = useParams();
                          onChange={() => setGender("male")}
                          required/>
                        <label>Male</label>
-                       <input
+                       <input 
                          type="radio"
                          value="female"
                          checked={gender === "female"}
@@ -270,7 +269,7 @@ const { id } = useParams();
                   <div>
                     <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
                      <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
-                      <option value="">--Select BloodGroup--</option>
+                      <option value="" disabled={true}>--Select BloodGroup--</option>
                         {bloodGroup.map((bloodGroup, index) => (
                           <option key={index} value={bloodGroup}>{bloodGroup}</option>
                           ))}
@@ -286,9 +285,9 @@ const { id } = useParams();
                       id='inputstudentform'
                       required
                       onChange={(e) => setStandard(e.target.value)}>
-                      <option value="">Select Standard</option>
+                      <option value="" disabled={true}>Select Standard</option>
                         {standardData.map((standard) => (
-                      <option key={standard} value={standard}>
+                      <option key={standard} value={standard} >
                        {standard}
                       </option>
                        ))}
@@ -297,8 +296,7 @@ const { id } = useParams();
                     {standardError && <p style={{color:'red'}}>{standardError}</p>}
                   </div>
                 </div>
-            </div>     
-
+            </div>    
 
            <div id='form-groupstudentform-2'>        
                     
@@ -307,7 +305,7 @@ const { id } = useParams();
                 <input 
                 id='inputstudentform2' 
                 type='date' 
-                value={joinDate} max={moment().format("YYYY-MM-DD")} 
+                value={joinDate}
                 onChange={(e) => setJoinDate(e.target.value)} 
                 required />
             </div>

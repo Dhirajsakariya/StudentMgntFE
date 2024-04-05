@@ -1,21 +1,18 @@
 #mainsearchstudent{
-    margin-top:60px;
+    margin-top:40px;
     margin-left:auto;
     margin-right: auto;
-    width: 100%;
-    height: 50%;
+    width: 95%;
+    height: 60%;
 }
 #searchstudentbutton{
-    width:400px;
-    margin-left : auto;
-    margin-right: auto;
-    height: 30px;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin-left: 70px;
-    font-size: 15px;
-    margin-top: 15px;
-    text-align: center;
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-left: 35px;
+  padding-left: 20px;
 }
 #searchstudenttable{
     background-color: #dbdddf;
@@ -36,13 +33,12 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-  
 #butnnameview:hover {
     background-color: lightgray;
 }
 #iconsearchstudent{
-    margin-left: -25px;
-    margin-bottom: -3px;
+  margin-left:-30px;
+  margin-bottom: -2px;
 }
 #studentdetailpopup{
     color:black;
@@ -69,6 +65,8 @@
 }
 #trsearchstudent{
     background-color: hsl(107, 17%, 78%);
+    color: #146a51;
+    font-size: 18px;
     height: 35px;
 }
 #tr1searchstudent{
@@ -80,10 +78,20 @@
 #btnviewsearchstudent {
     color: black;   
     border: none;
-    width:50px
+    width:50px;
 }
 #actionth{
-  width: 130px;
+  width: 220px;
+}
+#btnaddstudent{
+  width:5%;
+  color: #fff;
+  background-color: #146a51; 
+  margin-left: 20px;
+  border-radius: 5px;
+  margin-top: -20px;
+  height: 31px;
+  font-size: 20px;
 }
 #btnviewsearchstudent:hover {
     color: black;    
@@ -97,7 +105,7 @@
     width:50px;
     margin-right: auto;
     margin-left: auto;
-    margin-left: -134px;   
+    margin-left: -220px;
 }
 #btndeletesearchstudent {
     color: #fff;
@@ -106,8 +114,14 @@
     width:50px ;
     margin-left: 5px;
 }
+#btnaddfamilysearchstudent {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  width:50px ;
+  margin-left: 5px;
+}
 #close-btn {
-
     position: absolute;
     top: 0px;
     right: 10px;
@@ -118,32 +132,32 @@
     font-size: 20px;
     cursor: pointer;
     margin-top: 5px;
-  }
-  #close-btn:hover {
+}
+#close-btn:hover {
     color: white;
     background-color: red; /* Change color on hover if desired */
-  }
-  #headingpopup{
+}
+#headingpopup{
     margin-bottom: 20px;
     margin-top: 20px;
     text-align: center;
     color: #007bff;
-  }
-  #edit-popup {
+}
+#edit-popup {
     padding: 20px;
-  }
-  #edit-popuppart1{
+}
+#edit-popuppart1{
     margin-left:50px ;
-  }
-  #edit-popuplabel {
+}
+#edit-popuplabel {
     display: block;
     margin-bottom: -5px;
-  }
-  #edit-popuppart2{
+}
+#edit-popuppart2{
     margin-left: 400px;
     margin-top: -443px;
-  }
-  #edit-popup1  {
+}
+#edit-popup1  {
     width: 300px;
     padding: 5px;
     margin-top: 10px;
@@ -152,8 +166,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     height: 35px; 
-  } 
-   #edit-popup2  {
+} 
+#edit-popup2  {
     width: 300px;
     padding: 5px;
     margin-top: 10px;
@@ -162,8 +176,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     height: 35px; 
-  }
-  #edit-popupbtn {
+}
+#edit-popupbtn {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -173,8 +187,8 @@
     font-size: 16px;
     margin-left: 330px;
     margin-top: 30px;
-  }
- #edit-popupbtn:hover {
+}
+#edit-popupbtn:hover {
     background-color: #0056b3;
 }
 .swal2-popup{

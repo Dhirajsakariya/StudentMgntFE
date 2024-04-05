@@ -11,14 +11,17 @@ import { toast, Toaster } from 'react-hot-toast';
 import { FaSearch } from 'react-icons/fa';
 import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
+import { MdOutlineFamilyRestroom } from "react-icons/md";
+
 const Search_Student = () => {
   
-  const [originalData, setOriginalData] = useState([]);
-  const [data, setData] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [editedStudent, setEditedStudent] = useState(null);
- const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+const [originalData, setOriginalData] = useState([]);
+const [data, setData] = useState(null);
+const [selectedStudent, setSelectedStudent] = useState(null);
+const [searchQuery, setSearchQuery] = useState('');
+const [editedStudent, setEditedStudent] = useState(null);
+const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
 //  useEffect(() => {
 //     const userRole = localStorage.getItem('loggedInRole');
@@ -26,6 +29,8 @@ const Search_Student = () => {
 //       setRedirectToNotFound(false);
 //     }
 //   })
+
+const history = useHistory();
 
 useEffect(() => {
   const userRoleString = localStorage.getItem('loggedInRole');
@@ -111,7 +116,7 @@ useEffect(() => {
     const handleDelete = (id) => {
       Swal.fire({
         title: 'Are you sure?',
-        text: 'You will not be able to recover this user!',
+        text: 'You will not be able to recover this Student!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#29c2a6',
@@ -138,6 +143,16 @@ useEffect(() => {
     }
   });
   };
+
+  //To add Family Details
+  const handleAddFamily = () =>{
+    history.push('/ParentsPortal');
+  }
+
+ //To add Student Details
+ const handleAddStudent = () =>{
+  history.push('/StudentForm');
+}
 
  // Function to filter data based on search query
  const handleSearch = (query) => {
@@ -180,7 +195,10 @@ useEffect(() => {
                   value={searchQuery}
                   onChange={handleSearchChange}/>
                   <FaSearch id="iconsearchstudent" />
+                  <button id="btnaddstudent" onClick={handleAddStudent}>Add</button>
           </div>
+
+          
 
             <table id="mainsearchstudent">
              <thead>
@@ -212,13 +230,18 @@ useEffect(() => {
                       <td>{student.mobileNumber}</td>
                       <td>{student.standard}</td>
                       <td>{student.subject}</td>
-                      <td colSpan={2}>
+                      <td colSpan={3}>
                         <button id="btneditsearchstudent" onClick={() => handleEdit(student.id)}>
                           <FiEdit />
                         </button>
                        
                         <button id="btndeletesearchstudent" onClick={() => handleDelete(student.id)}>
                           <RiDeleteBin6Line />
+                        </button>
+
+                        <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
+                        <MdOutlineFamilyRestroom />
+
                         </button>
                       </td>
                     </tr>
@@ -245,9 +268,9 @@ useEffect(() => {
                             <p id='psearchstudent'><b>Roll No:</b> {selectedStudent.rollNo}</p>
                             <p id='psearchstudent'><b>Email:</b> {selectedStudent.email}</p>
                             <p id='psearchstudent'><b>Gender:</b> {selectedStudent.gender}</p>
-                            <p id='psearchstudent'><b>Birth Date:</b> {selectedStudent.birthDate}</p>
+                            <p id='psearchstudent'><b>Birth Date:</b> {selectedStudent.birthDate.split("-").reverse().join("-")}</p>
                             <p id='psearchstudent'><b>Mobile Number:</b> {selectedStudent.mobileNumber}</p>
-                            <p id='psearchstudent'><b>Join Date:</b> {selectedStudent.joinDate}</p>
+                            <p id='psearchstudent'><b>Join Date:</b> {selectedStudent.joinDate.split("-").reverse().join("-")}</p>
                             <p id='psearchstudent'><b>Blood Group:</b> {selectedStudent.bloodGroup}</p>
                             <p id='psearchstudent'><b>Address: </b>{selectedStudent.address}</p>
                             <p id='psearchstudent'><b>City: </b>{selectedStudent.city}</p>
@@ -317,13 +340,13 @@ useEffect(() => {
                                         value={editedStudent.email}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, email: e.target.value })}
-                                    /> 
+                                    />  
 
                                 <label id='edit-popuplabel'>Birth Date:</label> 
                                     <input
                                         id="edit-popup1"
                                         type="text"
-                                        value={editedStudent.birthDate}
+                                        value={editedStudent.birthDate.split("-").reverse().join("-")}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, birthDate: e.target.value })}
                                     /> 
@@ -344,7 +367,7 @@ useEffect(() => {
                                     <input
                                         id="edit-popup2"
                                         type="text"
-                                        value={editedStudent.joinDate}
+                                        value={editedStudent.joinDate.split("-").reverse().join("-")}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, joinDate: e.target.value })}
                                     /> 
