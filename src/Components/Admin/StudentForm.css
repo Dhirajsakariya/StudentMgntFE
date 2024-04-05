@@ -6,7 +6,7 @@
   height:550px;
   background: transparent;
   border: 2px solid;
-  background-color: hsl(107, 17%, 78%);
+  background-color:  #e1e4e8;
   margin-left: auto;
   padding-top: auto;
   padding-bottom: 7%;
@@ -28,7 +28,7 @@
 #containerstudentform h2{
   justify-content: center;
   padding-top: 0.1%;
-  color:#146a51;
+  color:#24305E;
   text-align: center;
   font: bold;
   margin-top: -1%;
@@ -111,7 +111,7 @@ border-radius: 5px;
   border-radius: 10px;
   outline: auto;
   border: 1px;
-  background:#146a51;
+  background:#24305E;
   justify-content: center;
   text-align: center;
   margin-left: 40%;

@@ -15,7 +15,7 @@
   padding-left: 20px;
 }
 #searchstudenttable{
-    background-color: #dbdddf;
+    background-color: #f7f9fb;
 }
 #searchstudent{ 
     width:320px;
@@ -64,8 +64,8 @@
     margin-left: 75px ;
 }
 #trsearchstudent{
-    background-color: hsl(107, 17%, 78%);
-    color: #146a51;
+    background-color: #24305E;
+    color: white;
     font-size: 18px;
     height: 35px;
 }
@@ -86,7 +86,7 @@
 #btnaddstudent{
   width:5%;
   color: #fff;
-  background-color: #146a51; 
+  background-color: rgb(68, 161, 68); 
   margin-left: 20px;
   border-radius: 5px;
   margin-top: -20px;

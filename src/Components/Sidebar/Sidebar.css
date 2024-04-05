@@ -9,7 +9,7 @@ main{
   color: #000;
   height: 131.9vh;
   transition:all 0.5s;
-  background-color: white;
+  background-color: #f7f9fb;
 }
 .top-section{
   display: flex;
@@ -20,7 +20,7 @@ main{
 }
 .logo{
   font-size: 20px;
-  color: hsl(107, 10%, 72%);
+  color:#24305E ;
   font: bolder;
   margin-left: 12px;
   margin-top: 5%;
@@ -44,13 +44,13 @@ main{
   transition: all 0.5s;
 }
 .link:hover{
-  background: hsl(107, 17%, 78%);
-  color: #000;
+  background:#24305E;
+  color:white;
   transition: all 0.5s;
 }
 .active{
-  background:  hsl(107, 17%, 78%);
-  color: #000;
+  background:#24305E;
+  color: white;
 }
 .icons{
   font-size: 25px;
@@ -69,7 +69,7 @@ main{
   position: relative;
   width: 100%;
   /* height: 55px; */
-  background-color: hsl(107, 17%, 78%);
+  background-color:#24305E;
 }
 #menu-trigger {
   display: flex;
@@ -91,7 +91,7 @@ main{
   padding: 10px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight:800;
-  color: #146a51;;
+  color:#e1e4e8;
   font-size: xx-large;
 }
 #dropdown-menu {
@@ -123,7 +123,7 @@ main{
 }
 
 #dropdown-menu ul li a:hover {
-  color: #146a51;
+  color: #24305E;
   font-weight: bold;
 }
 

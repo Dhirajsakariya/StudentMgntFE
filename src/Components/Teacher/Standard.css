@@ -4,7 +4,7 @@
 }
 
 #stdheader{
-    color:#146a51;
+    color:#24305E;
     font-weight: 300;
     text-align: center;
     margin-bottom: 1.5%;
@@ -24,7 +24,7 @@
     table-layout: fixed;
     border: 1px solid black;
     text-align: center;
-    background-color: hsl(107, 17%, 78%);
+    background-color: #e1e4e8;
 }
 
 #tbl-content{    
@@ -38,7 +38,7 @@
     vertical-align:middle;    
     font-size: 130%;
     color: white;
-    background-color: #146a51;    
+    background-color: #24305E;    
 }
 
 #stdtd{        

@@ -10,14 +10,14 @@
   width: 120px;
 }
 #heading{
-  background-color: hsl(107, 17%, 78%);
-  color: #146a51;;
+  background-color:#24305E;
+  color:white;
   height: 40px;
   font-size: 18px;
   
 }
 #table_body{
- background-color:#dbdddf;
+ background-color:#f7f9fb;
 } 
 #div-details{
   color: black;
@@ -44,11 +44,11 @@
 #btn-Add{
   background-color: rgb(68, 161, 68);
   margin-left:20px;
-  color: white;
-  border-radius: 5px;
+ color: white;
+  border-radius: 10px;
   font-size: 20px;
-  width: 5%;
-  height:31px;
+  width: 8%;
+  height:32px;
 
 }
 
@@ -98,9 +98,10 @@ width: auto;
 }
 
 #btn-edit{
-  color:black;
+  color:white;
   background-color: #007bff;
   border-color: #007bff;
+  border-radius: 3px;
   width: 50px;
 }
 #btn-close{
@@ -116,7 +117,8 @@ width: auto;
   cursor: pointer;
 }
 #btn-close:hover{
-  background-color:rgb(156, 127, 127);
+  background-color:rgb(219, 35, 35);
+  color: white;
 
 }
 #btn-delete{
@@ -124,6 +126,7 @@ width: auto;
   background-color: #dc3545;
   border-color: #dc3545;
   width: 50px;
+  border-radius: 3px;
 }
 #td-align{
   text-align: center;
