@@ -1,7 +1,7 @@
 #main{
   margin-left: auto;
   margin-right: auto;
-  margin-top:40px;
+  margin-top:15px;
   width: 100%;
   height: 40%;
   padding: 30px 30px;
@@ -11,8 +11,9 @@
 }
 #heading{
   background-color: hsl(107, 17%, 78%);
-  color: white;
+  color: #146a51;;
   height: 40px;
+  font-size: 18px;
   
 }
 #table_body{
@@ -32,7 +33,7 @@
   border-radius: 10px;
   font-size: 18px;
   margin-top: 20px;
-  margin-left: 40px;
+  margin-left: 32px;
   padding-left: 20px;
 }
 #teachersearchicon{
@@ -40,6 +41,17 @@
   margin-bottom: -2px;
 
 }
+#btn-Add{
+  background-color: rgb(68, 161, 68);
+  margin-left:20px;
+  color: white;
+  border-radius: 5px;
+  font-size: 20px;
+  width: 5%;
+  height:31px;
+
+}
+
 #btn-view{
   border: none;
   background-color: transparent;

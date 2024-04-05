@@ -11,6 +11,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
 import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const Search_Teacher = () => {
@@ -25,7 +26,7 @@ const Search_Teacher = () => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for Search Teacher', userRole.Role);
+          console.log('loggedInRole for time table', userRole.Role);
           if (userRole.Role !== 'admin') {
             setRedirectToNotFound(true);
           }
@@ -33,6 +34,12 @@ const Search_Teacher = () => {
           console.error('loggedInRole not found in localStorage');
         }
       }, []);
+      
+      const history =useHistory();
+
+      const handleAddTeacher=()=>{
+        history.push('/TeacherForm');
+      }
        
        const handleSearch = (query) => {
         const filteredData = originalData.filter((student) =>
@@ -169,15 +176,15 @@ const Search_Teacher = () => {
               onChange={handleSearchChange}
               />
               <FaSearch  id='teachersearchicon'/>
-              
+              <button id='btn-Add' onClick={handleAddTeacher}>Add</button>
           </div>
-
+     
         <table id='main'>
         <thead >
           <tr id='heading'>
             <th>ID</th>
             <th id='th-name'> Name</th>
-            <th>Email</th>
+            <th id='th-email'>Email</th>
             <th>Gender</th>
             <th>Mobile Number</th>
             <th>Standard</th>
@@ -238,8 +245,8 @@ const Search_Teacher = () => {
               <p id='pop-field'><b>Email:</b>{selectedTeacher.email}</p>
               <p id='pop-field'><b>Gender:</b> {selectedTeacher.gender}</p>
               <p id='pop-field'><b>Mobile Number:</b> {selectedTeacher.mobileNumber}</p>
-              <p id='pop-field'><b>BirthDate: </b>{selectedTeacher.birthDate}</p>
-              <p id='pop-field'><b>JoinDate:</b> {selectedTeacher.joinDate}</p>
+              <p id='pop-field'><b>BirthDate: </b>{selectedTeacher.birthDate.split("-").reverse().join("-")}</p>
+              <p id='pop-field'><b>JoinDate:</b> {selectedTeacher.joinDate.split("-").reverse().join("-")}</p>
               <p id='pop-field'><b>Address:</b> {selectedTeacher.address}</p>
               <p id='pop-field'><b>City: </b>{selectedTeacher.city}</p>
               <p id='pop-field'><b>District:</b> {selectedTeacher.district}</p>
@@ -272,7 +279,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.name}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, name: e.target.value })
-                  }
+                  } required
                 /> 
                 <label id='First-div-editPopup_label'  htmlFor="teacherName">Email:</label> 
                 <input
@@ -281,7 +288,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.email}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, email: e.target.value })
-                  }
+                  }required
                 />
                 <label id='First-div-editPopup_label' htmlFor="teacherName">Gender:</label> 
                 <input
@@ -290,7 +297,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.gender}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, gender: e.target.value })
-                  }
+                  }required
                 />
                 <label id='First-div-editPopup_label'  htmlFor="teacherName">Mobile No:</label> 
                 <input
@@ -299,25 +306,25 @@ const Search_Teacher = () => {
                   value={editedTeacher.mobileNumber}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, mobileNumber: e.target.value })
-                  }
+                  }required
                 />
                 <label id='First-div-editPopup_label' htmlFor="teacherName">BirthDate:</label> 
                 <input
                   id="teacheredit"
                   type="text"
-                  value={editedTeacher.birthDate}
+                  value={editedTeacher.birthDate.split("-").reverse().join("-")}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, birthDate: e.target.value })
-                  }
+                  }required
                 />
                 <label id='First-div-editPopup_label' htmlFor="teacherName">JoinDate:</label> 
                 <input
                   id="teacheredit"
                   type="text"
-                  value={editedTeacher.joinDate}
+                  value={editedTeacher.joinDate.split("-").reverse().join("-")}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, joinDate: e.target.value })
-                  }
+                  }required
                 />
                 <label id='First-div-editPopup_label' htmlFor="teacherName">Address:</label> 
                 <textarea
@@ -325,7 +332,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.address}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, address: e.target.value })
-                  }
+                  }required
                 />
 
                 </div>
@@ -337,7 +344,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.city}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, city: e.target.value })
-                  }
+                  }required
                 />
                 <label id='Second-div-editPopup_label' htmlFor="teacherName">District:</label> 
                 <input
@@ -346,7 +353,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.district}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, district: e.target.value })
-                  }
+                  }required
                 />
                 <label id='Second-div-editPopup_label' htmlFor="teacherName">State:</label> 
                 <input
@@ -355,7 +362,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.state}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, state: e.target.value })
-                  }
+                  }required
                 />
                 <label id='Second-div-editPopup_label' htmlFor="teacherName">PinCode:</label> 
                 <input
@@ -364,7 +371,7 @@ const Search_Teacher = () => {
                   value={editedTeacher.pinCode}
                   onChange={(e) =>
                     setEditedTeacher({ ...editedTeacher, pinCode: e.target.value })
-                  }
+                  }required
                 />
                 <label id='Second-div-editPopup_label' htmlFor="teacherName">Standard:</label> 
                 <input

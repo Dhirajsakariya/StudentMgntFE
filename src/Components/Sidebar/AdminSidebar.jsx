@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { FaBars, FaGooglePay, FaMarkdown, FaSearch } from "react-icons/fa";
+import { GrScorecard } from "react-icons/gr";
+import { FaBars } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { LuUserCircle2 } from "react-icons/lu";
-import { MdFamilyRestroom } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import { RiUserSearchLine } from "react-icons/ri";
 import { NavLink, useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import config from '../Login/config';
@@ -25,7 +24,7 @@ const AdminSidebar = ({handleLogout, children }) => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for Admin Sidebar', userRole.Role);
+          console.log('loggedInRole for time table', userRole.Role);
           if (userRole.Role !== 'admin') {
             setRedirectToNotFound(true);
           }
@@ -42,35 +41,24 @@ const AdminSidebar = ({handleLogout, children }) => {
         };
     
     const menuItem = [
-        {
-            path: '/TeacherForm',
-            name: 'Teacher Form',
-            icon: <LiaChalkboardTeacherSolid  />
-        },
+           
         {
             path: '/Search_Teacher',
-            name: 'Search Teacher',
-            icon: <RiUserSearchLine />
+            name: 'Teachers',
+            icon: <LiaChalkboardTeacherSolid />
+
         },
-        {
-            path: '/StudentForm',
-            name: 'Student Form',
-            icon: <PiStudentBold  />
-        },
+      
         {
             path: '/Search_Student',
-            name: 'Search Student',
-            icon: <FaSearch />
-        },
-        {
-            path: '/ParentsPortal',
-            name: 'Parents Portal',
-            icon: <MdFamilyRestroom  />
+            name: 'Students',
+            icon: <PiStudentBold  />
         },
         {
             path: '/StudentMarks',
             name: 'Student Marks',
-            icon: <FaMarkdown />
+            icon: <GrScorecard />
+
         },
         {
             path: '/Login',
