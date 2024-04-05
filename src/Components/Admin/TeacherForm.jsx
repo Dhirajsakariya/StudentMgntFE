@@ -41,15 +41,11 @@ const TeacherForm = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
-  // useEffect(() => {
-    
-  //   setRole('admin');
-  // }, []);
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
       const userRole = JSON.parse(userRoleString);
-      console.log('loggedInRole for Teacher Form', userRole.Role);
+      console.log('loggedInRole for time table', userRole.Role);
       if (userRole.Role !== 'admin') {
         setRedirectToNotFound(true);
       }
@@ -240,7 +236,7 @@ if (redirectToNotFound) {
             </div>
             <div id='Form-GroupT' >
                 <label id='labelT'>Join-Date:</label>
-                <input id='inputT' type='date' value={joinDate} max={moment().format("YYYY-MM-DD")} onChange={(e) => setJoinDate(e.target.value)} required />
+                <input id='inputT' type='date' value={joinDate}  onChange={(e) => setJoinDate(e.target.value)} required />
             </div>
            
             <div>
