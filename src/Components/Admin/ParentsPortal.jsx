@@ -211,7 +211,7 @@ const handleDelete = async (id) => {
   }).then(async (result)=> {
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`https://localhost:7157/api/Family/DeleteFamily152A31E3-7238-41A9-BD2E-D4BB68B11ED5`, {
+        const response = await fetch(`https://localhost:7157/api/Family/DeleteFamily/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
