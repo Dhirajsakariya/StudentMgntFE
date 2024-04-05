@@ -81,7 +81,7 @@
     width:50px;
 }
 #actionth{
-  width: 220px;
+  width: 230px;
 }
 #btnaddstudent{
   width:5%;
@@ -93,6 +93,13 @@
   height: 31px;
   font-size: 20px;
 }
+#btnaddmarkssearchstudent{
+    color: #fff;
+    background-color: #bb196a;
+    border-color: #bb196a;
+    width:50px ;
+    margin-left: 5px;
+  }
 #btnviewsearchstudent:hover {
     color: black;    
     border: none;
@@ -105,7 +112,7 @@
     width:50px;
     margin-right: auto;
     margin-left: auto;
-    margin-left: -220px;
+    margin-left: -230px;
 }
 #btndeletesearchstudent {
     color: #fff;

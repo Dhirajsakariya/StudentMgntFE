@@ -12,6 +12,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
+import { GrScorecard } from "react-icons/gr";
 import { MdOutlineFamilyRestroom } from "react-icons/md";
 
 const Search_Student = () => {
@@ -149,6 +150,11 @@ useEffect(() => {
     history.push('/ParentsPortal');
   }
 
+   //To add Family Details
+   const handleAddMarks = () =>{
+    history.push('/StudentMarks');
+  }
+
  //To add Student Details
  const handleAddStudent = () =>{
   history.push('/StudentForm');
@@ -230,17 +236,20 @@ useEffect(() => {
                       <td>{student.mobileNumber}</td>
                       <td>{student.standard}</td>
                       <td>{student.subject}</td>
-                      <td colSpan={3}>
+                      <td colSpan={4}>
                         <button id="btneditsearchstudent" onClick={() => handleEdit(student.id)}>
-                          <FiEdit />
+                                      <FiEdit />
                         </button>
                        
                         <button id="btndeletesearchstudent" onClick={() => handleDelete(student.id)}>
-                          <RiDeleteBin6Line />
+                                    <RiDeleteBin6Line />
                         </button>
 
                         <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
-                        <MdOutlineFamilyRestroom />
+                                   <MdOutlineFamilyRestroom />
+                        </button>
+                        <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
+                                    <GrScorecard />
 
                         </button>
                       </td>
