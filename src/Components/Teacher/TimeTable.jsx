@@ -38,20 +38,38 @@ const TimeTable = () => {
     const [subject23, setSubject23] = useState('');
     const [subject24, setSubject24] = useState('');
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+    const [notloginSuccessMessageShown, setNotloginSuccessMessageShown] = useState(false)
+   // const [data, setData] = useState([]);
 
+    const resetSubjects = () => {
+      setSubject1('');
+      setSubject2('');
+      setSubject3('');
+      setSubject4('');
+      setSubject5('');
+      setSubject6('');
+      setSubject7('');
+      setSubject8('');
+      setSubject9('');
+      setSubject10('');
+      setSubject11('');
+      setSubject12('');
+      setSubject13('');
+      setSubject14('');
+      setSubject15('');
+      setSubject16('');
+      setSubject17('');
+      setSubject18('');
+      setSubject19('');
+      setSubject20('');
+      setSubject21('');
+      setSubject22('');
+      setSubject23('');
+      setSubject24('');
+  };
 
       const str = standard;
       const parts = str.split("-");
-
-      // useEffect(() => {
-      //   const userRole =JSON.parse( localStorage.getItem('loggedInRole'));
-      //   console.log('loggedInRole for time table',localStorage.getItem('loggedInRole'), userRole.Role);
-      //   if (userRole.Role !== 'teacher') {
-      //     setRedirectToNotFound(true);
-      //   }
-      //             return <Redirect to="/PageNotFound" />;
-
-      //   })
         
       useEffect(() => {
         const userRoleString = localStorage.getItem('loggedInRole');
@@ -65,9 +83,6 @@ const TimeTable = () => {
           console.error('loggedInRole not found in localStorage');
         }
       }, []);
-      
-     
-      // Your component JSX continues here...
       
       useEffect(() => {
         const fetchStandards = async () => {
@@ -101,6 +116,29 @@ const TimeTable = () => {
         fetchStandards();
         fetchSubject();
       }, []);
+
+      // useEffect(() => {
+      //   fetchData(); 
+      // }, []);
+
+      // const fetchData = async () => {
+      //   try {
+      //     const response = await fetch(`${config.ApiUrl}AdminTeacher/GetStandardFromString/${standardNumber}/${section}`, {
+      //       method: 'GET',
+      //       headers: {
+      //           'Content-Type': 'application/json'
+      //       },
+      //       body: JSON.stringify(GetStandardfromString)
+      //   });
+      //     if (!response.ok) {
+      //       throw new Error('Failed to fetch standard data');
+      //     }
+      //     const result = await response.json();
+      //     setStandardData(result); 
+      //   } catch (error) {
+      //     console.error('Error fetching standard data:', error);
+      //   }
+      // };
 
       const handleSave =async () =>{
         try{
@@ -306,6 +344,17 @@ const TimeTable = () => {
           },
         ]
           setIsDisable(false);
+
+          // const StandardNumber = 10;
+          // const Section = 'A';
+          // const data = await fetch(`${config.ApiUrl}AdminTeacher/GetStandardFromString/${StandardNumber}/${Section}`,{
+          //   method: 'GET',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   },
+          // });          
+          // console.log(data);
+
           const response = await fetch(`${config.ApiUrl}TimeTable/PostTimeTable`, {
               method: 'POST',
               headers: {
@@ -322,10 +371,14 @@ const TimeTable = () => {
               }, 1500);
            } 
            else{
-            toast.error("Data not Saved!");
+            // toast.error("Data not Saved!");
+            if (!notloginSuccessMessageShown)
+             {
+                toast.error('Login failed. Please try again later.');
+                setNotloginSuccessMessageShown(true)
+             }
            }
-        }
-        catch{
+        } catch{
             toast.error("Error in data Saving!")
         }
       }
@@ -338,16 +391,13 @@ const TimeTable = () => {
 
       const handleEdit =()=>{
         setIsDisable(true);
+        resetSubjects(); 
       }
-
-      // if (redirectToNotFound) {
-      //   return <Redirect to="/PageNotFound" />; // Redirect if user role is not teacher
-      // }
+      
       if (redirectToNotFound) {
         return <Redirect to="/PageNotFound" />;
       }
-      
-    
+          
   return (
     <>
     <TeacherSidebar>
@@ -363,9 +413,10 @@ const TimeTable = () => {
                  // setFormData({ ...formData, standard: e.target.value });
                  setStandard(e.target.value);
                   setStandardError('');
+                  setIsDisable(true);
                 }}
               >
-                <option value="" disabled={true}>Select Standard</option>
+                <option value="" disabled={true} >Select Standard</option>
                 {standardData.map((standard) => (
                   <option key={standard} value={standard}>
                     {standard}
@@ -407,7 +458,7 @@ const TimeTable = () => {
                       {subject1}
                     </option>
                     ))}
-                  </select> : <input id='sub' value={subject1} onChange={(e) => subject1(e.target.value)}/> }
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
                   </td>
                   <td>
                   {isDisable ? <select
