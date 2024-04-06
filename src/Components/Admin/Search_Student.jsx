@@ -152,7 +152,7 @@ useEffect(() => {
     console.log("selectedStudentId",id);
   }
 
-   //To add Family Details
+   //To add StudentMark Details
    const handleAddMarks = (id) =>{
     history.push('/StudentMarks');
     localStorage.setItem('selectedStudentId', id);
@@ -297,7 +297,7 @@ useEffect(() => {
 
                   <>  
                     <Popup 
-                          contentStyle={{ width: "790px" , height:'650px' , borderRadius:'10px', background:'lightgray'}}
+                          contentStyle={{ width: "790px" , height:'640px' , borderRadius:'10px', background:'lightgray'}}
                           open={editedStudent !== null}
                           onClose={() => setEditedStudent(null)}
                           closeOnDocumentClick={false} // Prevents closing on document click

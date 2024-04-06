@@ -12,10 +12,6 @@ const StudentMarks = () => {
   const [marksObtained, setMarksObtained] = useState('');
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 
-  // useEffect(() => {
-    
-  //   setRole('admin');
-  // }, []);
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {

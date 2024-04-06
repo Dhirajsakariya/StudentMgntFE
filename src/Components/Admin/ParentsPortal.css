@@ -64,7 +64,18 @@ p{
   border: 1px;
   border-radius: 5px;
 }
+.relation{
+  
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
+}
+#input{
+  
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
+}
 #btnf {
+  cursor: pointer;
   display: inline;
   width: 200px;
   height: 40px;
@@ -100,13 +111,13 @@ p{
   height: fit-content;
   background: transparent;
   border: 2px solid black;
-  background-color:  hsl(107, 17%, 78%);
+  background-color:  #e1e4e8;
   margin-left: 240%;
   margin-top: -250%;
   margin-bottom: 100%;
 }
 #editing{
-  background-color: hsl(120, 62%, 96%);
+  background-color: #e1e4e8;
 } 
 #icon_f_m{
   margin-left: 1px;
@@ -135,17 +146,18 @@ p{
   margin-top: auto;
   margin-left: 0px;
   margin-bottom: 5px;
-  color: #146a51;
+  color:#24305E;
   font-size: 20px;
   text-decoration: underline;
 }
 #display button{
+  cursor: pointer;
   width: 60px;
   margin-left: 50px;
   margin-top: 15px;
   height: 35px;
   font-weight: bold;
-  background-color: seagreen;
+  background-color:#24305E;
   color: aliceblue;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;

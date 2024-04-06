@@ -69,6 +69,9 @@
   margin-top: 0.7%;
   border: 2px;
   border-radius: 5px;
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
+
 }
 #inputstudentform2 {
   width: 300px;
@@ -78,6 +81,8 @@
   margin-top: 1.4%;
   border: 2px;
   border-radius: 5px;
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
 }
 #inputr::placeholder { 
   color:gray;
@@ -106,6 +111,7 @@ height: 3.5%;
 border-radius: 5px;
 }
 #btnnextstudentform{
+  cursor: pointer;
   width: 30%;
   height: 40px;
   border-radius: 10px;

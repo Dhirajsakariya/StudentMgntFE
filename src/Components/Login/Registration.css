@@ -20,6 +20,7 @@
 .radio-groupa{
   width: fit-content;
   margin-left: 28px;
+  
 }
 #lradio{
   margin-left: 5px;
@@ -28,6 +29,7 @@
 .form-groupr {
   margin-bottom: 1.5%;
   margin-top: 10px;
+  
 }   
 .containerr h2{
   justify-content: center;
@@ -94,6 +96,8 @@
     margin-top: 5px;
     border: 1px;
     border-radius: 5px;
+    border-top:  1px solid #24305E;
+    border-left:  1px solid #24305E;
 }
 .inputl {
   width: 300px;
@@ -103,6 +107,8 @@
     margin-top: 5px;
     border: 1px;
     border-radius: 5px;
+    border-top:  1px solid #24305E;
+    border-left:  1px solid #24305E
 }
 .inputr::placeholder { 
   color:gray;
@@ -123,6 +129,7 @@
   transform: translateY(15%);
 }
 .buttonr { 
+  cursor: pointer;
   width: 20%;
   height: 40px;
   border-radius: 10px;

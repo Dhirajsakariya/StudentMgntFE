@@ -108,7 +108,7 @@ const StudentFeeForm = () => {
               type="text"
               id="input_feeAmount"
               value={feeAmount}
-              placeholder='Fee2 Amount'
+              placeholder='Fees Amount'
               readOnly // Ensure the input is read-only to display the fetched amount
               required
             />
