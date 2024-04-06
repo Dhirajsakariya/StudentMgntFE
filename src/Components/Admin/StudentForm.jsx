@@ -119,6 +119,7 @@ const StudentForm = () => {
         }
         try {
               const emailresponse =await axios.post(`${config.ApiUrl}Student/PostStudent`,{
+              Id:id,
               Name : name,
               Email : email,
               Password : password,
@@ -145,6 +146,8 @@ const StudentForm = () => {
           else{
             setTimeout(() => {
               navigate.push('/ParentsPortal') 
+              localStorage.setItem("setStudentId",userERes.id);
+              console.log("setStudentId",id);
               }, 1500);
             toast.success("Registration Successfull!")
           }

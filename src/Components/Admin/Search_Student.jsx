@@ -79,8 +79,8 @@ useEffect(() => {
     axios
       .get(`${config.ApiUrl}Student/GetStudent/${id}`)
       .then((result) => {
-      
         setEditedStudent(result.data); // Set editedStudent when getting details
+        localStorage.setItem('selectedStudentId', id);
       })
       .catch((error) => {
         console.log(error);
@@ -146,13 +146,17 @@ useEffect(() => {
   };
 
   //To add Family Details
-  const handleAddFamily = () =>{
+  const handleAddFamily = (id) =>{
     history.push('/ParentsPortal');
+    localStorage.setItem('selectedStudentId', id);
+    console.log("selectedStudentId",id);
   }
 
    //To add Family Details
-   const handleAddMarks = () =>{
+   const handleAddMarks = (id) =>{
     history.push('/StudentMarks');
+    localStorage.setItem('selectedStudentId', id);
+    console.log("selectedStudentId",id);
   }
 
  //To add Student Details
