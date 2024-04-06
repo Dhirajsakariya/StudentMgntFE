@@ -1,10 +1,9 @@
 #main{
   margin-left: auto;
   margin-right: auto;
-  margin-top:15px;
+  margin-top:40px;
   width: 100%;
   height: 40%;
-  padding: 30px 30px;
 }
 #action{
   width: 120px;
@@ -42,6 +41,7 @@
 
 }
 #btn-Add{
+  cursor: pointer;
   background-color: rgb(68, 161, 68);
   margin-left:20px;
  color: white;
@@ -53,12 +53,14 @@
 }
 
 #btn-view{
+  cursor: pointer;
   border: none;
   background-color: transparent;
   transition: box-shadow 0.7s ease;
 }
 #btn-view:hover{
-box-shadow: 0 0 10px rgba(52, 28, 205, 0.5);
+box-shadow: 0 0 10px rgba(66, 66, 68, 0.5);
+background-color: lightgray;
 width: auto;
 }
 #close{
@@ -73,7 +75,7 @@ width: auto;
   color: #007bff;
 }
 #pop-field{
-  margin-left: 10px;
+  margin-left: -10px;
   color: black;
 }
 #pop-up-title{
@@ -88,16 +90,13 @@ width: auto;
   color: black;
   margin-left: 50px;
 }
-#btn-view {
-  cursor: pointer;
-  width: 50px;
-  border: none;
-}
+
 #detail_heading{
   margin-left: 200px;
 }
 
 #btn-edit{
+  cursor: pointer;
   color:white;
   background-color: #007bff;
   border-color: #007bff;
@@ -122,6 +121,7 @@ width: auto;
 
 }
 #btn-delete{
+  cursor: pointer;
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;

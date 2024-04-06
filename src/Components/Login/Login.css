@@ -6,7 +6,7 @@
   height: 100%;
   background: transparent;
   border: 2px solid;
-  background-color: #e1e4e8;
+  background-color:#d6e2f3;
   margin-left: auto;
   padding-top: auto;
   padding-bottom: 10px;
@@ -96,7 +96,7 @@
   font-size: 17px;
 }
 
-buttonlogin:hover {
+.buttonlogin:hover {
   cursor: pointer;
 }
 
