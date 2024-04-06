@@ -84,14 +84,13 @@
   width: 230px;
 }
 #btnaddstudent{
-  width:5%;
-  color: #fff;
-  background-color: rgb(68, 161, 68); 
-  margin-left: 20px;
-  border-radius: 5px;
-  margin-top: -20px;
-  height: 31px;
-  font-size: 20px;
+    background-color: rgb(68, 161, 68);
+    margin-left:20px;
+   color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 8%;
+    height:32px;
 }
 #btnaddmarkssearchstudent{
     color: #fff;
@@ -99,6 +98,7 @@
     border-color: #bb196a;
     width:50px ;
     margin-left: 5px;
+    border-radius: 3px;
   }
 #btnviewsearchstudent:hover {
     color: black;    
@@ -113,6 +113,7 @@
     margin-right: auto;
     margin-left: auto;
     margin-left: -230px;
+    border-radius: 3px;
 }
 #btndeletesearchstudent {
     color: #fff;
@@ -120,6 +121,7 @@
     border-color: #dc3545;
     width:50px ;
     margin-left: 5px;
+    border-radius: 3px;
 }
 #btnaddfamilysearchstudent {
   color: #fff;
@@ -127,6 +129,7 @@
   border-color: #17a2b8;
   width:50px ;
   margin-left: 5px;
+  border-radius: 3px;
 }
 #close-btn {
     position: absolute;
