@@ -1,143 +1,158 @@
-import React, { useEffect, useState } from 'react';
-import '../Admin/StudentMarks.css';
+import React, { useState, useEffect } from 'react';
+import './StudentMarks.css'; 
 import AdminSidebar from '../Sidebar/AdminSidebar';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import config from '../Login/config';
 
-const StudentMarks = () => {
-  const [studentId, setStudentId] = useState('');
-  const [examId, setExamId] = useState('');
-  const [examType, setExamType] = useState('');
-  const [subjectId, setSubjectId] = useState('');
-  const [totalMarks, setTotalMarks] = useState('');
-  const [marksObtained, setMarksObtained] = useState('');
-  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+const InputMarksTable = () => {
+  const [name, setName] = useState('');
+  const [subjects, setSubjects] = useState([]);
+  const [marks, setMarks] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [enteredData, setEnteredData] = useState([]); 
+  const [studentName, setStudentName] = useState(''); 
 
   useEffect(() => {
-    const userRoleString = localStorage.getItem('loggedInRole');
-    if (userRoleString) {
-      const userRole = JSON.parse(userRoleString);
-      console.log('loggedInRole for Student Marks', userRole.Role);
-      if (userRole.Role !== 'admin') {
-        setRedirectToNotFound(true);
-      }
-    } else {
-      console.error('loggedInRole not found in localStorage');
-    }
-  }, []);
+    // Fetch subjects from the backend
+    const selectId = localStorage.getItem('selectedStudentId');
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', { studentId, examId, examType, subjectId, totalMarks, marksObtained });
+    const fetchSubjects = async () => {
+      try {
+        const response = await fetch(`https://localhost:7157/api/DropDown/AllSubjectByStudent/${selectId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch subjects');
+        }
+        const data = await response.json();
+        setSubjects(data);
+      } catch (error) {
+        console.error('Error fetching subjects:', error);
+      }
+    };
+
+    const fetchStudentName = async () => {
+      try {
+        const response = await fetch(`https://localhost:7157/api/Student/GetStudent/${selectId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch student details');
+        }
+        const studentData = await response.json();
+        setStudentName(studentData.name); 
+      } catch (error) {
+        console.error('Error fetching student name:', error);
+      }
+    };
+
+    fetchSubjects();
+    fetchStudentName();
+  }, []);
+
+  
+  const handleSubjectChange = (subject, value) => {
+    setMarks({ ...marks, [subject]: value });
   };
 
-  // if (role !== 'admin') {
-  //   return <Redirect to="/PageNotFound" />;
-  // }
+  
+  const calculateTotalMarks = () => {
+    let total = 0;
+    Object.values(marks).forEach((value) => {
+      total += parseInt(value) || 0; 
+    });
+    return total;
+  };
 
-  if (redirectToNotFound) {
-    return <Redirect to="/PageNotFound" />; // Redirect if user role is not admin
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    // Store entered data in an object
+    const totalMarks = calculateTotalMarks(); // Calculate total marks
+    const newData = { name: studentName, totalMarks, obtainedMarks: totalMarks, status: 'Pass', ...marks }; // Include total marks, obtained marks, and status
+    // Update the state to include the new data in the enteredData array
+    setEnteredData([...enteredData, newData]);
+    // Clear input fields and marks
+    setName('');
+    setMarks({});
+    // Set submitted state to true
+    setSubmitted(true);
+  };
+
+  // Function to reset the form
+  const resetForm = () => {
+    setName('');
+    setMarks({});
+    setSubmitted(false);
+    setEnteredData([]);
+  };
 
   return (
     <AdminSidebar>
-    <div id='containerStudentMarks'>
-        <form onSubmit={handleSubmit}>
-        <h2 id='studentmarksh2'>Add Student Marks</h2>
-    
-    <div id='form-studentmarks'>
-        
-        <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Student Id:</label>
-        <input
-          id='input_studentmarks'
-          type="number"
-          value={studentId}
-          onChange={(e) => setStudentId(e.target.value)}
-          placeholder='Enter Student Id'
-          required
-        />
-      </div>
-      </div>
+      <div className="studentmarkscontainer">
+        <center>
+          <h2 className="heading">Input Marks</h2><br /><br /></center>
+          <form onSubmit={handleSubmit}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  {subjects.map((subject) => (
+                    <th key={subject}>{subject}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{studentName}</td> {/* Display student's name */}
+                  {subjects.map((subject) => (
+                    <td key={subject}>
+                      <input type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required />
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={1 + subjects.length}><center>
+                    <input type="submit" value="Add To Table" /></center>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </form>
+          <br /><br />
+          {submitted && enteredData.length > 0 && (
+            <div><center>
+              <h2>View Marks</h2></center><br />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    {subjects.map((subject) => (
+                      <th key={subject}>{subject}</th>
+                    ))}
+                    <th>Total Marks</th> {/* Add Total Marks column */}
+                    <th>Obtained Marks</th> {/* Add Obtained Marks column */}
+                    <th>Status</th> {/* Add Status column */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {enteredData.map((data, index) => (
+                    <tr key={index}>
+                      <td>{data.name}</td> {/* Display student's name from enteredData */}
+                      {subjects.map((subject) => (
+                        <td key={subject}>{data[subject]}</td>
+                      ))}
+                      <td>{data.totalMarks}</td> {/* Display Total Marks */}
+                      <td>{data.obtainedMarks}</td> {/* Display Obtained Marks */}
+                      <td>{data.status}</td> {/* Display Status */}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </AdminSidebar>
+    );
+  };
+  
+  export default InputMarksTable;
 
-      <div id='form-studentmarks'>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Exam Id:</label>
-        <input
-          id='input_studentmarks'
-          type="number"
-          value={examId}
-          onChange={(e) => setExamId(e.target.value)}
-          placeholder='Enter Exam Id'
-          required
-        />
-      </div>
-      </div>
 
-      <div id='form-studentmarks'>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Exam Type:</label>
-        <select
-          id='input_studentmarks'
-          value={examType}
-          onChange={(e) => setExamType(e.target.value)}
-          placeholder='Select Exam Type'
-          required
-        >
-          <option value="">Select Exam Type</option>
-          <option value="Midterm">Midterm</option>
-          <option value="Final">Final</option>
-        </select>
-      </div>
-      </div>
-
-      <div id='form-studentmarks'>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Subject Id:</label>
-        <input
-          id='input_studentmarks'
-          type="text"
-          value={subjectId}
-          onChange={(e) => setSubjectId(e.target.value)}
-          placeholder='Enter Subject Id'
-          required
-        />
-      </div>
-      </div>
-
-      <div id='form-studentmarks'>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Total Marks:</label>
-        <input
-          id='input_studentmarks'
-          type="number"
-          value={totalMarks}
-          onChange={(e) => setTotalMarks(e.target.value)}
-          placeholder='Enter Total Marks'
-          required
-        />
-      </div>
-      </div>
-
-      <div>
-      <div id='form-groupstudentMarks'>
-        <label id='label_student_marks'>Marks Obtained:</label>
-        <input
-          id='input_studentmarks'
-          type="number"
-          value={marksObtained}
-          onChange={(e) => setMarksObtained(e.target.value)}
-          placeholder='Enter Marks Obtained'
-          required
-        />
-      </div>
-      </div>
-      
-      <button type="submit" id='btnaddstudentmarks'>Submit</button>
-    </form>
-    </div>
-    </AdminSidebar>
-  );
-};
-
-export default StudentMarks;
