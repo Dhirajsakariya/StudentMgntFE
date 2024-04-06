@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
@@ -101,45 +102,13 @@ const AddExamSchedule = () => {
           
     // Reset form fields
     setExamType('');
-    setStandard('');
+    //setStandard('');
     setSubject('');
     setExamDate('');
     setStartTime('');
     setEndTime('');
   };
 
-  const handleEdit = async (index) => {
-    const id = examSchedules[index].id; 
-
-    try {
-      const response = await axios.put(`${config.ApiUrl}Exam/PutExam/${id}`, {
-        ExamType: examType,
-        StandardNumber: parts[0],
-        Section: parts[1],
-        SubjectName: subject,
-        ExamDate: examDate,
-        StartTime: startTime,
-        EndTime: endTime,
-      });
-
-      const updatedExamSchedule = response.data;
-      const updatedSchedules = [...examSchedules];
-      updatedSchedules[index] = updatedExamSchedule;
-      setExamSchedules(updatedSchedules);
-      toast.success('Exam schedule updated successfully');
-    } catch (error) {
-      toast.error('Failed to update exam schedule. Please try again later.');
-      console.error('Error updating exam schedule:', error);
-    }
-
-    // Reset form fields
-    setExamType('');
-    setStandard('');
-    setSubject('');
-    setExamDate('');
-    setStartTime('');
-    setEndTime('');
-  };
   
 
   const handleDelete = async (index) => {
@@ -253,35 +222,37 @@ const AddExamSchedule = () => {
             <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
 
           </form>
+          <div id="student-exam-timetable2">
           <table id="student-table">
             <thead>
               <tr>
-                <th>Standard</th>
-                <th>Subject</th>
-                <th>Exam Type</th>
-                <th>Exam Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Actions</th>
+                <th id='student-exam-th'>Standard</th>
+                <th id='student-exam-th'>Subject</th>
+                <th id='student-exam-th'>Exam Type</th>
+                <th id='student-exam-th'>Exam Date</th>
+                <th id='student-exam-th'>Start Time</th>
+                <th id='student-exam-th'>End Time</th>
+                <th id='student-exam-th'>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {examSchedules.map((examSchedule, index) => (
-                <tr key={index}>
-                  <td>{examSchedule.standard}</td>
-                  <td>{examSchedule.subject}</td>
-                  <td>{examSchedule.examType}</td>
-                  <td>{examSchedule.examDate}</td>
-                  <td>{examSchedule.startTime}</td>
-                  <td>{examSchedule.endTime}</td>
-                  <td>
-                  <button onClick={() => handleEdit(index)}>Edit</button>
-                    <button onClick={() => handleDelete(index)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
+            {examSchedules.filter((examSchedule) => examSchedule.standard === standard).map((examSchedule, index) => (
+              <tr key={index}>
+                <td id='student-exam-sub'>{examSchedule.standard}</td>
+                <td id='student-exam-sub'>{examSchedule.subject}</td>
+                <td id='student-exam-sub'>{examSchedule.examType}</td>
+                <td id='student-exam-sub'>{examSchedule.examDate}</td>
+                <td id='student-exam-sub'>{examSchedule.startTime}</td>
+                <td id='student-exam-sub'>{examSchedule.endTime}</td>
+                <td id='student-exam-sub'>
+              
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            </td>
+            </tr>
+            ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </TeacherSidebar>
