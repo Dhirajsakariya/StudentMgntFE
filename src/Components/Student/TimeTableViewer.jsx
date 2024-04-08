@@ -42,37 +42,6 @@ const TimeTableViewer = () => {
         }
       }, []);
 
-    // useEffect(() => {
-    //     const fetchStandards = async () => {
-    //         try {
-    //             const response = await fetch(${config.ApiUrl}DropDown/Standard);
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setStandardData(data);
-    //             } else {
-    //                 throw new Error('Failed to fetch standard');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching standard:', error);
-    //         };
-    //     };
-    //     const fetchSubject = async () => {
-    //         try {
-    //             const response = await fetch(${config.ApiUrl}DropDown/Subject);
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setSubjectData(data);
-    //             } else {
-    //                 throw new Error('Failed to fetch subject');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching subject:', error);
-    //         }
-    //     };
-    //     fetchStandards();
-    //     fetchSubject();
-    // }, []);
-
     useEffect(() => {
       const fetchStandards = async () => {
           try {
@@ -142,7 +111,7 @@ const TimeTableViewer = () => {
                         <div id='formtabledata'>
                             <select
                                 value={standard}
-                                className='inputform' id='inputformstd'
+                                id='inputformstd'
                                 required
                                 onChange={(e) => {
                                     setStandard(e.target.value);
@@ -161,7 +130,7 @@ const TimeTableViewer = () => {
                             <button id='btn' type='button' onClick={handleSave}>Save</button> */}
                         </div>
                         <div>
-                            <table className='tableview' id='tableview'>
+                            <table id='tableview'>
                                 <thead>
                                     <tr>
                                         <th id='thtable'>Day/Period</th>
@@ -233,9 +202,9 @@ const TimeTableViewer = () => {
                                         <tr key={index}>
                                             <td id='row'>{${period.startTime}${period.endTime}}</td>
                                             {Array(6).fill().map((_, dayIndex) => (
-                                                <td key={dayIndex}> */}
+                                                <td key={dayIndex}> 
                                                   
-                                                    {/* {isDisable ?
+                                                     {isDisable ?
                                                         <select
                                                             value={subjects[index * 6 + dayIndex]}
                                                             id='sub'
@@ -262,8 +231,8 @@ const TimeTableViewer = () => {
                                                                 setSubjects(newSubjects);
                                                             }}
                                                         />
-                                                    } */}
-                                                {/* </td>
+                                                    } 
+                                                 </td>
                                             ))}
                                         </tr>
                                     ))}
