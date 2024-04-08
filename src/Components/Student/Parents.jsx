@@ -25,15 +25,13 @@ const Parents = () => {
         setRedirectToNotFound(true);
       }
     };
-
     const fetchFamilyDetails = async () => {
       try {
-        const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
-        if (!storedId) {
+        const studentId = JSON.parse(localStorage.getItem('loggedInUserId'));
+        if (!studentId) {
           throw new Error('User ID not found in local storage');
         }
-
-        const response = await axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${storedId}`);
+        const response = await axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
         setParents(response.data);
       } catch (err) {
         setError(err.message);
