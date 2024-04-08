@@ -167,6 +167,7 @@ const Search_Teacher = () => {
     <AdminSidebar>   
     <>
         <Fragment>
+          <h2 id='headingsearchTeacher'>Search Teacher</h2>
         <div id="search-container">
             <input
             id='search'

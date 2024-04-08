@@ -282,7 +282,7 @@ const { id } = useParams();
                  <div className='form-groupr'>
                   <div className='subjectselection'>
                    <div>
-                    <label className='labelr'>Standard</label>
+                    <label id='labelstudentform'>Standard</label>
                     <select
                       value={standard}
                       id='inputstudentform'

@@ -197,6 +197,7 @@ useEffect(() => {
     <AdminSidebar>
       <>
         <Fragment>
+          <h2 id='searchstudenth2'>Search Student</h2>
           <div id="search-container">
             <input
                   id="searchstudentbutton"

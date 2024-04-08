@@ -1,108 +1,125 @@
 #timetable{   
-    padding: -1%;
-    width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    justify-content: center;
+  padding: -1%;
+  width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 #h1{
-    color:#24305E;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 2%;
-    padding: -1%;
-    max-width: 80%;
-    margin-left: 10%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 200%;
-    font: bold;
-    text-decoration: underline;
+  color:#24305E;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 2%;
+  padding: -1%;
+  max-width: 80%;
+  margin-left: 10%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 200%;
+  font: bold;
+  text-decoration: underline;
 }
 
 #table{    
-    margin-left: 20%;
-    width:60%;
-    height: 30%;
-    table-layout: fixed;
-    border: none;
-    outline: none;
-    border: 1px solid black;
-    text-align: center;   
-    background-color: #e1e4e8;
+  margin-left: 20%;
+  width:60%;
+  height: 30%;
+  table-layout: fixed;
+  border: none;
+  outline: none;
+  /* border: 1px solid black; */
+  text-align: center;   
+  background-color: #e1e4e8;
 }
 
 #th{
-  width: 50%;
-  height: 50px;
-  background:#24305E;;
-  color: white;
+width: 50%;
+height: 40px;
+background:#24305E;;
+color: white;
 }
 
 #row{
-  font-family: sans-serif;
-  width: 50%;
-  height: 17.5%;
-	font-weight: 400;
-  background-color: #e1e4e8;
+font-family: sans-serif;
+width: 50%;
+height: 17.5%;
+font-weight: 400;
+background-color: #e1e4e8;
 }
 
 #sub {
-	font-family: sans-serif;
-  width: 98%;
-  height: 50px;
-	font-weight: 400;
-  border: none;
-  outline: none;
-  text-align: center;
-  border: 1px solid black;
-  background-color: #c2c9d2;
+font-family: sans-serif;
+width: 98%;
+height: 40px;
+font-weight: 400;
+border: none;
+outline: none;
+text-align: center;
+border: 1px solid black;
+background-color: #c2c9d2;
 }
 
 #break{
-  font-family: sans-serif;
-  /* font: bold; */
-  font-size: 130%;
-  height: 50px;
-	font-weight: 700;
-  border: none;
-  outline: none;
-  text-align: center;
-  border: 1px solid black;
-  background-color: #e1e4e8;
+font-family: sans-serif;
+/* font: bold; */
+font-size: 130%;
+height: 40px;
+font-weight: 700;
+border: none;
+outline: none;
+text-align: center;
+/* border: 1px solid black; */
+background-color: #e1e4e8;
 }
 
 /* Standard dropdown */
 #formtable {
-    margin-bottom: 1%;
-    margin-top: -1%;
-  }
-  #formtable p{
-    margin-left: 7%;
-  }
-  #labelofform {
-    display: block;
-    margin-bottom: 1%;
-    margin-top: 2%;
-    margin-left: 20%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 100%;
-  }
-  
+  margin-bottom: 1%;
+  margin-top: -1%;
+}
+#formtable p{
+  margin-left: 7%;
+}
+#labelofform {
+  display: block;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  margin-left: 20%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 100%;
+}
+
 #inputforms {
-    width: 15%;
-    margin-left: 20%;
-    margin-bottom: 1%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 1%;
-    border: none;
-    outline: none;
-    border: 2px solid rgba(0,0,0);
-    border-radius: 5%;
-  }
+  width: 15%;
+  margin-left: 20%;
+  margin-bottom: 1%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 1%;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(0,0,0);
+  border-radius: 5%;
+}
 #btn{
+width: 8%;
+height: 40px;
+border-radius: 10px;
+outline: auto;
+border: 1px;
+background:#24305E;
+justify-content: center;
+text-align: center;
+margin-left: 3%;
+margin-top: 1%;
+margin-bottom: 2%;
+font-weight: 700;
+font-size: 110%;
+color: white;
+}
+
+#btn1{
   width: 8%;
   height: 40px;
   border-radius: 10px;
@@ -111,29 +128,10 @@
   background:#24305E;
   justify-content: center;
   text-align: center;
-  margin-left: 3%;
+  margin-left: 25%;
   margin-top: 1%;
   margin-bottom: 2%;
   font-weight: 700;
   font-size: 110%;
   color: white;
 }
-
-  #btn1{
-    width: 8%;
-    height: 40px;
-    border-radius: 10px;
-    outline: auto;
-    border: 1px;
-    background:#24305E;
-    justify-content: center;
-    text-align: center;
-    margin-left: 25%;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    font-weight: 700;
-    font-size: 110%;
-    color: white;
-  }
-
-

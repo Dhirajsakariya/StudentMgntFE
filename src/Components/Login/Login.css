@@ -179,8 +179,8 @@
   margin-top: 5px;
   border: 1px;
   border-radius: 5px;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
 }
 
 .inputlogin::placeholder { 
