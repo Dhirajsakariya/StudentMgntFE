@@ -26,12 +26,12 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
-import Navigationbar from './Components/Header/Navigationbar';
+
 import Parents from './Components/Student/Parents';
 import StudentReport from './Components/Teacher/StudentReport';
+import Navigationbar from './Components/Header/Navigationbar';
 
 function App() {
-
 
   return (
     <div>
