@@ -2,37 +2,37 @@
   margin: 60px;
 }
 
-.heading {
+#heading1 {
   color: #333;
 }
 .error-messagee {
   color: red;
 }
-
-table {
+#t1
+ {
   width: 100%;
   border-collapse: collapse;
 }
 
-table th,
-table td {
+#t1 #th1,
+#t1 #td1 {
   border: 1px solid #ccc;
   padding: 8px;
 }
 
-table th {
+#t1 #th1 {
   background-color: #f0f0f0;
 }
 
-table tbody tr:nth-child(even) {
+#t1 #tbody #tr1:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-table tbody tr:hover {
+#t1 #tbody #tr1:hover {
   background-color: #e0e0e0;
 }
 
-input[type="text"] {
+#i1 {
   width: 100%;
   padding: 6px;
   box-sizing: border-box;
