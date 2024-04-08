@@ -86,19 +86,57 @@ const handlePost = async () => {
         Gender: formData.gender,
         MobileNumber: mobilenumber,
         Relation: formData.relation,
-        // StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
         StudentId: studentId
       })
     });
+
     if (response.ok) {
-      const result = await response.json(); 
-      setFamilyMembers([...familyMembers, result]);
+      fetchFamilyMembers(studentId);
+      
+      setFormData({
+        id: '',
+        email: '',
+        name: '',
+        occupation: '',
+        gender: '',
+        relation: '',
+      });
+      setMobileNumber('');
+      
       toast.success("Added Successfully!");
     }
   } catch (error) {
     toast.error('Failed to add family member');
   }
 };
+
+// const handlePost = async () => {
+//   try {
+//     const response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         Name: formData.name,
+//         Email: formData.email,
+//         Occupation: formData.occupation,
+//         Gender: formData.gender,
+//         MobileNumber: mobilenumber,
+//         Relation: formData.relation,
+//         // StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
+//         StudentId: studentId
+//       })
+//     });
+//     if (response.ok) {
+//       const result = await response.json(); 
+//       setFamilyMembers([...familyMembers, result]);
+//       toast.success("Added Successfully!");
+//     }
+//   } catch (error) {
+//     toast.error('Failed to add family member');
+//   }
+// };
 const handlePut = async () => {
   try {
     const response = await fetch(`https://localhost:7157/api/Family/PutFamily/${formData.id}`, {
