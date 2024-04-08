@@ -42,7 +42,7 @@ function Registration(props) {
   // State to store the fetched data
   const [data, setData] = useState([]);
   const[standard,setStandard]=useState('');
-  const[subject,setSubject]=useState('');
+  const[subject,setSubject]=useState(null);
   const[subjectError,setSubjectError]=useState('');
   const[standardError,setStandardError]=useState('');
 
@@ -148,9 +148,45 @@ function Registration(props) {
         setStandardError('Select Subject');
         return;
       }
+      try {
+        const emailresponse =await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
+        Name : name,
+        Email : email,
+        Password : password,
+        Gender : gender,
+        BirthDate : birthday,
+        MobileNumber : mobileNumber,
+        JoinDate : joinDate,
+        Address : address,
+        City : city,
+        District : district,
+        State : state,
+        PinCode : pinCode,
+        IsAdmin : isAdmin,
+        SubjectName: subject,
+        StandardNumber: parts[0],
+        Section : parts[1]
+        });
+      const userERes = emailresponse.data;
+      if(userERes === "email already exists")
+      {
+          toast.error("User already exist !!!");
+          return;
+      }
+      else{
+        setTimeout(() => {
+          navigate.push('/Login') 
+          }, 1500);
+        toast.success("Registration Successfull!")
+      } 
+    } 
+    catch {
+    toast.error('Signup failed. Please try again later.');
     }
-    try {
-          const emailresponse =await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
+      return;
+  }
+  try {
+          const adminresponse =await axios.post(`${config.ApiUrl}AdminTeacher/PostAdminTeachers`,{
           Name : name,
           Email : email,
           Password : password,
@@ -164,12 +200,9 @@ function Registration(props) {
           State : state,
           PinCode : pinCode,
           IsAdmin : isAdmin,
-          SubjectName: subject,
-          StandardNumber: parts[0],
-          Section : parts[1]
       });
-      const userERes = emailresponse.data;
-      if(userERes === "email already exists")
+      const adminERes = adminresponse.data;
+      if(adminERes === "email already exists")
       {
             toast.error("User already exist !!!");
             return;
@@ -179,8 +212,7 @@ function Registration(props) {
           navigate.push('/Login') 
           }, 1500);
         toast.success("Registration Successfull!")
-      }
-      
+      }   
   } catch {
       toast.error('Signup failed. Please try again later.');
     }
@@ -195,13 +227,13 @@ const customToastStyle = {
 
 return (
   <>
-    <div className='containerr'>
+    <div id='containerr'>
       <form onSubmit={handleSubmit}>
-        <h2 className='signup'>Sign Up</h2>
-      <div className='form-group1'>
-        <div className='form-groupr'>
-            <label className='labelr'>Role</label>
-            <div className='radio-groupa'>
+        <h2 id='signup'>Sign Up</h2>
+      <div id='form-group1'>
+        <div id='form-groupr'>
+            <label id='labelr'>Role</label>
+            <div id='radio-groupa'>
               <input
                 type="radio" 
                 value="admin"
@@ -216,20 +248,20 @@ return (
               onChange={handleRole}
               required/>
               <label  id='lradio'>Teacher</label>
-              {/* <input className="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
+              {/* <input id="form-check-input" type="radio" name="role" id="student" value={3} onChange={e => setRole(e.target.value)} />
               <label htmlFor="user">Student</label> */}
             </div>
             {roleError && <p style={{color:'red'}}>{roleError}</p>}
           </div>
-          <div className='form-groupr'>
+          <div id='form-groupr'>
           {toggleTeacher && (
-             <div className='subjectselection'>
+             <div id='subjectselection'>
               <div>
-                <select className='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
+                <select id='StandardSelection' title='Select Standard' value={standard} onChange={handleStandard}>
                     <option value="" >Select Standard</option>
                     {standarddata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
-                <select className='SubjectSelection' value={subject} onChange={handleSubject}>
+                <select id='SubjectSelection' value={subject} onChange={handleSubject}>
                 <option value="" >Select Subject</option>
                   {subjectdata.map((e) => <option value={e} key={e}>{e}</option> )}
                 </select>
@@ -239,49 +271,49 @@ return (
            </div>
           )}
           </div>
-          <div className='form-groupr'>
-            <label className='labelr'>Name:</label>
-            <input className='inputr' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Full Name'
+          <div id='form-groupr'>
+            <label id='labelr'>Name:</label>
+            <input id='inputr' type='text' value={name} onChange={(e)=> setName(e.target.value)} placeholder='Full Name'
               name='name'  required />
-            <FaRegUserCircle className='iconl' />
+            <FaRegUserCircle id='iconr' />
           </div>
-          <div className='form-groupr'>
-            <label className='labelr'>Email:</label>
-            <input className='inputr' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email'
+          <div id='form-groupr'>
+            <label id='labelr'>Email:</label>
+            <input id='inputr' type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email'
               name='email'  required />
-            <CgMail className='iconr' /> 
+            <CgMail id='iconr' /> 
           </div>
-          <div className='form-groupr'>
-            <label className='labelr'>Password:</label>
-            <input className='inputr' type={!isVisible ? "password" : "text"}
+          <div id='form-groupr'>
+            <label id='labelr'>Password:</label>
+            <input id='inputr' type={!isVisible ? "password" : "text"}
               name='password' placeholder='Password' 
               value={password} onChange={(e)=> setPassword(e.target.value)}
               pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
               title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
               autoComplete='current-password'
               required/>
-            <span className='iconeye' onClick={toggle}>
+            <span id='iconeye' onClick={toggle}>
               {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />
               }</span>
-          </div><p className='pass'>{error}</p>
-          <div className='form-groupr'>
-            <label className='labelr'>Confirm Password:</label>
-            <input className='inputr' type={!isDisable ? "password" : "text"}
+          </div><p id='pass'>{error}</p>
+          <div id='form-groupr'>
+            <label id='labelr'>Confirm Password:</label>
+            <input id='inputr' type={!isDisable ? "password" : "text"}
               name='password' placeholder='Confirm-Password'
               autoComplete='Confirm-Password'
               value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}
               pattern={password} 
               title="The Password Confirmation does not match !"required/>
-            <span className='iconeye' onClick={toggleBtn}>
+            <span id='iconeye' onClick={toggleBtn}>
               {isDisable  ? <IoEyeOutline /> : <IoEyeOffOutline /> }</span>
-          </div><p className='pass'>{error}</p>
-          <div className='form-groupr'>
-            <label className='labelr'>Birthdate:</label>
-            <input className='inputr' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
+          </div><p id='pass'>{error}</p>
+          <div id='form-groupr'>
+            <label id='labelr'>Birthdate:</label>
+            <input id='inputr' type='date' value={birthday} max={moment().format("YYYY-MM-DD")} onChange={(e) => setBirthday(e.target.value)} required />
           </div>
-          <div className='form-groupr'>
-          <label className='labelr'>Mobile Number:</label>
-            <div className='phone_numberr'>
+          <div id='form-groupr'>
+          <label id='labelr'>Mobile Number:</label>
+            <div id='phone_numberr'>
               <PhoneInput
                 country="in"
                 value={mobileNumber}
@@ -295,10 +327,10 @@ return (
           </div>
           {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
         </div>
-        <div className='form-groupr2'>
-        <div className='form-groupr'>
-          <label className='labell'>Gender</label>
-          <div className="radio-groupa">
+        <div id='form-groupr2'>
+        <div id='form-groupr'>
+          <label id='labell'>Gender</label>
+          <div id="radio-groupa">
             <input
               type="radio"
               value="male"
@@ -318,38 +350,38 @@ return (
           </div>
           {genderError && <p style={{color:'red'}}>{genderError}</p>}
         </div>
-          <div className='form-groupr'>
-          <label className='labell'>Join Date:</label>
-          <input className='inputl' type='date' value={joinDate} onChange={(e) => setJoinDate(e.target.value)} required />
+          <div id='form-groupr'>
+          <label id='labell'>Join Date:</label>
+          <input id='inputl' type='date' value={joinDate} onChange={(e) => setJoinDate(e.target.value)} required />
         </div> 
-          <div className='form-groupr'>
-            <lable className='labell'>Address:</lable>
-            <textarea className="inputl" id="Address" name="address" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: 294/5, Sammanthurai" rows="2" required></textarea>
+          <div id='form-groupr'>
+            <lable id='labell'>Address:</lable>
+            <textarea id="inputl"  name="address" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: 294/5, Sammanthurai" rows="2" required></textarea>
           </div>
-          <div className="form-groupr">
-            <label className='labell'>State:</label>
+          <div id="form-groupr">
+            <label id='labell'>State:</label>
             <input
-              className="inputl"
+              id="inputl"
               type="text"
               value={state}
               onChange={e => setState(e.target.value)}
               placeholder="Enter State" 
             required/>
           </div>
-          <div className="form-groupr">
-            <label className='labell'>District:</label>
+          <div id="form-groupr">
+            <label id='labell'>District:</label>
             <input
-              className="inputl"
+              id="inputl"
               type="text"
               value={district}
               onChange={e => setDistrict(e.target.value)}
               placeholder="Enter District" 
             required/>
           </div>
-          <div className="form-groupr">
-            <label className='labell'>City:</label>
+          <div id="form-groupr">
+            <label id='labell'>City:</label>
             <input
-              className="inputl"
+              id="inputl"
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -357,11 +389,10 @@ return (
               required
             />
           </div>
-          <div className="form-groupr">
-            <label className='labell'>PinCode:</label>
+          <div id="form-groupr">
+            <label id='labell'>PinCode:</label>
             <input
-              className="inputl"
-              id="pincode"
+              id="inputl"
               name="pincode"
               value={pinCode}
               onChange={(e) => setPinCode(e.target.value)}
@@ -370,7 +401,7 @@ return (
             />
           </div>        
         </div>
-        <button type="submit" className='buttonr' onClick={()=>handleSubmit}>Sign Up</button>
+        <button type="submit" id='buttonr' onClick={()=>handleSubmit}>Sign Up</button>
       </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />

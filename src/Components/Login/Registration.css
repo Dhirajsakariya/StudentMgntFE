@@ -1,4 +1,4 @@
-.containerr{
+#containerr{
   width: 50%;
   color:black;
   border-radius: 10px;
@@ -17,21 +17,21 @@
   margin-bottom: 50%;
 }
 
-.radio-groupa{
+#radio-groupa{
   width: fit-content;
-  margin-left: 28px;
+  margin-left: 42px;
   
 }
 #lradio{
   margin-left: 5px;
   margin-right: 30px;
 }
-.form-groupr {
+#form-groupr {
   margin-bottom: 1.5%;
   margin-top: 10px;
   
 }   
-.containerr h2{
+#containerr h2{
   justify-content: center;
   padding-top: 1px;
   color:#24305E;
@@ -42,7 +42,7 @@
   text-decoration: underline;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.signup{
+#signup{
   justify-content: center;
   padding-top: 1px;
   color:#24305E;
@@ -51,7 +51,7 @@
   text-decoration: underline;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.labelr {
+#labelr {
   display: block;
   margin-bottom: 0.5%;
   margin-top: 2%;
@@ -59,7 +59,7 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
 }
-.labell {
+#labell {
   width: fit-content;
   display: block;
   margin-bottom: 2%;
@@ -68,18 +68,18 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
 }
-.StandardSelection{
+#StandardSelection{
   height: 25px;
   margin-left: 25px;
   width: fit-content;
 }
-.SubjectSelection{
+#SubjectSelection{
   height: 25px;
   margin-left: 14px;
   width: fit-content;
 }
 
-.phone_numberr {
+#phone_numberr {
   width: 30%;
   margin-left: 2.3%;
   padding: 0.5%;
@@ -88,7 +88,7 @@
   border: 1px;
   border-radius: 8px;
 }
-.inputr {
+#inputr {
     width: 300px;
     margin-left: 3.2%;
     padding: 8px;
@@ -99,7 +99,7 @@
     border-top:  1px solid #24305E;
     border-left:  1px solid #24305E;
 }
-.inputl {
+#inputl {
   width: 300px;
     margin-left: 7%;
     padding: 8px;
@@ -110,25 +110,25 @@
     border-top:  1px solid #24305E;
     border-left:  1px solid #24305E
 }
-.inputr::placeholder { 
+#inputr::placeholder { 
   color:gray;
   position:absolute;
 }
 
-.iconr {
+#iconr {
   position:relative;
   right: 25px;
   top: 50%;
   transform: translateY(15%);
 }
 
-.iconeye {
+#iconeye {
   position:relative;
   right: 25px;
   top: 4px;
   transform: translateY(15%);
 }
-.buttonr { 
+#buttonr { 
   cursor: pointer;
   width: 20%;
   height: 40px;
@@ -145,7 +145,7 @@
   font-size: 18px;
   color: white;
 }
-.form-groupr2{
+#form-groupr2{
   margin-left: 50%;
   margin-top: -70%;
 }
