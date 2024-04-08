@@ -268,7 +268,7 @@ const Search_Teacher = () => {
         >
             {editedTeacher && (
               <div>
-                <button className="close-btn" onClick={() => setEditedTeacher(null)}>
+                <button id="close-btn" onClick={() => setEditedTeacher(null)}>
                   × </button>
                 <h2 id="headingpopup">Edit Details of {editedTeacher.name}</h2>
                 <div id='First-div-editPopup'> 
