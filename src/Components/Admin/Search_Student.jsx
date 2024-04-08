@@ -351,7 +351,7 @@ useEffect(() => {
                                     <input
                                         id="edit-popup1"
                                         type="text"
-                                        value={editedStudent.email}
+                                        value={editedStudent.gender}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, email: e.target.value })}
                                     />  
