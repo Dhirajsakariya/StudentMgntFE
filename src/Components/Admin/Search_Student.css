@@ -72,6 +72,18 @@
 #tr1searchstudent{
     text-align: center;
 }
+#searchstudenth2{
+    justify-content: center;
+    padding-top: 1px;
+    color:#24305E;
+    text-align: center;
+    font: bold;
+    font-size: 30px ;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 #datasearchstudent{
     height:30px
 }

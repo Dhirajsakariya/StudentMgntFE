@@ -14,7 +14,18 @@
   color:white;
   height: 40px;
   font-size: 18px;
-  
+}
+#headingsearchTeacher{
+  justify-content: center;
+  padding-top: 1px;
+  color:#24305E;
+  text-align: center;
+  font: bold;
+  font-size: 30px ;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #table_body{
  background-color:#f7f9fb;
