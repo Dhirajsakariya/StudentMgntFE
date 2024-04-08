@@ -127,6 +127,9 @@ border-radius: 5px;
   font-size: 18px;
   color: white;
 }
+#btnnextstudentform:hover {
+  cursor: pointer;
+}
 #studentformh2studentform{
   justify-content: center;
   padding-top: 1px;
