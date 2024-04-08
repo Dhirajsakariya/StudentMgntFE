@@ -3,7 +3,7 @@
   color:black;
   border-radius: 4%;
   padding: 30px 20px;
-  height: 40%;
+  height: 35%;
   background: transparent;
   border: 2px solid;
   background-color:#e1e4e8;
@@ -11,7 +11,7 @@
   margin-right: auto;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 9.3%;
   padding-top: 0.5%;
   
 }
@@ -82,7 +82,7 @@ p{
   justify-content: center;
   text-align: center;
   margin-left: 29%;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 1%;
   font-weight: 700;
   font-size: 15px;

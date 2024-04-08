@@ -8,6 +8,37 @@
 .error-messagee {
   color: red;
 }
+#submitmarks{
+  cursor: pointer;
+  width: 140px;
+  height: 40px;
+  border-radius: 10px;
+  outline: auto;
+  border: 1px;
+  background:#24305E;
+  justify-content: center;
+  text-align: center;
+  margin-left: 1%;
+  margin-top: 18px;
+  margin-bottom: 1px;
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+}
+#btn-deletee{
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  width: 50px;
+  border-radius: 3px;
+}
+#btn-editt{
+  color:white;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 3px;
+  width: 50px;
+}
 #t1
  {
   width: 100%;
@@ -36,4 +67,7 @@
   width: 100%;
   padding: 6px;
   box-sizing: border-box;
+}
+.custom-toast {
+  margin-top: 60px; /* Set the margin-top to 100px */
 }

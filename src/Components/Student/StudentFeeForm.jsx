@@ -4,6 +4,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import { FaRupeeSign } from "react-icons/fa";
 import StudentSidebar from '../Sidebar/StudentSidebar';
 import './StudentFeeForm.css';
+import config from '../Login/config';
 
 const StudentFeeForm = () => {
   const [feeAmount, setFeeAmount] = useState('');
@@ -15,7 +16,7 @@ const StudentFeeForm = () => {
     const selectedFrequency = e.target.value;
 
     // Fetch fee amount from backend based on selected frequency
-    const response = await fetch(`https://localhost:7157/api/Fees/GetFeeAmount/${fullId}?frequency=${selectedFrequency}`, {
+    const response = await fetch(`${config.ApiUrl}Fees/GetFeeAmount/${fullId}?frequency=${selectedFrequency}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +38,7 @@ const StudentFeeForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://localhost:7157/api/Fees/PostFees`, {
+      const response = await axios.post(`${config.ApiUrl}Fees/PostFees`, {
         StudentId: fullId,
         FeeFrequency: feeFrequency,
         Amount: feeAmount
