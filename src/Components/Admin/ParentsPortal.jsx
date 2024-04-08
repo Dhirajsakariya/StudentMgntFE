@@ -131,30 +131,57 @@ const handlePut = async () => {
   }
 };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
 
-  if (!validateForm()) {
-    return ;
-  }
+//   if (!validateForm()) {
+//     return ;
+//   }
 
   
-  const existingRecord = familyMembers.find(
-    (member) => member.relation === formData.relation
-  );
+//   const existingRecord = familyMembers.find(
+//     (member) => member.relation === formData.relation
+//   );
 
-  if (!editing && existingRecord) {
-    toast.error(
-      `A ${formData.relation} record already exists. Please edit the existing record.`
+//   if (!editing && existingRecord) {
+//     toast.error(
+//       `A ${formData.relation} record already exists. Please edit the existing record.`
+//     );
+//     return;
+//   }
+
+//   if (editing) {
+//     await handlePut();
+//   } else {
+//     await handlePost();
+//   }
+
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!validateForm()) {
+      return ;
+    }
+  
+    
+    const existingRecord = familyMembers.find(
+      (member) => member.relation === formData.relation
     );
-    return;
-  }
-
-  if (editing) {
-    await handlePut();
-  } else {
-    await handlePost();
-  }
+  
+    if (!editing && existingRecord) {
+      toast.error(
+        `A ${formData.relation} record already exists. Please edit the existing record.`
+      );
+      return;
+    }
+  
+    if (editing) {
+      await handlePut();
+    } else {
+      await handlePost();
+    }
+  
   
   setFormData({
     id: '',
