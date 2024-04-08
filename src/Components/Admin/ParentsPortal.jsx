@@ -50,27 +50,23 @@ const ParentsPortal = () => {
     }
   }, []);
   
-// Inside useEffect, set the studentId state variable with the actual student ID
 useEffect(() => {
   const studentId = "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"; 
   setStudentId(studentId);
-  fetchFamilyMembers(studentId); // Pass the student ID to fetchFamilyMembers
+  fetchFamilyMembers(studentId); 
 }, []);
 
-// Update fetchFamilyMembers to accept the studentId parameter
 const fetchFamilyMembers = async (studentId) => {
   try {
     console.log('Fetching family members for student:', studentId);
-    const response = await fetch(`https://localhost:7157/api/Family/GetFamilyByStudent/${studentId}`);
+    const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetailByStudentId/${studentId}`);
     if (response.ok) {
       const data = await response.json();
-      setFamilyMembers(data); // Assuming the response contains an array of family members
-    } else {
+      setFamilyMembers(data); 
       throw new Error('Failed to fetch family members');
     }
   } catch (error) {
     console.error('Error fetching family members:', error);
-    // Handle error, maybe show a toast or set an error state
   }
 };
 
@@ -92,8 +88,8 @@ const handlePost = async () => {
       })
     });
     if (response.ok) {
-      const result = await response.json(); // Assuming the response contains the newly added family member object
-      setFamilyMembers([...familyMembers, result]); // Fetch updated data after adding
+      const result = await response.json(); 
+      setFamilyMembers([...familyMembers, result]);
       toast.success("Added Successfully!");
     }
   } catch (error) {
@@ -139,13 +135,19 @@ const handleSubmit = async (e) => {
     return ;
   }
 
+  
+const alreadyRecord = familyMembers.find(member => member.relation === formData.relation);
+if (alreadyRecord) {
+  toast.error(`A ${formData.relation} record already exists. Please edit the existing records.`);
+  return;
+}
+
   if (editing) {
     await handlePut();
   } else {
     await handlePost();
   }
 
-  // Reset form fields after submission
   setFormData({
     id: '',
     email: '',
@@ -179,7 +181,6 @@ const validateForm = () => {
     setMobileNumberError('Please Select a Mobile Number');
     return false;
   }
-  // All validations passed
   return true;
 };
 const handlePhoneChange = (value) => {
