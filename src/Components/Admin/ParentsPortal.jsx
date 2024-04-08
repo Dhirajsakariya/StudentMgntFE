@@ -1,14 +1,14 @@
 import React,{useState,useEffect} from 'react';
 import './ParentsPortal.css';
-import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
+import { BiMale ,BiFemale} from "react-icons/bi";
 import { CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import ocuupation from '../Assets/occupation.png'
-import { BiMale, BiFemale, BiEdit, BiTrash, BiEnvelope, BiPhone, BiBriefcase } from 'react-icons/bi';
 
 const ParentsPortal = () => {
 
@@ -50,23 +50,21 @@ const ParentsPortal = () => {
     }
   }, []);
   
-// Inside useEffect, set the studentId state variable with the actual student ID
-useEffect((id) => {
-  const studentId = localStorage.getItem('selectedStudentId'); 
-  setStudentId(studentId);
-  fetchFamilyMembers(studentId); 
-}, []);
+  useEffect(() => {
+    const studentId = localStorage.getItem('selectedStudentId');
+    if (studentId) {
+      setStudentId(studentId);
+      fetchFamilyMembers(studentId);
+    }
+  }, []);
 
-// Update fetchFamilyMembers to accept the studentId parameter
 const fetchFamilyMembers = async (studentId) => {
   try {
     console.log('Fetching family members for student:', studentId);
-    const response = await fetch(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
+    const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetailByStudentId/${studentId}`);
     if (response.ok) {
       const data = await response.json();
-      console.log('data',data)
-      setFamilyMembers(data); // Assuming the response contains an array of family members
-    } else {
+      setFamilyMembers(data); 
       throw new Error('Failed to fetch family members');
     }
   } catch (error) {
@@ -76,7 +74,7 @@ const fetchFamilyMembers = async (studentId) => {
 
 const handlePost = async () => {
   try {
-    const response = await fetch(`${config.ApiUrl}Family/PostFamily`, {
+    const response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -88,22 +86,22 @@ const handlePost = async () => {
         Gender: formData.gender,
         MobileNumber: mobilenumber,
         Relation: formData.relation,
+        // StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
         StudentId: studentId
       })
     });
     if (response.ok) {
-      const result = await response.json(); // Assuming the response contains the newly added family member object
-      setFamilyMembers([...familyMembers, result]); // Fetch updated data after adding
+      const result = await response.json(); 
+      setFamilyMembers([...familyMembers, result]);
       toast.success("Added Successfully!");
     }
   } catch (error) {
     toast.error('Failed to add family member');
   }
 };
-
 const handlePut = async () => {
   try {
-    const response = await fetch(`${config.ApiUrl}Family/PutFamily/${formData.id}`, {
+    const response = await fetch(`https://localhost:7157/api/Family/PutFamily/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -137,12 +135,18 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (!validateForm()) {
-    return;
+    return ;
   }
 
-  const alreadyRecord = familyMembers.find(member => member.relation === formData.relation);
-  if (alreadyRecord) {
-    toast.error(`A ${formData.relation} record already exists. Please edit the existing records.`);
+  
+  const existingRecord = familyMembers.find(
+    (member) => member.relation === formData.relation
+  );
+
+  if (!editing && existingRecord) {
+    toast.error(
+      `A ${formData.relation} record already exists. Please edit the existing record.`
+    );
     return;
   }
 
@@ -151,8 +155,7 @@ const handleSubmit = async (e) => {
   } else {
     await handlePost();
   }
-
-  // Reset form fields after submission
+  
   setFormData({
     id: '',
     email: '',
@@ -163,14 +166,6 @@ const handleSubmit = async (e) => {
   });
   setMobileNumber('');
   setEditing(false);
-  // Clear error messages
-  setIdError('');
-  setEmailError('');
-  setNameError('');
-  setOccupationError('');
-  setGenderError('');
-  setRelationError('');
-  setMobileNumberError('');
 };
 
 const validateForm = () => {
@@ -194,7 +189,6 @@ const validateForm = () => {
     setMobileNumberError('Please Select a Mobile Number');
     return false;
   }
-
   return true;
 };
 const handlePhoneChange = (value) => {
@@ -226,7 +220,7 @@ const handleDelete = async (id) => {
   }).then(async (result)=> {
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`${config.ApiUrl}Family/DeleteFamily/${id}`, {
+        const response = await fetch(`https://localhost:7157/api/Family/DeleteFamily/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -374,46 +368,38 @@ const customToastStyle = {
           </form>
         </div>
       </div>
-      
-
-<div id='disp'>
-  {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
-    familyMembers.map((familyMember) => (
-      <div key={familyMember.id} id='display'>
-        <h2>{familyMember.relation}</h2>
-        <div id="icon_f_m">
-          {familyMember.gender === 'male' ? (
-            <BiMale size='20px' />
-          ) : (
-            <BiFemale size='20px' />
-          )}
-          <span id='icon_f_m'>{familyMember.name}</span>
-          
-          <BiEnvelope size='20px' />
-          <span id='icon_f_m'>{familyMember.email}</span>
-        </div>
-        <div>
-          <BiEnvelope size='20px' />
-          <span id='icon_f_m'>{familyMember.email}</span>
-        </div>
-        <div>
-          <BiBriefcase size='20px' />
-          <span id='icon_f_m'>"{familyMember.occupation}"</span>
-        </div>
-        <div>
-          <BiPhone size='20px' />
-          <span id='icon_f_m'>{familyMember.mobileNumber}</span>
-        </div>
-
-        <button onClick={() => handleEdit(familyMember)}><BiEdit /></button>
-        <button onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
+      <div id='disp'>
+      {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
+  familyMembers.map((familyMember) => (
+    <div key={familyMember.id} id='display'>
+      <h2>{familyMember.relation}</h2>
+      <div id="icon_f_m">
+        {familyMember.gender === 'male' ? (
+          <BiMale size='20px' />
+        ) : (
+          <BiFemale size='20px' />
+        )}
+        <span>{familyMember.name}</span>
       </div>
-    ))
-  ) : (
-    <p>No family members to display</p>
-  )}
-</div>
+      <div>
+        <strong>Email:</strong> {familyMember.email}
+      </div>
+      <div>
+        <strong>Occupation:</strong> "{familyMember.occupation}"
+      </div>
+      <div>
+        <strong>Mobile Number:</strong> {familyMember.mobileNumber}
+      </div>
 
+      <button onClick={() => handleEdit(familyMember)}>Edit</button>
+      <button onClick={() => handleDelete(familyMember.id)}>Delete</button>
+    </div>
+  ))
+) : (
+  <p>No family members to display</p>
+)}
+
+</div>
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </AdminSidebar>
   );
