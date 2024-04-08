@@ -121,6 +121,9 @@ textarea{
   width:292px;
   padding-left: 8px;
   border-radius: 5px;
+  border: none;
+  border-top: 1px solid #24305E;
+  border-left: 1px solid #24305E;
 }
 
 .iconT {

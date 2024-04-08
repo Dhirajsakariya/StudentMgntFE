@@ -6,6 +6,7 @@ import { LuUserCircle2 } from "react-icons/lu";
 import { RiParentFill } from "react-icons/ri";
 import {  BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
+import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { useHistory,Redirect } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
@@ -54,6 +55,11 @@ const StudentSidebar = ({ handleLogout,children }) => {
             path: '/StudentFeeForm',
             name: 'StudentFees',
             icon: <FaGooglePay   />
+        },
+        {
+          path: '/TimeTableViewer',
+          name: 'TimeTableViewer',
+          icon: <FaTableCells  />
         },
         {
             path: '/Login',
