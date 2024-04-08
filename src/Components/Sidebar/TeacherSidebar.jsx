@@ -69,6 +69,11 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             icon: <MdEditCalendar />
         },
         {
+            path: '/StudentReport',
+            name: 'Student Report',
+            icon: <MdEditCalendar />
+        },
+        {
             path: '/Login',
             name: 'Logout',
             icon: <BiLogOut />,

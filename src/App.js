@@ -27,6 +27,7 @@ import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
 import Parents from './Components/Student/Parents';
+import StudentReport from './Components/Teacher/StudentReport';
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
           <PrivateRoute path='/Search_Student' component={Search_Student} />
           <PrivateRoute path='/StudentMarks' component={StudentMarks} />
           <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
+          <PrivateRoute path='/StudentReport' component={StudentReport} />
           <PrivateRoute path='/Parents' component={Parents}/>
           <Route path='/Login' component={Login} />
           <Redirect to="/Login" />
