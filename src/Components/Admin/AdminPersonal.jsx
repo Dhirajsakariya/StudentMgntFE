@@ -27,6 +27,7 @@ const AdminPersonal = () => {
     }
   }, []);
   
+  
   useEffect(() => {
     const fetchAdminDetails = async () => {
       try {
