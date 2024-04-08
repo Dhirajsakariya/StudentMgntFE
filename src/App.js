@@ -19,6 +19,7 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import StudentSidebar from './Components/Sidebar/StudentSidebar';
 import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
+import TimeTableViewer from './Components/Student/TimeTableViewer';
 import StudentPersonal from './Components/Student/StudentPersonal';
 import AddExamSchedule from './Components/Teacher/AddExamSchedule';
 import Standard from './Components/Teacher/Standard';
@@ -49,6 +50,7 @@ function App() {
           <PrivateRoute path='/TeacherSidebar' component={TeacherSidebar} />
           <PrivateRoute path='/AdminSidebar' component={AdminSidebar} />
           <PrivateRoute path='/StudentFeeForm' component={StudentFeeForm} />
+          <PrivateRoute path='/TimeTableViewer' component={TimeTableViewer} />
           <PrivateRoute path='/TeacherPersonal' component={TeacherPersonal} />
           <PrivateRoute path='/AdminPersonal' component={AdminPersonal} />
           <PrivateRoute path='/StudentPersonal' component={StudentPersonal} />

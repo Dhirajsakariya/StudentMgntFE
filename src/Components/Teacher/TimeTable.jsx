@@ -123,7 +123,7 @@ const TimeTable = () => {
 
       // const fetchData = async () => {
       //   try {
-      //     const response = await fetch(`${config.ApiUrl}AdminTeacher/GetStandardFromString/${standardNumber}/${section}`, {
+      //     const response = await fetch(${config.ApiUrl}AdminTeacher/GetStandardFromString/${standardNumber}/${section}, {
       //       method: 'GET',
       //       headers: {
       //           'Content-Type': 'application/json'
@@ -347,7 +347,7 @@ const TimeTable = () => {
 
           // const StandardNumber = 10;
           // const Section = 'A';
-          // const data = await fetch(`${config.ApiUrl}AdminTeacher/GetStandardFromString/${StandardNumber}/${Section}`,{
+          // const data = await fetch(${config.ApiUrl}AdminTeacher/GetStandardFromString/${StandardNumber}/${Section},{
           //   method: 'GET',
           //   headers: {
           //     'Content-Type': 'application/json'
