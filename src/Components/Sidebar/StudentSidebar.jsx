@@ -3,7 +3,8 @@ import './Sidebar.css';
 import config from '../Login/config';
 import { NavLink } from 'react-router-dom';
 import { LuUserCircle2 } from "react-icons/lu";
-import { BiSolidUserDetail, BiLogOut } from 'react-icons/bi';
+import { RiParentFill } from "react-icons/ri";
+import {  BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
 import { FaBars } from 'react-icons/fa';
 import { useHistory,Redirect } from 'react-router-dom';
@@ -44,13 +45,14 @@ const StudentSidebar = ({ handleLogout,children }) => {
     
     const menuItem = [
         {
-            path: '/Student',
-            name: 'Student',
-            icon: <BiSolidUserDetail />
+          path:'/Parents',
+          name:'Parents',
+          icon:<RiParentFill />
+
         },
         {
             path: '/StudentFeeForm',
-            name: 'StudentFeeForm',
+            name: 'StudentFees',
             icon: <FaGooglePay   />
         },
         {

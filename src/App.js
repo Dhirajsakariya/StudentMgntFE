@@ -18,7 +18,6 @@ import AdminSidebar from './Components/Sidebar/AdminSidebar';
 import Sidebar from './Components/Sidebar/Sidebar';
 import StudentSidebar from './Components/Sidebar/StudentSidebar';
 import TeacherSidebar from './Components/Sidebar/TeacherSidebar';
-import Student from './Components/Student/Student';
 import StudentFeeForm from './Components/Student/StudentFeeForm';
 import StudentPersonal from './Components/Student/StudentPersonal';
 import AddExamSchedule from './Components/Teacher/AddExamSchedule';
@@ -26,6 +25,7 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
+import Parents from './Components/Student/Parents';
 
 function App() {
 
@@ -44,7 +44,6 @@ function App() {
           <PrivateRoute path='/Student_Form' component={Student_Form} />
           <PrivateRoute path='/TimeTable' component={TimeTable} />
           <PrivateRoute path='/Standard' component={Standard} />
-          <PrivateRoute path='/Student' component={Student} />
           <PrivateRoute path='/ParentsPortal' component={ParentsPortal} />
           <PrivateRoute path='/StudentSidebar' component={StudentSidebar} />
           <PrivateRoute path='/TeacherSidebar' component={TeacherSidebar} />
@@ -57,6 +56,7 @@ function App() {
           <PrivateRoute path='/Search_Student' component={Search_Student} />
           <PrivateRoute path='/StudentMarks' component={StudentMarks} />
           <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
+          <PrivateRoute path='/Parents' component={Parents}/>
           <Route path='/Login' component={Login} />
           <Redirect to="/Login" />
         </Switch>
