@@ -6,6 +6,7 @@ import { CgMail } from 'react-icons/cg';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import moment from 'moment';
 import config from './config';
+import Navigationbar from '../Header/Navigationbar';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -85,6 +86,8 @@ const ForgotPassword = () => {
     };
 
     return (
+    <>
+        <Navigationbar/>
         <div id='containerF'>
             <form onSubmit={handleSubmit}>
                 <h2>Reset Password</h2>
@@ -136,6 +139,7 @@ const ForgotPassword = () => {
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
         </div>
+    </>
     );
 };
 

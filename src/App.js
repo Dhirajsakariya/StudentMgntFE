@@ -26,6 +26,7 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
+import Navigationbar from './Components/Header/Navigationbar';
 import Parents from './Components/Student/Parents';
 import StudentReport from './Components/Teacher/StudentReport';
 
@@ -62,7 +63,8 @@ function App() {
           <PrivateRoute path='/StudentReport' component={StudentReport} />
           <PrivateRoute path='/Parents' component={Parents}/>
           <Route path='/Login' component={Login} />
-          <Redirect to="/Login" />
+          {/*<Redirect to="/Login" /> */}
+          <Route path='/' component={Navigationbar} />
         </Switch>
       </Router>
     </div>
