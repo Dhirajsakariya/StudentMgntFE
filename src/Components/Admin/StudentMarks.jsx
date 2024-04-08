@@ -86,19 +86,13 @@ const InputMarksTable = () => {
     const finalCount = enteredData.filter((data) => data.examType === 'Final').length;
 
     // Check if adding another record exceeds the limit
-    if (examType === 'Midterm' && midtermCount >= 1) {
+    if (examType === 'Midterm' && midtermCount >= 1 && editedIndex === null) {
       toast.error('You cannot add more than one Midterm record!');
-      setName('');
-    setMarks({});
-    setExamType('Midterm'); // Reset exam type to default
-    setEditedIndex(null);
+      clearForm(); // Clear form after showing the toast message
       return;
-    } else if (examType === 'Final' && finalCount >= 1) {
+    } else if (examType === 'Final' && finalCount >= 1 && editedIndex === null) {
       toast.error('You cannot add more than one Final record!');
-      setName('');
-    setMarks({});
-    setExamType('Midterm'); // Reset exam type to default
-    setEditedIndex(null);
+      clearForm(); // Clear form after showing the toast message
       return;
     }
 
@@ -110,13 +104,14 @@ const InputMarksTable = () => {
       updatedData[editedIndex] = newData;
       setEnteredData(updatedData);
       toast.success('Record updated successfully!');
+      clearForm();
     } else {
       // Add new record
       setEnteredData([...enteredData, newData]);
       toast.success('Record added successfully!');
+      clearForm(); // Clear form after successful addition
     }
     setSubmitted(true);
-    clearForm(); // Clear form after submission
   };
 
   const clearForm = () => {
@@ -131,6 +126,7 @@ const InputMarksTable = () => {
     setMarks({ ...selectedData });
     setExamType(selectedData.examType); // Set exam type from selected data
     setEditedIndex(index);
+    
   };
 
   const handleDelete = (index) => {
