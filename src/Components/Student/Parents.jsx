@@ -25,7 +25,6 @@ const Parents = () => {
         setRedirectToNotFound(true);
       }
     };
-
     const fetchFamilyDetails = async () => {
       try {
         const studentId = JSON.parse(localStorage.getItem('loggedInUserId'));
