@@ -86,31 +86,31 @@ const InputMarksTable = () => {
     <AdminSidebar>
       <div className="studentmarkscontainer">
         <center>
-          <h2 className="heading">Input Marks</h2><br /><br /></center>
+          <h2 id="heading1">Input Marks</h2><br /><br /></center>
           <form onSubmit={handleSubmit}>
-            <table>
+            <table id='t1'>
               <thead>
-                <tr>
-                  <th>Name</th>
+                <tr id='tr1'>
+                  <th id='th1'>Name</th>
                   {subjects.map((subject) => (
-                    <th key={subject}>{subject}</th>
+                    <th id='th1' key={subject}>{subject}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>{studentName}</td> {/* Display student's name */}
+              <tbody id='tbody'>
+                <tr id='tr1'>
+                  <td id='td1'>{studentName}</td> {/* Display student's name */}
                   {subjects.map((subject) => (
-                    <td key={subject}>
-                      <input type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required />
+                    <td id='td1' key={subject}>
+                      <input id='i1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required />
                     </td>
                   ))}
                 </tr>
               </tbody>
               <tfoot>
-                <tr>
-                  <td colSpan={1 + subjects.length}><center>
-                    <input type="submit" value="Add To Table" /></center>
+                <tr id='tr1'>
+                  <td id='td1'colSpan={1 + subjects.length}><center>
+                    <input  id='submitmarks'type="submit" value="Add To Table" /></center>
                   </td>
                 </tr>
               </tfoot>
@@ -119,29 +119,29 @@ const InputMarksTable = () => {
           <br /><br />
           {submitted && enteredData.length > 0 && (
             <div><center>
-              <h2>View Marks</h2></center><br />
-              <table>
+              <h2 id='heading1'>View Marks</h2></center><br />
+              <table id='t1'>
                 <thead>
-                  <tr>
-                    <th>Name</th>
+                  <tr id='tr1'>
+                    <th id='th1'>Name</th>
                     {subjects.map((subject) => (
-                      <th key={subject}>{subject}</th>
+                      <th id='th1' key={subject}>{subject}</th>
                     ))}
-                    <th>Total Marks</th> {/* Add Total Marks column */}
-                    <th>Obtained Marks</th> {/* Add Obtained Marks column */}
-                    <th>Status</th> {/* Add Status column */}
+                    <th id='th1'>Total Marks</th> {/* Add Total Marks column */}
+                    <th id='th1'>Obtained Marks</th> {/* Add Obtained Marks column */}
+                    <th id='th1'>Status</th> {/* Add Status column */}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id='tbody'>
                   {enteredData.map((data, index) => (
-                    <tr key={index}>
-                      <td>{data.name}</td> {/* Display student's name from enteredData */}
+                    <tr  id='tr1'key={index}>
+                      <td id='td1'>{data.name}</td> {/* Display student's name from enteredData */}
                       {subjects.map((subject) => (
-                        <td key={subject}>{data[subject]}</td>
+                        <td id='td1' key={subject}>{data[subject]}</td>
                       ))}
-                      <td>{data.totalMarks}</td> {/* Display Total Marks */}
-                      <td>{data.obtainedMarks}</td> {/* Display Obtained Marks */}
-                      <td>{data.status}</td> {/* Display Status */}
+                      <td id='td1'>{data.totalMarks}</td> {/* Display Total Marks */}
+                      <td id='td1'>{data.obtainedMarks}</td> {/* Display Obtained Marks */}
+                      <td id ='td1'>{data.status}</td> {/* Display Status */}
                     </tr>
                   ))}
                 </tbody>
