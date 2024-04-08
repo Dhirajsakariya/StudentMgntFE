@@ -50,11 +50,13 @@ const ParentsPortal = () => {
     }
   }, []);
   
-useEffect(() => {
-  const studentId = "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"; 
-  setStudentId(studentId);
-  fetchFamilyMembers(studentId); 
-}, []);
+  useEffect(() => {
+    const studentId = localStorage.getItem('selectedStudentId');
+    if (studentId) {
+      setStudentId(studentId);
+      fetchFamilyMembers(studentId);
+    }
+  }, []);
 
 const fetchFamilyMembers = async (studentId) => {
   try {
@@ -84,7 +86,8 @@ const handlePost = async () => {
         Gender: formData.gender,
         MobileNumber: mobilenumber,
         Relation: formData.relation,
-        StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
+        // StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
+        StudentId: studentId
       })
     });
     if (response.ok) {
@@ -136,18 +139,23 @@ const handleSubmit = async (e) => {
   }
 
   
-const alreadyRecord = familyMembers.find(member => member.relation === formData.relation);
-if (alreadyRecord) {
-  toast.error(`A ${formData.relation} record already exists. Please edit the existing records.`);
-  return;
-}
+  const existingRecord = familyMembers.find(
+    (member) => member.relation === formData.relation
+  );
+
+  if (!editing && existingRecord) {
+    toast.error(
+      `A ${formData.relation} record already exists. Please edit the existing record.`
+    );
+    return;
+  }
 
   if (editing) {
     await handlePut();
   } else {
     await handlePost();
   }
-
+  
   setFormData({
     id: '',
     email: '',

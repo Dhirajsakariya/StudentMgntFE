@@ -9,7 +9,8 @@ const PageNotFound = () => {
       <p className="text-page-not-found">The page you're looking for does not exist.</p>
       <Link to="/Login" className="link-page-not-found">Go to Home</Link>
       <br />
-      <img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404 Not Found" className="image-page-not-found" />
+      {/* <img src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"  */}
+      {/* alt="404 Not Found" className="image-page-not-found" /> */}
     </div>
   );
 };
