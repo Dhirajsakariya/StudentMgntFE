@@ -10,6 +10,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './Registration.css';
 import axios from 'axios';
+import Navigationbar from '../Header/Navigationbar';
+
 function Registration(props) {
 
   //const [id, setId] = useState('');
@@ -227,6 +229,7 @@ const customToastStyle = {
 
 return (
   <>
+    <Navigationbar/>
     <div id='containerr'>
       <form onSubmit={handleSubmit}>
         <h2 id='signup'>Sign Up</h2>

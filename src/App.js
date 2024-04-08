@@ -26,7 +26,7 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
-
+import Navigationbar from './Components/Header/Navigationbar';
 function App() {
 
 
@@ -58,7 +58,8 @@ function App() {
           <PrivateRoute path='/StudentMarks' component={StudentMarks} />
           <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
           <Route path='/Login' component={Login} />
-          <Redirect to="/Login" />
+          {/*<Redirect to="/Login" /> */}
+          <Route path='/' component={Navigationbar} />
         </Switch>
       </Router>
     </div>

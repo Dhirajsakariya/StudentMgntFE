@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; 
 import { CgMail } from 'react-icons/cg';
 import { toast, Toaster } from 'react-hot-toast';
+import Navigationbar from '../Header/Navigationbar';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -126,6 +127,8 @@ const Login = () => {
     };
 
     return (
+    <>
+    <Navigationbar/>
         <div className='containerlogin'>
             <form onSubmit={handleSubmit}>
                 <h2>Login</h2>
@@ -173,7 +176,9 @@ const Login = () => {
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
         </div>
+        </>
     );
+
 };
 
 export default Login;
