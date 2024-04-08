@@ -43,9 +43,10 @@ color: white;
 #rowview{
 font-family: sans-serif;
 width: 50%;
-height: 20px;
+height: 30px;
 font-weight: 400;
 background-color: #e1e4e8;
+border: 1px solid white;
 }
 
 #formtabledata {
