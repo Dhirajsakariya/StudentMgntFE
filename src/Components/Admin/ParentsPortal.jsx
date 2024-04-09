@@ -60,15 +60,15 @@ const ParentsPortal = () => {
 
 const fetchFamilyMembers = async (studentId) => {
   try {
-    console.log('Fetching family members for student:', studentId);
+    console.log('Fetching parent detail for student:', studentId);
     const response = await fetch(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
     if (response.ok) {
       const data = await response.json();
       setFamilyMembers(data); 
-      throw new Error('Failed to fetch family members');
+      throw new Error('Failed to fetch parent detail ');
     }
   } catch (error) {
-    console.error('Error fetching family members:', error);
+    console.error('Error fetching parent detail:', error);
   }
 };
 
@@ -106,7 +106,7 @@ const handlePost = async () => {
       toast.success("Added Successfully!");
     }
   } catch (error) {
-    toast.error('Failed to add family member');
+    toast.error('Failed to add parent detail');
   }
 };
 
@@ -132,13 +132,13 @@ const handlePut = async () => {
         member.id === formData.id ? { ...member, ...updatedMember } : member
       );
       setFamilyMembers(updatedMembers);
-      toast.success('Member updated successfully');
+      toast.success('Parent Detail updated successfully');
     } else {
-      throw new Error('Failed to update member');
+      throw new Error('Failed to update Parent Detail');
     }
   } catch (error) {
-    console.error('Error updating member:', error);
-    toast.error('Failed to update member');
+    console.error('Error updating Parent Detail:', error);
+    toast.error('Failed to update Parent Detail');
   }
 };
 
@@ -239,15 +239,15 @@ const handleDelete = async (id) => {
           }
         });
         if (response.ok) {
-          toast.success('parent deleted successfully');
+          toast.success('parent detail deleted successfully');
           setFamilyMembers(familyMembers.filter(familyMembers => familyMembers.id !== id));
         } 
         else {
-          toast.error('Failed to delete family member');
+          toast.error('Failed to delete parent detail');
         }
       } catch  {
         
-        toast.error('Failed to delete parent');
+        toast.error('Failed to delete parent detail');
       }
     }
   })
@@ -363,51 +363,56 @@ const customToastStyle = {
               </div>
               {genderError && <p style={{color: 'red'}}>{genderError}</p>}
             </div>
-              <label id='lbl'>Mobile Number:</label>
-                <div id='phone_number'>
-                  <PhoneInput
-                       country={'in'}
-                       value={mobilenumber}
-                       onChange={handlePhoneChange}
-                       disableDropdown={true}
-                       isValid={isValidPhone}
-                       inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                       containerStyle={{padding:'1px'}} 
-                       required
-                  />
+            <label id='lbl'>Mobile Number:</label>
+            <div id='phone_number'>
+                <PhoneInput
+                    country={'in'}
+                    value={mobilenumber}
+                    placeholder="Enter mobile number"
+                    countryCodeEditable={false}
+                    onChange={handlePhoneChange}
+                    disableDropdown={true}
+                    isValid={isValidPhone}
+                    inputProps={{ maxLength: 15 }}
+                    inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
+                    containerStyle={{ padding: '1px' }} 
+                    required
+                />
             </div>
-            <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
+       <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
           </form>
         </div>
       </div>
-      <div id='disp'>
+    <div id='disp'>
   {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
     familyMembers.map((familyMember) => (
       <div key={familyMember.id} id='display'>
         <h2>{familyMember.relation}</h2>
-        <div id="icon_f_m">
+        <div id='parent-details'>
+        <div id='detail'>
           {familyMember.gender === 'male' ? (
             <BiMale size='20px' />
           ) : (
             <BiFemale size='20px' />
           )}
           <span>{familyMember.name}</span>
-          </div>
-        <div>
+        </div>
+        <div id='detail'>
           <BiEnvelope size='20px' />
-          <span> : {familyMember.email}</span>
+          <span>{familyMember.email}</span>
         </div>
-        <div>
+        <div id='detail'>
           <BiBriefcase size='20px' />
-          <span> : "{familyMember.occupation}"</span>
+          <span>"{familyMember.occupation}"</span>
         </div>
-        <div>
+        <div id='detail'>
           <BiPhone size='20px' />
-          <span> : {familyMember.mobileNumber}</span>
+          <span>{familyMember.mobileNumber}</span>
         </div>
+      </div>
 
-        <button onClick={() => handleEdit(familyMember)}><BiEdit /></button>
-        <button onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
+        <button id='btneditPP' onClick={() => handleEdit(familyMember)}><BiEdit /></button>
+        <button id='btndeletePP' onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
       </div>
     ))
   ) : (
