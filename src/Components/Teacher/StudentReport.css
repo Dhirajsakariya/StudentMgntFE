@@ -1,0 +1,61 @@
+.studentprojectreport {
+    /* margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 32%;
+    background-color: #d6e2f3;
+    border-radius: 10px;
+    border: 2px solid black; 
+    height: 45%;
+    text-align: center; */
+    width: 400px;
+    border-radius: 5%;
+    padding: 30px 30px;
+    height: auto;
+    background: transparent;
+    background-color: #d6e2f3;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 86px;
+    padding-top: 15px; 
+    border: 2px solid black; 
+ 
+}
+  
+  .projectreport {
+    margin-top: 3%;
+    margin-left: 15%;
+  }
+  
+  .header-student-report {
+    margin-top: 7%;
+    margin-bottom: 7%;  
+    text-align: center;
+  }
+  
+  .studentreportsbutton{
+    width: 50%;
+    height: 40px;
+    border-radius: 10px;
+    outline: auto;
+    border: 1px;
+    background:#24305E;
+    /* justify-content: center; */
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 18px;
+    color: white; 
+    margin-left: 26%;
+    margin-top: 9%;
+    /* align-items: center;  */
+
+  }
+
+  .starstudentreports{
+    height: 2%;
+  }
