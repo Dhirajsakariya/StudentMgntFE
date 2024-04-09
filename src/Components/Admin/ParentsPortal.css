@@ -23,17 +23,18 @@
 #radio-groupf  {
   display: inline-flex;
   align-items: center;
-  margin-left: 7%;
+  margin-left: 4%;
 }
-#radio-groupf label {
+#radio-groupf #label {
   margin-top: 1%;
-  margin-right: 49%;
+  margin-right: 20%;
+  margin-left: 10%;
 }
-#radio-groupf input {
+#radio-groupf #input {
   width: 15%;
   padding: 0;
   margin-top: -1%;
-  margin-left: -12%;
+  margin-left: -7%;
 }
 #containerf h2{
   justify-content: center;
@@ -55,7 +56,7 @@
 p{
   color:white;
 } 
-#input, .relation {
+#input, #relation {
   width: 300px;
   margin-left: 15px;
   padding: 8px;
@@ -64,7 +65,7 @@ p{
   border: 1px;
   border-radius: 5px;
 }
-.relation{
+#relation{
   
   border-top: 1px solid #24305E;
   border-left: 1px solid #24305E;
@@ -73,6 +74,9 @@ p{
   
   border-top: 1px solid #24305E;
   border-left: 1px solid #24305E;
+}
+.react-tel-input .flag-dropdown {
+  border:-1px solid #24305E;
 }
 #btnf {
   cursor: pointer;

@@ -240,9 +240,9 @@ return (
               <input
                 type="radio" 
                 value="admin"
-              checked={role === "admin"}
-              onChange={handleRole}
-              required/>
+                checked={role === "admin"}
+                onChange={handleRole}
+                required/>
               <label  id='lradio'>Admin</label>
               <input  
                 type="radio" 
@@ -322,8 +322,8 @@ return (
                 value={mobileNumber}
                 disableDropdown={true}
                 onChange={handlePhoneChange}
-                inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                containerStyle={{padding:'1px'}}
+                inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                containerStyle={{padding:'0.5px'}}
                 required
               />                     
             </div>

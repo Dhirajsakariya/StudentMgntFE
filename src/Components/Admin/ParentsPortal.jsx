@@ -281,7 +281,7 @@ const customToastStyle = {
               <label id='lbl'>Relation:</label>
                 <select
                         value={formData.relation}
-                        className='relation'
+                        id='relation'
                         required
                         onChange={(e) => {
                           setFormData({ ...formData, relation: e.target.value });
@@ -348,7 +348,7 @@ const customToastStyle = {
                           }}
                           required
                         />
-              <label id='lbl'>Male</label>
+              <label id='label'>Male</label>
                 <input
                         type="radio"
                         value="female"
@@ -359,21 +359,20 @@ const customToastStyle = {
                         }}
                         required
                       />
-              <label id='lbl'>Female</label>
+              <label id='label'>Female</label>
               </div>
               {genderError && <p style={{color: 'red'}}>{genderError}</p>}
             </div>
               <label id='lbl'>Mobile Number:</label>
                 <div id='phone_number'>
                   <PhoneInput
-                       country={'in'}
-                       value={mobilenumber}
-                       onChange={handlePhoneChange}
-                       disableDropdown={true}
-                       isValid={isValidPhone}
-                       inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                       containerStyle={{padding:'1px'}} 
-                       required
+                    country={'in'}
+                    value={mobilenumber}
+                    disableDropdown={true}
+                    onChange={handlePhoneChange}
+                    inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                    containerStyle={{padding:'0.5px'}}
+                    required
                   />
             </div>
             <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Family Member'}</button>
