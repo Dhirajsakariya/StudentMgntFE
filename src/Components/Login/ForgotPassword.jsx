@@ -6,7 +6,7 @@ import { CgMail } from 'react-icons/cg';
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import moment from 'moment';
 import config from './config';
-import Navigationbar from '../Header/Navigationbar';
+import Navigationbar from '../Dashboard/Navigationbar';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');

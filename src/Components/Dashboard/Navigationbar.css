@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -54,12 +53,9 @@ body {
   color: #66d1e4;
   font-weight: bold;
 }
-/* .nav-elements ul a.active {
-  color: aqua;
-  font-weight: 500;
-  position: relative;
-} */
-
+#activeitem{
+  background:#24305E;
+}
 #nav-elements ul a.active::after {
   content: '';
   position: absolute;

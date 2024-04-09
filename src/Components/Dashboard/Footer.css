@@ -1,0 +1,106 @@
+#Footer {
+    height: 265px;
+    width: 100%;
+    /* position: absolute; */
+    bottom: 0;
+    background: #24305E;
+}
+
+#containerfooter {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+#AboutUs{
+    height: 100%;
+    width:35%;
+}
+#AUTitle
+{
+  color: white;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 25px;
+  font-size: 25px;
+}
+#AUTitle a:hover {
+    color: #83EEFF;
+    font-weight: bold;
+}
+#AUContent{
+    color:#e7f5fe;
+    margin: auto;
+    margin-top: 10px; 
+    margin-left: 27px;
+    font-size: 15px;
+}
+
+#ContactUs{
+    height: 100%;
+    width: 25%;
+}
+#CUTitle
+{
+  color: white;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 25px;
+  font-size: 25px;
+}
+#CUTitle a:hover {
+    color: #83EEFF;
+    font-weight: bold;
+}
+#CUContent{
+  color:#e7f5fe;
+  margin-left: 27px;
+}
+#iconC{
+    font-size: 25px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+#pC{
+    margin-top: -28px;
+    margin-left: 35px;
+    color:#e7f5fe;
+}
+#ReachUs{
+    height: 100%;
+    width:25%;
+}
+#RUTitle
+{
+  color: white;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 25px;
+  font-size: 25px;
+}
+#RUTitle a:hover {
+    color: #83EEFF;
+    font-weight: bold;
+}
+#RUContent{
+    color:#e7f5fe;
+    margin-left: 25px;
+}
+#iconR{
+      font-size: 25px;
+      margin-right: 10px;
+      margin-top: 10px;
+}
+#pR{
+    margin-top: -30px;
+    margin-left: 35px;
+    color:#e7f5fe;
+}
+#pR1{
+   margin-left: 35px;
+   color:#e7f5fe;
+}
+  

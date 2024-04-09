@@ -4,6 +4,7 @@ import { FaGraduationCap } from "react-icons/fa";
 
 const Navigationbar = () => {
   return (
+    
     <nav id="navbar">
       <div id="container">
         <div id="logo">
@@ -13,7 +14,7 @@ const Navigationbar = () => {
         <div id="nav-elements">
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/Slideshow" >Home</NavLink>
             </li>
             <li>
               <NavLink to="/Login">Login</NavLink>
@@ -21,9 +22,6 @@ const Navigationbar = () => {
             <li>
               <NavLink to="/Registration">Sign Up</NavLink>
             </li>
-            {/* <li>
-              <NavLink to="/contact">Contact</NavLink>
-            </li> */}
           </ul>
         </div>
       </div>

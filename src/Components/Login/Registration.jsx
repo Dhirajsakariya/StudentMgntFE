@@ -10,7 +10,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './Registration.css';
 import axios from 'axios';
-import Navigationbar from '../Header/Navigationbar';
+import Navigationbar from '../Dashboard/Navigationbar';
 
 function Registration(props) {
 
