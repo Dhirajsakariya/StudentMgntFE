@@ -98,13 +98,11 @@
 #btnaddstudent{
     background-color: rgb(68, 161, 68);
     margin-left:20px;
-   color: white;
+    color: white;
     border-radius: 10px;
     font-size: 20px;
     width: 8%;
     height:32px;
-}
-#btnaddstudent:hover{
     cursor: pointer;
 }
 #btnaddmarkssearchstudent{
@@ -114,10 +112,9 @@
     width:50px ;
     margin-left: 5px;
     border-radius: 3px;
-  }
-#btnaddmarkssearchstudent {
     cursor: pointer;
 }
+
 #btnviewsearchstudent:hover {
     color: black;    
     border: none;
@@ -132,10 +129,9 @@
     margin-left: auto;
     margin-left: -230px;
     border-radius: 3px;
-}
-#btneditsearchstudent:hover {
     cursor: pointer;
 }
+
 #btndeletesearchstudent {
     color: #fff;
     background-color: #dc3545;
@@ -143,8 +139,6 @@
     width:50px ;
     margin-left: 5px;
     border-radius: 3px;
-}
-#btndeletesearchstudent {
     cursor: pointer;
 }
 #btnaddfamilysearchstudent {
@@ -154,10 +148,9 @@
   width:50px ;
   margin-left: 5px;
   border-radius: 3px;
+  cursor: pointer;
 }
-#btnaddfamilysearchstudent:hover {
-    cursor: pointer;
-}
+
 #close-btn {
     position: absolute;
     top: 0px;
@@ -171,7 +164,6 @@
     margin-top: 5px;
 }
 #close-btn:hover {
-    cursor: pointer;
     color: white;
     background-color: red; /* Change color on hover if desired */
 }
