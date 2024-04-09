@@ -11,6 +11,8 @@ const StudentFeeForm = () => {
   const [feeFrequency, setFeeFrequency] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [selectedFrequency,setselectedFrequency]=useState('');
+  const [message, setMessage] = useState('');
+
 
   const handleFrequencyChange = async (e) => {
     const selectedFrequency = e.target.value;
@@ -50,19 +52,14 @@ const StudentFeeForm = () => {
       setFeeFrequency('');
       setFeeAmount('');
       const userERes = response.data;
-      if (userERes=="already") {
-        toast.error(`Fees Already paid  !!!`);
-
-      
-      
-      }
       
 
-     else  if (userERes.remainingAmount > 0) {
+     if (userERes.remainingAmount > 0) {
         // Display toast message with remaining amount and updated frequencies
         toast.success(`Payment Successfully! Your remaining fee is ${userERes.remainingAmount}. You can pay in the following frequencies: ${userERes.updatedFrequencies.join(', ')}`);
         
       } 
+      
       else if(userERes.remainingAmount==0)
       {
         toast.success("payment sucessful");
@@ -71,7 +68,20 @@ const StudentFeeForm = () => {
         toast.error("Fees already paid.");
       }
     } catch (error) {
-      console.error('Error submitting fee:', error);
+      if (error.response && error.response.status === 400) {
+        if (error.response.data === 'Please select appropriate frequencies based on your remaining amount.') {
+          toast.error('Please select appropriate frequencies based on your remaining amount.');
+          setFeeFrequency('');
+          setFeeAmount('');
+        } else {
+          toast.error( error.response.data); // Show the error message from the backend
+          setFeeFrequency('');
+          setFeeAmount('');
+        }
+      } else {
+        console.error('Error:', error);
+        toast.error('Error processing payment.');
+      }
     }
     
    
