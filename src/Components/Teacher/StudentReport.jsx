@@ -60,55 +60,55 @@ function StudentReport() {
         <div className='studentprojectreport'>
           <form>
             <div className='header-student-report'>
-            <h2>Monthly Progress Reports</h2>
-            <h2>Student Name:</h2>
+            <h1>Monthly Progress Reports</h1><br/>
+            <h2 style={{marginLeft:'-132px'}}>Student Name:<p style={{color:'black', fontSize:'24px', marginTop:'-28px', marginLeft:'300px'}}>Shraddha</p></h2>
             <h2>April 2024</h2>
             </div>
             <div className='projectreport'>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Topic</th>
-                    <th>Academic</th>
-                    <th>Behaviors</th>
+              <table id='tab_main'>
+                <thead id='table_column'>
+                  <tr id='tr_heading'>
+                    <th id='th_field'>Topic</th>
+                    <th id='th_field'>Academic</th>
+                    <th id='th_field'>Behaviors</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id='starting_body'>
                   <tr>
-                    <th>Math</th>
-                    <td><StarRating value={ratings.math} onChange={(rating) => handleRatingChange('math', rating)} name = 'math'/></td>
-                    <td><StarRating value={ratings.behaviorMath} onChange={(rating) => handleRatingChange('behaviorMath', rating)} /></td>
+                    <th id='th_tag'>Math</th>
+                    <td id='td_tag'><StarRating value={ratings.math} onChange={(rating) => handleRatingChange('math', rating)} name = 'math'/></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorMath} onChange={(rating) => handleRatingChange('behaviorMath', rating)} /></td>
                   </tr>
                   <tr>
-                    <th>Science</th>
-                    <td><StarRating value={ratings.science} onChange={(rating) => handleRatingChange('science', rating)} /></td>
-                    <td><StarRating value={ratings.behaviorScience} onChange={(rating) => handleRatingChange('behaviorScience', rating)} /></td>
+                    <th id='th_tag'>Science</th>
+                    <td id='td_tag'><StarRating value={ratings.science} onChange={(rating) => handleRatingChange('science', rating)} /></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorScience} onChange={(rating) => handleRatingChange('behaviorScience', rating)} /></td>
                   </tr>
                   <tr>
-                    <th>Read & Write</th>
-                    <td><StarRating value={ratings.readWrite} onChange={(rating) => handleRatingChange('readWrite', rating)} /></td>
-                    <td><StarRating value={ratings.behaviorReadWrite} onChange={(rating) => handleRatingChange('behaviorReadWrite', rating)} /></td>
+                    <th id='th_tag'>Read & Write</th>
+                    <td id='td_tag'><StarRating value={ratings.readWrite} onChange={(rating) => handleRatingChange('readWrite', rating)} /></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorReadWrite} onChange={(rating) => handleRatingChange('behaviorReadWrite', rating)} /></td>
                   </tr>
                   <tr>
-                    <th>Social Study</th>
-                    <td><StarRating value={ratings.socialStudy} onChange={(rating) => handleRatingChange('socialStudy', rating)} /></td>
-                    <td><StarRating value={ratings.behaviorSocialStudy} onChange={(rating) => handleRatingChange('behaviorSocialStudy', rating)} /></td>
+                    <th id='th_tag'>Social Study</th>
+                    <td id='td_tag'><StarRating value={ratings.socialStudy} onChange={(rating) => handleRatingChange('socialStudy', rating)} /></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorSocialStudy} onChange={(rating) => handleRatingChange('behaviorSocialStudy', rating)} /></td>
                   </tr>
                   <tr>
-                    <th>Special</th>
-                    <td><StarRating value={ratings.special} onChange={(rating) => handleRatingChange('special', rating)} /></td>
-                    <td><StarRating value={ratings.behaviorSpecial} onChange={(rating) => handleRatingChange('behaviorSpecial', rating)} /></td>
+                    <th id='th_tag'>Special</th>
+                    <td id='td_tag'><StarRating value={ratings.special} onChange={(rating) => handleRatingChange('special', rating)} /></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorSpecial} onChange={(rating) => handleRatingChange('behaviorSpecial', rating)} /></td>
                   </tr>
                   <tr>
-                    <th>Other</th>
-                    <td> N/A </td>
+                    <th id='th_tag'>Other</th>
+                    <td id='td_tag'> N/A </td>
                     {/* <td><StarRating value={ratings.other} onChange={(rating) => handleRatingChange('other', rating)} /></td> */}
-                    <td><StarRating value={ratings.behaviorOther} onChange={(rating) => handleRatingChange('behaviorOther', rating)} /></td>
+                    <td id='td_tag'><StarRating value={ratings.behaviorOther} onChange={(rating) => handleRatingChange('behaviorOther', rating)} /></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <button onClick={()=>handlesubmitrating} className='studentreportsbutton'>submit recods</button>
+            <button onClick={()=>handlesubmitrating} className='studentreportsbutton'>Submit Records</button>
           </form>
         </div>
       </TeacherSidebar>
