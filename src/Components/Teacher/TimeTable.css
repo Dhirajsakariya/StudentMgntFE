@@ -7,6 +7,34 @@
   justify-content: center;
 }
 
+#teacher-timetable{    
+  margin-left: 13%;
+  margin-top: 2%;
+  width:70%;
+  height: 30%;
+  table-layout: fixed;
+  border: none;
+  outline: none;
+  border: 1px solid black;
+  text-align: center;   
+  background-color: #e1e4e8;
+}
+
+#teacher-timetable-th{
+  width: 50%;
+  height: 50px;
+  background:#24305E;
+  color: white;
+}
+
+#teacher-timetable-row{
+  font-family: sans-serif;
+  width: 50%;
+  height: 17.5%;
+    font-weight: 400;
+  background-color: #e1e4e8;
+}
+
 #h1{
   color:#24305E;
   font-weight: 300;
@@ -14,7 +42,7 @@
   margin-bottom: 2%;
   padding: -1%;
   max-width: 80%;
-  margin-left: 10%;
+  margin-left: 8.5%;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 200%;
   font: bold;
@@ -22,13 +50,13 @@
 }
 
 #table{    
-  margin-left: 20%;
-  width:60%;
+  margin-left: 13%;
+  width:70%;
   height: 30%;
   table-layout: fixed;
   border: none;
   outline: none;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   text-align: center;   
   background-color: #e1e4e8;
 }
@@ -111,8 +139,8 @@ border: 1px;
 background:#24305E;
 justify-content: center;
 text-align: center;
-margin-left: 3%;
-margin-top: 1%;
+margin-left: 14%;
+margin-top: 3%;
 margin-bottom: 2%;
 font-weight: 700;
 font-size: 110%;
@@ -128,8 +156,8 @@ color: white;
   background:#24305E;
   justify-content: center;
   text-align: center;
-  margin-left: 25%;
-  margin-top: 1%;
+  margin-left: 33%;
+  margin-top: 3%;
   margin-bottom: 2%;
   font-weight: 700;
   font-size: 110%;
