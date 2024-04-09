@@ -9,6 +9,7 @@ const TimeTable = () => {
 
     const [standard, setStandard] = useState('');
     const [standardData, setStandardData] = useState([]);
+    const [startTime, setStartTime] = useState('');
     //const [toggle , setToggel] = useState(true);
     const [isDisable , setIsDisable] = useState(true);
     const [standardError, setStandardError] = useState('');
@@ -116,29 +117,6 @@ const TimeTable = () => {
         fetchStandards();
         fetchSubject();
       }, []);
-
-      // useEffect(() => {
-      //   fetchData(); 
-      // }, []);
-
-      // const fetchData = async () => {
-      //   try {
-      //     const response = await fetch(${config.ApiUrl}AdminTeacher/GetStandardFromString/${standardNumber}/${section}, {
-      //       method: 'GET',
-      //       headers: {
-      //           'Content-Type': 'application/json'
-      //       },
-      //       body: JSON.stringify(GetStandardfromString)
-      //   });
-      //     if (!response.ok) {
-      //       throw new Error('Failed to fetch standard data');
-      //     }
-      //     const result = await response.json();
-      //     setStandardData(result); 
-      //   } catch (error) {
-      //     console.error('Error fetching standard data:', error);
-      //   }
-      // };
 
       const handleSave =async () =>{
         try{
@@ -345,16 +323,6 @@ const TimeTable = () => {
         ]
           setIsDisable(false);
 
-          // const StandardNumber = 10;
-          // const Section = 'A';
-          // const data = await fetch(${config.ApiUrl}AdminTeacher/GetStandardFromString/${StandardNumber}/${Section},{
-          //   method: 'GET',
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   },
-          // });          
-          // console.log(data);
-
           const response = await fetch(`${config.ApiUrl}TimeTable/PostTimeTable`, {
               method: 'POST',
               headers: {
@@ -403,9 +371,121 @@ const TimeTable = () => {
     <TeacherSidebar>
     <div>
       <div id='timetable'>
-        <h1 id='h1'>TimeTable</h1>
+        <h1 id='h1'>Time-Table</h1>
+        <table id='teacher-timetable'>
+        <tbody>
+                <tr>
+                  <td id='teacher-timetable-th'>Start Time</td>
+                  <td id='teacher-timetable-th'>End Time</td>
+                  <td id='teacher-timetable-th'>Standard</td>
+                  <td id='teacher-timetable-th'>Section</td>
+                  <td id='teacher-timetable-th'>Subject</td>
+                  <td id='teacher-timetable-th'>No. of Day</td>
+                </tr>
+                <tr id='teacher-timetable-row'>
+                <td>
+                  {isDisable ? <select
+                      value={startTime}
+                      type='time'
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setStartTime(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((startTime) => (
+                      <option key={startTime} value={startTime}>
+                      {startTime}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={startTime}  onChange={(e) => startTime(e.target.value) }/>}
+                  </td>
+                  <td>
+                  {isDisable ? <select
+                      value={subject1}
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setSubject1(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((subject1) => (
+                      <option key={subject1} value={subject1}>
+                      {subject1}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
+                  </td>
+                  <td>
+                  {isDisable ? <select
+                      value={subject1}
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setSubject1(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((subject1) => (
+                      <option key={subject1} value={subject1}>
+                      {subject1}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
+                  </td>
+                  <td>
+                  {isDisable ? <select
+                      value={subject1}
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setSubject1(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((subject1) => (
+                      <option key={subject1} value={subject1}>
+                      {subject1}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
+                  </td>
+                  <td>
+                  {isDisable ? <select
+                      value={subject1}
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setSubject1(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((subject1) => (
+                      <option key={subject1} value={subject1}>
+                      {subject1}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
+                  </td>
+                  <td>
+                  {isDisable ? <select
+                      value={subject1}
+                      id='sub'
+                      required
+                      onChange={(e) => {
+                      setSubject1(e.target.value);
+                      }} >
+                    <option disabled={true} value="">Select</option>
+                    {subjectData.map((subject1) => (
+                      <option key={subject1} value={subject1}>
+                      {subject1}
+                    </option>
+                    ))}
+                  </select> : <input id='sub' value={subject1}  onChange={(e) => subject1(e.target.value) }/>}
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
         <div id='formtable'>
-              <select
+              {/* <select
                 value={standard}
                 className='inputform' id='inputforms'
                 required
@@ -422,7 +502,7 @@ const TimeTable = () => {
                     {standard}
                   </option>
                 ))}
-              </select>
+              </select> */}
               {standardError && <p style={{ color: 'red' }}>{standardError}</p>}
               <button id='btn1' type='submit' onClick={handleEdit}>Edit</button>
               <button id='btn' type='submit' onClick={handleSave}>Save</button>
@@ -852,3 +932,100 @@ const TimeTable = () => {
   )
 }
 export default TimeTable
+
+//ADD TIMETABLE DATA
+// import React, { useState,useEffect } from 'react';
+// import axios from 'axios';
+// import '../Teacher/TimeTable.css';
+// import config from '../Login/config';
+// import TeacherSidebar from '../Sidebar/TeacherSidebar';
+// import toast, { Toaster } from 'react-hot-toast';
+
+// function TimeTable() {
+//   const [startTime, setStartTime] = useState('');
+//   const [endTime, setEndTime] = useState('');
+//   const [standardNumber, setStandardNumber] = useState('');
+//   const [section, setSection] = useState('');
+//   const [subjectName, setSubjectName] = useState('');
+//   const [noOfDay, setNoOfDay] = useState('');
+//   const [error, setError] = useState(''); 
+  
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await axios.post('https://localhost:7157/api/TimeTable/PostTimeTable', {
+//         // startTime,
+//         // endTime,
+//         // standardNumber,
+//         // section,
+//         // subjectName,
+//         // noOfDay
+//         timeTableCreateList: [{
+//           startTime,
+//           endTime,
+//           standardNumber: parseInt(standardNumber), 
+//           section,
+//           subjectName,
+//           noOfDay: parseInt(noOfDay) 
+//         }]
+//       });
+//       console.log('Response data:', response.data); 
+//       setStartTime('');
+//       setEndTime('');
+//       setStandardNumber('');
+//       setSection('');
+//       setSubjectName('');
+//       setNoOfDay('');
+//     } catch (error) {
+//       console.error('Error adding timetable:', error);
+//       setError('Error adding timetable. Please try again.'); 
+//     }
+//   };
+
+//   const customToastStyle = {
+//         fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+//         fontSize: '16px',
+//         fontWeight: 'bold',
+//    };
+
+//   return (
+//     <TeacherSidebar>  <>
+//     <div>
+//       <h2>Add TimeTable</h2>
+//       {error && <p style={{ color: 'red' }}>{error}</p>} 
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label>Start Time:</label>
+//           <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+//         </div>
+//         <div>
+//           <label>End Time:</label>
+//           <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+//         </div>
+//         <div>
+//           <label>Standard Number:</label>
+//           <input type="text" value={standardNumber} onChange={(e) => setStandardNumber(e.target.value)} />
+//         </div>
+//         <div>
+//           <label>Section:</label>
+//           <input type="text" value={section} onChange={(e) => setSection(e.target.value)} />
+//         </div>
+//         <div>
+//           <label>Subject Name:</label>
+//           <input type="text" value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />
+//         </div>
+//         <div>
+//           <label>Day of the Week:</label>
+//           <input type="number" value={noOfDay} onChange={(e) => setNoOfDay(e.target.value)} />
+//         </div>
+//         <button type="submit">Add TimeTable</button>
+//       </form>
+//       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+//     </div>
+//    </>
+//    </TeacherSidebar>
+  
+//   );
+// }
+
+// export default TimeTable;

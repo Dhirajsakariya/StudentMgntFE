@@ -240,20 +240,22 @@ const { id } = useParams();
                   <div id='form-groupstudentform'>
                     <label id='labelstudentform'>Gender:</label>
                       <div id="radio-groupa">
-                       <input id='inputstudentform'
+                       <input
                          type="radio"
+                         id='input'
                          value="male"
                          checked={gender === "male"}
                          onChange={() => setGender("male")}
                          required/>
-                       <label>Male</label>
+                       <label id='label'>Male</label>
                        <input 
                          type="radio"
+                         id='input'
                          value="female"
                          checked={gender === "female"}
                          onChange={() => setGender("female")}
                          required/>
-                       <label>Female</label>
+                       <label id='label'>Female</label>
                      </div>
                       {genderError && <p style={{color:'red'}}>{genderError}</p>}
                   </div>
@@ -379,13 +381,13 @@ const { id } = useParams();
               <label id='labelstudentform2'>Mobile Number:</label>
                 <div id='phone_numberstudentform'>
                   <PhoneInput
-                       country={'in'}
-                       value={mobileNumber}
-                       onChange={handlePhoneChange}
-                       disableDropdown={true}
-                       isValid={isValidPhone}
-                       inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                       containerStyle={{padding:'1px'}}/>
+                    country={'in'}
+                    value={mobileNumber}
+                    disableDropdown={true}
+                    onChange={handlePhoneChange}
+                    inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                    containerStyle={{padding:'0.5px'}} 
+                    required/>
                 </div>
                 {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
             </div>

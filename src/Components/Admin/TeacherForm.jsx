@@ -307,13 +307,12 @@ if (redirectToNotFound) {
                <label id='labelT'>Mobile Number:</label>
                <div className='phone_numberT'>
                <PhoneInput
-                   country={'in'}
-                   value={mobileNumber}
-                   disableDropdown={true}
-                   onChange={handlePhoneChange}
-                   isValid={isValidPhone}
-                   inputStyle={{backgroundColor: 'white', borderColor: 'white' }}
-                   containerStyle={{padding:'1px',marginLeft:'15px'}}
+                country={'in'}
+                value={mobileNumber}
+                disableDropdown={true}
+                onChange={handlePhoneChange}
+                inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                containerStyle={{padding:'0.5px'}}
                 />
                  </div>
                  {mobileError && <p style={{color:'red'}}>{mobileError}</p>}

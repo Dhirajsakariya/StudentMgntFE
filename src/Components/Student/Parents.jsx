@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StudentSidebar from '../Sidebar/StudentSidebar';
-import './StudentFeeForm.css';
+import './Parents.css';
 import config from '../Login/config';
 import { Redirect } from 'react-router-dom';
 
@@ -25,12 +25,14 @@ const Parents = () => {
         setRedirectToNotFound(true);
       }
     };
+
     const fetchFamilyDetails = async () => {
       try {
         const studentId = JSON.parse(localStorage.getItem('loggedInUserId'));
         if (!studentId) {
-          throw new Error('User ID not found in local storage');
+          throw new Error('Student ID not found in local storage');
         }
+
         const response = await axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
         setParents(response.data);
       } catch (err) {
@@ -61,35 +63,35 @@ const Parents = () => {
 
   return (
     <StudentSidebar>
-      <div className='student-personal-info'>
-        <h2 className='student-personal-info-h2'>Parents Details</h2>
-        <div className='strong-student-personal-info'>
+      <div id='studentfamilyinfo'>
+        <h2 id='studentfamilyh2'>Parents Details</h2>
+        <div id='cards-container'>
           {parents.map((parent, index) => (
-            <div key={index}>
-              <label>
-                <strong className='strong-student'>Relation:</strong>
-                {parent.relation}
-              </label><br />
-              <label>
-                <strong className='strong-student'>Name:</strong>
+            <div key={index} id='parent-card'>
+              <div>
+               
+               <strong id='familyrelation'> {parent.relation} </strong>
+              </div>
+              <div id='details1'>
+                <strong id='strong-student'>Name: </strong>
                 {parent.name}
-              </label><br />
-              <label>
-                <strong className='strong-student'>Email:</strong>
+              </div>
+              <div id='details'>
+                <strong id='strong-student'>Email:    </strong>
                 {parent.email}
-              </label> <br />
-              <label>
-                <strong className='strong-student'>Occupation:</strong>
+              </div>
+              <div id='details'>
+                <strong id='strong-student'>Occupation:   </strong>
                 {parent.occupation}
-              </label><br />
-              <label>
-                <strong className='strong-student'>Mobile Number:</strong>
+              </div>
+              <div id='details'>
+                <strong id='strong-student'>Mobile Number:   </strong>
                 {parent.mobileNumber}
-              </label> <br />
-              <label>
-                <strong className='strong-student'>Gender:</strong>
+              </div>
+              <div id='details'>
+                <strong id='strong-student'>Gender:   </strong>
                 {parent.gender}
-              </label> <br />
+              </div>
             </div>
           ))}
         </div>

@@ -24,7 +24,7 @@
 .radio-groupT {
   display: inline-flex;
   align-items: center;
-  margin-left: -150px;
+  margin-left: -160px;
 }
 .radio-groupT #inputFemale {
   width: 10%;
@@ -148,6 +148,7 @@ textarea{
   color: white;
   cursor: pointer;
 }
+
 #Form-Part-Two{
   margin-left: 400px;
   margin-top: -480px;
