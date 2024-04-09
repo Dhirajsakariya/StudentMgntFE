@@ -8,12 +8,12 @@
     border: 2px solid black; 
     height: 45%;
     text-align: center; */
-    width: 400px;
+    width: 500px;
     border-radius: 5%;
     padding: 30px 30px;
     height: auto;
     background: transparent;
-    background-color: #d6e2f3;
+    background-color: #e1e4e8;;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -36,7 +36,7 @@
   }
   
   .studentreportsbutton{
-    width: 50%;
+    width: 40%;
     height: 40px;
     border-radius: 10px;
     outline: auto;
@@ -44,13 +44,12 @@
     background:#24305E;
     /* justify-content: center; */
     text-align: center;
-    margin-left: 0px;
     margin-top: 20px;
     margin-bottom: 15px;
     font-weight: 700;
     font-size: 18px;
     color: white; 
-    margin-left: 26%;
+    margin-left: 28%;
     margin-top: 9%;
     /* align-items: center;  */
 
@@ -59,3 +58,24 @@
   .starstudentreports{
     height: 2%;
   }
+  
+  #th_field{
+    width: 400px;
+    color: white;
+    height: 40px;
+    background-color:#24305E;
+  }
+  #starting_body{
+    background-color:  #d1d3d6;
+  }
+  #tab_main{
+    width: 500px;
+    margin-left: -75px;
+  }
+ #td_tag{
+  text-align: center;
+  font-size: 22px;
+ }
+ #th_tag{
+  text-align: center;
+ }
