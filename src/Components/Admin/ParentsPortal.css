@@ -1,5 +1,6 @@
 #mainp{
   align-items: center;
+  margin-top: 3%;
 }
 #containerf {
   width: 325px;
@@ -23,18 +24,17 @@
 #radio-groupf  {
   display: inline-flex;
   align-items: center;
-  margin-left: 4%;
+  margin-left: 7%;
 }
-#radio-groupf #label {
+#radio-groupf label {
   margin-top: 1%;
-  margin-right: 20%;
-  margin-left: 10%;
+  margin-right: 49%;
 }
-#radio-groupf #input {
+#radio-groupf input {
   width: 15%;
   padding: 0;
   margin-top: -1%;
-  margin-left: -7%;
+  margin-left: -12%;
 }
 #containerf h2{
   justify-content: center;
@@ -56,7 +56,7 @@
 p{
   color:white;
 } 
-#input, #relation {
+#input, .relation {
   width: 300px;
   margin-left: 15px;
   padding: 8px;
@@ -65,7 +65,7 @@ p{
   border: 1px;
   border-radius: 5px;
 }
-#relation{
+.relation{
   
   border-top: 1px solid #24305E;
   border-left: 1px solid #24305E;
@@ -74,9 +74,6 @@ p{
   
   border-top: 1px solid #24305E;
   border-left: 1px solid #24305E;
-}
-.react-tel-input .flag-dropdown {
-  border:-1px solid #24305E;
 }
 #btnf {
   cursor: pointer;
@@ -100,14 +97,14 @@ p{
 }
 #disp{
   display: grid;
-  grid-template-columns: 210px 210px;
-  gap:75px;
-  row-gap: 200px;
+  grid-template-columns: 210px;
+  gap:40px;
+  row-gap: 265px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #display{
   cursor: pointer;
-  width:200px;
+  width:300px;
   margin: 20px;
   border-radius: 10px;
   color:black;
@@ -117,7 +114,7 @@ p{
   border: 2px solid black;
   background-color:  #e1e4e8;
   margin-left: 380%;
-  margin-top: -180%;
+  margin-top: -240%;
   margin-bottom: 100%;
 }
 #editing{
@@ -126,6 +123,7 @@ p{
 #icon_f_m{
   margin-left: 1px;
   padding-top: 5px;
+  margin-bottom: 1%;
   display: flex;
 }
 #icon_f_m span{
@@ -150,22 +148,33 @@ p{
   justify-content: center;
   margin-top: auto;
   margin-right: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   color:#24305E;
   font-size: 20px;
   text-decoration: underline;
 }
-#display button{
-  cursor: pointer;
-  width: 60px;
-  margin-left: 28px;
-  margin-top: 15px;
+#btndeletePP{
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  width:65px ;
   height: 35px;
-  font-weight: bold;
-  background-color:#24305E;
-  color: aliceblue;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 17px;
+  margin-left: 58px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#btneditPP {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  width:65px;
+  height: 35px;
+  margin-right: auto;
+  margin-left: 58px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 .swal2-popup{
   box-shadow: 0 3px 20px -10px #4a4a4a;
@@ -217,5 +226,19 @@ p{
 #familyformicon{
   margin-left: -30px;
   margin-bottom: -5px;
+}
+#parent-details {
+  display: flex;
+  flex-direction: column;
+}
+
+#detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust spacing between details */
+}
+
+#detail span {
+  margin-left: 10px; /* Adjust spacing between icon and text */
 }
 
