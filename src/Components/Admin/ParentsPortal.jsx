@@ -61,7 +61,7 @@ const ParentsPortal = () => {
 const fetchFamilyMembers = async (studentId) => {
   try {
     console.log('Fetching family members for student:', studentId);
-    const response = await fetch(`https://localhost:7157/api/Family/GetFamilyDetailByStudentId/${studentId}`);
+    const response = await fetch(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
     if (response.ok) {
       const data = await response.json();
       setFamilyMembers(data); 
@@ -74,7 +74,7 @@ const fetchFamilyMembers = async (studentId) => {
 
 const handlePost = async () => {
   try {
-    const response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
+    const response = await fetch(`${config.ApiUrl}Family/PostFamily`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ const handlePost = async () => {
 // };
 const handlePut = async () => {
   try {
-    const response = await fetch(`https://localhost:7157/api/Family/PutFamily/${formData.id}`, {
+    const response = await fetch(`${config.ApiUrl}Family/PutFamily/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -285,7 +285,7 @@ const handleDelete = async (id) => {
   }).then(async (result)=> {
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`https://localhost:7157/api/Family/DeleteFamily/${id}`, {
+        const response = await fetch(`${config.ApiUrl}Family/DeleteFamily/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
