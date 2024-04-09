@@ -102,6 +102,7 @@ p{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #display{
+  cursor: pointer;
   width:200px;
   margin: 20px;
   border-radius: 10px;
@@ -126,6 +127,7 @@ p{
 #icon_f_m span{
   margin-left: 12px;
   font-size: 17px;
+  margin-right: 5px;
   padding-top: 1px;
   margin-bottom: 0px;
 }
@@ -212,6 +214,4 @@ p{
   margin-left: -30px;
   margin-bottom: -5px;
 }
-
-
 
