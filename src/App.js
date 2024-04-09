@@ -26,13 +26,13 @@ import Standard from './Components/Teacher/Standard';
 import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
-import Navigationbar from './Components/Header/Navigationbar';
+import Navigationbar from './Components/Dashboard/Navigationbar';
 import Parents from './Components/Student/Parents';
 import StudentReport from './Components/Teacher/StudentReport';
+import Home from './Components/Dashboard/Home';
+import Footer from './Components/Dashboard/Footer';
 
 function App() {
-
-
   return (
     <div>
       <Router>
@@ -42,6 +42,9 @@ function App() {
           <Route path='/PageNotFound' component={PageNotFound} />
           <Route path='/Logout' component={Logout} />
           <Route path='/Registration' component={Registration} />
+          <Route path='/Login' component={Login} />
+          <Route path='/Navigationbar' component={Navigationbar} />
+          <Route path='/Footer' component={Footer} />
           <PrivateRoute path='/StudentForm' component={StudentForm} />
           <PrivateRoute path='/TeacherForm' component={TeacherForm} />
           <PrivateRoute path='/Student_Form' component={Student_Form} />
@@ -62,9 +65,8 @@ function App() {
           <PrivateRoute path='/AddExamSchedule' component={AddExamSchedule} />
           <PrivateRoute path='/StudentReport' component={StudentReport} />
           <PrivateRoute path='/Parents' component={Parents}/>
-          <Route path='/Login' component={Login} />
           {/*<Redirect to="/Login" /> */}
-          <Route path='/' component={Navigationbar} />
+          <Route path='/' component={Home} />
         </Switch>
       </Router>
     </div>
