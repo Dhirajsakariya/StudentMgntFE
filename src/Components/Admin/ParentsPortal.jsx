@@ -4,10 +4,10 @@ import AdminSidebar from '../Sidebar/AdminSidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
-import { BiMale ,BiFemale} from "react-icons/bi";
 import { CgMail } from 'react-icons/cg';
 import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
+import { BiMale, BiFemale, BiEdit, BiTrash, BiEnvelope, BiPhone, BiBriefcase } from 'react-icons/bi';
 import ocuupation from '../Assets/occupation.png'
 
 const ParentsPortal = () => {
@@ -110,33 +110,6 @@ const handlePost = async () => {
   }
 };
 
-// const handlePost = async () => {
-//   try {
-//     const response = await fetch(`https://localhost:7157/api/Family/PostFamily`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         Name: formData.name,
-//         Email: formData.email,
-//         Occupation: formData.occupation,
-//         Gender: formData.gender,
-//         MobileNumber: mobilenumber,
-//         Relation: formData.relation,
-//         // StudentId: "FA4F0568-CDD2-4D0C-C879-08DC4EEEDF7D"
-//         StudentId: studentId
-//       })
-//     });
-//     if (response.ok) {
-//       const result = await response.json(); 
-//       setFamilyMembers([...familyMembers, result]);
-//       toast.success("Added Successfully!");
-//     }
-//   } catch (error) {
-//     toast.error('Failed to add family member');
-//   }
-// };
 const handlePut = async () => {
   try {
     const response = await fetch(`${config.ApiUrl}Family/PutFamily/${formData.id}`, {
@@ -168,32 +141,6 @@ const handlePut = async () => {
     toast.error('Failed to update member');
   }
 };
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-
-//   if (!validateForm()) {
-//     return ;
-//   }
-
-  
-//   const existingRecord = familyMembers.find(
-//     (member) => member.relation === formData.relation
-//   );
-
-//   if (!editing && existingRecord) {
-//     toast.error(
-//       `A ${formData.relation} record already exists. Please edit the existing record.`
-//     );
-//     return;
-//   }
-
-//   if (editing) {
-//     await handlePut();
-//   } else {
-//     await handlePost();
-//   }
-
 
 const handleSubmit = async (e) => {
     e.preventDefault();
@@ -434,37 +381,40 @@ const customToastStyle = {
         </div>
       </div>
       <div id='disp'>
-      {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
-  familyMembers.map((familyMember) => (
-    <div key={familyMember.id} id='display'>
-      <h2>{familyMember.relation}</h2>
-      <div id="icon_f_m">
-        {familyMember.gender === 'male' ? (
-          <BiMale size='20px' />
-        ) : (
-          <BiFemale size='20px' />
-        )}
-        <span>{familyMember.name}</span>
-      </div>
-      <div>
-        <strong>Email:</strong> {familyMember.email}
-      </div>
-      <div>
-        <strong>Occupation:</strong> "{familyMember.occupation}"
-      </div>
-      <div>
-        <strong>Mobile Number:</strong> {familyMember.mobileNumber}
-      </div>
+  {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
+    familyMembers.map((familyMember) => (
+      <div key={familyMember.id} id='display'>
+        <h2>{familyMember.relation}</h2>
+        <div id="icon_f_m">
+          {familyMember.gender === 'male' ? (
+            <BiMale size='20px' />
+          ) : (
+            <BiFemale size='20px' />
+          )}
+          <span>{familyMember.name}</span>
+          </div>
+        <div>
+          <BiEnvelope size='20px' />
+          <span> : {familyMember.email}</span>
+        </div>
+        <div>
+          <BiBriefcase size='20px' />
+          <span> : "{familyMember.occupation}"</span>
+        </div>
+        <div>
+          <BiPhone size='20px' />
+          <span> : {familyMember.mobileNumber}</span>
+        </div>
 
-      <button onClick={() => handleEdit(familyMember)}>Edit</button>
-      <button onClick={() => handleDelete(familyMember.id)}>Delete</button>
-    </div>
-  ))
-) : (
-  <p>No family members to display</p>
-)}
-
+        <button onClick={() => handleEdit(familyMember)}><BiEdit /></button>
+        <button onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
+      </div>
+    ))
+  ) : (
+    <p>No family members to display</p>
+  )}
 </div>
+
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </AdminSidebar>
   );
