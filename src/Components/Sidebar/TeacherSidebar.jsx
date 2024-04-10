@@ -7,6 +7,7 @@ import { LuUserCircle2 } from "react-icons/lu";
 import { PiUserListDuotone } from "react-icons/pi";
 import { PiStudentBold } from "react-icons/pi";
 import { FaTableCells } from "react-icons/fa6";
+import { GrScorecard } from "react-icons/gr";
 import { FaBars } from 'react-icons/fa';
 import { useHistory,Redirect} from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
@@ -71,7 +72,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         {
             path: '/StudentReport',
             name: 'Student Report',
-            icon: <MdEditCalendar />
+            icon: <GrScorecard />
         },
         {
             path: '/Login',
