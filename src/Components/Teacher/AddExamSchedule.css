@@ -68,12 +68,40 @@
   background-color:#e1e4e8 ;
 }
 
+#exam-sub {
+  font-family: sans-serif;
+  width: 70%;
+  height: 30px;
+  font-weight: 400;
+  margin-top: 7.5%;
+  margin-left: 170px;
+  margin-bottom: 3px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-align: center;
+  border: 2px solid black;
+  background-color: white;
+  }
+  
+
 #deleteexamschedulebtn {
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+  border-radius: 3px;
   width:50px ;
   margin-left: 5px;
+  cursor: pointer;
+}
+
+#editexamschedulebtn{
+  color:white;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 3px;
+  width: 50px;
+  cursor: pointer;
 }
 
 #student-exam-btn{
