@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
+import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
 import config from '../Login/config';
@@ -9,10 +10,12 @@ import '../Teacher/AddExamSchedule.css';
 
 const AddExamSchedule = () => {
   const [examType, setExamType] = useState('');
+  const [examType1, setExamType1] = useState('');
   const [examDate, setExamDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [standard, setStandard] = useState('');
+  const [standard1, setStandard1] = useState('');
   const [subject, setSubject] = useState('');
   const [examSchedules, setExamSchedules] = useState([]);
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
@@ -102,7 +105,7 @@ const AddExamSchedule = () => {
           
     // Reset form fields
     setExamType('');
-    //setStandard('');
+    setStandard1('');
     setSubject('');
     setExamDate('');
     setStartTime('');
@@ -112,6 +115,7 @@ const AddExamSchedule = () => {
   
 
   const handleDelete = async (index) => {
+    
     const examId = examSchedules[index].id; 
     try {
       await axios.delete(`${config.ApiUrl}Exam/DeleteExam/${examId}`);
@@ -121,6 +125,12 @@ const AddExamSchedule = () => {
       toast.error('Failed to delete exam schedule. Please try again later.');
       console.error('Error deleting exam schedule:', error);
     }
+  };
+
+  const customToastStyle = { 
+    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+    fontSize: '16px',
+    fontWeight: 'bold',
   };
 
   if (redirectToNotFound) {
@@ -147,14 +157,14 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={standard}
+                      value={standard1}
                       required
-                      onChange={(e) => setStandard(e.target.value)}
+                      onChange={(e) => setStandard1(e.target.value)}
                     >
                       <option value="" disabled={true}>Select Standard</option>
-                      {standardData.map((standard) => (
-                        <option key={standard} value={standard}>
-                          {standard}
+                      {standardData.map((standard1) => (
+                        <option key={standard1} value={standard1}>
+                          {standard1}
                         </option>
                       ))}
                     </select>
@@ -177,8 +187,8 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={examType}
-                      onChange={(e) => setExamType(e.target.value)}
+                      value={examType1}
+                      onChange={(e) => setExamType1(e.target.value)}
                       required
                     >
                       <option value="" disabled={true}>Select Exam Type</option>
@@ -223,6 +233,38 @@ const AddExamSchedule = () => {
 
           </form>
           <div id="student-exam-timetable2">
+
+            
+                <td>
+                    <select
+                      id='exam-sub'
+                      value={standard}
+                      required
+                      onChange={(e) => setStandard(e.target.value)}
+                    >
+                      <option value="" disabled={true}>Select Standard</option>
+                      {standardData.map((standard) => (
+                        <option key={standard} value={standard}>
+                          {standard}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  
+                  <td>
+                    <select
+                      id='exam-sub'
+                      value={examType}
+                      onChange={(e) => setExamType(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled={true}>Select Exam Type</option>
+                      <option value="Midterm">Mid-Term</option>
+                      <option value="Final">Final</option>
+                    </select>
+                  </td>
+
+
           <table id="student-table">
             <thead>
               <tr>
@@ -236,7 +278,7 @@ const AddExamSchedule = () => {
               </tr>
             </thead>
             <tbody>
-            {examSchedules.filter((examSchedule) => examSchedule.standard === standard).map((examSchedule, index) => (
+            {examSchedules.filter((examSchedule) => examSchedule.standard === standard && examSchedule.examType === examType).map((examSchedule, index) => (
               <tr key={index}>
                 <td id='student-exam-sub'>{examSchedule.standard}</td>
                 <td id='student-exam-sub'>{examSchedule.subject}</td>
@@ -245,7 +287,7 @@ const AddExamSchedule = () => {
                 <td id='student-exam-sub'>{examSchedule.startTime}</td>
                 <td id='student-exam-sub'>{examSchedule.endTime}</td>
                 <td id='student-exam-sub'>
-              
+                <button id="editexamschedulebtn" ><FiEdit /></button>
             <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
             </td>
             </tr>
@@ -255,6 +297,7 @@ const AddExamSchedule = () => {
           </div>
         </div>
       </div>
+      <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     </TeacherSidebar>
   );
 };
