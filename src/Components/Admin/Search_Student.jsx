@@ -14,7 +14,6 @@ import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { GrScorecard } from "react-icons/gr";
-import { MdOutlineFamilyRestroom } from "react-icons/md";
 
 const Search_Student = () => {
   
@@ -26,13 +25,6 @@ const [editedStudent, setEditedStudent] = useState(null);
 const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 const[familyMembers,setFamilyMembers] = useState([]);
 const [currentUserRole,setCurrentUserRole]=useState('');
-
-//  useEffect(() => {
-//     const userRole = localStorage.getItem('loggedInRole');
-//     if (userRole !== 'admin') {
-//       setRedirectToNotFound(false);
-//     }
-//   })
 
 const history = useHistory();
 

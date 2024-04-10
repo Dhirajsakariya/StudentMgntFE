@@ -55,12 +55,12 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         },
         {
             path: '/Standard',
-            name: 'Standard',
+            name: 'Standards',
             icon: <PiUserListDuotone   />
         },
         {
             path: '/TimeTable',
-            name: 'TimeTable',
+            name: 'Time Table',
             icon: <FaTableCells  />
         },
         {
