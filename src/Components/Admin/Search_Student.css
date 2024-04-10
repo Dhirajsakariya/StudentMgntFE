@@ -85,9 +85,8 @@
     margin-top: -415px;
 }
 #popupcardcontainer{
-    
-    display: grid;
-   grid-template-row: 2;
+   display: grid;
+   grid-template-rows: 2;
    margin-top: 20px;
 }
 #parentrelation{
