@@ -11,6 +11,7 @@ import 'react-phone-input-2/lib/style.css';
 import './Registration.css';
 import axios from 'axios';
 import Navigationbar from '../Dashboard/Navigationbar';
+import Footer from '../Dashboard/Footer';
 
 function Registration(props) {
 
@@ -408,6 +409,7 @@ return (
       </form>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+    <Footer/>
   </>
 )
 }

@@ -7,6 +7,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import moment from 'moment';
 import config from './config';
 import Navigationbar from '../Dashboard/Navigationbar';
+import Footer from '../Dashboard/Footer';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -139,6 +140,7 @@ const ForgotPassword = () => {
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
         </div>
+        <Footer/>
     </>
     );
 };
