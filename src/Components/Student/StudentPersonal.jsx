@@ -72,7 +72,7 @@ const StudentPersonal = () => {
 
   return (
     <StudentSidebar>
-    <div className='student-personal-info'>
+    <div id='student-personal-info'>
       <h2 className='student-personal-info-h2'>Student Details</h2>
       <div className='strong-student-personal-info'>
       
