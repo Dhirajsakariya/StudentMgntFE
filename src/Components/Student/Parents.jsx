@@ -88,10 +88,6 @@ const Parents = () => {
                 <strong id='strong-student'>Mobile Number:   </strong>
                 {parent.mobileNumber}
               </div>
-              <div id='details'>
-                <strong id='strong-student'>Gender:   </strong>
-                {parent.gender}
-              </div>
             </div>
           ))}
         </div>
