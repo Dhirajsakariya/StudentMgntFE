@@ -23,6 +23,7 @@ const [selectedStudent, setSelectedStudent] = useState(null);
 const [searchQuery, setSearchQuery] = useState('');
 const [editedStudent, setEditedStudent] = useState(null);
 const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+const[familyMembers,setFamilyMembers] = useState([]);
 
 //  useEffect(() => {
 //     const userRole = localStorage.getItem('loggedInRole');
@@ -67,6 +68,7 @@ useEffect(() => {
       .then((result) => {
         setSelectedStudent(result.data);
        // Set editedStudent when getting details
+       fetchFamilyMembers(result.data.id);
       })
       .catch((error) => {
         console.log(error);
@@ -146,11 +148,19 @@ useEffect(() => {
   };
 
   //To add Family Details
-  const handleAddFamily = (id) =>{
-    history.push('/ParentsPortal');
-    localStorage.setItem('selectedStudentId', id);
-    console.log("selectedStudentId",id);
-  }
+  const fetchFamilyMembers = (studentId) => {
+    axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`)
+      .then((response) => {
+        // Handle the response data here
+        console.log(response.data);
+        // Assuming you want to store family members in state
+        setFamilyMembers(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching family members:', error);
+      });
+  };
+
 
    //To add StudentMark Details
    const handleAddMarks = (id) =>{
@@ -250,9 +260,9 @@ useEffect(() => {
                                     <RiDeleteBin6Line />
                         </button>
 
-                        <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
+                        {/* <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
                                    <MdOutlineFamilyRestroom />
-                        </button>
+                        </button> */}
                         <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
                                     <GrScorecard />
 
@@ -268,16 +278,21 @@ useEffect(() => {
               )}
             </tbody>
           </table>
-                 <Popup  contentStyle={{width: "400px",borderRadius:'10px',background:'#f7f9fb'}}
+                 <Popup  contentStyle={{width: "790px" , height:'640px',borderRadius:'10px',background:'#f7f9fb'}}
                          open={selectedStudent !== null}
                          onClose={() => setSelectedStudent(null)}
                          closeOnDocumentClick={false} // Prevents closing on document click
                          closeOnEscape={false} // Prevents closing on escape key press
                          >
                     {selectedStudent && (
-                      <div >
+                      <div>
+                      
                         <button id="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
                             <h2 id='headingpopup'>Details of  {selectedStudent.name}</h2>
+                            <div id='popuppart1'>
+                              <h2 id='headingpopup1'>Student Details</h2>
+                              <div id='part2'>
+                                <div id='part-2'>
                             <p id='psearchstudent'><b>Standard:</b> {selectedStudent.standard}</p>
                             <p id='psearchstudent'><b>Roll No:</b> {selectedStudent.rollNo}</p>
                             <p id='psearchstudent'><b>Email:</b> {selectedStudent.email}</p>
@@ -291,8 +306,27 @@ useEffect(() => {
                             <p id='psearchstudent'><b>District:</b> {selectedStudent.district}</p>
                             <p id='psearchstudent'><b>State: </b>{selectedStudent.state}</p>
                             <p id='psearchstudent'><b>PinCode:</b> {selectedStudent.pinCode}</p>
+                            </div>
+                            </div>
                               {/* Add more details as needed */}
+                              </div>
+                              <div id='popuppart2'>
+                              <h2 id='headingpopup2'>Parents Details</h2>
+                              <div id='popupcardcontainer'>
+                {familyMembers.map((member, index) => (
+                  <div  id='popupparents-card'key={index}>
+                    <p id='parentrelation'>{member.relation}</p>
+                    <p id='psearchstudent2'><strong>Name:</strong> {member.name}</p>
+                    <p id='psearchstudent2'><strong>Email:</strong> {member.email}</p>
+                    <p id='psearchstudent2'><strong>Occupation:</strong> {member.occupation}</p>
+                    <p id='psearchstudent2'><strong>Mobile No.:</strong> {member.mobileNumber}</p> 
+                    {/* Add more fields as needed */}
+                  </div>
+                 
+                ))}
+                </div>
                       </div>  
+                      </div>
                     )}
                   </Popup>
 
@@ -318,6 +352,7 @@ useEffect(() => {
                                         value={editedStudent.standard}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, standard: e.target.value })}
+                                        readOnly
                                     /> 
 
                                 <label id='edit-popuplabel'>Roll No.:</label>
@@ -327,6 +362,7 @@ useEffect(() => {
                                         value={editedStudent.rollNo}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, rollNo: e.target.value })}
+                                        readOnly
                                     /> 
       
                                 <label id='edit-popuplabel'>Name:</label> 
@@ -351,7 +387,7 @@ useEffect(() => {
                                     <input
                                         id="edit-popup1"
                                         type="text"
-                                        value={editedStudent.email}
+                                        value={editedStudent.gender}
                                         onChange={(e) =>
                                         setEditedStudent({ ...editedStudent, email: e.target.value })}
                                     />  
