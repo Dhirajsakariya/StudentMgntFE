@@ -5,6 +5,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './Search_Student.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { toast, Toaster } from 'react-hot-toast';
@@ -24,6 +25,7 @@ const [searchQuery, setSearchQuery] = useState('');
 const [editedStudent, setEditedStudent] = useState(null);
 const [redirectToNotFound, setRedirectToNotFound] = useState(false);
 const[familyMembers,setFamilyMembers] = useState([]);
+const [currentUserRole,setCurrentUserRole]=useState('');
 
 //  useEffect(() => {
 //     const userRole = localStorage.getItem('loggedInRole');
@@ -38,9 +40,10 @@ useEffect(() => {
   const userRoleString = localStorage.getItem('loggedInRole');
   if (userRoleString) {
     const userRole = JSON.parse(userRoleString);
-    console.log('loggedInRole for Search Student', userRole.Role);
-    if (userRole.Role !== 'admin') {
-      setRedirectToNotFound(true);
+    setCurrentUserRole(userRole.Role)
+    console.log('loggedInRole for Student Form', userRole.Role);
+    if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {
+    setRedirectToNotFound(true);
     }
   } else {
     console.error('loggedInRole not found in localStorage');
@@ -204,6 +207,8 @@ useEffect(() => {
   }
 
   return (
+    <>
+    { currentUserRole =='admin' ?
     <AdminSidebar>
       <>
         <Fragment>
@@ -218,9 +223,6 @@ useEffect(() => {
                   <FaSearch id="iconsearchstudent" />
                   <button id="btnaddstudent" onClick={handleAddStudent}>Add</button>
           </div>
-
-          
-
             <table id="mainsearchstudent">
              <thead>
               <tr id="trsearchstudent">
@@ -485,6 +487,287 @@ useEffect(() => {
          <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
       </>
     </AdminSidebar>
+    :
+    <TeacherSidebar>
+    <>
+        <Fragment>
+          <h2 id='searchstudenth2'>Search Student</h2>
+          <div id="search-container">
+            <input
+                  id="searchstudentbutton"
+                  type="text"
+                  placeholder="Search By Name..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}/>
+                  <FaSearch id="iconsearchstudent" />
+                  <button id="btnaddstudent" onClick={handleAddStudent}>Add</button>
+          </div>
+            <table id="mainsearchstudent">
+             <thead>
+              <tr id="trsearchstudent">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Mobile Number</th>
+                <th>Standard</th>
+                <th id='actionth'>Actions</th>
+              </tr>
+            </thead>
+           
+            <tbody id='searchstudenttable'>
+              {data && data.length > 0 ? (
+                data.map((student, index) => {
+                  return (
+                    <tr key={index} id="tr1searchstudent">
+                      <td>{index + 1}</td>
+                      <td>
+                        <button id='butnnameview' 
+                            onClick={() => getStudentDetails(student.id)}>
+                            {student.name}
+                        </button>
+                      </td>
+                      <td>{student.email}</td>
+                      <td>{student.gender}</td>
+                      <td>{student.mobileNumber}</td>
+                      <td>{student.standard}</td>
+                      <td>{student.subject}</td>
+                      <td colSpan={4}>
+                        <button id="btneditsearchstudent" onClick={() => handleEdit(student.id)}>
+                                      <FiEdit />
+                        </button>
+                       
+                        <button id="btndeletesearchstudent" onClick={() => handleDelete(student.id)}>
+                                    <RiDeleteBin6Line />
+                        </button>
+
+                        {/* <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
+                                   <MdOutlineFamilyRestroom />
+                        </button> */}
+                        <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
+                                    <GrScorecard />
+
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="8">Loading...</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+                 <Popup  contentStyle={{width: "790px" , height:'640px',borderRadius:'10px',background:'#f7f9fb'}}
+                         open={selectedStudent !== null}
+                         onClose={() => setSelectedStudent(null)}
+                         closeOnDocumentClick={false} // Prevents closing on document click
+                         closeOnEscape={false} // Prevents closing on escape key press
+                         >
+                    {selectedStudent && (
+                      <div>
+                      
+                        <button id="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
+                            <h2 id='headingpopup'>Details of  {selectedStudent.name}</h2>
+                            <div id='popuppart1'>
+                              <h2 id='headingpopup1'>Student Details</h2>
+                              <div id='part2'>
+                                <div id='part-2'>
+                            <p id='psearchstudent'><b>Standard:</b> {selectedStudent.standard}</p>
+                            <p id='psearchstudent'><b>Roll No:</b> {selectedStudent.rollNo}</p>
+                            <p id='psearchstudent'><b>Email:</b> {selectedStudent.email}</p>
+                            <p id='psearchstudent'><b>Gender:</b> {selectedStudent.gender}</p>
+                            <p id='psearchstudent'><b>Birth Date:</b> {selectedStudent.birthDate.split("-").reverse().join("-")}</p>
+                            <p id='psearchstudent'><b>Mobile Number:</b> {selectedStudent.mobileNumber}</p>
+                            <p id='psearchstudent'><b>Join Date:</b> {selectedStudent.joinDate.split("-").reverse().join("-")}</p>
+                            <p id='psearchstudent'><b>Blood Group:</b> {selectedStudent.bloodGroup}</p>
+                            <p id='psearchstudent'><b>Address: </b>{selectedStudent.address}</p>
+                            <p id='psearchstudent'><b>City: </b>{selectedStudent.city}</p>
+                            <p id='psearchstudent'><b>District:</b> {selectedStudent.district}</p>
+                            <p id='psearchstudent'><b>State: </b>{selectedStudent.state}</p>
+                            <p id='psearchstudent'><b>PinCode:</b> {selectedStudent.pinCode}</p>
+                            </div>
+                            </div>
+                              {/* Add more details as needed */}
+                              </div>
+                              <div id='popuppart2'>
+                              <h2 id='headingpopup2'>Parents Details</h2>
+                              <div id='popupcardcontainer'>
+                {familyMembers.map((member, index) => (
+                  <div  id='popupparents-card'key={index}>
+                    <p id='parentrelation'>{member.relation}</p>
+                    <p id='psearchstudent2'><strong>Name:</strong> {member.name}</p>
+                    <p id='psearchstudent2'><strong>Email:</strong> {member.email}</p>
+                    <p id='psearchstudent2'><strong>Occupation:</strong> {member.occupation}</p>
+                    <p id='psearchstudent2'><strong>Mobile No.:</strong> {member.mobileNumber}</p> 
+                    {/* Add more fields as needed */}
+                  </div>
+                 
+                ))}
+                </div>
+                      </div>  
+                      </div>
+                    )}
+                  </Popup>
+
+                  <>  
+                    <Popup 
+                          contentStyle={{ width: "790px" , height:'640px' , borderRadius:'10px', background:'lightgray'}}
+                          open={editedStudent !== null}
+                          onClose={() => setEditedStudent(null)}
+                          closeOnDocumentClick={false} // Prevents closing on document click
+                          closeOnEscape={false} // Prevents closing on escape key press
+                          >
+                        {editedStudent && (
+                          <div id='edit-popup'>
+                            <button id="close-btn" onClick={() => setEditedStudent(null)}>×</button>
+                            <h2 id="headingpopup">Edit Details of {editedStudent.name}</h2>
+              
+                              <div id='edit-popuppart1'>
+
+                                <label id='edit-popuplabel'>Standard:</label>
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.standard}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, standard: e.target.value })}
+                                        readOnly
+                                    /> 
+
+                                <label id='edit-popuplabel'>Roll No.:</label>
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.rollNo}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, rollNo: e.target.value })}
+                                        readOnly
+                                    /> 
+      
+                                <label id='edit-popuplabel'>Name:</label> 
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.name}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, name: e.target.value })}
+                                    /> 
+     
+                                <label id='edit-popuplabel'>Email:</label> 
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.email}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, email: e.target.value })}
+                                    /> 
+
+                                <label id='edit-popuplabel'>Gender:</label> 
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.gender}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, email: e.target.value })}
+                                    />  
+
+                                <label id='edit-popuplabel'>Birth Date:</label> 
+                                    <input
+                                        id="edit-popup1"
+                                        type="text"
+                                        value={editedStudent.birthDate.split("-").reverse().join("-")}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, birthDate: e.target.value })}
+                                    /> 
+     
+                                 <label id='edit-popuplabel'>Mobile No:</label> 
+                                     <input
+                                         id="edit-popup1"
+                                         type="text"
+                                         value={editedStudent.mobileNumber}
+                                         onChange={(e) =>
+                                         setEditedStudent({ ...editedStudent, mobileNumber: e.target.value })}
+                                     /> 
+                              </div>
+
+                              <div id="edit-popuppart2">
+
+                                <label id='edit-popuplabel'>Join Date:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.joinDate.split("-").reverse().join("-")}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, joinDate: e.target.value })}
+                                    /> 
+      
+                                <label id='edit-popuplabel'>Blood Group:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.bloodGroup}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, bloodGroup: e.target.value })}
+                                    /> 
+      
+                                <label id='edit-popuplabel'>Address:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.address}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, address: e.target.value })}
+                                    /> 
+     
+                                <label id='edit-popuplabel'>City:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.city}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, city: e.target.value })}
+                                    /> 
+      
+                                <label id='edit-popuplabel'>District:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.district}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, district: e.target.value })}
+                                    /> 
+      
+                                <label id='edit-popuplabel'>State:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.state}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, state: e.target.value })}
+                                /> 
+                                
+                                <label id='edit-popuplabel'>PinCode:</label> 
+                                    <input
+                                        id="edit-popup2"
+                                        type="text"
+                                        value={editedStudent.pinCode}
+                                        onChange={(e) =>
+                                        setEditedStudent({ ...editedStudent, pinCode: e.target.value })}
+                                    /> 
+                              </div>
+                            <button id='edit-popupbtn' onClick={handleUpdate}>Update</button>
+                          </div>
+                          )}
+                    </Popup>
+          </>
+        </Fragment>
+         <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      </>
+    </TeacherSidebar>
+  }
+  </>
   );
 };
  export default Search_Student;
