@@ -1,11 +1,11 @@
 
   
-  .student-personal-info {
+  #student-personal-info {
     width: 390px;
+    height: 400px;
     background-color: #d6e2f3;
     border-radius: 5%;
     padding: 30px 30px;
-    height: 10px;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -14,10 +14,11 @@
     padding-top: 15px;
   }
   
-  .student-personal-info h2 {
+  #student-personal-info h2 {
     font-size: 24px;
     margin-bottom: 15px;
     text-align: center;
+
     color: #24305E;
   }
   

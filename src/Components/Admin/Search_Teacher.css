@@ -67,12 +67,9 @@
 #btn-view{
   border: none;
   background-color: transparent;
-  transition: box-shadow 0.7s ease;
+  color: #0d6efd;
 }
-#btn-view:hover{
-box-shadow: 0 0 10px rgba(52, 28, 205, 0.5);
-width: auto;
-}
+
 #close{
   margin-left: 280px;
 }
