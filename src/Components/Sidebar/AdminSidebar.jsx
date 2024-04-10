@@ -4,7 +4,10 @@ import { GrScorecard } from "react-icons/gr";
 import { FaBars } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { LuUserCircle2 } from "react-icons/lu";
+import { MdEditCalendar } from "react-icons/md";
+import { FaGooglePay } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
+import { FaTableCells } from "react-icons/fa6";
 import { NavLink, useHistory } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import config from '../Login/config';
@@ -43,28 +46,40 @@ const AdminSidebar = ({handleLogout, children }) => {
     const menuItem = [
            
         {
-            path: '/Search_Teacher',
-            name: 'Teachers',
-            icon: <LiaChalkboardTeacherSolid />
-
-        },
-      
-        {
-            path: '/Search_Student',
-            name: 'Students',
-            icon: <PiStudentBold  />
+          path: '/Search_Teacher',
+          name: 'Teachers',
+          icon: <LiaChalkboardTeacherSolid />
         },
         {
-            path: '/StudentMarks',
-            name: 'Student Marks',
-            icon: <GrScorecard />
-
+          path: '/Search_Student',
+          name: 'Students',
+          icon: <PiStudentBold  />
         },
         {
-            path: '/Login',
-            name: 'Logout',
-            icon: <BiLogOut />,
-            onClick: handleLogoutClick
+          path: '/TimeTable',
+          name: 'Time Table',
+          icon: <FaTableCells />
+        },
+        {
+          path: '/AddExamSchedule',
+          name: 'Exam Schedule',
+          icon: <MdEditCalendar />
+        },
+        {
+          path: '/StudentReport',
+          name: 'Student Report',
+          icon: <GrScorecard />
+        },
+        {
+          path: '/StudentFeeForm',
+          name: 'Student Fees',
+          icon: <FaGooglePay   />
+        },
+        {
+          path: '/Login',
+          name: 'Logout',
+          icon: <BiLogOut />,
+          onClick: handleLogoutClick
         }
     ];
     // useEffect(() => {

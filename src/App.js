@@ -23,7 +23,6 @@ import TimeTableViewer from './Components/Student/TimeTableViewer';
 import StudentPersonal from './Components/Student/StudentPersonal';
 import AddExamSchedule from './Components/Teacher/AddExamSchedule';
 import Standard from './Components/Teacher/Standard';
-import Student_Form from './Components/Teacher/Student_Form';
 import TeacherPersonal from './Components/Teacher/TeacherPersonal';
 import TimeTable from './Components/Teacher/TimeTable';
 import Navigationbar from './Components/Dashboard/Navigationbar';
@@ -48,7 +47,6 @@ function App() {
           <Route path='/Footer' component={Footer} />
           <PrivateRoute path='/StudentForm' component={StudentForm} />
           <PrivateRoute path='/TeacherForm' component={TeacherForm} />
-          <PrivateRoute path='/Student_Form' component={Student_Form} />
           <PrivateRoute path='/TimeTable' component={TimeTable} />
           <PrivateRoute path='/Standard' component={Standard} />
           <PrivateRoute path='/ParentsPortal' component={ParentsPortal} />
