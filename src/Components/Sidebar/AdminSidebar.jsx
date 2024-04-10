@@ -48,7 +48,6 @@ const AdminSidebar = ({handleLogout, children }) => {
             icon: <LiaChalkboardTeacherSolid />
 
         },
-      
         {
             path: '/Search_Student',
             name: 'Students',
@@ -58,7 +57,6 @@ const AdminSidebar = ({handleLogout, children }) => {
             path: '/StudentMarks',
             name: 'Student Marks',
             icon: <GrScorecard />
-
         },
         {
             path: '/Login',

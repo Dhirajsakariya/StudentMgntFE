@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import './ParentsPortal.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import config from '../Login/config';
 import { toast, Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'; 
@@ -24,25 +25,27 @@ const ParentsPortal = () => {
     relation: '',
    });
 
-  const[idError,setIdError]=useState();
-  const[emailError,setEmailError] =useState();
-  const[nameError,setNameError] = useState();
+  const [idError,setIdError]=useState();
+  const [emailError,setEmailError] =useState();
+  const [nameError,setNameError] = useState();
   const [familyMembers, setFamilyMembers] = useState([]);
   const [occupationError, setOccupationError] = useState('');
   const [genderError,setGenderError] =useState('');
-  const[mobilenumberError,setMobileNumberError]=useState('');
+  const [mobilenumberError,setMobileNumberError]=useState('');
   const [mobilenumber, setMobileNumber] = useState('');
   const [relationError, setRelationError] = useState('');
   const [isValidPhone, setIsValidPhone] = useState(false);
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
   const relations=[ "Father", "Mother"];
+  const [currentUserRole,setCurrentUserRole]=useState('');
 
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
       const userRole = JSON.parse(userRoleString);
+      setCurrentUserRole(userRole.Role)
       console.log('loggedInRole for ParentsPortal', userRole.Role);
-      if (userRole.Role !== 'admin') {
+      if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {
         setRedirectToNotFound(true);
       }
     } else {
@@ -263,7 +266,10 @@ const customToastStyle = {
 };
 
   return (
+  <>
+  { currentUserRole =='admin' ?
     <AdminSidebar>
+      <>
       <div id='mainp'>
         <div id='containerf'>
           <form onSubmit={handleSubmit}>
@@ -401,8 +407,153 @@ const customToastStyle = {
 </div>
 
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      </>
     </AdminSidebar>
-  );
+    :
+    <TeacherSidebar>
+      <>
+        <div id='mainp'>
+          <div id='containerf'>
+            <form onSubmit={handleSubmit}>
+              <h2>Parents Detail</h2>
+              <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => {setFormData({ ...formData, id: e.target.value });
+                            setIdError('');} }/>
+              <div id='form-groupf'>
+                    <input 
+                            type='hidden' 
+                            value={studentId} 
+                            placeholder='id'
+                            onChange={(e) => {setStudentId({ ...formData, id: e.target.value });
+                            setIdError('');} }
+                  required
+                />
+                {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
+                <div id='form-groupf'>
+                <label id='lbl'>Relation:</label>
+                {editing ? (
+                  <span>{formData.relation}</span>
+                ) : (
+                  <select
+                    value={formData.relation}
+                    className='relation'
+                    required
+                    onChange={(e) => {
+                      setFormData({ ...formData, relation: e.target.value });
+                      setRelationError('');
+                    }}
+                  >
+                    <option value="">Select Relation</option>
+                    {relations.map((relation) => (
+                      <option key={relation} value={relation}>
+                        {relation}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
+              </div>
+
+                  <label id='lbl' >Email:</label>
+                    <input 
+                            id='input'
+                            type='email' 
+                            value={formData.email} 
+                            placeholder='Email'
+                            onChange={(e) => {setFormData({ ...formData, email: e.target.value });
+                            setEmailError('');} }
+                  required
+                /><CgMail id='familyformicon' />
+                {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
+              </div>
+              <div id='form-groupf'>
+                <label id='lbl'>Name:</label>
+                  <input
+                          type="text"
+                          id='input'
+                          value={formData.name}
+                          placeholder='Full Name'
+                          onChange={(e) => {setFormData({ ...formData, name: e.target.value });
+                            setNameError('');} }
+                  required
+                /> < FiUser id='familyformicon' />
+                {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
+              </div>
+              <div id='form-groupf'>
+                <label id='lbl'>Occupation:</label>
+                  <input
+                          id='input'
+                          type='text'
+                          value={formData.occupation}
+                          placeholder='Occupation'
+                          onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
+                          setOccupationError('');} }
+                required
+              /><img src={ocuupation} id='familyformicon'/>
+              {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
+              </div>
+              <label id='lbl'>Mobile Number:</label>
+              <div id='phone_number'>
+                  <PhoneInput
+                      country={'in'}
+                      value={mobilenumber}
+                      placeholder="Enter mobile number"
+                      countryCodeEditable={false}
+                      onChange={handlePhoneChange}
+                      disableDropdown={true}
+                      isValid={isValidPhone}
+                      inputProps={{ maxLength: 15 }}
+                      inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
+                      containerStyle={{ padding: '1px' }} 
+                      required
+                  />
+              </div>
+        <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
+            </form>
+          </div>
+        </div>
+      <div id='disp'>
+    {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
+      familyMembers.map((familyMember) => (
+        <div key={familyMember.id} id='display'>
+          <h2>{familyMember.relation}</h2>
+          <div id='parent-details'>
+          <div id='detail'>
+            {familyMember.gender === 'male' ? (
+              <BiMale size='20px' />
+            ) : (
+              <BiFemale size='20px' />
+            )}
+            <span>{familyMember.name}</span>
+          </div>
+          <div id='detail'>
+            <BiEnvelope size='20px' />
+            <span>{familyMember.email}</span>
+          </div>
+          <div id='detail'>
+            <BiBriefcase size='20px' />
+            <span>"{familyMember.occupation}"</span>
+          </div>
+          <div id='detail'>
+            <BiPhone size='20px' />
+            <span>{familyMember.mobileNumber}</span>
+          </div>
+        </div>
+
+          <button id='btneditPP' onClick={() => handleEdit(familyMember)}><BiEdit /></button>
+          <button id='btndeletePP' onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
+        </div>
+      ))
+    ) : (
+      <p>No family members to display</p>
+    )}
+  </div>
+
+        <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      </>
+    </TeacherSidebar>
+}
+  </>
+      );
 };
 
 export default ParentsPortal;

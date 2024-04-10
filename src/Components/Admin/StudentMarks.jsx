@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './StudentMarks.css';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import { toast, Toaster } from 'react-hot-toast';
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -16,6 +17,23 @@ const InputMarksTable = () => {
   const [enteredData, setEnteredData] = useState([]);
   const [studentName, setStudentName] = useState('');
   const [editedIndex, setEditedIndex] = useState(null);
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+  const [currentUserRole,setCurrentUserRole]=useState('');
+
+
+  useEffect(() => {
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      setCurrentUserRole(userRole.Role)
+      console.log('loggedInRole for ParentsPortal', userRole.Role);
+      if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {
+        setRedirectToNotFound(true);
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
+    }
+  }, []);
 
   useEffect(() => {
     // Fetch subjects from the backend
@@ -144,7 +162,10 @@ const InputMarksTable = () => {
   };
 
   return (
+    <>
+      { currentUserRole =='admin' ?
     <AdminSidebar>
+      <>
       <div className="studentmarkscontainer">
         <center>
           <h2 id="heading1">Input Marks</h2>
@@ -231,7 +252,100 @@ const InputMarksTable = () => {
         )}
       </div>
       <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500 }} position="top-center" reverseOrder={false} />
+      </>
     </AdminSidebar>
+    :
+    <TeacherSidebar>
+    <><div className="studentmarkscontainer">
+        <center>
+          <h2 id="heading1">Input Marks</h2>
+        </center><br></br>
+        <form onSubmit={handleSubmit}>
+          <table id="t1">
+            <thead>
+              <tr id="tr1">
+                <th id="th1">Name</th>
+                <th id="th1">Exam Type</th>
+                {subjects.map((subject) => (
+                  <th id="th1" key={subject}>{subject}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <tr id="tr1">
+                <td id='td1'>{studentName}</td>
+                <td id='td1'>
+                  <select id='examType' value={examType} onChange={handleExamTypeChange}>
+                    <option value="" disabled={true}>Select Exam Type</option>
+                    <option value="Midterm">Midterm</option>
+                    <option value="Final">Final</option>
+                  </select>
+                </td>
+                {subjects.map((subject) => (
+                  <td id='td1' key={subject}><center></center>
+                    <input id='i1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required  autoComplete="off"  />
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+          <center>
+            <button id='submitmarks' type="submit">
+              {editedIndex !== null ? "Save Changes" : "Add To Table"}
+            </button>
+          </center>
+        </form>
+        <br /><br />
+        {submitted && enteredData.length > 0 && (
+          <div>
+            <center>
+              <h2 id='heading1'>View Marks</h2>
+            </center><br />
+            <table id='t1'>
+              <thead>
+                <tr id='tr1'>
+                  <th id='th1'>Name</th>
+                  <th id='th1'>Exam Type</th>
+                  {subjects.map((subject) => (
+                    <th id='th1' key={subject}>{subject}</th>
+                  ))}
+                  <th id='th1'>Total Marks</th>
+                  <th id='th1'>Obtained Marks</th>
+                  <th id='th1'>Status</th>
+                  <th id='th1'>Actions</th>
+                </tr>
+              </thead>
+              <tbody id='tbody'>
+                {enteredData.map((data, index) => (
+                  <tr id='tr1' key={index}>
+                    <td id='td1'>{data.name}</td>
+                    <td id='td1'>{data.examType}</td>
+                    {subjects.map((subject) => (
+                      <td id='td1' key={subject}>{data[subject]}</td>
+                    ))}
+                    <td id='td1'>{data.totalMarks}</td>
+                    <td id='td1'>{data.obtainedMarks}</td>
+                    <td id='td1'>{data.status}</td>
+                    <td id='td1'>
+                      <button id="btn-editt" onClick={() => handleEdit(index)}>
+                        <FiEdit />
+                      </button>&nbsp;&nbsp;&nbsp;
+                      <button id="btn-deletee" onClick={() => handleDelete(index)}>
+                        <RiDeleteBin6Line />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+      <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500 }} position="top-center" reverseOrder={false} />
+      </>
+    </TeacherSidebar>
+    }
+    </>
   );
 };
 

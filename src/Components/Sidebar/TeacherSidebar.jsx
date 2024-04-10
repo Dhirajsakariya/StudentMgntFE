@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {  BiLogOut } from 'react-icons/bi';
 import { LuUserCircle2 } from "react-icons/lu";
 import { PiUserListDuotone } from "react-icons/pi";
-import { FaWpforms } from "react-icons/fa";
+import { PiStudentBold } from "react-icons/pi";
 import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { useHistory,Redirect} from 'react-router-dom';
@@ -31,7 +31,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
         if (userRoleString) {
           const userRole = JSON.parse(userRoleString);
           console.log('loggedInRole for Teacher Sidebar', userRole.Role);
-          if (userRole.Role !== 'teacher') {
+          if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {
             setRedirectToNotFound(true);
           }
         } else {
@@ -49,9 +49,9 @@ const TeacherSidebar = ({ handleLogout,children }) => {
 
     const menuItem = [
         {
-            path: '/Student_Form',
-            name: 'Student Form',
-            icon: <FaWpforms   />
+          path: '/Search_Student',
+          name: 'Students',
+          icon: <PiStudentBold  />
         },
         {
             path: '/Standard',
