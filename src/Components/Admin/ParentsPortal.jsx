@@ -91,7 +91,7 @@ const handlePost = async () => {
     });
 
     if (response.ok) {
-      fetchFamilyMembers(studentId);
+      fetchFamilyMembers(studentId)
       
       setFormData({
         id: '',
@@ -102,7 +102,6 @@ const handlePost = async () => {
         relation: '',
       });
       setMobileNumber('');
-      
       toast.success("Added Successfully!");
     }
   } catch (error) {
@@ -141,33 +140,38 @@ const handlePut = async () => {
     toast.error('Failed to update Parent Detail');
   }
 };
-
 const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    if (!validateForm()) {
-      return ;
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return ;
+  }
+
+  if (!formData.gender) {
+    if (formData.relation === 'Father') {
+      setFormData({ ...formData, gender: 'male' });
+    } else if (formData.relation === 'Mother') {
+      setFormData({ ...formData, gender: 'female' });
     }
+  }
   
-    
-    const existingRecord = familyMembers.find(
-      (member) => member.relation === formData.relation
+  const existingRecord = familyMembers.find(
+    (member) => member.relation === formData.relation
+  );
+
+  if (!editing && existingRecord) {
+    toast.error(
+      `A ${formData.relation} record already exists. Please edit the existing record.`
     );
-  
-    if (!editing && existingRecord) {
-      toast.error(
-        `A ${formData.relation} record already exists. Please edit the existing record.`
-      );
-      return;
-    }
-  
-    if (editing) {
-      await handlePut();
-    } else {
-      await handlePost();
-    }
-  
-  
+    return;
+  }
+
+  if (editing) {
+    await handlePut();
+  } else {
+    await handlePost();
+  }
+
   setFormData({
     id: '',
     email: '',
@@ -181,28 +185,27 @@ const handleSubmit = async (e) => {
 };
 
 const validateForm = () => {
-  const emailRegex = /^\S+@\S+\.\S+$/;
-  if (!emailRegex.test(formData.email)) {
-    setEmailError('Please Enter a Valid Email');
-    return false;
-  } else if (!formData.name) {
-    setNameError('Please Enter a Name');
-    return false;
-  } else if (!formData.occupation) {
-    setOccupationError('Please Enter an Occupation');
-    return false;
-  } else if (!formData.gender) {
-    setGenderError('Please select a Gender');
-    return false;
-  } else if (!formData.relation) {
-    setRelationError('Please select a Relation');
-    return false;
-  } else if (!mobilenumber) {
-    setMobileNumberError('Please Select a Mobile Number');
-    return false;
-  }
-  return true;
+const emailRegex = /^\S+@\S+\.\S+$/;
+if (!emailRegex.test(formData.email)) {
+  setEmailError('Please Enter a Valid Email');
+  return false;
+} else if (!formData.name) {
+  setNameError('Please Enter a Name');
+  return false;
+} else if (!formData.occupation) {
+  setOccupationError('Please Enter an Occupation');
+  return false;
+} else if (!formData.relation) {
+  setRelationError('Please select a Relation');
+  return false;
+} else if (!mobilenumber) {
+  setMobileNumberError('Please Select a Mobile Number');
+  return false;
+}
+
+return true;
 };
+
 const handlePhoneChange = (value) => {
   setMobileNumber(value);
 };
@@ -277,26 +280,31 @@ const customToastStyle = {
                 required
               />
               {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
-              <div id="form-groupf">
+              <div id='form-groupf'>
               <label id='lbl'>Relation:</label>
+              {editing ? (
+                <span>{formData.relation}</span>
+              ) : (
                 <select
-                        value={formData.relation}
-                        className='relation'
-                        required
-                        onChange={(e) => {
-                          setFormData({ ...formData, relation: e.target.value });
-                          setRelationError('');
-                        }}
-                      >
-                <option value="">Select Relation</option>
+                  value={formData.relation}
+                  className='relation'
+                  required
+                  onChange={(e) => {
+                    setFormData({ ...formData, relation: e.target.value });
+                    setRelationError('');
+                  }}
+                >
+                  <option value="">Select Relation</option>
                   {relations.map((relation) => (
                     <option key={relation} value={relation}>
                       {relation}
                     </option>
                   ))}
                 </select>
-                {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
+              )}
+              {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
             </div>
+
                 <label id='lbl' >Email:</label>
                   <input 
                           id='input'
@@ -334,34 +342,6 @@ const customToastStyle = {
               required
             /><img src={ocuupation} id='familyformicon'/>
             {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
-            </div>
-            <div id='form-groupf'>
-              <label id='lbl'>Gender:</label>
-                <div id="radio-groupf">
-                  <input
-                          type="radio"
-                          value="male"
-                          checked={formData.gender === "male" }
-                          onChange={(e) => {
-                            setFormData({...formData, gender: e.target.value});
-                            setGenderError('');
-                          }}
-                          required
-                        />
-              <label id='lbl'>Male</label>
-                <input
-                        type="radio"
-                        value="female"
-                        checked={formData.gender === "female"}
-                        onChange={(e) => {
-                          setFormData({...formData, gender: e.target.value});
-                          setGenderError('');
-                        }}
-                        required
-                      />
-              <label id='lbl'>Female</label>
-              </div>
-              {genderError && <p style={{color: 'red'}}>{genderError}</p>}
             </div>
             <label id='lbl'>Mobile Number:</label>
             <div id='phone_number'>

@@ -1,13 +1,13 @@
 #mainp{
   align-items: center;
-  margin-top: 3%;
+  margin-top: 1%;
 }
 #containerf {
   width: 325px;
   color:black;
   border-radius: 10px;
   padding: 30px 30px;
-  height: 500px;
+  height: 550px;
   background: transparent;
   border: 2px solid;
   background-color: #e1e4e8;
@@ -17,24 +17,6 @@
   justify-content: center;
   margin-top: 0%;
   padding-top: 15px;
-}
-#form-groupf {
-  margin-bottom: 10%;
-}
-#radio-groupf  {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 7%;
-}
-#radio-groupf label {
-  margin-top: 1%;
-  margin-right: 49%;
-}
-#radio-groupf input {
-  width: 15%;
-  padding: 0;
-  margin-top: -1%;
-  margin-left: -12%;
 }
 #containerf h2{
   justify-content: center;
@@ -47,8 +29,8 @@
 }
  #lbl {
   display: block;
-  margin-bottom: 1%;
-  margin-top: 2.2%;
+  margin-bottom: 10px; 
+  margin-top: 20px; 
   margin-left:4%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 17px;
@@ -114,7 +96,7 @@ p{
   border: 2px solid black;
   background-color:  #e1e4e8;
   margin-left: 380%;
-  margin-top: -240%;
+  margin-top: -252%;
   margin-bottom: 100%;
 }
 #editing{
@@ -235,10 +217,10 @@ p{
 #detail {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Adjust spacing between details */
+  margin-bottom: 10px; 
 }
 
 #detail span {
-  margin-left: 10px; /* Adjust spacing between icon and text */
+  margin-left: 10px; 
 }
 
