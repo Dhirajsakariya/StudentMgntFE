@@ -6,6 +6,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
 import config from '../Login/config';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
+import AdminSidebar from '../Sidebar/AdminSidebar';
 import '../Teacher/AddExamSchedule.css';
 
 const AddExamSchedule = () => {
@@ -19,17 +20,19 @@ const AddExamSchedule = () => {
   const [subject, setSubject] = useState('');
   const [examSchedules, setExamSchedules] = useState([]);
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
-
   const [standardError, setStandardError] = useState('');
   const [standardData, setStandardData] = useState([]);
   const [subjectError, setSubjectError] = useState('');
   const [subjectData, setSubjectData] = useState([]);
+  const [currentUserRole,setCurrentUserRole]=useState('');
 
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
       const userRole = JSON.parse(userRoleString);
-      if (userRole.Role !== 'teacher') {
+      setCurrentUserRole(userRole.Role)
+      console.log('loggedInRole for Student Form', userRole.Role);
+      if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {            
         setRedirectToNotFound(true);
       }
     } else {
@@ -138,7 +141,10 @@ const AddExamSchedule = () => {
   }
 
   return (
-    <TeacherSidebar>
+    <>
+    { currentUserRole =='admin' ?
+    <AdminSidebar>
+    <>
       <div>
         <div id="student-exam-timetable">
           <h2 id="studentexamtimetableh2">Add Exam Schedule</h2>
@@ -298,7 +304,174 @@ const AddExamSchedule = () => {
         </div>
       </div>
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+    </>
+    </AdminSidebar>
+    :
+    <TeacherSidebar>
+      <>
+      <div>
+        <div id="student-exam-timetable">
+          <h2 id="studentexamtimetableh2">Add Exam Schedule</h2>
+          <form onSubmit={handleSubmit}>
+            <table id='student-table'>
+              <tbody>
+                <tr>
+                  <td id='student-exam-th'>Standard</td>
+                  <td id='student-exam-th'>Subject</td>
+                  <td id='student-exam-th'>Exam Type</td>
+                  <td id='student-exam-th'>Exam Date</td>
+                  <td id='student-exam-th'>Start Time</td>
+                  <td id='student-exam-th'>End Time</td>
+                </tr>
+                <tr id='student-exam-row'>
+                  <td>
+                    <select
+                      id='student-exam-sub'
+                      value={standard1}
+                      required
+                      onChange={(e) => setStandard1(e.target.value)}
+                    >
+                      <option value="" disabled={true}>Select Standard</option>
+                      {standardData.map((standard1) => (
+                        <option key={standard1} value={standard1}>
+                          {standard1}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      id='student-exam-sub'
+                      value={subject}
+                      required
+                      onChange={(e) => setSubject(e.target.value)}
+                    >
+                      <option value="" disabled={true}>Select Subject</option>
+                      {subjectData.map((subject) => (
+                        <option key={subject} value={subject}>
+                          {subject}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      id='student-exam-sub'
+                      value={examType1}
+                      onChange={(e) => setExamType1(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled={true}>Select Exam Type</option>
+                      <option value="Midterm">Mid-Term</option>
+                      <option value="Final">Final</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <input
+                      id='student-exam-sub'
+                      type='date'
+                      value={examDate}
+                      onChange={(e) => setExamDate(e.target.value)}
+                      required
+                    />
+                  </td>
+                  <td>
+                    <input
+                      id='student-exam-sub'
+                      type="time"
+                      value={startTime}
+                      onChange={(e) => setStartTime(e.target.value)}
+                      required
+                    />
+                  </td>
+
+                  <td>
+                    <input
+                      id='student-exam-sub'
+                      type="time"
+                      value={endTime}
+                      onChange={(e) => setEndTime(e.target.value)}
+                      required
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
+
+          </form>
+          <div id="student-exam-timetable2">
+
+            
+                <td>
+                    <select
+                      id='exam-sub'
+                      value={standard}
+                      required
+                      onChange={(e) => setStandard(e.target.value)}
+                    >
+                      <option value="" disabled={true}>Select Standard</option>
+                      {standardData.map((standard) => (
+                        <option key={standard} value={standard}>
+                          {standard}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  
+                  <td>
+                    <select
+                      id='exam-sub'
+                      value={examType}
+                      onChange={(e) => setExamType(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled={true}>Select Exam Type</option>
+                      <option value="Midterm">Mid-Term</option>
+                      <option value="Final">Final</option>
+                    </select>
+                  </td>
+
+
+          <table id="student-table">
+            <thead>
+              <tr>
+                <th id='student-exam-th'>Standard</th>
+                <th id='student-exam-th'>Subject</th>
+                <th id='student-exam-th'>Exam Type</th>
+                <th id='student-exam-th'>Exam Date</th>
+                <th id='student-exam-th'>Start Time</th>
+                <th id='student-exam-th'>End Time</th>
+                <th id='student-exam-th'>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {examSchedules.filter((examSchedule) => examSchedule.standard === standard && examSchedule.examType === examType).map((examSchedule, index) => (
+              <tr key={index}>
+                <td id='student-exam-sub'>{examSchedule.standard}</td>
+                <td id='student-exam-sub'>{examSchedule.subject}</td>
+                <td id='student-exam-sub'>{examSchedule.examType}</td>
+                <td id='student-exam-sub'>{examSchedule.examDate}</td>
+                <td id='student-exam-sub'>{examSchedule.startTime}</td>
+                <td id='student-exam-sub'>{examSchedule.endTime}</td>
+                <td id='student-exam-sub'>
+                <button id="editexamschedulebtn" ><FiEdit /></button>
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            </td>
+            </tr>
+            ))}
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+      <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      </>
     </TeacherSidebar>
+    }
+    </>
   );
 };
 
