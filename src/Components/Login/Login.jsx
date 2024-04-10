@@ -6,6 +6,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { CgMail } from 'react-icons/cg';
 import { toast, Toaster } from 'react-hot-toast';
 import Navigationbar from '../Dashboard/Navigationbar';
+import Footer from '../Dashboard/Footer';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -176,6 +177,7 @@ const Login = () => {
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
         </div>
+        <Footer/>
         </>
     );
 
