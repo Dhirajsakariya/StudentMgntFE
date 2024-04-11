@@ -229,7 +229,7 @@ const Search_Teacher = () => {
           )}
         </tbody>
       </table>
-      <Popup contentStyle={{width:'450px',borderRadius:'10px',background:'#f7f9fb'}}
+      <Popup contentStyle={{width:'450px', height:'550px',borderRadius:'10px',background:'#f7f9fb'}}
           open={selectedTeacher!== null}
           onClose={() => {
             setSelectedTeacher(null);
