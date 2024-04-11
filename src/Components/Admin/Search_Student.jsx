@@ -282,7 +282,7 @@ useEffect(() => {
                       <div>
                       
                         <button id="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
-                            <h2 id='headingpopup'>Details of  {selectedStudent.name}</h2>
+                            <h2 id='headingpopup5'>Details of  {selectedStudent.name}</h2>
                             <div id='popuppart1'>
                               <h2 id='headingpopup1'>Student Details</h2>
                               <div id='part2'>
@@ -292,7 +292,7 @@ useEffect(() => {
                             <p id='psearchstudent'><b>Email:</b> {selectedStudent.email}</p>
                             <p id='psearchstudent'><b>Gender:</b> {selectedStudent.gender}</p>
                             <p id='psearchstudent'><b>Birth Date:</b> {selectedStudent.birthDate.split("-").reverse().join("-")}</p>
-                            <p id='psearchstudent'><b>Mobile Number:</b> {selectedStudent.mobileNumber}</p>
+                            <p id='psearchstudent'><b>Mobile No.:</b> {selectedStudent.mobileNumber}</p>
                             <p id='psearchstudent'><b>Join Date:</b> {selectedStudent.joinDate.split("-").reverse().join("-")}</p>
                             <p id='psearchstudent'><b>Blood Group:</b> {selectedStudent.bloodGroup}</p>
                             <p id='psearchstudent'><b>Address: </b>{selectedStudent.address}</p>
@@ -561,7 +561,7 @@ useEffect(() => {
                       <div>
                       
                         <button id="close-btn" onClick={() => setSelectedStudent(null)}>×</button>
-                            <h2 id='headingpopup'>Details of  {selectedStudent.name}</h2>
+                            <h2 id='headingpopup5'>Details of  {selectedStudent.name}</h2>
                             <div id='popuppart1'>
                               <h2 id='headingpopup1'>Student Details</h2>
                               <div id='part2'>
@@ -571,7 +571,7 @@ useEffect(() => {
                             <p id='psearchstudent'><b>Email:</b> {selectedStudent.email}</p>
                             <p id='psearchstudent'><b>Gender:</b> {selectedStudent.gender}</p>
                             <p id='psearchstudent'><b>Birth Date:</b> {selectedStudent.birthDate.split("-").reverse().join("-")}</p>
-                            <p id='psearchstudent'><b>Mobile Number:</b> {selectedStudent.mobileNumber}</p>
+                            <p id='psearchstudent'><b>Mobile No.:</b> {selectedStudent.mobileNumber}</p>
                             <p id='psearchstudent'><b>Join Date:</b> {selectedStudent.joinDate.split("-").reverse().join("-")}</p>
                             <p id='psearchstudent'><b>Blood Group:</b> {selectedStudent.bloodGroup}</p>
                             <p id='psearchstudent'><b>Address: </b>{selectedStudent.address}</p>

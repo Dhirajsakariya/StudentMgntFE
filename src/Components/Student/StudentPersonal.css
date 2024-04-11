@@ -1,8 +1,6 @@
-
-  
-  #student-personal-info {
+#student-personal-info {
     width: 390px;
-    height: 400px;
+    height: auto;
     background-color: #d6e2f3;
     border-radius: 5%;
     padding: 30px 30px;
