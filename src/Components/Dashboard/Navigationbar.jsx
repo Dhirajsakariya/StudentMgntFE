@@ -14,13 +14,13 @@ const Navigationbar = () => {
         <div id="nav-elements">
           <ul>
             <li>
-              <NavLink to="/Home" activeClassName='active' >Home</NavLink>
+              <NavLink to="/Slideshow" >Home</NavLink>
             </li>
             <li>
-              <NavLink to="/Login" activeClassName='active'>Login</NavLink>
+              <NavLink to="/Login">Login</NavLink>
             </li>
             <li>
-              <NavLink to="/Registration" activeClassName='active'>Sign Up</NavLink>
+              <NavLink to="/Registration">Sign Up</NavLink>
             </li>
           </ul>
         </div>
