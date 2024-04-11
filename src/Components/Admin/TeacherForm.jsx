@@ -305,7 +305,7 @@ if (redirectToNotFound) {
            
            <div id ='Form-GroupT'>
                <label id='labelT'>Mobile Number:</label>
-               <div className='phone_numberT'>
+               <div className='Phone_NumberT'>
                <PhoneInput
                 country={'in'}
                 value={mobileNumber}
