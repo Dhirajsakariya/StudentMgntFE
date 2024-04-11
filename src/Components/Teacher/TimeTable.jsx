@@ -10,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 
 const TimeTable = () => {
 
+    const [standardId, setStandardId] = useState('');
     const [standard, setStandard] = useState('');
     const [standard1, setStandard1] = useState('');
     const [standardData, setStandardData] = useState([]);
@@ -28,6 +29,8 @@ const TimeTable = () => {
       const day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
       const str = standard;
       const parts = str.split("-");
+      var standards = parts[0] === standards;
+      var section= parts[1] === section;
       const dayMap = {
         Monday : 1,
         Tuesday : 2,
@@ -37,7 +40,14 @@ const TimeTable = () => {
         Saturday : 6
       };
       const dayInteger = dayMap[noOfDay];
-        
+
+      useEffect(() => {
+        if (standard) {
+          const [standardNumber, section] = standard.split("-");
+          fetchStandardId(standardNumber, section);
+        }
+      }, [standard]);
+
       useEffect(() => {
         const userRoleString = localStorage.getItem('loggedInRole');
         if (userRoleString) {
@@ -67,20 +77,6 @@ const TimeTable = () => {
             toast.error('Error fetching standard:');
           }
         }; 
-        const fetchSubject = async () => {
-          try {
-            const response = await fetch(`${config.ApiUrl}DropDown/Subject`);
-            if (response.ok) {
-              const data = await response.json();
-              setSubjectData(data);
-              console.log(data);
-            } else {
-               toast.error('Failed to fetch subject');
-            }
-          } catch {
-            toast.error('Error fetching subject:');
-          }
-        };
           const fetchTeacherName = async () => {
             try {
               const response = await fetch(`${config.ApiUrl}DropDown/TeacherName`);
@@ -93,7 +89,7 @@ const TimeTable = () => {
             } catch {
               toast.error('Error fetching subject:');
             }
-     }; 
+        }; 
           const fetchTimeTableData = async () => {
             try {
               const response = await fetch(`${config.ApiUrl}TimeTable/GetTimeTables`);
@@ -108,12 +104,48 @@ const TimeTable = () => {
               toast.error('Error fetching subject:');
             }
      }; 
+          
         fetchStandards();
-        fetchSubject();
         fetchTeacherName();
         fetchTimeTableData();
+        fetchStandardId();
       }, []);
     
+      useEffect(() => {
+        const fetchSubject = async () => {
+          try {
+            const response = await fetch(`${config.ApiUrl}DropDown/AllSubjectByStandard/${standardId}`);
+            if (response.ok) {
+              const data = await response.json();
+              setSubjectData(data);
+            } else {
+              toast.error('Failed to fetch subjects');
+            }
+          } catch (error) {
+            console.error('Error fetching subjects:', error);
+            toast.error('Error fetching subjects');
+          }
+        };
+      
+        fetchSubject();
+      }, [standardId]);
+      
+      const fetchStandardId = async (standards , section) => {
+        try {
+          console.log("standardNumber",standards)
+          const response = await fetch(`${config.ApiUrl}AdminTeacher/GetStandardFromString/${parts[0]}/${parts[1]}`);
+          if (response.ok) {
+            const data = await response.json();
+            setStandardId(data);
+            console.log("standards",data);
+          } else {
+             toast.error('Failed to fetch subject');
+          }
+        } catch {
+          toast.error('Error fetching subject:');
+        }
+      }; 
+ 
 
       const handleSave =async (e) =>{
         e.preventDefault();
@@ -189,6 +221,7 @@ const TimeTable = () => {
     <div>
       <div id='timetable'>
         <h1 id='h1'>Time-Table</h1>
+        <input type='hidden' value={standardId} onChange={(e) => setStandardId(e.target.value)}/>
         <table id='teacher-timetable'>
         <tbody>
                 <tr>
@@ -353,7 +386,8 @@ const TimeTable = () => {
       <>
     <div>
       <div id='timetable'>
-        <h1 id='h1'>Time-Table</h1>
+        <h1 id='h1'>Time-Table</h1>        
+        <input type='hidden' value={standardId} onChange={(e) => setStandardId(e.target.value)}/>
         <table id='teacher-timetable'>
         <tbody>
                 <tr>
@@ -396,7 +430,8 @@ const TimeTable = () => {
                       {day}
                     </option>
                     ))}
-                  </select>                  </td>
+                  </select>                  
+                  </td>
                   <td>
                     <input id='sub' type='time' value={startTime} onChange={(e) => setStartTime(e.target.value)}/>
                   </td>
