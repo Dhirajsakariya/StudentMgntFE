@@ -75,7 +75,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             icon: <GrScorecard />
         },
         {
-            path: '/',
+            path: '/Home',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick 

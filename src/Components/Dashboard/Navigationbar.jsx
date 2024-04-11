@@ -14,7 +14,7 @@ const Navigationbar = () => {
         <div id="nav-elements">
           <ul>
             <li>
-              <NavLink to="/Slideshow" activeClassName='active' >Home</NavLink>
+              <NavLink to="/Home" activeClassName='active' >Home</NavLink>
             </li>
             <li>
               <NavLink to="/Login" activeClassName='active'>Login</NavLink>

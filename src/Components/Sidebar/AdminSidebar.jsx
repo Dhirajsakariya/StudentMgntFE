@@ -76,7 +76,7 @@ const AdminSidebar = ({handleLogout, children }) => {
           icon: <FaGooglePay   />
         },
         {
-          path: '/',
+          path: '/Home',
           name: 'Logout',
           icon: <BiLogOut />,
           onClick: handleLogoutClick

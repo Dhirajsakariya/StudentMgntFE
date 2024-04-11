@@ -68,7 +68,7 @@ const StudentSidebar = ({ handleLogout,children }) => {
           icon: <GrSchedules />,
       },
         {
-            path: '/',
+            path: '/Home',
             name: 'Logout',
             icon: <BiLogOut />,
             onClick: handleLogoutClick
