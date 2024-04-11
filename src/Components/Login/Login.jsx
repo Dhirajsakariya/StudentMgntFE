@@ -130,6 +130,7 @@ const Login = () => {
     return (
     <>
     <Navigationbar/>
+    <div class="noeffect">
         <div className='containerlogin'>
             <form onSubmit={handleSubmit}>
                 <h2>Login</h2>
@@ -176,6 +177,7 @@ const Login = () => {
                 </div>
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+        </div>
         </div>
         <Footer/>
         </>

@@ -231,6 +231,7 @@ const customToastStyle = {
 return (
   <>
     <Navigationbar/>
+    <div class="noeffect">
     <div id='containerr'>
       <form onSubmit={handleSubmit}>
         <h2 id='signup'>Sign Up</h2>
@@ -407,6 +408,7 @@ return (
         </div>
         <button type="submit" id='buttonr' onClick={()=>handleSubmit}>Sign Up</button>
       </form>
+    </div>
     </div>
     <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
     <Footer/>
