@@ -206,9 +206,6 @@ if (!emailRegex.test(formData.email)) {
 return true;
 };
 
-const handlePhoneChange = (value) => {
-  setMobileNumber(value);
-};
 
 const handleEdit = (familyMember) => {
   setFormData({
@@ -221,6 +218,10 @@ const handleEdit = (familyMember) => {
   });
   setMobileNumber(familyMember.mobileNumber);
   setEditing(true);
+};
+
+const handlePhoneChange = (value) => {
+  setMobileNumber(value);
 };
 
 const handleDelete = async (id) => {
