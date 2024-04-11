@@ -89,6 +89,7 @@ const ForgotPassword = () => {
     return (
     <>
         <Navigationbar/>
+        <div class="noeffect">
         <div id='containerF'>
             <form onSubmit={handleSubmit}>
                 <h2>Reset Password</h2>
@@ -139,6 +140,7 @@ const ForgotPassword = () => {
                 </div>
             </form>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+        </div>
         </div>
         <Footer/>
     </>
