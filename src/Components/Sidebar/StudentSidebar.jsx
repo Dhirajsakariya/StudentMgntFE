@@ -8,6 +8,7 @@ import {  BiLogOut } from 'react-icons/bi';
 import { FaGooglePay } from "react-icons/fa";
 import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
+import { GrSchedules } from "react-icons/gr";
 import { useHistory,Redirect } from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 
@@ -61,6 +62,11 @@ const StudentSidebar = ({ handleLogout,children }) => {
           name: 'TimeTableViewer',
           icon: <FaTableCells  />
         },
+        {
+          path: '/Exam_Schedule',
+          name: 'Exam Schedule',
+          icon: <GrSchedules />,
+      },
         {
             path: '/Login',
             name: 'Logout',

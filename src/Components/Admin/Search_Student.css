@@ -65,7 +65,7 @@
 #psearchstudent2{
     color: black;
 }#popuppart1{
-    margin-top: 100px;
+    margin-top: 50px;
 }
 #part-2{
     margin-top: 20px;
@@ -74,7 +74,7 @@
 #part2{
     margin-top: 35px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     width:300px;
@@ -82,12 +82,13 @@
 }
 #popuppart2{
     margin-left: 375px;
-    margin-top: -415px;
+    margin-top: -500px;
 }
 #popupcardcontainer{
    display: grid;
    grid-template-rows: 2;
-   margin-top: 20px;
+   row-gap: 30px;
+   margin-top: 25px;
 }
 #parentrelation{
     color:rgb(133, 61, 172);
@@ -101,10 +102,11 @@
     margin: 10px;
     padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin-left: 50px;
+    height: 160px;
 }
 #trsearchstudent{
     background-color: #24305E;
@@ -216,6 +218,13 @@
     text-align: center;
     color: #007bff;
 }
+#headingpopup5{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: #007bff;
+    margin-top: 20px;
+}
 #edit-popup {
     padding: 20px;
 }
@@ -266,7 +275,7 @@
 }
 #headingpopup1{
     margin-left: 120px;
-    
+    margin-top: -15px;
     color: #3d34b5;
 }
 #headingpopup2{
