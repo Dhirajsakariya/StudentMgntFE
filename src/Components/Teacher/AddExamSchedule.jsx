@@ -5,8 +5,8 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
 import config from '../Login/config';
-import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 import '../Teacher/AddExamSchedule.css';
 
 const AddExamSchedule = () => {
@@ -163,14 +163,14 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={standard1}
+                      value={standard}
                       required
-                      onChange={(e) => setStandard1(e.target.value)}
+                      onChange={(e) => setStandard(e.target.value)}
                     >
                       <option value="" disabled={true}>Select Standard</option>
-                      {standardData.map((standard1) => (
-                        <option key={standard1} value={standard1}>
-                          {standard1}
+                      {standardData.map((standard) => (
+                        <option key={standard} value={standard}>
+                          {standard}
                         </option>
                       ))}
                     </select>
@@ -193,8 +193,8 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={examType1}
-                      onChange={(e) => setExamType1(e.target.value)}
+                      value={examType}
+                      onChange={(e) => setExamType(e.target.value)}
                       required
                     >
                       <option value="" disabled={true}>Select Exam Type</option>
@@ -238,69 +238,69 @@ const AddExamSchedule = () => {
             <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
 
           </form>
+          
           <div id="student-exam-timetable2">
-
-            
-                <td>
-                    <select
-                      id='exam-sub'
-                      value={standard}
-                      required
-                      onChange={(e) => setStandard(e.target.value)}
-                    >
-                      <option value="" disabled={true}>Select Standard</option>
-                      {standardData.map((standard) => (
-                        <option key={standard} value={standard}>
-                          {standard}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  
-                  <td>
-                    <select
-                      id='exam-sub'
-                      value={examType}
-                      onChange={(e) => setExamType(e.target.value)}
-                      required
-                    >
-                      <option value="" disabled={true}>Select Exam Type</option>
-                      <option value="Midterm">Mid-Term</option>
-                      <option value="Final">Final</option>
-                    </select>
-                  </td>
-
-
-          <table id="student-table">
-            <thead>
-              <tr>
-                <th id='student-exam-th'>Standard</th>
-                <th id='student-exam-th'>Subject</th>
-                <th id='student-exam-th'>Exam Type</th>
-                <th id='student-exam-th'>Exam Date</th>
-                <th id='student-exam-th'>Start Time</th>
-                <th id='student-exam-th'>End Time</th>
-                <th id='student-exam-th'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {examSchedules.filter((examSchedule) => examSchedule.standard === standard && examSchedule.examType === examType).map((examSchedule, index) => (
-              <tr key={index}>
-                <td id='student-exam-sub'>{examSchedule.standard}</td>
-                <td id='student-exam-sub'>{examSchedule.subject}</td>
-                <td id='student-exam-sub'>{examSchedule.examType}</td>
-                <td id='student-exam-sub'>{examSchedule.examDate}</td>
-                <td id='student-exam-sub'>{examSchedule.startTime}</td>
-                <td id='student-exam-sub'>{examSchedule.endTime}</td>
-                <td id='student-exam-sub'>
-                <button id="editexamschedulebtn" ><FiEdit /></button>
-            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            <td>
+              <select
+                id='exam-sub'
+                value={standard1}
+                required
+                onChange={(e) => setStandard1(e.target.value)}
+                >
+                <option value="" disabled>Select Standard</option>
+                {standardData.map((standard) => (
+                <option key={standard} value={standard}>
+                {standard}
+                </option>
+                  ))}
+              </select>
             </td>
+  
+            <td>
+              <select
+                id='exam-sub'
+                value={examType1}
+                onChange={(e) => setExamType1(e.target.value)}
+                required
+                >
+                <option value="" disabled>Select Exam Type</option>
+                <option value="Midterm">Mid-Term</option>
+                <option value="Final">Final</option>
+              </select>
+            </td>
+
+            <table id="student-table">
+              <thead>
+                <tr>
+                  <th id='student-exam-th'>Standard</th>
+                  <th id='student-exam-th'>Subject</th>
+                  <th id='student-exam-th'>Exam Type</th>
+                  <th id='student-exam-th'>Exam Date</th>
+                  <th id='student-exam-th'>Start Time</th>
+                  <th id='student-exam-th'>End Time</th>
+                  <th id='student-exam-th'>Actions</th>
+                </tr>
+            </thead>
+          <tbody>
+            {examSchedules.filter((examSchedule) => examSchedule.standard === standard1 && examSchedule.examType === examType1).map((examSchedule, index) => (
+            <tr key={index}>
+              <td id='student-exam-sub'>{examSchedule.standard}</td>
+              <td id='student-exam-sub'>{examSchedule.subject}</td>
+              <td id='student-exam-sub'>{examSchedule.examType}</td>
+              <td id='student-exam-sub'>{examSchedule.examDate}</td>
+              <td id='student-exam-sub'>{examSchedule.startTime}</td>
+              <td id='student-exam-sub'>{examSchedule.endTime}</td>
+              <td id='student-exam-sub'>
+
+              <button id="editexamschedulebtn"><FiEdit /></button>
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+              </td>
             </tr>
-            ))}
-            </tbody>
-          </table>
-          </div>
+              ))}
+          </tbody>
+        </table>
+        </div>
+
         </div>
       </div>
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
@@ -327,14 +327,14 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={standard1}
+                      value={standard}
                       required
-                      onChange={(e) => setStandard1(e.target.value)}
+                      onChange={(e) => setStandard(e.target.value)}
                     >
                       <option value="" disabled={true}>Select Standard</option>
-                      {standardData.map((standard1) => (
-                        <option key={standard1} value={standard1}>
-                          {standard1}
+                      {standardData.map((standard) => (
+                        <option key={standard} value={standard}>
+                          {standard}
                         </option>
                       ))}
                     </select>
@@ -357,8 +357,8 @@ const AddExamSchedule = () => {
                   <td>
                     <select
                       id='student-exam-sub'
-                      value={examType1}
-                      onChange={(e) => setExamType1(e.target.value)}
+                      value={examType}
+                      onChange={(e) => setExamType(e.target.value)}
                       required
                     >
                       <option value="" disabled={true}>Select Exam Type</option>
@@ -402,69 +402,69 @@ const AddExamSchedule = () => {
             <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
 
           </form>
+              
           <div id="student-exam-timetable2">
-
-            
-                <td>
-                    <select
-                      id='exam-sub'
-                      value={standard}
-                      required
-                      onChange={(e) => setStandard(e.target.value)}
-                    >
-                      <option value="" disabled={true}>Select Standard</option>
-                      {standardData.map((standard) => (
-                        <option key={standard} value={standard}>
-                          {standard}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  
-                  <td>
-                    <select
-                      id='exam-sub'
-                      value={examType}
-                      onChange={(e) => setExamType(e.target.value)}
-                      required
-                    >
-                      <option value="" disabled={true}>Select Exam Type</option>
-                      <option value="Midterm">Mid-Term</option>
-                      <option value="Final">Final</option>
-                    </select>
-                  </td>
-
-
-          <table id="student-table">
-            <thead>
-              <tr>
-                <th id='student-exam-th'>Standard</th>
-                <th id='student-exam-th'>Subject</th>
-                <th id='student-exam-th'>Exam Type</th>
-                <th id='student-exam-th'>Exam Date</th>
-                <th id='student-exam-th'>Start Time</th>
-                <th id='student-exam-th'>End Time</th>
-                <th id='student-exam-th'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {examSchedules.filter((examSchedule) => examSchedule.standard === standard && examSchedule.examType === examType).map((examSchedule, index) => (
-              <tr key={index}>
-                <td id='student-exam-sub'>{examSchedule.standard}</td>
-                <td id='student-exam-sub'>{examSchedule.subject}</td>
-                <td id='student-exam-sub'>{examSchedule.examType}</td>
-                <td id='student-exam-sub'>{examSchedule.examDate}</td>
-                <td id='student-exam-sub'>{examSchedule.startTime}</td>
-                <td id='student-exam-sub'>{examSchedule.endTime}</td>
-                <td id='student-exam-sub'>
-                <button id="editexamschedulebtn" ><FiEdit /></button>
-            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            <td>
+              <select
+                id='exam-sub'
+                value={standard1}
+                required
+                onChange={(e) => setStandard1(e.target.value)}
+                >
+                <option value="" disabled>Select Standard</option>
+                {standardData.map((standard) => (
+                <option key={standard} value={standard}>
+                {standard}
+                </option>
+                  ))}
+              </select>
             </td>
+  
+            <td>
+              <select
+                id='exam-sub'
+                value={examType1}
+                onChange={(e) => setExamType1(e.target.value)}
+                required
+                >
+                <option value="" disabled>Select Exam Type</option>
+                <option value="Midterm">Mid-Term</option>
+                <option value="Final">Final</option>
+              </select>
+            </td>
+
+            <table id="student-table">
+              <thead>
+                <tr>
+                  <th id='student-exam-th'>Standard</th>
+                  <th id='student-exam-th'>Subject</th>
+                  <th id='student-exam-th'>Exam Type</th>
+                  <th id='student-exam-th'>Exam Date</th>
+                  <th id='student-exam-th'>Start Time</th>
+                  <th id='student-exam-th'>End Time</th>
+                  <th id='student-exam-th'>Actions</th>
+                </tr>
+            </thead>
+          <tbody>
+            {examSchedules.filter((examSchedule) => examSchedule.standard === standard1 && examSchedule.examType === examType1).map((examSchedule, index) => (
+            <tr key={index}>
+              <td id='student-exam-sub'>{examSchedule.standard}</td>
+              <td id='student-exam-sub'>{examSchedule.subject}</td>
+              <td id='student-exam-sub'>{examSchedule.examType}</td>
+              <td id='student-exam-sub'>{examSchedule.examDate}</td>
+              <td id='student-exam-sub'>{examSchedule.startTime}</td>
+              <td id='student-exam-sub'>{examSchedule.endTime}</td>
+              <td id='student-exam-sub'>
+
+              <button id="editexamschedulebtn"><FiEdit /></button>
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+              </td>
             </tr>
-            ))}
-            </tbody>
-          </table>
-          </div>
+              ))}
+          </tbody>
+        </table>
+        </div>
+
         </div>
       </div>
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
