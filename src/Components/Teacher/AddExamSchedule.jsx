@@ -26,6 +26,8 @@ const AddExamSchedule = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [currentUserRole,setCurrentUserRole]=useState('');
 
+  const [editingIndex, setEditingIndex] = useState(null);
+
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
@@ -83,37 +85,76 @@ const AddExamSchedule = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
+      if (editingIndex !== null) {
+        // Updating an existing exam schedule
+        const examId = examSchedules[editingIndex].id;
+        await axios.put(`${config.ApiUrl}Exam/PutExam/${examId}`, {
+          ExamType: examType,
+          StandardNumber: parts[0],
+          Section: parts[1],
+          SubjectName: subject,
+          ExamDate: examDate,
+          StartTime: startTime,
+          EndTime: endTime,
+        });
+  
+        const updatedExamSchedules = [...examSchedules];
+        updatedExamSchedules[editingIndex] = {
+          id: examId,
+          examType: examType,
+          standard: standard,
+          subject: subject,
+          examDate: examDate,
+          startTime: startTime,
+          endTime: endTime,
+        };
+        setExamSchedules(updatedExamSchedules);
+        setEditingIndex(null);
+        toast.success('Exam schedule updated successfully');
+      } else {
+        // Adding a new exam schedule
         const response = await axios.post(`${config.ApiUrl}Exam/PostExams`, {
-        ExamType: examType,
-        StandardNumber: parts[0],
-        Section: parts[1],
-        SubjectName: subject,
-        ExamDate: examDate,
-        StartTime: startTime,
-        EndTime: endTime,
-      });
-
-      const newExamSchedule = response.data;
-      setExamSchedules([...examSchedules, newExamSchedule]);
-      toast.success('Exam schedule added successfully');
+          ExamType: examType,
+          StandardNumber: parts[0],
+          Section: parts[1],
+          SubjectName: subject,
+          ExamDate: examDate,
+          StartTime: startTime,
+          EndTime: endTime,
+        });
+  
+        const newExamSchedule = response.data;
+        setExamSchedules([...examSchedules, newExamSchedule]);
+        toast.success('Exam schedule added successfully');
+      }
+  
+      // Reset form fields
+      setExamType('');
+      setSubject('');
+      setExamDate('');
+      setStartTime('');
+      setEndTime('');
     } catch (error) {
-      toast.error('Failed to add exam schedule. Please try again later.');
-      console.error('Error adding exam schedule:', error);
+      toast.error('Failed to add/update exam schedule. Please try again later.');
+      console.error('Error adding/updating exam schedule:', error);
     }
-    
-    const updatedExamSchedule = await axios.get(`${config.ApiUrl}Exam/GetExams`);
-    setExamSchedules(updatedExamSchedule.data);
-          
-    // Reset form fields
-    setExamType('');
-    setStandard1('');
-    setSubject('');
-    setExamDate('');
-    setStartTime('');
-    setEndTime('');
-  };  
+  };
+  const customToastStyle = {
+    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+    fontSize: '16px',
+    fontWeight: 'bold',
+  };
+  
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+    const selectedExamSchedule = examSchedules[index];
+    setExamType(selectedExamSchedule.examType);
+    setExamDate(selectedExamSchedule.examDate);
+    setStartTime(selectedExamSchedule.startTime);
+    setEndTime(selectedExamSchedule.endTime);
+  };
 
   const handleDelete = async (index) => {
     
@@ -128,37 +169,7 @@ const AddExamSchedule = () => {
     }
   };
 
-  const handleEdit = async (index) => {
-    console.log('Editing exam at index:', index);
-    const examId = examSchedules[index].id;
-    const updatedExam = {
-      ExamType: examType,
-      StandardNumber: parts[0],
-      Section: parts[1],
-      SubjectName: subject,
-      ExamDate: examDate,
-      StartTime: startTime,
-      EndTime: endTime,
-    };
-
-    try {
-      const response = await axios.put(`${config.ApiUrl}Exam/PutExam/${examId}`, updatedExam);
-      const updatedExamSchedule = response.data;
-      const updatedSchedules = [...examSchedules];
-      updatedSchedules[index] = updatedExamSchedule;
-      setExamSchedules(updatedSchedules);
-      toast.success('Exam schedule updated successfully');
-    } catch (error) {
-      toast.error('Failed to update exam schedule. Please try again later.');
-      console.error('Error updating exam schedule:', error);
-    }
-  };
-
-  const customToastStyle = { 
-    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
-    fontSize: '16px',
-    fontWeight: 'bold',
-  };
+  
 
   if (redirectToNotFound) {
     return <Redirect to="/PageNotFound" />;
@@ -260,7 +271,7 @@ const AddExamSchedule = () => {
               </tbody>
             </table>
 
-            <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
+            <button id='student-exam-btn' type="submit">{editingIndex !== null ? 'Update Exam Schedule' : 'Add Exam Schedule'}</button>
 
           </form>
           
