@@ -189,7 +189,7 @@ const TimeTable = () => {
            else{
             if (!notloginSuccessMessageShown)
              {
-                toast.error('Login failed. Please try again later.');
+                toast.error('Error data Saving in Timetable!');
                 setNotloginSuccessMessageShown(true)
              }
            }
