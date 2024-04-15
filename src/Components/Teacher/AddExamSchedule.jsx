@@ -85,7 +85,7 @@ const AddExamSchedule = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${config.ApiUrl}Exam/PostExams`, {
+        const response = await axios.post(`${config.ApiUrl}Exam/PostExams`, {
         ExamType: examType,
         StandardNumber: parts[0],
         Section: parts[1],
@@ -113,9 +113,7 @@ const AddExamSchedule = () => {
     setExamDate('');
     setStartTime('');
     setEndTime('');
-  };
-
-  
+  };  
 
   const handleDelete = async (index) => {
     
@@ -127,6 +125,32 @@ const AddExamSchedule = () => {
     } catch (error) {
       toast.error('Failed to delete exam schedule. Please try again later.');
       console.error('Error deleting exam schedule:', error);
+    }
+  };
+
+  const handleEdit = async (index) => {
+    console.log('Editing exam at index:', index);
+    const examId = examSchedules[index].id;
+    const updatedExam = {
+      ExamType: examType,
+      StandardNumber: parts[0],
+      Section: parts[1],
+      SubjectName: subject,
+      ExamDate: examDate,
+      StartTime: startTime,
+      EndTime: endTime,
+    };
+
+    try {
+      const response = await axios.put(`${config.ApiUrl}Exam/PutExam/${examId}`, updatedExam);
+      const updatedExamSchedule = response.data;
+      const updatedSchedules = [...examSchedules];
+      updatedSchedules[index] = updatedExamSchedule;
+      setExamSchedules(updatedSchedules);
+      toast.success('Exam schedule updated successfully');
+    } catch (error) {
+      toast.error('Failed to update exam schedule. Please try again later.');
+      console.error('Error updating exam schedule:', error);
     }
   };
 
@@ -208,6 +232,7 @@ const AddExamSchedule = () => {
                       id='student-exam-sub'
                       type='date'
                       value={examDate}
+                      // value={examDate.split("-").reverse().join("-")}
                       onChange={(e) => setExamDate(e.target.value)}
                       required
                     />
@@ -292,7 +317,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>{examSchedule.endTime}</td>
               <td id='student-exam-sub'>
 
-              <button id="editexamschedulebtn"><FiEdit /></button>
+              <button id="editexamschedulebtn" onClick={() => handleEdit(index)}><FiEdit /></button>
             <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
@@ -372,6 +397,7 @@ const AddExamSchedule = () => {
                       id='student-exam-sub'
                       type='date'
                       value={examDate}
+                      // value={examDate.split("-").reverse().join("-")}
                       onChange={(e) => setExamDate(e.target.value)}
                       required
                     />
@@ -456,7 +482,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>{examSchedule.endTime}</td>
               <td id='student-exam-sub'>
 
-              <button id="editexamschedulebtn"><FiEdit /></button>
+              <button id="editexamschedulebtn" onClick={() => handleEdit(index)}><FiEdit /></button>
             <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
