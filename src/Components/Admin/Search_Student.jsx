@@ -10,6 +10,7 @@ import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { toast, Toaster } from 'react-hot-toast';
 import { FaSearch } from 'react-icons/fa';
+import { MdOutlineFamilyRestroom } from "react-icons/md";
 import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
@@ -162,7 +163,13 @@ useEffect(() => {
     history.push('/StudentMarks');
     localStorage.setItem('selectedStudentId', id);
     console.log("selectedStudentId",id);
-  }
+   }
+
+   const handleAddFamily = (id) =>{
+    history.push('/ParentsPortal');
+    localStorage.setItem('selectedStudentId', id);
+    console.log("selectedStudentId",id);
+   }
 
  //To add Student Details
  const handleAddStudent = () =>{
@@ -254,9 +261,9 @@ useEffect(() => {
                                     <RiDeleteBin6Line />
                         </button>
 
-                        {/* <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
+                        <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
                                    <MdOutlineFamilyRestroom />
-                        </button> */}
+                        </button> 
                         <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
                                     <GrScorecard />
 
@@ -326,7 +333,7 @@ useEffect(() => {
 
                   <>  
                     <Popup 
-                          contentStyle={{ width: "790px" , height:'640px' , borderRadius:'10px', background:'lightgray'}}
+                          contentStyle={{ width: "1300px" , height:'640px' , borderRadius:'10px', background:'lightgray'}}
                           open={editedStudent !== null}
                           onClose={() => setEditedStudent(null)}
                           closeOnDocumentClick={false} // Prevents closing on document click
@@ -335,7 +342,7 @@ useEffect(() => {
                         {editedStudent && (
                           <div id='edit-popup'>
                             <button id="close-btn" onClick={() => setEditedStudent(null)}>×</button>
-                            <h2 id="headingpopup">Edit Details of {editedStudent.name}</h2>
+                            <h2 id="headingpopup1">Edit Details of {editedStudent.name}</h2>
               
                               <div id='edit-popuppart1'>
 
@@ -533,9 +540,9 @@ useEffect(() => {
                                     <RiDeleteBin6Line />
                         </button>
 
-                        {/* <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
+                        <button id="btnaddfamilysearchstudent" onClick={() => handleAddFamily(student.id)}>
                                    <MdOutlineFamilyRestroom />
-                        </button> */}
+                        </button> 
                         <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
                                     <GrScorecard />
 

@@ -212,11 +212,11 @@
     color: white;
     background-color: red; /* Change color on hover if desired */
 }
-#headingpopup{
+#headingpopup1{
     margin-bottom: 20px;
     margin-top: 20px;
-    text-align: center;
     color: #007bff;
+
 }
 #headingpopup5{
     margin-bottom: 20px;
@@ -274,9 +274,10 @@
     background-color: #0056b3;
 }
 #headingpopup1{
-    margin-left: 120px;
+    margin-left: 290px;
     margin-top: -15px;
     color: #3d34b5;
+    
 }
 #headingpopup2{
 
