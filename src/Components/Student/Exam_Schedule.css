@@ -1,0 +1,45 @@
+#examviewer{   
+    padding: -1%;
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+}
+#h1examschedule{
+    color:#24305E;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 4%;
+    padding: -1%;
+    max-width: 80%;
+    margin-left: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 200%;
+    font: bold;
+    text-decoration: underline;
+  }
+#thtableexam{
+    width: 3%;
+    height: 40px;
+    text-align: center;
+    background:#24305E;;
+    color: white;
+
+}
+#exam-th{           
+    height: 50px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+}
+#exam-scheduletable{
+    width : 75%;
+    padding: -1%;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+}
+          
