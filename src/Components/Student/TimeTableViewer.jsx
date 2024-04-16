@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import '../Teacher/TimeTable.css';
 import '../Student/TimeTableViewer.css';
 import config from '../Login/config';
 import StudentSidebar from '../Sidebar/StudentSidebar';
@@ -7,242 +6,136 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Redirect } from 'react-router-dom';
 
 const TimeTableViewer = () => {
-
     const [timeTables, setTimeTables] = useState([]);
-    const [standard, setStandard] = useState('');
-    const [standardData, setStandardData] = useState([]);
-    const [isDisable, setIsDisable] = useState(true);
-    const [standardError, setStandardError] = useState('');
-    const [subjectData, setSubjectData] = useState([]);
-    const [redirectToNotFound, setRedirectToNotFound] = useState(false);
-    const [periods, setPeriods] = useState([
-        { startTime: '', endTime: '' },
-        { startTime: '', endTime: '' },
-        { startTime: '', endTime: '' },
-        { startTime: '', endTime: '' },
-        { startTime: '', endTime: '' },
-        { startTime: '', endTime: '' },
-    ]);
-    //const [subjects, setSubjects] = useState(Array(24).fill(''));
+    const [studentId, setStudentId] = useState('');
+    const [standardId, setStandardId] = useState('');
+    const [redirectToNotFound, setRedirectToNotFound] = useState(false); 
 
-    // const resetSubjects = () => {
-    //     setSubjects(Array(24).fill(''));
-    // };
+    const filterUniqueTimeSlots = (timeTables) => {
+        const uniqueTimeSlots = [];
+        const uniqueStartTimeSet = new Set();
+    
+        timeTables.forEach((timeSlot) => {
+            if (!uniqueStartTimeSet.has(timeSlot.startTime)) {
+                uniqueStartTimeSet.add(timeSlot.startTime);
+                uniqueTimeSlots.push(timeSlot);
+            }
+        });    
+        return uniqueTimeSlots;
+    };
+    
+    useEffect(() => {
+        const fetchStudentData = async () => {
+            try {
+                const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
+                if (storedId) {
+                    setStudentId(storedId);
+                } else {
+                    console.error('loggedInUserId not found in localStorage');
+                }
+            } catch (error) {
+                console.error('Error fetching student data:', error);
+                toast.error('Error fetching student data');
+            }
+        };
+        fetchStudentData();
+    }, []);
 
     useEffect(() => {
-        const userRoleString = localStorage.getItem('loggedInRole');
-        if (userRoleString) {
-          const userRole = JSON.parse(userRoleString);
-          console.log('loggedInRole for Student', userRole.Role);
-          if (userRole.Role !== 'student') {
-            setRedirectToNotFound(true);
-          }
-        } else {
-          console.error('loggedInRole not found in localStorage');
+        const fetchStandardData = async () => {
+            try {
+                const response = await fetch(`${config.ApiUrl}Student/GetStudent/${studentId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setStandardId(data.standardId);
+                } else {
+                    toast.error('Failed to fetch standard');
+                }
+            } catch (error) {
+                console.error('Error fetching standard:', error);
+                toast.error('Error fetching standard');
+            }
+        };
+        if (studentId) {
+            fetchStandardData();
         }
-      }, []);
+    }, [studentId]);
 
     useEffect(() => {
-      const fetchStandards = async () => {
-          try {
-              const response = await fetch(`${config.ApiUrl}DropDown/Standard`);
-              if (response.ok) {
-                  const data = await response.json();
-                  setStandardData(data);
-              } else {
-                  throw new Error('Failed to fetch standard');
-              }
-          } catch (error) {
-              console.error('Error fetching standard:', error);
-          }
-          };
-          fetchStandards();
-      },[]);
-
-
-    // const handleSave = async () => {
-    //     try {
-    //         const timeTableCreateList = periods.flatMap((period, index) => {
-    //             return {
-    //                 StartTime: period.startTime,
-    //                 EndTime: period.endTime,
-    //                 StandardNumber: standard.split("-")[0],
-    //                 Section: standard.split("-")[1],
-    //                 NoOfDay: index + 1,
-    //                 SubjectName: subjects[index]
-    //             };
-    //         });
-    //         setIsDisable(false);
-    //         const response = await fetch(${config.ApiUrl}TimeTable/PostTimeTable, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(timeTableCreateList)
-    //         });
-    //         if (response.ok) {
-    //             toast.success("Successfully Saved!");
-    //         } else {
-    //             toast.error("Failed to save data!");
-    //         }
-    //     } catch {
-    //         toast.error("Error in data Saving!");
-    //     }
-    // };
-
-    // const handleEdit = () => {
-    //     setIsDisable(true);
-    //     resetSubjects();
-    // };
+        const fetchTimeTable = async () => {
+            try {
+                const response = await fetch(`${config.ApiUrl}TimeTable/GetTimeTableByStandardId/${standardId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setTimeTables(data);
+                } else {
+                    toast.error('Failed to fetch timetable');
+                }
+            } catch (error) {
+                console.error('Error fetching timetable:', error);
+                toast.error('Error fetching timetable');
+            }
+        };
+        if (standardId) {
+            fetchTimeTable();
+        }
+    }, [standardId]);
 
     if (redirectToNotFound) {
         return <Redirect to="/PageNotFound" />;
     }
 
+    console.log('time table sort ',new Date(), timeTables.sort((c,d)=> new Date(2024,4,1,c.startTime.split(':')[0],c.startTime.split(':')[1],0,0).getTime() - new Date(2024,4,1,d.startTime.split(':')[0],d.startTime.split(':')[1],0,0)))
+    const uniqueTimeTables = filterUniqueTimeSlots(timeTables);
+    
     return (
         <>
             <StudentSidebar>
                 <div>
                     <div id='timetableviewer'>
-                        <h1 id='h1viewer'>TimeTable</h1>
-                        {timeTables.map(timeTable => (
-                            <li key={timeTable.id}>{timeTable.name}</li>
-                        ))}
-                        <div id='formtabledata'>
-                            <select
-                                value={standard}
-                                id='inputformstd'
-                                required
-                                onChange={(e) => {
-                                    setStandard(e.target.value);
-                                    setStandardError('');
-                                    setIsDisable(true);
-                                }}
-                            >
-                                <option value="" disabled={true} >Select Standard</option>
-                                {standardData.map((standard) => (
-                                    <option key={standard} value={standard}>
-                                        {standard}
-                                    </option>
-                                ))}
-                            </select>
-                            {/* <button id='btn1' type='button' onClick={handleEdit}>Edit</button>
-                            <button id='btn' type='button' onClick={handleSave}>Save</button> */}
-                        </div>
-                        <div>
-                            <table id='tableview'>
-                                <thead>
-                                    <tr>
-                                        <th id='thtable'>Day/Period</th>
-                                        <th id='thtable'>Monday</th>
-                                        <th id='thtable'>Tuesday</th>
-                                        <th id='thtable'>Wednesday</th>
-                                        <th id='thtable'>Thursday</th>
-                                        <th id='thtable'>Friday</th>
-                                        <th id='thtable'>Saturday</th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-                                    <tr>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                        <th id='rowview'></th>
-                                    </tr>
-
-                                </thead>
-                                {/* <tbody>
-                                    {periods.map((period, index) => (
-                                        <tr key={index}>
-                                            <td id='row'>{${period.startTime}${period.endTime}}</td>
-                                            {Array(6).fill().map((_, dayIndex) => (
-                                                <td key={dayIndex}> 
-                                                  
-                                                     {isDisable ?
-                                                        <select
-                                                            value={subjects[index * 6 + dayIndex]}
-                                                            id='sub'
-                                                            required
-                                                            onChange={(e) => {
-                                                                const newSubjects = [...subjects];
-                                                                newSubjects[index * 6 + dayIndex] = e.target.value;
-                                                                setSubjects(newSubjects);
-                                                            }}
-                                                        >
-                                                            <option disabled={true} value="">Select</option>
-                                                            {subjectData.map((subject) => (
-                                                                <option key={subject} value={subject}>
-                                                                    {subject}
-                                                                </option>
-                                                            ))}
-                                                        </select> :
-                                                        <input
-                                                            id='sub'
-                                                            value={subjects[index * 6 + dayIndex]}
-                                                            onChange={(e) => {
-                                                                const newSubjects = [...subjects];
-                                                                newSubjects[index * 6 + dayIndex] = e.target.value;
-                                                                setSubjects(newSubjects);
-                                                            }}
-                                                        />
-                                                    } 
-                                                 </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody> */}
-                            </table>
-                        </div>
+                    <h1 id='h1viewer'>TimeTable</h1>
+                    <input type='hidden' value={studentId} onChange={(e) => setStudentId(e.target.value)}/>
+                    <input type='hidden' value={standardId.standardId}/>
                     </div>
+                    <div>
+                     <table id='tableview'>
+                            <thead>
+                                 <tr>
+                                    <th id='thtable'>Day/Period</th>
+                                    <th id='thtable'>Monday</th>
+                                    <th id='thtable'>Tuesday</th>
+                                    <th id='thtable'>Wednesday</th>
+                                    <th id='thtable'>Thursday</th>
+                                    <th id='thtable'>Friday</th>
+                                    <th id='thtable'>Saturday</th>
+                                 </tr>
+                             </thead> 
+                             <tbody>
+                                {uniqueTimeTables.map((timeSlot, index) => (
+                            <tr key={index}>
+                            <td>{timeSlot.startTime} - {timeSlot.endTime}</td>
+                            {[1, 2, 3, 4, 5, 6].map(day => {
+                            const timetableForDay = timeTables.sort((c,d)=> new Date('2024-04-01'+ c.startTime).getTime() - new Date('2024-04-01'+ d.startTime).getTime()).find(t => t.noOfDay === day && t.startTime === timeSlot.startTime);
+                            if (timetableForDay) {
+                            return (
+                                <td key={day}>
+                                    <div>
+                                        {timetableForDay.subject} ({timetableForDay.teacherName})
+                                    </div>
+                                </td>
+                                );
+                            } else {
+                                return <td key={day}></td>;
+                            }
+                            })}
+                        </tr>
+                         ))}
+                     </tbody>
+                   </table>                       
                 </div>
-            </StudentSidebar>
-        </>
+            </div>
+        </StudentSidebar>
+      </>
     );
 };
 
