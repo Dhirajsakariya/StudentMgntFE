@@ -138,7 +138,7 @@
     width:50px;
 }
 #actionth{
-  width: 280px;
+  width: 230px;
 }
 #btnaddstudent{
     background-color: rgb(68, 161, 68);
@@ -172,7 +172,7 @@
     width:50px;
     margin-right: auto;
     margin-left: auto;
-    margin-left: -270px;
+    margin-left: -230px;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -213,8 +213,9 @@
     background-color: red; /* Change color on hover if desired */
 }
 #headingpopup1{
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    padding-top: 10px;
     color: #007bff;
 
 }
@@ -268,7 +269,7 @@
     cursor: pointer;
     font-size: 16px;
     margin-left: 330px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 #edit-popupbtn:hover {
     background-color: #0056b3;
@@ -335,3 +336,54 @@
     width: 70px;
     margin-top: 10px;
   }
+
+#family_div{
+    display: flex;
+    gap: -20px;
+    flex-direction: row;
+    margin-left: 720px;
+    margin-top: -500px;
+}
+#family_name{
+    width: 270px;
+    margin-top: 10px;
+    padding-left: 5px;
+    margin-bottom: 15px;
+    height: 25px;
+    border-radius: 5px;
+    border-color: black;
+    
+}
+#family-card{
+    width: 45%; /* Adjust the width as needed */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-left: 50px;
+    margin-top: -10px;
+    height: 385px;
+    
+    
+}
+#family_update{
+    color: white;
+    background-color: #0d6efd;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 110px;
+    margin-top: 23px;
+}
+#edit_family_heading{
+    color: #3d34b5;
+    margin-left: 950px;
+    position:absolute;
+    left: 0;
+    top: 0;
+    margin-bottom: 25px; 
+    margin-top: 20px;
+}
