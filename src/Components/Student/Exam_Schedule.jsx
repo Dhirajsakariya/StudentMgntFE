@@ -78,6 +78,13 @@ const Exam_Schedule = () => {
         return <Redirect to="/PageNotFound" />;
     }
 
+
+    const filteredAndSortedExamSchedule = selectedExamType
+    ? examSchedule.filter(schedule => schedule.examType === selectedExamType)
+    : examSchedule.sort((a, b) => new Date(a.examDate) - new Date(b.examDate));
+
+
+
     return (
         <>
             <StudentSidebar>
@@ -105,18 +112,18 @@ const Exam_Schedule = () => {
                                     <th id='thtableexam'>Time</th>
                              </tr>
                             </thead>
-                              <tbody>
-                                {filteredExamSchedule.map((schedule, index) => (
+                            <tbody>
+                                {filteredAndSortedExamSchedule.map((schedule, index) => (
                                     <tr key={index}>
-                                          {selectedExamType === "" && (
-                                        <td id='exam-th'>{schedule.examType}</td>
-                                    )}
+                                        {selectedExamType === "" && (
+                                            <td id='exam-th'>{schedule.examType}</td>
+                                        )}
                                         <td id='exam-th'>{schedule.examDate.split("-").reverse().join("-")}</td>
                                         <td id='exam-th'>{schedule.subject}</td>
                                         <td id='exam-th'>{schedule.startTime} - {schedule.endTime}</td>
                                     </tr>
-                                ))}
-                              </tbody>
+                                 ))}
+                            </tbody>
                          </table>
                     </div>
                 </div>
