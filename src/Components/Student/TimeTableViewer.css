@@ -22,8 +22,8 @@
 }
 
 #tableview{    
-  margin-left: 20%;
-  width:60%;
+  margin-left: auto;
+  width:100%;
   height: 30%;
   table-layout: fixed;
   border: none;
@@ -65,4 +65,11 @@ border: none;
 outline: none;
 border: 2px solid rgba(0,0,0);
 border-radius: 5%;
+}
+
+#tdtimetable{
+  height: 50px;
+  text-align: center;
+  color: black;
+  background-color: lightgrey;
 }

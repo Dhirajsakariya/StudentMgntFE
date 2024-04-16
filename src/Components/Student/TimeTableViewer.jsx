@@ -113,12 +113,12 @@ const TimeTableViewer = () => {
                              <tbody>
                                 {uniqueTimeTables.map((timeSlot, index) => (
                             <tr key={index}>
-                            <td>{timeSlot.startTime} - {timeSlot.endTime}</td>
+                            <td id='tdtimetable'>{timeSlot.startTime} - {timeSlot.endTime}</td>
                             {[1, 2, 3, 4, 5, 6].map(day => {
                             const timetableForDay = timeTables.sort((c,d)=> new Date('2024-04-01'+ c.startTime).getTime() - new Date('2024-04-01'+ d.startTime).getTime()).find(t => t.noOfDay === day && t.startTime === timeSlot.startTime);
                             if (timetableForDay) {
                             return (
-                                <td key={day}>
+                                <td id='tdtimetable' key={day}>
                                     <div>
                                         {timetableForDay.subject} ({timetableForDay.teacherName})
                                     </div>
