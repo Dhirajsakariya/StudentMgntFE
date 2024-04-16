@@ -1,0 +1,84 @@
+#close-btn-fees {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width:30px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+#close-btn-fees:hover {
+    color: white;
+    background-color: red; /* Change color on hover if desired */
+}
+
+.fees-admin{
+    align-items: center;
+    margin-left: 14%;
+    margin-top: 78px;
+    line-height: 31px;
+    border: 1px solid black;
+    margin-right: 55px;
+    border-radius: 13px;
+    padding: 20px;
+}
+
+.details-fees{
+    line-height: 30px;
+    align-items: center;
+}
+
+.fees-form-admin{
+    margin-top: 150px;
+    line-height: 50px;
+    margin-left: 35%;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    padding: 40px;
+    margin-right: 33%;
+    background-color: #e1e4e8;
+
+    
+}
+
+.submit-pay-admin{
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+
+.submit-view-admin{
+
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: -24px;
+    padding-left: 20px;
+}
+
+.form-admin-fess{
+   
+    padding: 20px; 
+    border-radius: 10px;
+}
+
+.select-fees-admin{
+    margin-left: 20px;
+    box-sizing: border-box;
+    background: transparent;
+
+}
+
+.input-fees-admin{
+    margin-left: 20px;
+    box-sizing: border-box;
+    background: transparent;
+}
