@@ -138,7 +138,7 @@
     width:50px;
 }
 #actionth{
-  width: 230px;
+  width: 280px;
 }
 #btnaddstudent{
     background-color: rgb(68, 161, 68);
@@ -172,7 +172,7 @@
     width:50px;
     margin-right: auto;
     margin-left: auto;
-    margin-left: -230px;
+    margin-left: -270px;
     border-radius: 3px;
     cursor: pointer;
 }

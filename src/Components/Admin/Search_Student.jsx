@@ -11,6 +11,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { toast, Toaster } from 'react-hot-toast';
 import { FaSearch } from 'react-icons/fa';
 import { MdOutlineFamilyRestroom } from "react-icons/md";
+import { FaApplePay } from "react-icons/fa";
 import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
@@ -171,6 +172,12 @@ useEffect(() => {
     console.log("selectedStudentId",id);
    }
 
+   const handlefeesform = (id) => {
+    history.push('/FeesCalculators');
+    localStorage.setItem('selectedStudentId',id);
+    console.log('selectedStudentId',id);
+   }
+
  //To add Student Details
  const handleAddStudent = () =>{
   history.push('/StudentForm');
@@ -266,8 +273,10 @@ useEffect(() => {
                         </button> 
                         <button id="btnaddmarkssearchstudent" onClick={() => handleAddMarks(student.id)}>
                                     <GrScorecard />
-
                         </button>
+                        <button id="btnaddfamilysearchstudent" onClick={() => handlefeesform(student.id)}>
+                                   <FaApplePay />
+                        </button> 
                       </td>
                     </tr>
                   );
