@@ -71,23 +71,13 @@ const AdminSidebar = ({handleLogout, children }) => {
           icon: <GrScorecard />
         },
         {
-          path: '/StudentFeeForm',
-          name: 'Student Fees',
-          icon: <FaGooglePay   />
-        },
-        {
           path: '/Home',
           name: 'Logout',
           icon: <BiLogOut />,
           onClick: handleLogoutClick
         }
     ];
-    // useEffect(() => {
-    
-    //     setRole('admin');
-    //   }, []);
-    
-
+   
     useEffect(() => {
         const fetchAdminDetails = async () => {
           try {

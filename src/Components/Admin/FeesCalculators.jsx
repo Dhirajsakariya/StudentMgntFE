@@ -71,8 +71,6 @@ try {
     printWindow.print();
   };
   
-  
-  
   const handleView = () => {
 
     fetchStudentFeesDetails(true);
@@ -169,9 +167,9 @@ try {
     <AdminSidebar>
     <div className='form-admin-fess'>
       <form > 
-        <h2 className='h2-fees-admin' >Fees Form {studentName}</h2>
+        <h2 className='h2-fees-admin' >Fees Form {studentName}({studentStandard}) </h2>
         
-        <label className='lable-fees-form'>Fee Frequency:</label>   
+        <label className='lable-fees-form'>Fees Frequency:</label>   
         <select
          className='select-fees-admin'
           value={feeFrequency}
@@ -185,11 +183,10 @@ try {
         </select>
 
         <br />
-        <label className='lable-fees-form'> fees payment </label>
+        <label className='lable-fees-form'> Fees Payment </label>
         <input
-        className='input-fees-admin'
+        className='select-fees-admin'
           type="text"
-          placeholder='feeAmount'
           readOnly
           value={feeAmount}
      
