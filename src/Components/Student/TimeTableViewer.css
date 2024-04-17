@@ -71,5 +71,6 @@ border-radius: 5%;
   height: 50px;
   text-align: center;
   color: black;
-  background-color: lightgrey;
+  background-color: #e1e4e8;
+  border: 1px solid black;
 }
