@@ -51,7 +51,10 @@ try {
     fontWeight: 'bold',
   };
 
-
+  const handlePrint = () => {
+    window.print();
+  };
+  
   const handleView = () => {
 
     fetchStudentFeesDetails(true);
@@ -199,7 +202,7 @@ try {
           <button id="close-btn-fees" onClick={() => setShowModal(false)}> × </button>
          
         </div>
-        <button className='print-admin-fees'> Print </button>
+        <button onClick={handlePrint} className='print-admin-fees'> Print </button>
       </Popup>
       </form>
     </div>
