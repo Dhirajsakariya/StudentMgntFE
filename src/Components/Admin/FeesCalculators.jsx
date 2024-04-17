@@ -11,6 +11,7 @@ const FeesCalculators = () => {
   const [selectedFrequency, setselectedFrequency] = useState('');
   const [feeAmount, setFeeAmount] = useState('');
   const [feeFrequency, setFeeFrequency] = useState('');
+  const [selectfeeFrequency , setSelectFeeFrequency] = useState('')
   const [studentName, setStudentName] = useState('');
   const [studentEmail,setStudentEmail] = useState('');
   const [studentStandard,setStudentStandard] = useState('');
@@ -119,6 +120,15 @@ try {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!feeFrequency) {
+      if(!selectfeeFrequency){
+      toast.error('Please select a frequency.');
+      }
+      setSelectFeeFrequency(true)
+      return; 
+    }
+
+  
     try {
       const response = await axios.post(`${config.ApiUrl}Fees/PostFees`, {
         StudentId: fullId,
