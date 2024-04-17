@@ -3,6 +3,7 @@ import config from '../Login/config';
 import axios from 'axios';
 import Popup from 'reactjs-popup';
 import './FeesCalculators.css'
+import AdminSidebar from '../Sidebar/AdminSidebar';
 
 import { Toaster, toast } from 'react-hot-toast';
 
@@ -17,6 +18,7 @@ const FeesCalculators = () => {
   const [pendingFees, setPendingFees] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [showModal, setShowModal] = useState(false); 
+  const [pendingAmount,setPendingAmount] = useState(null);
 
   const fullId = localStorage.getItem('selectedStudentId');
 
@@ -108,7 +110,7 @@ try {
       setFeeFrequency('');
       setFeeAmount('');
       const userERes = response.data;
-      
+      setPendingAmount(userERes.remainingAmount);
 
      if (userERes.remainingAmount > 0) {
         // Display toast message with remaining amount and updated frequencies
@@ -143,11 +145,12 @@ try {
   };
 
   return (
+    <AdminSidebar>
     <div className='form-admin-fess'>
-      <form className='fees-form-admin'> 
-        <h2 >Fees Form {studentName}</h2>
+      <form > 
+        <h2 className='h2-fees-admin' >Fees Form {studentName}</h2>
         
-        <label>Fee Frequency:</label>   
+        <label className='lable-fees-form'>Fee Frequency:</label>   
         <select
          className='select-fees-admin'
           value={feeFrequency}
@@ -161,7 +164,7 @@ try {
         </select>
 
         <br />
-        <label > fees payment </label>
+        <label className='lable-fees-form'> fees payment </label>
         <input
         className='input-fees-admin'
           type="text"
@@ -175,9 +178,11 @@ try {
        
      
       <button className='submit-pay-admin' type="submit" onClick={handleSubmit} >Pay</button>
-      <br />           <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500, }} position="top-center" reverseOrder={false} />
-
+     
       <button onClick={handleView}className='submit-view-admin' >View</button>
+     <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500, }} position="top-center" reverseOrder={false} />
+
+     
       <Popup
         contentStyle={{ width: "400px" , height:'350px', borderRadius:'10px', background:'#f7f9fb' }}
         open={showModal}
@@ -190,13 +195,18 @@ try {
           Standard : {studentStandard} <br/>
           Email : {studentEmail} <br/>
           Paid fees : {paidFees} <br/>
-          Pending Fees : {pendingFees} <br/>
+          Pending Fees : {pendingAmount} <br/>
           <button id="close-btn-fees" onClick={() => setShowModal(false)}> × </button>
+         
         </div>
+        <button className='print-admin-fees'> Print </button>
       </Popup>
       </form>
     </div>
+    </AdminSidebar>
   );
 }
 
+
 export default FeesCalculators;
+
