@@ -157,7 +157,7 @@ const StudentFeeForm = () => {
   return (
     <StudentSidebar>
       <div id='containerstudentfeeform'>
-        <form onSubmit={handleSubmit}>
+        <form>
           <br /><h2>Fee Form</h2><br />
           <div className="form-groupf">
             <label id="labelboxFee">Fee Frequency:</label>
@@ -187,7 +187,7 @@ const StudentFeeForm = () => {
             <FaRupeeSign id='feeformicon' />
             <br />
           </div>
-          <button id="buttontypee" type="submit">Pay</button>
+          <button id="buttontypee" type="submit" onClick={handleSubmit}>Pay</button>
       
           <button onClick={handleView}id="buttontypeview" >View</button>
           <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500, }} position="top-center" reverseOrder={false} />
