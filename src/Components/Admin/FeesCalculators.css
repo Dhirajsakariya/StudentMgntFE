@@ -42,8 +42,8 @@
 }
 
 .submit-pay-admin:hover{
-    background-color: green;
-    color: white;
+        background-color: green;
+        color: white;
 }
 
 
@@ -59,7 +59,7 @@
 }
 
 .submit-view-admin:hover{
-    background-color: green;
+    background-color: #24305E;
     color: white;
 }
 
@@ -114,26 +114,24 @@
 
 .print-admin-fees{
 
-    width: 113px;
+    width: 230px;
     line-height: 20px;
-    color: black;
     border-radius: 10px;
     padding: 25px 41px;
     height: 50px;
     background: transparent;
     border: 2px solid;
-    background-color: #e1e4e8;
-    margin-left: 37%;
+    margin-left: 22%;
     margin-top: 3%;
     padding-top: 15px;
+    background-color: #24305E;
+    color: white;
+    font-size: x-large;
 
 }
 
 .p-admin-fees-form{
-
-    color: black;
-    
-    
+    color: black;   
 }
 
 @media print {
