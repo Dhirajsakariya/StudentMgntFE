@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import config from '../Login/config';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
-import './FeesCalculators.css'
+import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import './FeesCalculators.css';
 
 import { Toaster, toast } from 'react-hot-toast';
 
@@ -175,15 +175,15 @@ try {
 
   return (
     <AdminSidebar>
-    <div className='form-admin-fess'>
+    <div id='form-admin-fess'>
       <form > 
-        <h2 className='h2-fees-admin' >Fees Form {studentName}({studentStandard}) </h2>
+        <h2 id='h2-fees-admin' >Fees Form {studentName}({studentStandard}) </h2>
         
-        <label className='lable-fees-form'>Fees Frequency:</label>   
+        <label id='lable-fees-form'>Fees Frequency:</label>   
         <select
          className='select-fees-admin'
           value={feeFrequency}
-         
+         id='input-fees-admin'
           required
           onChange={(e) => { setFeeFrequency(e.target.value); handleFrequencyChange(e); }}>
           <option value="" disabled hidden></option>
@@ -193,9 +193,9 @@ try {
         </select>
 
         <br />
-        <label className='lable-fees-form'> Fees Payment </label>
+        <label id='lable-fees-form'> Fees Payment: </label>
         <input
-        className='select-fees-admin'
+        id='input-fees-admin'
           type="text"
           readOnly
           value={feeAmount}
@@ -205,9 +205,9 @@ try {
         <br />
        
      
-      <button className='submit-pay-admin' type="submit" onClick={handleSubmit} >Pay</button>
+      <button id='submit-pay-admin' type="submit" onClick={handleSubmit} >Pay</button>
      
-      <button onClick={handleView}className='submit-view-admin' >View</button>
+      <button onClick={handleView} id='submit-view-admin' >View</button>
      <Toaster toastOptions={{ className: "custom-toast", style: customToastStyle, duration: 4500, }} position="top-center" reverseOrder={false} />
 
      
