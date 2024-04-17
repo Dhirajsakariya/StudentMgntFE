@@ -44,7 +44,10 @@ const StudentForm = () => {
     const [standardData, setStandardData] = useState([]);
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
     const [currentUserRole,setCurrentUserRole]=useState('');
+    const [photo, setPhoto] = useState(null); // State for storing selected photo
 
+    
+  
   // useEffect(() => {
     
   //   setRole('admin');
@@ -107,76 +110,77 @@ const StudentForm = () => {
   const navigate=useHistory();
 
   const handleSubmit = async (e) => {
-        e.preventDefault();
-        if(!standard){
-          setStandardError('Select standard');
-          return;
-        }
-        if(!gender){
-          setGenderError('Select Gender');
-          return;
-        }
-        if(!mobileNumber){
-          setMobileError('Enter Mobile Number');
-          return;
-        }
-        try {
-              const emailresponse =await axios.post(`${config.ApiUrl}Student/PostStudent`,{
-              Id:id,
-              Name : name,
-              Email : email,
-              Password : password,
-              Gender : gender,
-              BirthDate : birthday,
-              MobileNumber : mobileNumber,
-              JoinDate : joinDate,
-              BloodGroup : selectedBloodGroup,
-              Address : address,
-              City : city,
-              District : district,
-              State : state,
-              PinCode : pinCode,
-             StandardNumber: parts[0],
-             Section : parts[1]
-              
-              });
-          const userERes = emailresponse.data;
-          if(userERes === "email already exists")
-          {
-                toast.error("User already exist !!!");
-                return;
-          }
-          else{
-            setTimeout(() => {
-              navigate.push('/ParentsPortal') 
-              localStorage.setItem("setStudentId",userERes.id);
-              console.log("setStudentId",id);
-              }, 1500);
-            toast.success("Registration Successfull!")
-          }
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('birthday', birthday);
+    formData.append('joinDate', joinDate);
+    formData.append('bloodGroup', selectedBloodGroup); 
+    formData.append('city', city);
+    formData.append('gender', gender);
+    formData.append('state', state);
+    formData.append('district', district);
+    formData.append('mobileNumber', mobileNumber);
+    formData.append('address', address);
+    formData.append('password', password);
+    formData.append('pinCode', pinCode);
+    formData.append('standardNumber', parts[0]);
+    formData.append('section', parts[1]);
+    formData.append('photo', photo); 
   
-          } catch {
-          toast.error('Signup failed. Please try again later.');
-        }
-        return;
-};
+    try {
+      const response = await axios.post(`${config.ApiUrl}Student/PostStudentWithPhoto`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
+
+      toast.success("Student added successfully");
+  
+      clearForm();
+    } catch (error) {
+      if (error.response && error.response.status === 400 && error.response.data.includes("already exists")) {
+        toast.error("Email already exists. Please use a different email.");
+      } else {
+        console.error("Error adding student:", error);
+        toast.error("Failed to add student");
+      }
+    }
+  };
+  
+  
+  // Function to clear the form fields after successful submission
+  const clearForm = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setGender('');
+    setBirthday('');
+    setJoinDate('');
+    setAddress('');
+    setCity('');
+    setState('');
+    setDistrict('');
+    setMobileNumber('');
+    setSelectedBloodGroup('');
+    setPinCode('');
+    setPhoto(null);
+  };
   
 
 const { id } = useParams();
   useEffect(() => {
     if (id) {
-      // Fetch student details based on ID
       axios.get(`${config.ApiUrl}Student/GetStudent${id}`)
         .then((response) => {
           const studentData = response.data;
-          // Set the fetched student data into state variables to pre-fill the form fields
           setName(studentData.name);
           setEmail(studentData.email);
-          // Similarly, set other state variables as needed
         })
         .catch((error) => {
           console.error('Error fetching student details:', error);
-          // Handle error fetching student details
         });
     }
   }, [id]);
@@ -187,7 +191,10 @@ const { id } = useParams();
   if (redirectToNotFound) {
     return <Redirect to="/PageNotFound" />; 
   }
-
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]); // Capture selected photo
+  };
+  
 
    return (
     <>
@@ -275,7 +282,6 @@ const { id } = useParams();
                       onChange={(e) => setBirthday(e.target.value)} 
                       required />  
                   </div>
-
                   <div>
                     <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
                      <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
@@ -286,7 +292,38 @@ const { id } = useParams();
                     </select>
                   </div>
                   
-                 <div className='form-groupr'>
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Upload photo:</label>
+                      <input 
+                            id='inputstudentformphoto' 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={handlePhotoChange}  
+                            name="photo" 
+                      />
+                  </div>
+                  <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>Mobile Number:</label>
+                <div id='phone_numberstudentform'>
+                  <PhoneInput
+                    country={'in'}
+                    value={mobileNumber}
+                    disableDropdown={true}
+                    onChange={handlePhoneChange}
+                    inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                    containerStyle={{padding:'0.5px'}} 
+                    required/>
+                </div>
+                {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
+            </div>
+
+                 
+            </div>    
+
+           <div id='form-groupstudentform-2'>        
+                    
+
+           <div className='form-groupr'>
                   <div className='subjectselection'>
                    <div>
                     <label id='labelstudentform'>Standard</label>
@@ -306,10 +343,6 @@ const { id } = useParams();
                     {standardError && <p style={{color:'red'}}>{standardError}</p>}
                   </div>
                 </div>
-            </div>    
-
-           <div id='form-groupstudentform-2'>        
-                    
             <div id='form-groupstudentform'>
               <label id='labelstudentform2'>Join-Date:</label>
                 <input 
@@ -382,20 +415,7 @@ const { id } = useParams();
                 <TbMapPinCode id='iconstudentform'/>
             </div>
 
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform2'>Mobile Number:</label>
-                <div id='phone_numberstudentform'>
-                  <PhoneInput
-                    country={'in'}
-                    value={mobileNumber}
-                    disableDropdown={true}
-                    onChange={handlePhoneChange}
-                    inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
-                    containerStyle={{padding:'0.5px'}} 
-                    required/>
-                </div>
-                {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
-            </div>
+           
           </div>
           <button id='btnnextstudentform' type='submit'>Next</button>
         </form>
