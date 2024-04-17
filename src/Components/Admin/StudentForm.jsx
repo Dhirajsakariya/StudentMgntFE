@@ -303,7 +303,7 @@ const { id } = useParams();
                       />
                   </div>
                   <div id='form-groupstudentform'>
-              <label id='labelstudentform2'>Mobile Number:</label>
+              <label id='labelstudentform'>Mobile Number:</label>
                 <div id='phone_numberstudentform'>
                   <PhoneInput
                     country={'in'}
@@ -507,7 +507,7 @@ const { id } = useParams();
                 onChange={(e) => setBirthday(e.target.value)} 
                 required />  
             </div>
-
+            
             <div>
               <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
                <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
@@ -517,8 +517,34 @@ const { id } = useParams();
                     ))}
               </select>
             </div>
-            
-           <div className='form-groupr'>
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform'>Upload photo:</label>
+                <input 
+                  id='inputstudentformphoto' 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={handlePhotoChange}  
+                  name="photo"/>
+            </div>
+                  
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform'>Mobile Number:</label>
+                <div id='phone_numberstudentform'>
+                  <PhoneInput
+                    country={'in'}
+                    value={mobileNumber}
+                    disableDropdown={true}
+                    onChange={handlePhoneChange}
+                    inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
+                    containerStyle={{padding:'0.5px'}} 
+                    required/>
+                </div>
+                {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
+            </div>           
+          </div>    
+
+     <div id='form-groupstudentform-2'>        
+     <div className='form-groupr'>
             <div className='subjectselection'>
              <div>
               <label id='labelstudentform'>Standard</label>
@@ -538,10 +564,6 @@ const { id } = useParams();
               {standardError && <p style={{color:'red'}}>{standardError}</p>}
             </div>
           </div>
-      </div>    
-
-     <div id='form-groupstudentform-2'>        
-              
       <div id='form-groupstudentform'>
         <label id='labelstudentform2'>Join-Date:</label>
           <input 
@@ -614,22 +636,8 @@ const { id } = useParams();
           <TbMapPinCode id='iconstudentform'/>
       </div>
 
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>Mobile Number:</label>
-          <div id='phone_numberstudentform'>
-            <PhoneInput
-              country={'in'}
-              value={mobileNumber}
-              disableDropdown={true}
-              onChange={handlePhoneChange}
-              inputStyle={{backgroundColor: 'white', borderTopColor: '#24305E' }}
-              containerStyle={{padding:'0.5px'}} 
-              required/>
-          </div>
-          {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
-      </div>
-    </div>
-    <button id='btnnextstudentform' type='submit'>Next</button>
+     </div>
+    <button id='btnnextstudentform2' type='submit'>Next</button>
   </form>
 </div>
 <Toaster/>
