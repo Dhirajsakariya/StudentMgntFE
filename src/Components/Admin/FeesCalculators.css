@@ -1,3 +1,20 @@
+#form-admin-fess{
+   
+  width: 380px;
+  color:black;
+  border-radius: 4%;
+  padding: 30px 20px;
+  height: 35%;
+  background: transparent;
+  border: 2px solid;
+  background-color:#e1e4e8;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9.3%;
+  padding-top: 0.5%;
+}
 
 #close-btn-fees {
     position: absolute;
@@ -13,7 +30,7 @@
 }
 #close-btn-fees:hover {
     color: white;
-    background-color: red; 
+    background-color:  #24305E; 
 }
 
 .fees-admin{
@@ -32,13 +49,25 @@
     align-items: center;
 }
 
-.submit-pay-admin{
-    width: 150px;
-    height: 30px;
+#submit-pay-admin{
+    cursor: pointer;
+    display: inline;
+    width: 45%;
+    height: 40px;
     border-radius: 10px;
-    font-size: 18px;
-    margin-top: 29px;
-    padding-left: 20px;
+    outline: auto;
+    border: 1px;
+    background:#24305E;
+    justify-content: center;
+    text-align: center;
+    margin-left: 3%;
+    margin-top: 30px;
+    margin-bottom: 1%;
+    font-weight: 700;
+    font-size: 15px;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
 }
 
 .submit-pay-admin:hover{
@@ -47,38 +76,31 @@
 }
 
 
-.submit-view-admin{
+#submit-view-admin{
 
-    width: 150px;
-    height: 30px;
+    cursor: pointer;
+    display: inline;
+    width: 45%;
+    height: 40px;
     border-radius: 10px;
-    font-size: 18px;
-    margin-top: -24px;
-    padding-left: 20px;
-    margin-left: 24%;
+    outline: auto;
+    border: 1px;
+    background:#24305E;
+    justify-content: center;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: -30px;
+    margin-bottom: 1%;
+    font-weight: 700;
+    font-size: 15px;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
 }
 
 .submit-view-admin:hover{
     background-color: #24305E;
     color: white;
-}
-
-.form-admin-fess{
-   
-    width: 400px;
-    line-height: 20px;
-    color: black;
-    border-radius: 10px;
-    padding: 25px 41px;
-    height: 284px;
-    background: transparent;
-    border: 2px solid;
-    background-color: #e1e4e8;
-    margin-left: 350px;
-    margin-right: auto;
-    margin-top: 9%;
-    padding: 10px;
- 
 }
 
 .select-fees-admin{
@@ -90,26 +112,41 @@
     width: 215px;
     border-radius: 5px;
     margin-top: 6px;
-
 }
 
-.input-fees-admin{
-    margin-left: 109px;
+#input-fees-admin{
+    width:85%;  
+    margin-left: 7%;
+    padding:2.2%;
+    background-color: white;
     box-sizing: border-box;
-    background: transparent;
-    font-size: 18px;
-    border-radius: 16px
+    margin-top:0.7%;
+    border:2px;
+    border-radius: 5px;
+    border-top: 1px solid #24305E;
+    border-left: 1px solid #24305E;
 }
 
-.h2-fees-admin{
-    margin-top: 12px;
-    margin-bottom: 24px;
-    margin-left: 19%;
+#h2-fees-admin{
+    justify-content: center;
+    padding-top: 1px;
+    color:#146a51;;
+    text-align: center;
+    font: bold;
+    margin-top:5%;
+    margin-bottom:8% ;
+    text-decoration: underline;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
 }
 
-.lable-fees-form{
-    font-size: 26px;
-    margin-left: 26%;
+#lable-fees-form{
+ display: block;
+  margin-bottom: 3%;
+  margin-top: 1%;
+  margin-left: 8%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 17px;
 }
 
 .print-admin-fees{
