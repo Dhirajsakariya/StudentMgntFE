@@ -37,8 +37,13 @@
     height: 30px;
     border-radius: 10px;
     font-size: 18px;
-    margin-top: 42px;
+    margin-top: 29px;
     padding-left: 20px;
+}
+
+.submit-pay-admin:hover{
+    background-color: green;
+    color: white;
 }
 
 
@@ -53,6 +58,11 @@
     margin-left: 24%;
 }
 
+.submit-view-admin:hover{
+    background-color: green;
+    color: white;
+}
+
 .form-admin-fess{
    
     width: 400px;
@@ -60,40 +70,46 @@
     color: black;
     border-radius: 10px;
     padding: 25px 41px;
-    height: 203px;
+    height: 263px;
     background: transparent;
     border: 2px solid;
     background-color: #e1e4e8;
     margin-left: 350px;
     margin-right: auto;
-    margin-top: 13%;
-    padding-top: 15px;
+    margin-top: 9%;
+    padding: 10px;
+ 
 }
 
 .select-fees-admin{
-    margin-left: 20px;
+    margin-left: 26%;
     box-sizing: border-box;
     background: transparent;
     margin-bottom: 20px;
     font-size: 18px;
+    width: 215px;
+    border-radius: 5px;
+    margin-top: 6px;
 
 }
 
 .input-fees-admin{
-    margin-left: 20px;
+    margin-left: 109px;
     box-sizing: border-box;
     background: transparent;
     font-size: 18px;
+    border-radius: 16px
 }
 
 .h2-fees-admin{
     margin-top: 12px;
     margin-bottom: 24px;
+    margin-left: 19%;
 }
 
 .lable-fees-form{
-    font-size: 18px;
-
+    font-size: 26px;
+    margin-left: 26%;
 }
 
 .print-admin-fees{
