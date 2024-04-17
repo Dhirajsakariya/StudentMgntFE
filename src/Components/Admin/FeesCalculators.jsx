@@ -52,8 +52,26 @@ try {
   };
 
   const handlePrint = () => {
-    window.print();
+    const popupContent = document.getElementById('popup-content').innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>FEES RECEIPT</title>
+          <link rel="stylesheet" type="text/css" href="FeesCalculators.css">
+        </head>
+        <body>
+          <div id="print-view">
+            ${popupContent}
+          </div>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
   };
+  
+  
   
   const handleView = () => {
 
@@ -193,12 +211,12 @@ try {
         closeOnDocumentClick={false} 
         closeOnEscape={false} 
       >
-        <div className='fees-admin'>
+        <div id="popup-content" className='fees-admin'>
           <h2 className='details-fees'> {studentName} </h2>
-          Standard : {studentStandard} <br/>
-          Email : {studentEmail} <br/>
-          Paid fees : {paidFees} <br/>
-          Pending Fees : {pendingAmount} <br/>
+         <p id='popup-content' className='p-admin-fees-form'> Standard : {studentStandard} </p> 
+         <p id='popup-content' className='p-admin-fees-form'> Email : {studentEmail} </p>
+         <p id='popup-content' className='p-admin-fees-form'> Paid fees : {paidFees}</p> 
+         <p id='popup-content' className='p-admin-fees-form'> Pending Fees : {pendingAmount} </p>
           <button id="close-btn-fees" onClick={() => setShowModal(false)}> × </button>
          
         </div>

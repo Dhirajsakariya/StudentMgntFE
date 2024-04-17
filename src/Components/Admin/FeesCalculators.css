@@ -13,7 +13,7 @@
 }
 #close-btn-fees:hover {
     color: white;
-    background-color: red; /* Change color on hover if desired */
+    background-color: red; 
 }
 
 .fees-admin{
@@ -108,7 +108,31 @@
     border: 2px solid;
     background-color: #e1e4e8;
     margin-left: 37%;
-    margin-top: 9%;
+    margin-top: 3%;
     padding-top: 15px;
 
 }
+
+.p-admin-fees-form{
+
+    color: black;
+    
+    
+}
+
+@media print {
+    body * {
+      display: none;
+    }
+  
+    #popup-content,
+    #popup-content * {
+      display: block !important;
+    }
+  }
+  
+  #print-view {
+    color: red;
+}
+  
+  
