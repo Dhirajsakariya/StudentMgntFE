@@ -1,3 +1,4 @@
+
 #close-btn-fees {
     position: absolute;
     top: 0px;
@@ -18,7 +19,7 @@
 .fees-admin{
     align-items: center;
     margin-left: 14%;
-    margin-top: 78px;
+    margin-top: 41px;
     line-height: 31px;
     border: 1px solid black;
     margin-right: 55px;
@@ -31,25 +32,12 @@
     align-items: center;
 }
 
-.fees-form-admin{
-    margin-top: 150px;
-    line-height: 50px;
-    margin-left: 35%;
-    border: 1px solid #ccc;
-    border-radius: 5%;
-    padding: 40px;
-    margin-right: 33%;
-    background-color: #e1e4e8;
-
-    
-}
-
 .submit-pay-admin{
     width: 150px;
     height: 30px;
     border-radius: 10px;
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 42px;
     padding-left: 20px;
 }
 
@@ -62,18 +50,32 @@
     font-size: 18px;
     margin-top: -24px;
     padding-left: 20px;
+    margin-left: 24%;
 }
 
 .form-admin-fess{
    
-    padding: 20px; 
+    width: 400px;
+    line-height: 20px;
+    color: black;
     border-radius: 10px;
+    padding: 25px 41px;
+    height: 203px;
+    background: transparent;
+    border: 2px solid;
+    background-color: #e1e4e8;
+    margin-left: 350px;
+    margin-right: auto;
+    margin-top: 13%;
+    padding-top: 15px;
 }
 
 .select-fees-admin{
     margin-left: 20px;
     box-sizing: border-box;
     background: transparent;
+    margin-bottom: 20px;
+    font-size: 18px;
 
 }
 
@@ -81,4 +83,32 @@
     margin-left: 20px;
     box-sizing: border-box;
     background: transparent;
+    font-size: 18px;
+}
+
+.h2-fees-admin{
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.lable-fees-form{
+    font-size: 18px;
+
+}
+
+.print-admin-fees{
+
+    width: 113px;
+    line-height: 20px;
+    color: black;
+    border-radius: 10px;
+    padding: 25px 41px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid;
+    background-color: #e1e4e8;
+    margin-left: 37%;
+    margin-top: 9%;
+    padding-top: 15px;
+
 }
