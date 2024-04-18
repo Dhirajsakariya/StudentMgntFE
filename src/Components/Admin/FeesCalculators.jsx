@@ -6,6 +6,7 @@ import AdminSidebar from '../Sidebar/AdminSidebar';
 import './FeesCalculators.css';
 
 import { Toaster, toast } from 'react-hot-toast';
+import { Redirect } from 'react-router-dom';
 
 const FeesCalculators = () => {
   const [selectedFrequency, setselectedFrequency] = useState('');
@@ -19,9 +20,26 @@ const FeesCalculators = () => {
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [showModal, setShowModal] = useState(false); 
   // const [remainingAmount , setRemainingAmount] = useState();
+  const [redirectToNotFound, setRedirectToNotFound] = useState(false);
   const [pendingAmount,setPendingAmount] = useState(null);
-
+  const [currentUserRole,setCurrentUserRole]=useState('');
   const fullId = localStorage.getItem('selectedStudentId');
+
+
+  useEffect(() => {
+    const userRoleString = localStorage.getItem('loggedInRole');
+    if (userRoleString) {
+      const userRole = JSON.parse(userRoleString);
+      setCurrentUserRole(userRole.Role)
+      console.log('loggedInRole for Student Form', userRole.Role);
+      if (userRole.Role !== 'admin') {
+        setRedirectToNotFound(true);  
+      }
+    } else {
+      console.error('loggedInRole not found in localStorage');
+    }
+  }, []);
+
 
   const handleFrequencyChange = async (e) => {
     const selectedFrequency = e.target.value;
@@ -72,10 +90,6 @@ try {
     printWindow.print();
   };
   
-
- 
-  
-
   const handleView = () => {
     handleFeesPayment(); 
     setShowModal(true);
@@ -175,6 +189,10 @@ try {
     }
     
   };
+
+  if (redirectToNotFound) {
+    return <Redirect to="/PageNotFound" />;
+  }
 
   return (
     <AdminSidebar>

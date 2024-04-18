@@ -10,6 +10,7 @@ import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import { BiMale, BiFemale, BiEdit, BiTrash, BiEnvelope, BiPhone, BiBriefcase } from 'react-icons/bi';
 import ocuupation from '../Assets/occupation.png'
+import { Redirect } from 'react-router-dom';
 
 const ParentsPortal = () => {
 
@@ -265,6 +266,12 @@ const customToastStyle = {
   fontSize: '16px',
   fontWeight: 'bold',
 };
+
+
+
+if (redirectToNotFound) {
+  return <Redirect to="/PageNotFound" />;
+}
 
   return (
     <>
