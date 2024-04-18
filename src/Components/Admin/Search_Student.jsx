@@ -26,10 +26,6 @@ import { GiNurseFemale } from "react-icons/gi";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
 
 
-
-
-
-
 const Search_Student = () => {
                 const [originalData, setOriginalData] = useState([]);
                 const [data, setData] = useState(null);
@@ -1387,6 +1383,16 @@ const getData = () => {
               </>
             </Fragment>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+
+
+            <div className='Paginated-search-student'>
+  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
+ </button>
+  <span>{currentPage}</span>
+  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
+ </button>
+</div>
+
 
           </>
     </TeacherSidebar>
