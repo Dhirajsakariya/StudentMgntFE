@@ -21,6 +21,13 @@ import { FiUser } from "react-icons/fi";
 import PhoneInput from 'react-phone-input-2';
 import { BiMale, BiFemale, BiEdit, BiTrash, BiEnvelope, BiPhone, BiBriefcase } from 'react-icons/bi';
 import ocuupation from '../Assets/occupation.png'
+import { GiFemaleVampire } from "react-icons/gi";
+import { GiNurseFemale } from "react-icons/gi";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
+
+
+
+
 
 
 const Search_Student = () => {
@@ -301,17 +308,34 @@ const Search_Student = () => {
                       }, []);
 
                       // GET Student
-                      const getData = () => {
-                        axios
-                          .get(`${config.ApiUrl}Student/GetStudents?page=${currentPage}&pageSize=${itemsPerPage}`)
-                          .then((result) => {
-                            setOriginalData(result.data);
-                            setData(result.data);
-                          })
-                          .catch((error) => {
-                            console.log(error);
-                          });
-                      };
+                      // const getData = () => {
+                      //   axios
+                      //     .get(`${config.ApiUrl}Student/GetStudents?page=${currentPage}&pageSize=${itemsPerPage}`)
+                      //     .then((result) => {
+                      //       setOriginalData(result.data);
+                      //       setData(result.data);
+                          
+                      //     })
+                      //     .catch((error) => {
+                      //       console.log(error);
+                      //     });
+                      // };
+
+                      // GET Student
+const getData = () => {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  axios
+    .get(`${config.ApiUrl}Student/GetStudents`)
+    .then((result) => {
+      setOriginalData(result.data);
+      setData(result.data.slice(startIndex, endIndex));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 
                       //popup view details
                       const getStudentDetails = (id) => {
@@ -347,7 +371,7 @@ const Search_Student = () => {
 
                       useEffect(() => {
                         getData();
-                      }, []);
+                      }, [currentPage]);
 
                       const handleEdit = (id) => {
                         getStudentDetailsEdit(id);
@@ -512,9 +536,9 @@ const Search_Student = () => {
                           <td>{student.email}</td>
 
                           <td>  {student.gender === 'male' ? (
-                              <BiMale className="gender-icon"/>
+                              <GiNurseFemale className="gender-icon"/>
                             ) : (
-                              <BiFemale className="gender-icon" />
+                              <GiFemaleVampire  className="gender-icon" />
                             )
                         }
                          {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
@@ -913,13 +937,14 @@ const Search_Student = () => {
            
               
 
+            <div className='Paginated-search-student'>
+  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
+ </button>
+  <span>{currentPage}</span>
+  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
+ </button>
+</div>
 
-                      <div>
-                        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                        <span>{currentPage}</span>
-                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)}>Next</button>
-                      </div>
-                    
           </>
         </AdminSidebar>
         : 
