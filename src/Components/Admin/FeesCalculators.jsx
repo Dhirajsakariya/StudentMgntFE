@@ -16,9 +16,9 @@ const FeesCalculators = () => {
   const [studentEmail,setStudentEmail] = useState('');
   const [studentStandard,setStudentStandard] = useState('');
   const [paidFees, setPaidFees] = useState('');
-  const [pendingFees, setPendingFees] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [showModal, setShowModal] = useState(false); 
+  // const [remainingAmount , setRemainingAmount] = useState();
   const [pendingAmount,setPendingAmount] = useState(null);
 
   const fullId = localStorage.getItem('selectedStudentId');
@@ -72,29 +72,14 @@ try {
     printWindow.print();
   };
   
+
+ 
+  
+
   const handleView = () => {
-
-    fetchStudentFeesDetails(true);
-    //setShowModal(true);
+    handleFeesPayment(); 
+    setShowModal(true);
   };
-  const fetchStudentFeesDetails = async (showFeesView) => {
-    try {
-      const response = await fetch(`${config.ApiUrl}Fees/GetStudentFeesDetails/${fullId}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch student fees details');
-      }
-      const feesData = await response.json();
-      console.log('feesData ', feesData, feesData.paidFees);
-      setPaidFees(feesData.paidFees);
-      setPendingFees(feesData.pendingFees);
-      if(showFeesView){
-        setShowModal(true);
-      }
-    } catch (error) {
-      console.error('Error fetching student fees details:', error);
-    }
-  };
-
   
   useEffect(() => {
 
@@ -116,6 +101,24 @@ try {
   };
   fetchStudentName();
  }, [fullId]);
+
+
+
+ const handleFeesPayment = async () => {
+  try {
+    const response = await fetch(`${config.ApiUrl}Fees/GetStudentFeesDetails/${fullId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const feesdata = await response.json();
+    setPaidFees(feesdata.paidFees);
+    setPendingAmount(feesdata.pendingFees);
+    console.log('Fees details:', feesdata);
+    console.log('Payment completed successfully!');
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -139,7 +142,7 @@ try {
       setFeeFrequency('');
       setFeeAmount('');
       const userERes = response.data;
-      setPendingAmount(userERes.remainingAmount);
+      // setPendingAmount(userERes.remainingAmount);
 
      if (userERes.remainingAmount > 0) {
         // Display toast message with remaining amount and updated frequencies
