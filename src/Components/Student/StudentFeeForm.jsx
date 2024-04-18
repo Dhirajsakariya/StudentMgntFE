@@ -60,33 +60,30 @@ const StudentFeeForm = () => {
     fetchStudentName();
    }, []);
 
-  const handleView = () => {
-
-    fetchStudentFeesDetails(true);
+   const handleView = () => {
+    handleFeesPayment(); 
     setShowModal(true);
   };
 
-  const fetchStudentFeesDetails = async (showFeesView) => {
+  const handleFeesPayment = async () => {
     try {
       const response = await fetch(`${config.ApiUrl}Fees/GetStudentFeesDetails/${fullId}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch student fees details');
+        throw new Error('Network response was not ok');
       }
-      const feesData = await response.json();
-      console.log('feesData ', feesData, feesData.paidFees);
-      setPaidFees(feesData.paidFees);
-      // setPendingFees(feesData.pendingFees);
-      if(showFeesView){
-        setShowModal(true);
-      }
+      const feesdata = await response.json();
+      setPaidFees(feesdata.paidFees);
+      setPendingAmount(feesdata.pendingFees);
+      console.log('Fees details:', feesdata);
+      console.log('Payment completed successfully!');
     } catch (error) {
-      console.error('Error fetching student fees details:', error);
+      console.error('There was a problem with the fetch operation:', error);
     }
   };
 
 
-  const studentObject = JSON.parse(localStorage.getItem('loggedInUserId'));
-  const fullId = studentObject;
+  const fullId = JSON.parse(localStorage.getItem('loggedInUserId'));
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
