@@ -104,7 +104,7 @@ const handlePost = async () => {
         gender: '',
         relation: '',
       });
-      setMobileNumber('');
+      setMobileNumber('+91');
       toast.success("Added Successfully!");
     }
   } catch (error) {
@@ -183,7 +183,7 @@ const handleSubmit = async (e) => {
     gender: '',
     relation: '',
   });
-  setMobileNumber('');
+  setMobileNumber('+91');
   setEditing(false);
 };
 
@@ -273,7 +273,7 @@ const customToastStyle = {
       <>
       <div id='mainp'>
         <div id='containerf'>
-          <form onSubmit={handleSubmit}>
+          <form>
             <h2>Parents Detail</h2>
             <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => {setFormData({ ...formData, id: e.target.value });
                           setIdError('');} }/>
@@ -347,7 +347,9 @@ const customToastStyle = {
                         onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
                         setOccupationError('');} }
               required
-            /><img src={ocuupation} id='familyformicon'/>
+            />
+            
+            <img src={ocuupation} id='familyformicon'/>
             {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
             </div>
             <label id='lbl'>Mobile Number:</label>
