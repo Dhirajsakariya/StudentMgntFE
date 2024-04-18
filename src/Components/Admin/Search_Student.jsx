@@ -56,6 +56,8 @@ const Search_Student = () => {
                 const [redirectToNotFound, setRedirectToNotFound] = useState(false);
                 const relations=[ "Father", "Mother"];
                 const [currentUserRole,setCurrentUserRole]=useState('');
+                const [currentPage, setCurrentPage] = useState(1);
+                const itemsPerPage = 10; // Number of items to display per page
 
                 useEffect(() => {
                   const userRoleString = localStorage.getItem('loggedInRole');
@@ -301,7 +303,7 @@ const Search_Student = () => {
                       // GET Student
                       const getData = () => {
                         axios
-                          .get(`${config.ApiUrl}Student/GetStudents`)
+                          .get(`${config.ApiUrl}Student/GetStudents?page=${currentPage}&pageSize=${itemsPerPage}`)
                           .then((result) => {
                             setOriginalData(result.data);
                             setData(result.data);
@@ -452,9 +454,6 @@ const Search_Student = () => {
                         }
                       };
 
-                    
-                      
-
                       const customToastStyle = {
                         fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
                         fontSize: '16px',
@@ -464,6 +463,8 @@ const Search_Student = () => {
                       if (redirectToNotFound) {
                         return <Redirect to="/PageNotFound" />;
                       }
+
+                      
 
   return (
     <>
@@ -494,6 +495,7 @@ const Search_Student = () => {
                     <th id='actionth'>Actions</th>
                   </tr>
                 </thead>
+              
 
                 <tbody id='searchstudenttable'>
                   {data && data.length > 0 ? (
@@ -508,7 +510,18 @@ const Search_Student = () => {
                             </button>
                           </td>
                           <td>{student.email}</td>
-                          <td>{student.gender}</td>
+
+                          <td>  {student.gender === 'male' ? (
+                              <BiMale className="gender-icon"/>
+                            ) : (
+                              <BiFemale className="gender-icon" />
+                            )
+                        }
+                         {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
+
+                        </td>
+
+                      
                           <td>{student.mobileNumber}</td>
                           <td>{student.standard}</td>
                           <td>{student.subject}</td>
@@ -897,7 +910,16 @@ const Search_Student = () => {
               </>
             </Fragment>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+           
+              
 
+
+                      <div>
+                        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        <span>{currentPage}</span>
+                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)}>Next</button>
+                      </div>
+                    
           </>
         </AdminSidebar>
         : 
@@ -942,7 +964,16 @@ const Search_Student = () => {
                             </button>
                           </td>
                           <td>{student.email}</td>
-                          <td>{student.gender}</td>
+
+                          <td>  {student.gender === 'male' ? (
+                              <BiMale className="gender-icon"/>
+                            ) : (
+                              <BiFemale className="gender-icon" />
+                            )
+                        }
+                         {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
+
+                        </td>
                           <td>{student.mobileNumber}</td>
                           <td>{student.standard}</td>
                           <td>{student.subject}</td>
