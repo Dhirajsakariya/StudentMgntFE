@@ -1,9 +1,10 @@
 #mainsearchstudent{
-    margin-top:40px;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
+    margin-top: 15px;
     width: 95%;
-    height: 60%;
+    height: 40%;
+    padding: 20px 0px;
 }
 #searchstudentbutton{
   width: 400px;
@@ -15,9 +16,7 @@
   padding-left: 20px;
 }
 #searchstudenttable{
-    background-color: lightgray;
-    border: 1px solid black;
-
+  background-color: lightgray;
 }
 #searchstudent{ 
     width:320px;
@@ -118,7 +117,6 @@
 }
 #tr1searchstudent{
     text-align: center;
-    line-height: 39px;
 }
 #searchstudenth2{
     justify-content: center;
