@@ -1005,9 +1005,9 @@ const Search_Student = () => {
                           <td>{student.email}</td>
 
                           <td>  {student.gender === 'male' ? (
-                              <BiMale className="gender-icon"/>
+                              <GiNurseFemale className="gender-icon"/>
                             ) : (
-                              <BiFemale className="gender-icon" />
+                              <GiFemaleVampire className="gender-icon" />
                             )
                         }
                          {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
