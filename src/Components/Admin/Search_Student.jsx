@@ -38,7 +38,7 @@ const Search_Student = () => {
               //family start
                 const [editing, setEditing] = useState(false);
                 const [studentId, setStudentId] = useState('');
-                const [editedCardId, setEditedCardId] = useState(null);
+                const [editedCardId, setEditedCardId] = useState(false);
                 const [formData, setFormData] = useState({
                   id: '',
                   email:'',
@@ -367,6 +367,7 @@ const Search_Student = () => {
                           .then((result) => {
                             setEditedStudent(result.data); // Set editedStudent when getting details
                             localStorage.setItem('selectedStudentId', id);
+                            fetchFamilyMembersf(result.data.id);
                           })
                           .catch((error) => {
                             console.log(error);
@@ -631,7 +632,7 @@ const Search_Student = () => {
                   </Popup>
               <>
                 <Popup
-                  contentStyle={{ width: "1700px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
+                  contentStyle={{ width: "1510px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
                   open={editedStudent !== null}
                   onClose={() => setEditedStudent(null)}
                   closeOnDocumentClick={false} // Prevents closing on document click
@@ -804,7 +805,7 @@ const Search_Student = () => {
                                             <div id='form-groupf'>
                                             <label id='lbl'>Relation:</label>
                                             {editing ? (
-                                              <span>{formData.relation}</span>
+                                              <input id='inputfamily'value={formData.relation} readOnly/>
                                             ) : (
                                               <select
                                                 value={formData.relation}
@@ -815,7 +816,7 @@ const Search_Student = () => {
                                                   setRelationError('');
                                                 }}
                                               >
-                                                <option value="">Select Relation</option>
+                                                <option value="" disabled={true}>Select Relation</option>
                                                 {relations.map((relation) => (
                                                   <option key={relation} value={relation}>
                                                     {relation}
@@ -869,14 +870,10 @@ const Search_Student = () => {
                                               <PhoneInput
                                                   country={'in'}
                                                   value={mobilenumber}
-                                                  placeholder="Enter mobile number"
-                                                  countryCodeEditable={false}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
-                                                  isValid={isValidPhone}
-                                                  inputProps={{ maxLength: 15 }}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                                                  containerStyle={{ padding: '1px' }} 
+                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
@@ -964,7 +961,7 @@ const Search_Student = () => {
         : 
 
      <TeacherSidebar>
-  <>
+ <>
             <Fragment>
               <h2 id='searchstudenth2'>Search Student</h2>
               <div id="search-container">
@@ -989,6 +986,7 @@ const Search_Student = () => {
                     <th id='actionth'>Actions</th>
                   </tr>
                 </thead>
+              
 
                 <tbody id='searchstudenttable'>
                   {data && data.length > 0 ? (
@@ -1007,12 +1005,14 @@ const Search_Student = () => {
                           <td>  {student.gender === 'male' ? (
                               <GiNurseFemale className="gender-icon"/>
                             ) : (
-                              <GiFemaleVampire className="gender-icon" />
+                              <GiFemaleVampire  className="gender-icon" />
                             )
                         }
                          {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
 
                         </td>
+
+                      
                           <td>{student.mobileNumber}</td>
                           <td>{student.standard}</td>
                           <td>{student.subject}</td>
@@ -1096,7 +1096,7 @@ const Search_Student = () => {
                   </Popup>
               <>
                 <Popup
-                  contentStyle={{ width: "1700px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
+                  contentStyle={{ width: "1510px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
                   open={editedStudent !== null}
                   onClose={() => setEditedStudent(null)}
                   closeOnDocumentClick={false} // Prevents closing on document click
@@ -1269,7 +1269,7 @@ const Search_Student = () => {
                                             <div id='form-groupf'>
                                             <label id='lbl'>Relation:</label>
                                             {editing ? (
-                                              <span>{formData.relation}</span>
+                                              <input id='inputfamily'value={formData.relation} readOnly/>
                                             ) : (
                                               <select
                                                 value={formData.relation}
@@ -1280,7 +1280,7 @@ const Search_Student = () => {
                                                   setRelationError('');
                                                 }}
                                               >
-                                                <option value="">Select Relation</option>
+                                                <option value="" disabled={true}>Select Relation</option>
                                                 {relations.map((relation) => (
                                                   <option key={relation} value={relation}>
                                                     {relation}
@@ -1334,14 +1334,10 @@ const Search_Student = () => {
                                               <PhoneInput
                                                   country={'in'}
                                                   value={mobilenumber}
-                                                  placeholder="Enter mobile number"
-                                                  countryCodeEditable={false}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
-                                                  isValid={isValidPhone}
-                                                  inputProps={{ maxLength: 15 }}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                                                  containerStyle={{ padding: '1px' }} 
+                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
@@ -1401,6 +1397,8 @@ const Search_Student = () => {
               </>
             </Fragment>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+           
+              
 
             <div className='Paginated-search-student'>
                 {Array.from({ length: totalPages }, (_, index) => (
@@ -1414,15 +1412,13 @@ const Search_Student = () => {
                     </button>
                 ))}
             </div>
-{/* 
-            <div className='Paginated-search-student'>
-  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
- </button>
-  <span>{currentPage}</span>
-  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
- </button>
-</div> */}
-
+                            {/* <div className='Paginated-search-student'>
+                  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
+                </button>
+                  <span>{currentPage}</span>
+                  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
+                </button>
+                </div> */}
 
           </>
     </TeacherSidebar>
