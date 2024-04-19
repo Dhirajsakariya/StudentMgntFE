@@ -89,7 +89,7 @@ const StudentSidebar = ({ handleLogout, children }) => {
         },
         {
             path: '/TimeTableViewer',
-            name: 'TimeTableViewer',
+            name: 'TimeTable',
             icon: <FaTableCells />
         },
         {

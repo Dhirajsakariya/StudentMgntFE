@@ -1,7 +1,7 @@
 #examviewer{   
     padding: -1%;
-    width: 1300px;
-    margin-left: auto;
+    width: auto;
+    margin-left: 40px;
     margin-right: auto;
     align-items: center;
     justify-content: center;
@@ -21,18 +21,23 @@
     text-decoration: underline;
   }
 #thtableexam{
-    width: 3%;
+    width: 100%;
     height: 40px;
-    text-align: center;
     background:#24305E;;
     color: white;
-
 }
+
 #exam-th{           
-    height: 50px;
-    text-align: center;
-    color: black;
-    background-color: lightgrey;
+  font-family: sans-serif;
+  width: 100%;
+  height: 40px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid black;
+  background-color: #e1e4e8;
 }
 #exam-scheduletable{
     width : 75%;
@@ -43,11 +48,28 @@
     justify-content: center;
 }
 #examdropdown{
-    width: 250px;
-    height: 40px;
+    font-family: sans-serif;
+    width: 20%;
+    height: 30px;
+    font-weight: 400;
+    margin-left: 158px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
     text-align: center;
-    margin-top: -20px;
-    margin-bottom: 40px;
     border: 2px solid black;
-    font-size: 15px;
-}          
+    background-color: white;
+} 
+
+#table{    
+    margin-left: 13%;
+    width:70%;
+    height: 30%;
+    table-layout: fixed;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+    text-align: center;   
+    background-color: #e1e4e8;
+  }

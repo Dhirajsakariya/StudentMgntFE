@@ -1,7 +1,7 @@
 #timetable{   
   padding: -1%;
-  width: 1300px;
-  margin-left: auto;
+  width: auto;
+  margin-left: 40px;
   margin-right: auto;
   align-items: center;
   justify-content: center;
@@ -22,6 +22,12 @@
 
 #teacher-timetable-th{
   width: 50%;
+  height: 50px;
+  background:#24305E;
+  color: white;
+}
+#teacher-timetable-th1{
+  width: 60%;
   height: 50px;
   background:#24305E;
   color: white;
@@ -68,6 +74,13 @@ background:#24305E;;
 color: white;
 }
 
+#th1{
+width: 130%;
+height: 40px;
+background:#24305E;;
+color: white;
+}
+
 #row{
 font-family: sans-serif;
 width: 50%;
@@ -106,7 +119,7 @@ font-family: sans-serif;
 width: 20%;
 height: 30px;
 font-weight: 400;
-margin-left: 170px;
+margin-left: 205px;
 margin-bottom: 10px;
 border: none;
 outline: none;
