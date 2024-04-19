@@ -28,7 +28,7 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #table_body{
- background-color:#f7f9fb;
+  background-color: lightgray;
 } 
 #div-details{
   color: black;
@@ -284,4 +284,22 @@ color: #a5dc86;
 height:70px;
 width: 70px;
 margin-top: 10px;
+}
+
+.paginated-search-teacher{
+  margin-left: 45%;
+  margin-top: 3%;
+  
+}
+
+.pageButton{
+  width: 3%;
+  height: 3%;
+  color: black;
+  margin-left: 10px;
+}
+
+.pageButton:hover{
+  color: #3d34b5;
+
 }

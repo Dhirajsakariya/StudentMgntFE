@@ -12,6 +12,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import {toast,Toaster} from 'react-hot-toast';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { GiFemaleVampire } from "react-icons/gi";
+import { GiNurseFemale } from "react-icons/gi";
 
 
 const Search_Teacher = () => {
@@ -21,6 +23,10 @@ const Search_Teacher = () => {
        const [editedTeacher, setEditedTeacher] = useState(null);
        const [originalData, setOriginalData] = useState([]); 
        const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+       const [currentUserRole,setCurrentUserRole]=useState('');
+       const [currentPage, setCurrentPage] = useState(1);
+       const [totalPages, setTotalPages] = useState(0);
+       const itemsPerPage = 5; 
 
        useEffect(() => {
         const userRoleString = localStorage.getItem('loggedInRole');
@@ -60,17 +66,31 @@ const Search_Teacher = () => {
         };
 
     //TEACHER GET
+
     const getData = () => {
+      const startIndex = (currentPage -1 ) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
       axios
         .get(`${config.ApiUrl}AdminTeacher/GetTeachers`)
         .then((result) => {
-          setData(result.data);
           setOriginalData(result.data);
+          const slicedData = result.data.slice(startIndex,endIndex);
+          setData(slicedData);
+          setTotalPages(Math.ceil(result.data.length / itemsPerPage));
           
         })
         .catch((error) => {
           console.log(error);
         });
+     };
+
+     useEffect(() => {
+      getData();
+     },[currentPage]);
+
+
+     const handlePageClick = (page) => {
+      setCurrentPage(page);
      };
 
      //PopUp View Details
@@ -201,7 +221,15 @@ const Search_Teacher = () => {
                   <td id='td-align'>{index + 1}</td>
                   <td id='td-align' ><button id='btn-view' onClick={() => getTeacherDetails(teacher.id)}>{teacher.name}</button></td>
                   <td id='td-align'>{teacher.email}</td>
-                  <td id='td-align'>{teacher.gender}</td>
+                  {/* <td id='td-align'>{teacher.gender}</td> */}
+                  <td id='td-align'>  {teacher.gender === 'male' ? (
+                              <GiNurseFemale className="gender-icon"/>
+                            ) : (
+                              <GiFemaleVampire className="gender-icon" />
+                            )
+                        }
+                         {/* {teacher.gender === 'male' ? 'Male' : 'Female'} */}
+                    </td>
                   <td id='td-align'>{teacher.mobileNumber}</td>
                   <td id='td-align'>{(teacher.standard)}</td>
                   <td id='td-align'>{teacher.subject}</td>
@@ -405,6 +433,20 @@ const Search_Teacher = () => {
     </Fragment>
         <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
       
+            <div className='paginated-search-teacher'>
+                {Array.from({ length: totalPages }, (_,index) => (
+                  <button
+                    key={index}
+                    onClick={() => handlePageClick(index + 1 )}
+                    disabled={currentPage === index + 1}
+                    className='pageButton'
+                    >
+                      {index + 1}
+                  </button>
+                ))
+
+                }
+            </div>
 </>
   </AdminSidebar>
   );
