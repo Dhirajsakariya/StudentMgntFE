@@ -537,15 +537,21 @@
     margin-bottom: 25px; 
     margin-top: 20px;
 } 
-.leftarraybutton{
-  margin-right: 5%
-}
-
-.Rightarraybutton{
-  margin-left: 5%
-}
 
 .Paginated-search-student{
-  margin-left: 47%;
+  margin-left: 45%;
   margin-top: 3%;
+  
+}
+
+.pageButton{
+  width: 3%;
+  height: 3%;
+  color: black;
+  margin-left: 10px;
+}
+
+.pageButton:hover{
+  color: #3d34b5;
+
 }

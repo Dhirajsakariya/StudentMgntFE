@@ -32,6 +32,8 @@ const Search_Student = () => {
                 const [selectedStudent, setSelectedStudent] = useState(null);
                 const [searchQuery, setSearchQuery] = useState('');
                 const [editedStudent, setEditedStudent] = useState(null);
+                const [totalPages, setTotalPages] = useState(0);
+
 
               //family start
                 const [editing, setEditing] = useState(false);
@@ -60,7 +62,7 @@ const Search_Student = () => {
                 const relations=[ "Father", "Mother"];
                 const [currentUserRole,setCurrentUserRole]=useState('');
                 const [currentPage, setCurrentPage] = useState(1);
-                const itemsPerPage = 10; // Number of items to display per page
+                const itemsPerPage = 5; 
 
                 useEffect(() => {
                   const userRoleString = localStorage.getItem('loggedInRole');
@@ -84,6 +86,9 @@ const Search_Student = () => {
                   }
                 }, []);
 
+                const handlePageClick = (page) => {
+                  setCurrentPage(page);
+              };
                       const fetchFamilyMembers = async (studentId) => {
                         try {
                           console.log('Fetching parent detail for student:', studentId);
@@ -318,20 +323,26 @@ const Search_Student = () => {
                       // };
 
                       // GET Student
-const getData = () => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  axios
-    .get(`${config.ApiUrl}Student/GetStudents`)
-    .then((result) => {
-      setOriginalData(result.data);
-      setData(result.data.slice(startIndex, endIndex));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+                            const getData = () => {
+                              const startIndex = (currentPage - 1) * itemsPerPage;
+                              const endIndex = startIndex + itemsPerPage;
+                              axios
+                                .get(`${config.ApiUrl}Student/GetStudents`)
+                                .then((result) => {
+                                  setOriginalData(result.data);
+                                  const slicedData = result.data.slice(startIndex, endIndex);
+                                  setData(slicedData);
+                                  setTotalPages(Math.ceil(result.data.length / itemsPerPage));
 
+                                    })
+                                .catch((error) => {
+                                  console.log(error);
+                                });
+                            };
+
+                            useEffect(() => {
+                              getData();
+                            }, [currentPage]);
 
                       //popup view details
                       const getStudentDetails = (id) => {
@@ -364,11 +375,6 @@ const getData = () => {
 
                       //popup view details for edit
                     
-
-                      useEffect(() => {
-                        getData();
-                      }, [currentPage]);
-
                       const handleEdit = (id) => {
                         getStudentDetailsEdit(id);
                       };
@@ -934,12 +940,24 @@ const getData = () => {
               
 
             <div className='Paginated-search-student'>
-  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
- </button>
-  <span>{currentPage}</span>
-  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
- </button>
-</div>
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageClick(index + 1)}
+                        disabled={currentPage === index + 1}
+                        className='pageButton'
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
+                            {/* <div className='Paginated-search-student'>
+                  <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
+                </button>
+                  <span>{currentPage}</span>
+                  <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
+                </button>
+                </div> */}
 
           </>
         </AdminSidebar>
@@ -1384,14 +1402,26 @@ const getData = () => {
             </Fragment>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
 
-
+            <div className='Paginated-search-student'>
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageClick(index + 1)}
+                        disabled={currentPage === index + 1}
+                        className='pageButton'
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
+{/* 
             <div className='Paginated-search-student'>
   <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
  </button>
   <span>{currentPage}</span>
   <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
  </button>
-</div>
+</div> */}
 
 
           </>
