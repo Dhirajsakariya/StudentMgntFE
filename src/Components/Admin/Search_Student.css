@@ -229,7 +229,7 @@
     margin-top: 40px;
     padding-top: 10px;
     color: #007bff;
-
+    padding-left: 50px;
 }
 #headingpopup5{
     margin-bottom: 20px;
@@ -241,6 +241,7 @@
 #edit-popup {
     padding: 20px;
     margin-left: 20px;
+    margin-left: 0px;
 }
 #edit-popuppart1{
     margin-left:50px;
@@ -250,6 +251,7 @@
 #edit-popuplabel {
     display: block;
     margin-bottom: -5px;
+    margin-left: -15px;
 }
 #edit-popuppart2{
     margin-left: 400px;
@@ -264,11 +266,13 @@
     border-radius: 5px;
     box-sizing: border-box;
     height: 35px; 
+    margin-left: -15px;
 } 
 #edit-popup2  {
     width: 300px;
     padding: 5px;
     margin-top: 10px;
+    margin-left: -15px;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -365,7 +369,7 @@
   /*Family detailes css*/
   #family_div{
     align-items: center;
-    margin-left: 500px;
+    margin-left: 385px;
     margin-top: -610px;
   }
   #containerFamily {
@@ -410,7 +414,7 @@
   } 
   #inputfamily, .relation {
     width: 300px;
-    margin-left: 15px;
+    margin-left: 12px;
     padding: 8px;
     box-sizing: border-box;
     margin-top: 5px;
@@ -451,7 +455,7 @@
     grid-template-columns: 210px;
     gap:40px;
     row-gap: 265px;
-    margin-left: 510px;
+    margin-left: 378px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   #displayfamily{
@@ -530,7 +534,7 @@
   }
   #edit_family_heading{
     color: #3d34b5;
-    margin-left: 1100px;
+    margin-left: 950px;
     position:absolute;
     left: 0;
     top: 0;

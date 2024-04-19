@@ -148,6 +148,7 @@ const StudentForm = () => {
         toast.error("Failed to add student");
       }
     }
+    navigate.push('/ParentsPortal');
   };
   
   
