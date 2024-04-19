@@ -216,9 +216,10 @@ const Search_Teacher = () => {
         <tbody id='table_body'>
           {data && data.length > 0 ? (
             data.map((teacher, index) => {
+              const idNumber = (currentPage - 1) * itemsPerPage + index + 1;
               return (
                 <tr key={index}>
-                  <td id='td-align'>{index + 1}</td>
+                  <td id='td-align'>{idNumber}</td>
                   <td id='td-align' ><button id='btn-view' onClick={() => getTeacherDetails(teacher.id)}>{teacher.name}</button></td>
                   <td id='td-align'>{teacher.email}</td>
                   {/* <td id='td-align'>{teacher.gender}</td> */}
