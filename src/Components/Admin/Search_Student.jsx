@@ -38,7 +38,8 @@ const Search_Student = () => {
               //family start
                 const [editing, setEditing] = useState(false);
                 const [studentId, setStudentId] = useState('');
-                const [editedCardId, setEditedCardId] = useState(false);
+                const [editedCardId, setEditedCardId] = useState(null); 
+                const [cardColors, setCardColors] = useState({}); 
                 const [formData, setFormData] = useState({
                   id: '',
                   email:'',
@@ -48,13 +49,13 @@ const Search_Student = () => {
                   relation: '',
                 });
 
-                const[idError,setIdError]=useState();
-                const[emailError,setEmailError] =useState();
-                const[nameError,setNameError] = useState();
+                const [idError,setIdError]=useState();
+                const [emailError,setEmailError] =useState();
+                const [nameError,setNameError] = useState();
                 const [familyMembers, setFamilyMembers] = useState([]);
                 const [occupationError, setOccupationError] = useState('');
                 const [genderError,setGenderError] =useState('');
-                const[mobilenumberError,setMobileNumberError]=useState('');
+                const [mobilenumberError,setMobileNumberError]=useState('');
                 const [mobilenumber, setMobileNumber] = useState('');
                 const [relationError, setRelationError] = useState('');
                 const [isValidPhone, setIsValidPhone] = useState(false);
@@ -213,6 +214,11 @@ const Search_Student = () => {
                         });
                         setMobileNumber('');
                         setEditing(false);
+                        setCardColors((prevColors) => ({
+                          ...prevColors,
+                          [editedCardId]: '#e1e4e8', // Revert back to default color
+                        }));
+                        setEditedCardId(null);
                       };
 
                       const validateForm = () => {
@@ -249,6 +255,10 @@ const Search_Student = () => {
                         });
                         setMobileNumber(familyMember.mobileNumber);
                         setEditing(true);
+                        setCardColors((prevColors) => ({
+                          ...prevColors,
+                          [familyMember.id]: 'rgb(247, 249, 251)', // Change to desired color
+                        }));
                         setEditedCardId(familyMember.id);
                       };
 
@@ -490,9 +500,6 @@ const Search_Student = () => {
                       if (redirectToNotFound) {
                         return <Redirect to="/PageNotFound" />;
                       }
-
-                      
-
   return (
     <>
       {currentUserRole === 'admin' ?
@@ -872,25 +879,20 @@ const Search_Student = () => {
                                                   value={mobilenumber}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  inputStyle={{ backgroundColor: 'white', borderTopColor: '#24305E' }}
                                                   containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
-                                    <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
+                                    <button id='btnff' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
                                         </form>
                                       </div>
                                     </div>
               <div id='dispfamily'>
             {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
               familyMembers.map((familyMember) => (
-                <div key={familyMember.id} 
-                id='displayfamily'
-                style={{
-                  backgroundColor:
-                    editedCardId === familyMember.id ? '#d3f0f9' : '#e1e4e8', 
-                }}
->
+                <div key={familyMember.id} id='display' style={{ backgroundColor: cardColors[familyMember.id] || '#ffffff' }}>
+
                   <h2 id='heading_div'>{familyMember.relation}</h2>
                   <div id='parent-details'>
                   <div id='detail'>
@@ -925,7 +927,7 @@ const Search_Student = () => {
           </div>
 
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
-      </>
+                    </>
                     
                     </div>
                   )}
@@ -1336,25 +1338,20 @@ const Search_Student = () => {
                                                   value={mobilenumber}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  inputStyle={{ backgroundColor: 'white', borderTopColor: '#24305E' }}
                                                   containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
-                                    <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
+                                    <button id='btnff' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
                                         </form>
                                       </div>
                                     </div>
               <div id='dispfamily'>
             {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
               familyMembers.map((familyMember) => (
-                <div key={familyMember.id} 
-                id='displayfamily'
-                style={{
-                  backgroundColor:
-                    editedCardId === familyMember.id ? '#d3f0f9' : '#e1e4e8', 
-                }}
->
+                <div key={familyMember.id} id='display' style={{ backgroundColor: cardColors[familyMember.id] || '#ffffff' }}>
+
                   <h2 id='heading_div'>{familyMember.relation}</h2>
                   <div id='parent-details'>
                   <div id='detail'>
@@ -1389,7 +1386,7 @@ const Search_Student = () => {
           </div>
 
       <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
-      </>
+                    </>
                     
                     </div>
                   )}

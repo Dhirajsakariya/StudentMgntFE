@@ -16,6 +16,7 @@ const ParentsPortal = () => {
 
   const [userData, setUserData] = useState({id:'',email:''});
   const [editing, setEditing] = useState(false);
+  const [editedCardId, setEditedCardId] = useState(null); 
   const [studentId, setStudentId] = useState('');
   const [formData, setFormData] = useState({
     id: '',
@@ -30,6 +31,7 @@ const ParentsPortal = () => {
   const[emailError,setEmailError] =useState();
   const[nameError,setNameError] = useState();
   const [familyMembers, setFamilyMembers] = useState([]);
+  const [cardColors, setCardColors] = useState({}); 
   const [occupationError, setOccupationError] = useState('');
   const [genderError,setGenderError] =useState('');
   const[mobilenumberError,setMobileNumberError]=useState('');
@@ -186,6 +188,11 @@ const handleSubmit = async (e) => {
   });
   setMobileNumber('+91');
   setEditing(false);
+  setCardColors((prevColors) => ({
+    ...prevColors,
+    [editedCardId]: '#e1e4e8', 
+  }));
+  setEditedCardId(null);
 };
 
 const validateForm = () => {
@@ -222,6 +229,11 @@ const handleEdit = (familyMember) => {
   });
   setMobileNumber(familyMember.mobileNumber);
   setEditing(true);
+  setCardColors((prevColors) => ({
+    ...prevColors,
+    [familyMember.id]: 'rgb(247, 249, 251)', 
+  }));
+  setEditedCardId(familyMember.id);
 };
 
 const handlePhoneChange = (value) => {
@@ -267,8 +279,6 @@ const customToastStyle = {
   fontWeight: 'bold',
 };
 
-
-
 if (redirectToNotFound) {
   return <Redirect to="/PageNotFound" />;
 }
@@ -297,8 +307,8 @@ if (redirectToNotFound) {
               <div id='form-groupf'>
               <label id='lbl'>Relation:</label>
               {editing ? (
-                <span>{formData.relation}</span>
-              ) : (
+                <input id='inputfamily'value={formData.relation} readOnly/>
+                ) : (
                 <select
                   value={formData.relation}
                   className='relation'
@@ -308,7 +318,7 @@ if (redirectToNotFound) {
                     setRelationError('');
                   }}
                 >
-                  <option value="">Select Relation</option>
+                  <option value="" disabled={true}>Select Relation</option>
                   {relations.map((relation) => (
                     <option key={relation} value={relation}>
                       {relation}
@@ -361,19 +371,15 @@ if (redirectToNotFound) {
             </div>
             <label id='lbl'>Mobile Number:</label>
             <div id='phone_number'>
-                <PhoneInput
-                    country={'in'}
-                    value={mobilenumber}
-                    placeholder="Enter mobile number"
-                    countryCodeEditable={false}
-                    onChange={handlePhoneChange}
-                    disableDropdown={true}
-                    isValid={isValidPhone}
-                    inputProps={{ maxLength: 15 }}
-                    inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                    containerStyle={{ padding: '1px' }} 
-                    required
-                />
+            <PhoneInput
+              country={'in'}
+              value={mobilenumber}
+              onChange={handlePhoneChange}
+              disableDropdown={true}
+              inputStyle={{ backgroundColor: 'white', borderTopColor: '#24305E' }}
+              containerStyle={{ padding: '0.5px' }} 
+              required
+          />
             </div>
        <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
           </form>
@@ -382,8 +388,8 @@ if (redirectToNotFound) {
     <div id='disp'>
   {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
     familyMembers.map((familyMember) => (
-      <div key={familyMember.id} id='display'>
-        <h2>{familyMember.relation}</h2>
+      <div key={familyMember.id} id='display' style={{ backgroundColor: cardColors[familyMember.id] || '#e1e4e8' }}>
+      <h2>{familyMember.relation}</h2>
         <div id='parent-details'>
         <div id='detail'>
           {familyMember.gender === 'male' ? (
@@ -422,144 +428,142 @@ if (redirectToNotFound) {
     :
     <TeacherSidebar>
     <>
-    <div id='mainp'>
-      <div id='containerf'>
-        <form onSubmit={handleSubmit}>
-          <h2>Parents Detail</h2>
-          <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => {setFormData({ ...formData, id: e.target.value });
-                        setIdError('');} }/>
-          <div id='form-groupf'>
-                <input 
-                        type='hidden' 
-                        value={studentId} 
-                        placeholder='id'
-                        onChange={(e) => {setStudentId({ ...formData, id: e.target.value });
-                        setIdError('');} }
+      <div id='mainp'>
+        <div id='containerf'>
+          <form>
+            <h2>Parents Detail</h2>
+            <input id='input' type="hidden" name="id" value={formData.id} onChange={(e) => {setFormData({ ...formData, id: e.target.value });
+                          setIdError('');} }/>
+            <div id='form-groupf'>
+                  <input 
+                          type='hidden' 
+                          value={studentId} 
+                          placeholder='id'
+                          onChange={(e) => {setStudentId({ ...formData, id: e.target.value });
+                          setIdError('');} }
+                required
+              />
+              {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
+              <div id='form-groupf'>
+              <label id='lbl'>Relation:</label>
+              {editing ? (
+                <input id='inputfamily'value={formData.relation} readOnly/>
+                ) : (
+                <select
+                  value={formData.relation}
+                  className='relation'
+                  required
+                  onChange={(e) => {
+                    setFormData({ ...formData, relation: e.target.value });
+                    setRelationError('');
+                  }}
+                >
+                  <option value="" disabled={true}>Select Relation</option>
+                  {relations.map((relation) => (
+                    <option key={relation} value={relation}>
+                      {relation}
+                    </option>
+                  ))}
+                </select>
+              )}
+              {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
+            </div>
+
+                <label id='lbl' >Email:</label>
+                  <input 
+                          id='input'
+                          type='email' 
+                          value={formData.email} 
+                          placeholder='Email'
+                          onChange={(e) => {setFormData({ ...formData, email: e.target.value });
+                          setEmailError('');} }
+                required
+              /><CgMail id='familyformicon' />
+              {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
+            </div>
+            <div id='form-groupf'>
+              <label id='lbl'>Name:</label>
+                <input
+                        type="text"
+                        id='input'
+                        value={formData.name}
+                        placeholder='Full Name'
+                        onChange={(e) => {setFormData({ ...formData, name: e.target.value });
+                          setNameError('');} }
+                required
+              /> < FiUser id='familyformicon' />
+              {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
+            </div>
+            <div id='form-groupf'>
+              <label id='lbl'>Occupation:</label>
+                <input
+                        id='input'
+                        type='text'
+                        value={formData.occupation}
+                        placeholder='Occupation'
+                        onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
+                        setOccupationError('');} }
               required
             />
-            {emailError  && <p style={{ color: 'red'}}>{idError}</p>}
-            <div id='form-groupf'>
-            <label id='lbl'>Relation:</label>
-            {editing ? (
-              <span>{formData.relation}</span>
-            ) : (
-              <select
-                value={formData.relation}
-                className='relation'
-                required
-                onChange={(e) => {
-                  setFormData({ ...formData, relation: e.target.value });
-                  setRelationError('');
-                }}
-              >
-                <option value="">Select Relation</option>
-                {relations.map((relation) => (
-                  <option key={relation} value={relation}>
-                    {relation}
-                  </option>
-                ))}
-              </select>
-            )}
-            {relationError && <p style={{ color: 'red'}}>{relationError}</p>}
-          </div>
-
-              <label id='lbl' >Email:</label>
-                <input 
-                        id='input'
-                        type='email' 
-                        value={formData.email} 
-                        placeholder='Email'
-                        onChange={(e) => {setFormData({ ...formData, email: e.target.value });
-                        setEmailError('');} }
+            
+            <img src={ocuupation} id='familyformicon'/>
+            {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
+            </div>
+            <label id='lbl'>Mobile Number:</label>
+            <div id='phone_number'>
+            <PhoneInput
+              country={'in'}
+              value={mobilenumber}
+              onChange={handlePhoneChange}
+              disableDropdown={true}
+              inputStyle={{ backgroundColor: 'white', borderTopColor: '#24305E' }}
+              containerStyle={{ padding: '0.5px' }} 
               required
-            /><CgMail id='familyformicon' />
-            {emailError  && <p style={{ color: 'red'}}>{emailError}</p>}  
-          </div>
-          <div id='form-groupf'>
-            <label id='lbl'>Name:</label>
-              <input
-                      type="text"
-                      id='input'
-                      value={formData.name}
-                      placeholder='Full Name'
-                      onChange={(e) => {setFormData({ ...formData, name: e.target.value });
-                        setNameError('');} }
-              required
-            /> < FiUser id='familyformicon' />
-            {nameError  && <p style={{ color: 'red'}}>{nameError}</p>}
-          </div>
-          <div id='form-groupf'>
-            <label id='lbl'>Occupation:</label>
-              <input
-                      id='input'
-                      type='text'
-                      value={formData.occupation}
-                      placeholder='Occupation'
-                      onChange={(e) => {setFormData({ ...formData, occupation: e.target.value });
-                      setOccupationError('');} }
-            required
-          /><img src={ocuupation} id='familyformicon'/>
-          {occupationError  && <p style={{ color: 'red'}}>{occupationError}</p>}
-          </div>
-          <label id='lbl'>Mobile Number:</label>
-          <div id='phone_number'>
-              <PhoneInput
-                  country={'in'}
-                  value={mobilenumber}
-                  placeholder="Enter mobile number"
-                  countryCodeEditable={false}
-                  onChange={handlePhoneChange}
-                  disableDropdown={true}
-                  isValid={isValidPhone}
-                  inputProps={{ maxLength: 15 }}
-                  inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                  containerStyle={{ padding: '1px' }} 
-                  required
-              />
-          </div>
-     <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
-        </form>
+          />
+            </div>
+       <button id='btnf' type="submit" onClick={handleSubmit}>{formData.id? 'Save Change':'Add Parent Detail'}</button>
+          </form>
+        </div>
       </div>
-    </div>
-  <div id='disp'>
-{Array.isArray(familyMembers) && familyMembers.length > 0 ? (
-  familyMembers.map((familyMember) => (
-    <div key={familyMember.id} id='display'>
+    <div id='disp'>
+  {Array.isArray(familyMembers) && familyMembers.length > 0 ? (
+    familyMembers.map((familyMember) => (
+      <div key={familyMember.id} id='display' style={{ backgroundColor: cardColors[familyMember.id] || '#e1e4e8' }}>
       <h2>{familyMember.relation}</h2>
-      <div id='parent-details'>
-      <div id='detail'>
-        {familyMember.gender === 'male' ? (
-          <BiMale size='20px' />
-        ) : (
-          <BiFemale size='20px' />
-        )}
-        <span>{familyMember.name}</span>
+        <div id='parent-details'>
+        <div id='detail'>
+          {familyMember.gender === 'male' ? (
+            <BiMale size='20px' />
+          ) : (
+            <BiFemale size='20px' />
+          )}
+          <span>{familyMember.name}</span>
+        </div>
+        <div id='detail'>
+          <BiEnvelope size='20px' />
+          <span>{familyMember.email}</span>
+        </div>
+        <div id='detail'>
+          <BiBriefcase size='20px' />
+          <span>"{familyMember.occupation}"</span>
+        </div>
+        <div id='detail'>
+          <BiPhone size='20px' />
+          <span>{familyMember.mobileNumber}</span>
+        </div>
       </div>
-      <div id='detail'>
-        <BiEnvelope size='20px' />
-        <span>{familyMember.email}</span>
-      </div>
-      <div id='detail'>
-        <BiBriefcase size='20px' />
-        <span>"{familyMember.occupation}"</span>
-      </div>
-      <div id='detail'>
-        <BiPhone size='20px' />
-        <span>{familyMember.mobileNumber}</span>
-      </div>
-    </div>
 
-      <button id='btneditPP' onClick={() => handleEdit(familyMember)}><BiEdit /></button>
-      <button id='btndeletePP' onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
-    </div>
-  ))
-) : (
-  <p>No family members to display</p>
-)}
+        <button id='btneditPP' onClick={() => handleEdit(familyMember)}><BiEdit /></button>
+        <button id='btndeletePP' onClick={() => handleDelete(familyMember.id)}><BiTrash /></button>
+      </div>
+    ))
+  ) : (
+    <p>No family members to display</p>
+  )}
 </div>
 
-    <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
-    </>
+      <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
+      </>
     </TeacherSidebar>
     }
     </>
