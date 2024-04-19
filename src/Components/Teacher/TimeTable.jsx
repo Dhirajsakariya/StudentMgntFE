@@ -231,7 +231,7 @@ const TimeTable = () => {
                   <td id='teacher-timetable-th'>End Time</td>
                   <td id='teacher-timetable-th'>Subject</td>
                   <td id='teacher-timetable-th'>Teacher</td>
-                  <td id='teacher-timetable-th'>Action</td>
+                  <td id='teacher-timetable-th1'>Action</td>
                 </tr>
                 <tr id='teacher-timetable-row'>
                 <td>
@@ -326,10 +326,10 @@ const TimeTable = () => {
                 </option>
                 ))}
             </select>
-            <table className='table' id='table'>
+            <table id='table'>
               <thead>
                 <tr>
-                    <th id='th'>Day/Period</th>
+                    <th id='th1'>Day/Period</th>
                     <th id='th'>Monday</th>
                     <th id='th'>Tuesday</th>
                     <th id='th'>Wednesday</th>
@@ -397,7 +397,7 @@ const TimeTable = () => {
                   <td id='teacher-timetable-th'>End Time</td>
                   <td id='teacher-timetable-th'>Subject</td>
                   <td id='teacher-timetable-th'>Teacher</td>
-                  <td id='teacher-timetable-th'>Action</td>
+                  <td id='teacher-timetable-th1'>Action</td>
                 </tr>
                 <tr id='teacher-timetable-row'>
                 <td>
@@ -496,7 +496,7 @@ const TimeTable = () => {
             <table className='table' id='table'>
               <thead>
                 <tr>
-                    <th id='th'>Day/Period</th>
+                    <th id='th1'>Day/Period</th>
                     <th id='th'>Monday</th>
                     <th id='th'>Tuesday</th>
                     <th id='th'>Wednesday</th>

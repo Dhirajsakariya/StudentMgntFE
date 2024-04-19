@@ -101,7 +101,7 @@ const Exam_Schedule = () => {
                                 <option value="Final">Final</option>
                             </select>
                         </div>
-                        <table>
+                        <table id='table'>
                             <thead>
                              <tr>
                                  {selectedExamType === "" && (

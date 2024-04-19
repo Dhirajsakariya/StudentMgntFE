@@ -1,7 +1,7 @@
 #timetableviewer{   
   padding: -1%;
-  width: 100%;
-  /* margin-left: auto; */
+  width: auto;
+  margin-left: 40px;
   margin-right: auto;
   align-items: center;
   justify-content: center;
@@ -22,22 +22,28 @@
 }
 
 #tableview{    
-  margin-left: auto;
-  width:100%;
+  margin-left: 13%;
+  width:70%;
   height: 30%;
   table-layout: fixed;
   border: none;
   outline: none;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   text-align: center;   
   background-color: #e1e4e8;
 }
 
 #thtable{
-width: 50%;
-height: 40px;
-background:#24305E;;
-color: white;
+  width: 100%;
+  height: 40px;
+  background:#24305E;;
+  color: white;
+}
+#thtable1{
+  width: 130%;
+  height: 40px;
+  background:#24305E;;
+  color: white;
 }
 
 #rowview{
@@ -68,9 +74,14 @@ border-radius: 5%;
 }
 
 #tdtimetable{
-  height: 50px;
+  font-family: sans-serif;
+  width: 100%;
+  height: 40px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  font-size: 15px;
   text-align: center;
-  color: black;
-  background-color: #e1e4e8;
   border: 1px solid black;
+  background-color: #e1e4e8;
 }

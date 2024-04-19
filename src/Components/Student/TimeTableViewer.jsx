@@ -91,8 +91,8 @@ const TimeTableViewer = () => {
     return (
         <>
             <StudentSidebar>
-                <div>
-                    <div id='timetableviewer'>
+                <div id='timetableviewer'>
+                    <div>
                     <h1 id='h1viewer'>TimeTable</h1>
                     <input type='hidden' value={studentId} onChange={(e) => setStudentId(e.target.value)}/>
                     <input type='hidden' value={standardId.standardId}/>
@@ -101,7 +101,7 @@ const TimeTableViewer = () => {
                      <table id='tableview'>
                             <thead>
                                  <tr>
-                                    <th id='thtable'>Day/Period</th>
+                                    <th id='thtable1'>Day/Period</th>
                                     <th id='thtable'>Monday</th>
                                     <th id='thtable'>Tuesday</th>
                                     <th id='thtable'>Wednesday</th>
