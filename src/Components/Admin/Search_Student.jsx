@@ -534,9 +534,11 @@ const Search_Student = () => {
                 <tbody id='searchstudenttable'>
                   {data && data.length > 0 ? (
                     data.map((student, index) => {
+                      const idNumber = (currentPage - 1) * itemsPerPage + index + 1;
+
                       return (
                         <tr key={index} id="tr1searchstudent">
-                          <td>{index + 1}</td>
+                          <td>{idNumber}</td>
                           <td>
                             <button id='butnnameview'
                               onClick={() => getStudentDetails(student.id)}>
@@ -993,9 +995,10 @@ const Search_Student = () => {
                 <tbody id='searchstudenttable'>
                   {data && data.length > 0 ? (
                     data.map((student, index) => {
+                      const idNumber = (currentPage - 1) * itemsPerPage + index + 1;
                       return (
                         <tr key={index} id="tr1searchstudent">
-                          <td>{index + 1}</td>
+                          <td>{idNumber}</td>
                           <td>
                             <button id='butnnameview'
                               onClick={() => getStudentDetails(student.id)}>
