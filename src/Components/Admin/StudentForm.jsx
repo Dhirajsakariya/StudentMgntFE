@@ -45,13 +45,7 @@ const StudentForm = () => {
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
     const [currentUserRole,setCurrentUserRole]=useState('');
     const [photo, setPhoto] = useState(null); // State for storing selected photo
-
-    
   
-  // useEffect(() => {
-    
-  //   setRole('admin');
-  // }, []);
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
@@ -129,7 +123,6 @@ const StudentForm = () => {
     formData.append('standardNumber', parts[0]);
     formData.append('section', parts[1]);
     formData.append('photo', photo); 
-  
     try {
       const response = await axios.post(`${config.ApiUrl}Student/PostStudentWithPhoto`, formData, {
         headers: {
@@ -148,6 +141,7 @@ const StudentForm = () => {
         toast.error("Failed to add student");
       }
     }
+    navigate.push('/ParentsPortal');
   };
   
   
@@ -195,7 +189,6 @@ const { id } = useParams();
     setPhoto(e.target.files[0]); // Capture selected photo
   };
   
-
    return (
     <>
       { currentUserRole =='admin' ?
@@ -425,109 +418,109 @@ const { id } = useParams();
   </AdminSidebar>
   :
   <TeacherSidebar>
-  <>
-  <div id='containerstudentform'>
-      <form onSubmit={handleSubmit}>
-          
-        <h2 id='studentformh2studentform'>Student Detail</h2>
-            
-          <div className='form-group1'>
-            
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Name:</label>
-                <input 
-                id='inputstudentform'
-                type='text' value={name} 
-                onChange={(e)=> setName(e.target.value)} 
-                placeholder='Enter Full Name'
-               name='name'  
-               required />
-              <FaRegUserCircle id='iconstudentform'/>
-            </div>
-          
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Email:</label>
-              <input 
-              id='inputstudentform' 
-              type='email' 
-              value={email} 
-              onChange={(e)=> setEmail(e.target.value)} 
-              placeholder='Enter Email'
-              name='Email'  required />
-              <CgMail id='iconstudentform'/>
-            </div>
-          
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Password:</label>
-              <input 
-              id='inputstudentform'  
-              type={!isVisible ? "password" : "text"} 
-              name='password' 
-              placeholder='Password' 
-              value={password} 
-              onChange={(e)=> setPassword(e.target.value)}
-              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
-              title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
-              autoComplete='current-password'
-              required/>
-              <span id='iconstudentformeye' onClick={toggle}>
-              {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}</span>
-            </div>
-
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Gender:</label>
-                <div id="radio-groupa">
-                 <input
-                   type="radio"
-                   id='input'
-                   value="male"
-                   checked={gender === "male"}
-                   onChange={() => setGender("male")}
-                   required/>
-                 <label id='label'>Male</label>
-                 <input 
-                   type="radio"
-                   id='input'
-                   value="female"
-                   checked={gender === "female"}
-                   onChange={() => setGender("female")}
-                   required/>
-                 <label id='label'>Female</label>
-               </div>
-                {genderError && <p style={{color:'red'}}>{genderError}</p>}
-            </div>
-
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Date Of Birth:</label>
-               <input 
-                id='inputstudentform' 
-                type='date' 
-                value={birthday} 
-                max={moment().format("YYYY-MM-DD")} 
-                onChange={(e) => setBirthday(e.target.value)} 
-                required />  
-            </div>
-            
-            <div>
-              <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
-               <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
-                <option value="" disabled={true}>--Select BloodGroup--</option>
-                  {bloodGroup.map((bloodGroup, index) => (
-                    <option key={index} value={bloodGroup}>{bloodGroup}</option>
-                    ))}
-              </select>
-            </div>
-            <div id='form-groupstudentform'>
-              <label id='labelstudentform'>Upload photo:</label>
-                <input 
-                  id='inputstudentformphoto' 
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handlePhotoChange}  
-                  name="photo"/>
-            </div>
+    <>
+        <div id='containerstudentform'>
+            <form onSubmit={handleSubmit}>
+                
+              <h2 id='studentformh2studentform'>Student Detail</h2>
                   
-            <div id='form-groupstudentform'>
+                <div className='form-group1'>
+                  
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Name:</label>
+                      <input 
+                      id='inputstudentform'
+                      type='text' value={name} 
+                      onChange={(e)=> setName(e.target.value)} 
+                      placeholder='Enter Full Name'
+                     name='name'  
+                     required />
+                    <FaRegUserCircle id='iconstudentform'/>
+                  </div>
+                
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Email:</label>
+                    <input 
+                    id='inputstudentform' 
+                    type='email' 
+                    value={email} 
+                    onChange={(e)=> setEmail(e.target.value)} 
+                    placeholder='Enter Email'
+                    name='Email'  required />
+                    <CgMail id='iconstudentform'/>
+                  </div>
+                
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Password:</label>
+                    <input 
+                    id='inputstudentform'  
+                    type={!isVisible ? "password" : "text"} 
+                    name='password' 
+                    placeholder='Password' 
+                    value={password} 
+                    onChange={(e)=> setPassword(e.target.value)}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~\@\!\#\$\%\^\&\*\?]).{8,15}$"
+                    title="Must contain at least one  number and one uppercase and one lowercase letter and One special Charecter, and at least 8 characters"
+                    autoComplete='current-password'
+                    required/>
+                    <span id='iconstudentformeye' onClick={toggle}>
+                    {isVisible  ? <IoEyeOutline/> : <IoEyeOffOutline />}</span>
+                  </div>
+
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Gender:</label>
+                      <div id="radio-groupa">
+                       <input
+                         type="radio"
+                         id='input'
+                         value="male"
+                         checked={gender === "male"}
+                         onChange={() => setGender("male")}
+                         required/>
+                       <label id='label'>Male</label>
+                       <input 
+                         type="radio"
+                         id='input'
+                         value="female"
+                         checked={gender === "female"}
+                         onChange={() => setGender("female")}
+                         required/>
+                       <label id='label'>Female</label>
+                     </div>
+                      {genderError && <p style={{color:'red'}}>{genderError}</p>}
+                  </div>
+
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Date Of Birth:</label>
+                     <input 
+                      id='inputstudentform' 
+                      type='date' 
+                      value={birthday} 
+                      max={moment().format("YYYY-MM-DD")} 
+                      onChange={(e) => setBirthday(e.target.value)} 
+                      required />  
+                  </div>
+                  <div>
+                    <label id='labelstudentform' htmlFor="bloodgroup">Select a BloodGroup:</label>
+                     <select id='inputstudentform'  value={selectedBloodGroup} onChange={handleBloodGroupChange}>
+                      <option value="" disabled={true}>--Select BloodGroup--</option>
+                        {bloodGroup.map((bloodGroup, index) => (
+                          <option key={index} value={bloodGroup}>{bloodGroup}</option>
+                          ))}
+                    </select>
+                  </div>
+                  
+                  <div id='form-groupstudentform'>
+                    <label id='labelstudentform'>Upload photo:</label>
+                      <input 
+                            id='inputstudentformphoto' 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={handlePhotoChange}  
+                            name="photo" 
+                      />
+                  </div>
+                  <div id='form-groupstudentform'>
               <label id='labelstudentform'>Mobile Number:</label>
                 <div id='phone_numberstudentform'>
                   <PhoneInput
@@ -540,108 +533,114 @@ const { id } = useParams();
                     required/>
                 </div>
                 {mobileError && <p style={{color:'red'}}>{mobileError}</p>}
-            </div>           
-          </div>    
-
-     <div id='form-groupstudentform-2'>        
-     <div className='form-groupr'>
-            <div className='subjectselection'>
-             <div>
-              <label id='labelstudentform'>Standard</label>
-              <select
-                value={standard}
-                id='inputstudentform'
-                required
-                onChange={(e) => setStandard(e.target.value)}>
-                <option value="" disabled={true}>Select Standard</option>
-                  {standardData.map((standard) => (
-                <option key={standard} value={standard} >
-                 {standard}
-                </option>
-                 ))}
-              </select>
-              </div>
-              {standardError && <p style={{color:'red'}}>{standardError}</p>}
             </div>
+
+                 
+            </div>    
+
+           <div id='form-groupstudentform-2'>        
+                    
+
+           <div className='form-groupr'>
+                  <div className='subjectselection'>
+                   <div>
+                    <label id='labelstudentform'>Standard</label>
+                    <select
+                      value={standard}
+                      id='inputstudentform'
+                      required
+                      onChange={(e) => setStandard(e.target.value)}>
+                      <option value="" disabled={true}>Select Standard</option>
+                        {standardData.map((standard) => (
+                      <option key={standard} value={standard} >
+                       {standard}
+                      </option>
+                       ))}
+                    </select>
+                    </div>
+                    {standardError && <p style={{color:'red'}}>{standardError}</p>}
+                  </div>
+                </div>
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>Join-Date:</label>
+                <input 
+                id='inputstudentform2' 
+                type='date' 
+                value={joinDate}
+                onChange={(e) => setJoinDate(e.target.value)} 
+                required />
+            </div>
+                
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>Address:</label>
+                <input 
+                type='textarea' 
+                id='inputtextarea'  
+                value={address} 
+                onChange={(e)=> setAddress(e.target.value)} 
+                placeholder='Address'
+                name='Address'  required />
+                <FaRegAddressCard  id='iconstudentform'/>
+            </div> 
+               
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>City:</label>
+                <input 
+                id='inputstudentform2' 
+                type='text' 
+                value={city} 
+                onChange={(e)=> setCity(e.target.value)} 
+                placeholder='Enter Your City'
+                name='city'
+                required />
+                <LiaCitySolid id='iconstudentform'/>
+            </div>
+               
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>District:</label>
+                <input
+                id='inputstudentform2' 
+                type='text' 
+                value={district} 
+                onChange={(e)=> setDistrict(e.target.value)} 
+                placeholder='Enter Your District'
+                name='district'  required />
+                <GrMapLocation id='iconstudentform' />
+            </div>   
+               
+            <div id='form-groupstudentform'>
+              <label id='labelstudentform2'>State:</label>
+                <input 
+                id='inputstudentform2' 
+                type='text' 
+                value={state} 
+                onChange={(e)=> setState(e.target.value)} 
+                placeholder='Enter Your State'
+                name='city'  required />
+                <MdRealEstateAgent id='iconstudentform' />
+            </div>
+
+            <div id='form-groupr'>
+              <label id='labelstudentform2'>PinCode:</label>
+                <input 
+                id='inputstudentform2' 
+                type='text' 
+                value={pinCode} 
+                onChange={(e)=> setPinCode(e.target.value)}
+                placeholder='Enter PinCode'
+                name='pincode'  
+                required />
+                <TbMapPinCode id='iconstudentform'/>
+            </div>
+
+           
           </div>
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>Join-Date:</label>
-          <input 
-          id='inputstudentform2' 
-          type='date' 
-          value={joinDate}
-          onChange={(e) => setJoinDate(e.target.value)} 
-          required />
+          <button id='btnnextstudentform' type='submit'>Next</button>
+        </form>
       </div>
-          
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>Address:</label>
-          <input 
-          type='textarea' 
-          id='inputtextarea'  
-          value={address} 
-          onChange={(e)=> setAddress(e.target.value)} 
-          placeholder='Address'
-          name='Address'  required />
-          <FaRegAddressCard  id='iconstudentform'/>
-      </div> 
-         
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>City:</label>
-          <input 
-          id='inputstudentform2' 
-          type='text' 
-          value={city} 
-          onChange={(e)=> setCity(e.target.value)} 
-          placeholder='Enter Your City'
-          name='city'
-          required />
-          <LiaCitySolid id='iconstudentform'/>
-      </div>
-         
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>District:</label>
-          <input
-          id='inputstudentform2' 
-          type='text' 
-          value={district} 
-          onChange={(e)=> setDistrict(e.target.value)} 
-          placeholder='Enter Your District'
-          name='district'  required />
-          <GrMapLocation id='iconstudentform' />
-      </div>   
-         
-      <div id='form-groupstudentform'>
-        <label id='labelstudentform2'>State:</label>
-          <input 
-          id='inputstudentform2' 
-          type='text' 
-          value={state} 
-          onChange={(e)=> setState(e.target.value)} 
-          placeholder='Enter Your State'
-          name='city'  required />
-          <MdRealEstateAgent id='iconstudentform' />
-      </div>
+      <Toaster/>
+    </>
 
-      <div id='form-groupr'>
-        <label id='labelstudentform2'>PinCode:</label>
-          <input 
-          id='inputstudentform2' 
-          type='text' 
-          value={pinCode} 
-          onChange={(e)=> setPinCode(e.target.value)}
-          placeholder='Enter PinCode'
-          name='pincode'  
-          required />
-          <TbMapPinCode id='iconstudentform'/>
-      </div>
-
-     </div>
-    <button id='btnnextstudentform2' type='submit'>Next</button>
-  </form>
-</div>
-<Toaster/>
-</>
   </TeacherSidebar>
 }
 </>

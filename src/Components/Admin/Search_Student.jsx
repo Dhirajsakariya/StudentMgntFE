@@ -36,7 +36,7 @@ const Search_Student = () => {
               //family start
                 const [editing, setEditing] = useState(false);
                 const [studentId, setStudentId] = useState('');
-                const [editedCardId, setEditedCardId] = useState(null);
+                const [editedCardId, setEditedCardId] = useState(false);
                 const [formData, setFormData] = useState({
                   id: '',
                   email:'',
@@ -318,19 +318,19 @@ const Search_Student = () => {
                       // };
 
                       // GET Student
-const getData = () => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  axios
-    .get(`${config.ApiUrl}Student/GetStudents`)
-    .then((result) => {
-      setOriginalData(result.data);
-      setData(result.data.slice(startIndex, endIndex));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+                      const getData = () => {
+                        const startIndex = (currentPage - 1) * itemsPerPage;
+                        const endIndex = startIndex + itemsPerPage;
+                        axios
+                          .get(`${config.ApiUrl}Student/GetStudents`)
+                          .then((result) => {
+                            setOriginalData(result.data);
+                            setData(result.data.slice(startIndex, endIndex));
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      };
 
 
                       //popup view details
@@ -354,7 +354,8 @@ const getData = () => {
                         axios
                           .get(`${config.ApiUrl}Student/GetStudent/${id}`)
                           .then((result) => {
-                            setEditedStudent(result.data); // Set editedStudent when getting details
+                            setEditedStudent(result.data); // Set editedStudent when getting details'
+                            fetchFamilyMembersf(result.data.id);
                             localStorage.setItem('selectedStudentId', id);
                           })
                           .catch((error) => {
@@ -625,7 +626,7 @@ const getData = () => {
                   </Popup>
               <>
                 <Popup
-                  contentStyle={{ width: "1700px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
+                  contentStyle={{ width: "1510px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
                   open={editedStudent !== null}
                   onClose={() => setEditedStudent(null)}
                   closeOnDocumentClick={false} // Prevents closing on document click
@@ -798,7 +799,7 @@ const getData = () => {
                                             <div id='form-groupf'>
                                             <label id='lbl'>Relation:</label>
                                             {editing ? (
-                                              <span>{formData.relation}</span>
+                                              <input id='inputfamily'value={formData.relation} readOnly/>
                                             ) : (
                                               <select
                                                 value={formData.relation}
@@ -809,7 +810,7 @@ const getData = () => {
                                                   setRelationError('');
                                                 }}
                                               >
-                                                <option value="">Select Relation</option>
+                                                <option value="" disabled={true}>Select Relation</option>
                                                 {relations.map((relation) => (
                                                   <option key={relation} value={relation}>
                                                     {relation}
@@ -863,14 +864,11 @@ const getData = () => {
                                               <PhoneInput
                                                   country={'in'}
                                                   value={mobilenumber}
-                                                  placeholder="Enter mobile number"
-                                                  countryCodeEditable={false}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
                                                   isValid={isValidPhone}
-                                                  inputProps={{ maxLength: 15 }}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                                                  containerStyle={{ padding: '1px' }} 
+                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
@@ -944,7 +942,6 @@ const getData = () => {
           </>
         </AdminSidebar>
         : 
-
      <TeacherSidebar>
   <>
             <Fragment>
@@ -971,6 +968,7 @@ const getData = () => {
                     <th id='actionth'>Actions</th>
                   </tr>
                 </thead>
+              
 
                 <tbody id='searchstudenttable'>
                   {data && data.length > 0 ? (
@@ -987,14 +985,16 @@ const getData = () => {
                           <td>{student.email}</td>
 
                           <td>  {student.gender === 'male' ? (
-                              <BiMale className="gender-icon"/>
+                              <GiNurseFemale className="gender-icon"/>
                             ) : (
-                              <BiFemale className="gender-icon" />
+                              <GiFemaleVampire  className="gender-icon" />
                             )
                         }
                          {/* {student.gender === 'male' ? 'Male' : 'Female'} */}
 
                         </td>
+
+                      
                           <td>{student.mobileNumber}</td>
                           <td>{student.standard}</td>
                           <td>{student.subject}</td>
@@ -1078,7 +1078,7 @@ const getData = () => {
                   </Popup>
               <>
                 <Popup
-                  contentStyle={{ width: "1700px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
+                  contentStyle={{ width: "1510px", height: '690px', borderRadius: '10px', background: 'lightgray' }}
                   open={editedStudent !== null}
                   onClose={() => setEditedStudent(null)}
                   closeOnDocumentClick={false} // Prevents closing on document click
@@ -1251,7 +1251,7 @@ const getData = () => {
                                             <div id='form-groupf'>
                                             <label id='lbl'>Relation:</label>
                                             {editing ? (
-                                              <span>{formData.relation}</span>
+                                              <input id='inputfamily'value={formData.relation} readOnly/>
                                             ) : (
                                               <select
                                                 value={formData.relation}
@@ -1262,7 +1262,7 @@ const getData = () => {
                                                   setRelationError('');
                                                 }}
                                               >
-                                                <option value="">Select Relation</option>
+                                                <option value="" disabled={true}>Select Relation</option>
                                                 {relations.map((relation) => (
                                                   <option key={relation} value={relation}>
                                                     {relation}
@@ -1316,14 +1316,11 @@ const getData = () => {
                                               <PhoneInput
                                                   country={'in'}
                                                   value={mobilenumber}
-                                                  placeholder="Enter mobile number"
-                                                  countryCodeEditable={false}
                                                   onChange={handlePhoneChange}
                                                   disableDropdown={true}
                                                   isValid={isValidPhone}
-                                                  inputProps={{ maxLength: 15 }}
-                                                  inputStyle={{ backgroundColor: 'white', borderColor: 'white' }}
-                                                  containerStyle={{ padding: '1px' }} 
+                                                  inputStyle={{ backgroundColor: 'white', borderColor: '#24305E' }}
+                                                  containerStyle={{ padding: '0.5px' }} 
                                                   required
                                               />
                                           </div>
@@ -1383,7 +1380,8 @@ const getData = () => {
               </>
             </Fragment>
             <Toaster toastOptions={{style: customToastStyle,duration:1500,}} position="top-center" reverseOrder={false} />
-
+           
+              
 
             <div className='Paginated-search-student'>
   <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='leftarraybutton'>  <FaArrowLeft />
@@ -1392,7 +1390,6 @@ const getData = () => {
   <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(originalData.length / itemsPerPage)} className='Rightarraybutton'>   <FaArrowRight  />
  </button>
 </div>
-
 
           </>
     </TeacherSidebar>
