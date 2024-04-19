@@ -428,27 +428,21 @@
     border-top: 1px solid #24305E;
     border-left: 1px solid #24305E;
   }
-  #btnf {
+  #btnff {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    display: inline;
-    width: 200px;
-    height: 40px;
-    border-radius: 10px;
-    outline: auto;
-    border: 1px;
-    background:#24305E;
-    justify-content: left;
-    text-align: center;
-    margin-left: 70px;
-    margin-top: 25px;
-    margin-bottom: 3%;
-    font-weight: 700;
-    font-size: 15px;
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-  }
-  #dispfamily{
+    font-size: 16px;
+    margin-left: 80px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+#btnff:hover {
+    background-color: #0056b3;
+}  #dispfamily{
     display: grid;
     grid-template-columns: 210px;
     gap:40px;

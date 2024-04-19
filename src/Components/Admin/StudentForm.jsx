@@ -195,7 +195,11 @@ const { id } = useParams();
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]); // Capture selected photo
   };
-  
+  const customToastStyle = {
+    fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+    fontSize: '16px',
+    fontWeight: 'bold',
+  };
 
    return (
     <>
