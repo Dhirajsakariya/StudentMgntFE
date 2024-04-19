@@ -16,7 +16,7 @@ const FeesCalculators = () => {
   const [studentName, setStudentName] = useState('');
   const [studentEmail,setStudentEmail] = useState('');
   const [studentStandard,setStudentStandard] = useState('');
-  const [paidFees, setPaidFees] = useState('');
+  const [totalPaidAmount, setTotalPaidAmount] = useState('');
   const feeFrequencies = ["Quarterly", "Annually", "Semi-Annually"];
   const [showModal, setShowModal] = useState(false); 
   // const [remainingAmount , setRemainingAmount] = useState();
@@ -125,8 +125,8 @@ try {
       throw new Error('Network response was not ok');
     }
     const feesdata = await response.json();
-    setPaidFees(feesdata.paidFees);
-    setPendingAmount(feesdata.pendingFees);
+    setTotalPaidAmount(feesdata.totalPaidAmount);
+    setPendingAmount(feesdata.pendingAmount);
     console.log('Fees details:', feesdata);
     console.log('Payment completed successfully!');
   } catch (error) {
@@ -243,7 +243,7 @@ try {
           <h2 className='details-fees'> {studentName} </h2>
          <p id='popup-content' className='p-admin-fees-form'> Standard : {studentStandard} </p> 
          <p id='popup-content' className='p-admin-fees-form'> Email : {studentEmail} </p>
-         <p id='popup-content' className='p-admin-fees-form'> Paid fees : {paidFees}</p> 
+         <p id='popup-content' className='p-admin-fees-form'> Paid fees : {totalPaidAmount}</p> 
          <p id='popup-content' className='p-admin-fees-form'> Pending Fees : {pendingAmount} </p>
           <button id="close-btn-fees" onClick={() => setShowModal(false)}> × </button>
          
