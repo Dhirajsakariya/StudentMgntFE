@@ -6,6 +6,7 @@ import { MdCancelPresentation } from "react-icons/md";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
 import Popup from 'reactjs-popup';
+import Swal from 'sweetalert2';
 import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
@@ -151,18 +152,38 @@ const AddExamSchedule = () => {
     }
   };
   
-  const handleDelete = async (index) => {
-    
-    const examId = examSchedules[index].id; 
-    try {
-      await axios.delete(`${config.ApiUrl}Exam/DeleteExam/${examId}`);
-      setExamSchedules(examSchedules.filter((_, i) => i !== index));
-      toast.success('Exam schedule deleted successfully');
-    } catch (error) {
-      toast.error('Failed to delete exam schedule. Please try again later.');
-      console.error('Error deleting exam schedule:', error);
-    }
-  };
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this exam schedule!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#29c2a6',
+      cancelButtonColor: '#ee8686',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result)=> {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`${config.ApiUrl}Exam/DeleteExam/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          if (response.ok) {
+            toast.success('Exam schedule deleted successfully');
+            setExamSchedules(examSchedules.filter(schedule => schedule.id !== id));
+          } 
+          else {
+            toast.error('Failed to delete exam schedule');
+          }
+        } catch {
+          toast.error('Failed to delete exam schedule');
+        }
+      }
+    })
+  }; 
+  
 
   if (redirectToNotFound) {
     return <Redirect to="/PageNotFound" />;
@@ -170,7 +191,7 @@ const AddExamSchedule = () => {
 
   return (
     <>
-    { currentUserRole =='admin' ?
+    { currentUserRole ==='admin' ?
     <AdminSidebar>
     <>
       <div>
@@ -287,7 +308,7 @@ const AddExamSchedule = () => {
   
             <td>
               <select
-                id='exam-sub'
+                id='exam-sub1'
                 value={examType1}
                 onChange={(e) => setExamType1(e.target.value)}
                 required
@@ -322,7 +343,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>
 
               <button id="editexamschedulebtn" onClick={() =>  handleEdit(examSchedule)}><FiEdit /></button>
-            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(examSchedule.id)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
               ))}
@@ -524,8 +545,8 @@ const AddExamSchedule = () => {
               <select
                 id='exam-sub'
                 value={standard1}
-                required
                 onChange={(e) => setStandard1(e.target.value)}
+                required
                 >
                 <option value="" disabled>Select Standard</option>
                 {standardData.map((standard) => (
@@ -538,7 +559,7 @@ const AddExamSchedule = () => {
   
             <td>
               <select
-                id='exam-sub'
+                id='exam-sub1'
                 value={examType1}
                 onChange={(e) => setExamType1(e.target.value)}
                 required
@@ -573,7 +594,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>
 
               <button id="editexamschedulebtn" onClick={() =>  handleEdit(examSchedule)}><FiEdit /></button>
-            <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
+            <button id="deleteexamschedulebtn" onClick={() => handleDelete(examSchedule.id)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
               ))}
@@ -585,8 +606,8 @@ const AddExamSchedule = () => {
         open={isEditPopupOpen} closeOnDocumentClick onClose={handleEditClose} >
         <div id="popup-content-exam">
           <div id="popup-header-exam">
-          <h2 className="popup-title-exam">Edit Exam Schedule</h2>
-                <button id="close-btn-exam" onClick={handleEditClose}>X</button>
+          <h2 id="popup-title-exam">Edit Exam Schedule</h2>
+                <button id="close-btn-exam" onClick={handleEditClose}><MdCancelPresentation /></button>
           </div>
           
           <label id="label-popup-exam">
