@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { FiEdit } from "react-icons/fi";
+import { MdCancelPresentation } from "react-icons/md";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Redirect } from 'react-router-dom';
+import Popup from 'reactjs-popup';
 import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
@@ -20,13 +22,12 @@ const AddExamSchedule = () => {
   const [subject, setSubject] = useState('');
   const [examSchedules, setExamSchedules] = useState([]);
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
-  const [standardError, setStandardError] = useState('');
   const [standardData, setStandardData] = useState([]);
-  const [subjectError, setSubjectError] = useState('');
   const [subjectData, setSubjectData] = useState([]);
   const [currentUserRole,setCurrentUserRole]=useState('');
 
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
+  const [formData, setFormData] = useState(null);
 
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
@@ -34,7 +35,7 @@ const AddExamSchedule = () => {
       const userRole = JSON.parse(userRoleString);
       setCurrentUserRole(userRole.Role)
       console.log('loggedInRole for Student Form', userRole.Role);
-      if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {            
+      if (userRole.Role !== 'teacher' && userRole.Role !== 'admin') {
         setRedirectToNotFound(true);
       }
     } else {
@@ -69,16 +70,18 @@ const AddExamSchedule = () => {
   }, []);
 
   useEffect(() => {
-    const fetchExamSchedules = async () => {
-      try {
-        const response = await axios.get(`${config.ApiUrl}Exam/GetExams`);
-        setExamSchedules(response.data);
-      } catch (error) {
-        console.error('Error fetching exam schedules:', error);
-      }
-    };
+    
     fetchExamSchedules();
   }, []);
+
+  const fetchExamSchedules = async () => {
+    try {
+      const response = await axios.get(`${config.ApiUrl}Exam/GetExams`);
+      setExamSchedules(response.data);
+    } catch (error) {
+      console.error('Error fetching exam schedules:', error);
+    }
+  };
 
   const str = standard;
   const parts = str.split("-");
@@ -87,48 +90,21 @@ const AddExamSchedule = () => {
     event.preventDefault();
   
     try {
-      if (editingIndex !== null) {
-        // Updating an existing exam schedule
-        const examId = examSchedules[editingIndex].id;
-        await axios.put(`${config.ApiUrl}Exam/PutExam/${examId}`, {
-          ExamType: examType,
-          StandardNumber: parts[0],
-          Section: parts[1],
-          SubjectName: subject,
-          ExamDate: examDate,
-          StartTime: startTime,
-          EndTime: endTime,
-        });
+      // Adding a new exam schedule
+      const response = await axios.post(`${config.ApiUrl}Exam/PostExams`, {
+        ExamType: examType,
+        StandardNumber: parts[0],
+        Section: parts[1],
+        SubjectName: subject,
+        ExamDate: examDate,
+        StartTime: startTime,
+        EndTime: endTime,
+      });
   
-        const updatedExamSchedules = [...examSchedules];
-        updatedExamSchedules[editingIndex] = {
-          id: examId,
-          examType: examType,
-          standard: standard,
-          subject: subject,
-          examDate: examDate,
-          startTime: startTime,
-          endTime: endTime,
-        };
-        setExamSchedules(updatedExamSchedules);
-        setEditingIndex(null);
-        toast.success('Exam schedule updated successfully');
-      } else {
-        // Adding a new exam schedule
-        const response = await axios.post(`${config.ApiUrl}Exam/PostExams`, {
-          ExamType: examType,
-          StandardNumber: parts[0],
-          Section: parts[1],
-          SubjectName: subject,
-          ExamDate: examDate,
-          StartTime: startTime,
-          EndTime: endTime,
-        });
-  
-        const newExamSchedule = response.data;
-        setExamSchedules([...examSchedules, newExamSchedule]);
-        toast.success('Exam schedule added successfully');
-      }
+      const newExamSchedule = response.data;
+      setExamSchedules([...examSchedules, newExamSchedule]);
+      toast.success('Exam schedule added successfully');
+      fetchExamSchedules();
   
       // Reset form fields
       setExamType('');
@@ -137,25 +113,44 @@ const AddExamSchedule = () => {
       setStartTime('');
       setEndTime('');
     } catch (error) {
-      toast.error('Failed to add/update exam schedule. Please try again later.');
-      console.error('Error adding/updating exam schedule:', error);
+      toast.error('Failed to add exam schedule. Please try again later.');
+      console.error('Error adding exam schedule:', error);
     }
   };
+  
   const customToastStyle = {
     fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
     fontSize: '16px',
     fontWeight: 'bold',
   };
-  
-  const handleEdit = (index) => {
-    setEditingIndex(index);
-    const selectedExamSchedule = examSchedules[index];
-    setExamType(selectedExamSchedule.examType);
-    setExamDate(selectedExamSchedule.examDate);
-    setStartTime(selectedExamSchedule.startTime);
-    setEndTime(selectedExamSchedule.endTime);
-  };
 
+  
+  const handleEditClose = () => {
+    setFormData(null); 
+    setIsEditPopupOpen(false);
+  };
+  
+  const handleEdit = (examSchedule) => {
+    setFormData({ ...examSchedule }); 
+    setIsEditPopupOpen(true); 
+  };
+  
+  const handleUpdate = () => {
+    if (formData) {
+      axios
+        .put(`${config.ApiUrl}Exam/PutExam/${formData.id}`, formData)
+        .then((response) => {
+          toast.success('Exam schedule updated successfully');
+          fetchExamSchedules(); 
+          setIsEditPopupOpen(false); 
+        })
+        .catch((error) => {
+          toast.error('Failed to update exam schedule');
+          console.error('Error updating exam schedule:', error);
+        });
+    }
+  };
+  
   const handleDelete = async (index) => {
     
     const examId = examSchedules[index].id; 
@@ -168,8 +163,6 @@ const AddExamSchedule = () => {
       console.error('Error deleting exam schedule:', error);
     }
   };
-
-  
 
   if (redirectToNotFound) {
     return <Redirect to="/PageNotFound" />;
@@ -271,7 +264,7 @@ const AddExamSchedule = () => {
               </tbody>
             </table>
 
-            <button id='student-exam-btn' type="submit">{editingIndex !== null ? 'Update Exam Schedule' : 'Add Exam Schedule'}</button>
+            <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
 
           </form>
           
@@ -328,7 +321,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>{examSchedule.endTime}</td>
               <td id='student-exam-sub'>
 
-              <button id="editexamschedulebtn" onClick={() => handleEdit(index)}><FiEdit /></button>
+              <button id="editexamschedulebtn" onClick={() =>  handleEdit(examSchedule)}><FiEdit /></button>
             <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
@@ -336,6 +329,92 @@ const AddExamSchedule = () => {
           </tbody>
         </table>
         </div>
+
+        <Popup contentStyle={{width: "400px" , height:'fit-content',borderRadius:'10px',background:'#f7f9fb'}}
+        open={isEditPopupOpen} closeOnDocumentClick onClose={handleEditClose} >
+        
+          <div id="popup-header-exam">
+          <h2 id="popup-title-exam">Edit Exam Schedule</h2>
+                <button id="close-btn-exam" onClick={handleEditClose}><MdCancelPresentation /></button>
+          </div>
+          
+          <label id="label-popup-exam">
+            Standard:
+              <input
+              id='popup-exam-sub'
+              type='text'
+              value={formData?.standard || ''}
+              onChange={(e) => setFormData({ ...formData, standard: e.target.value })}
+              readOnly
+              />
+            </label>
+
+          <label id="label-popup-exam">
+            Subject:
+            <select
+            id='popup-exam-sub'
+              value={formData?.subject || ''}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              required
+            >
+              <option value="" disabled={true}>Select Subject</option>
+              {subjectData.map((subject) => (
+                <option key={subject} value={subject}>
+                  {subject}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label id="label-popup-exam">
+            Exam Type:
+            <select
+            id='popup-exam-sub'
+              value={formData?.examType || ''}
+              onChange={(e) => setFormData({ ...formData, examType: e.target.value })}
+              required
+            >
+              <option value="" disabled={true}>Select Exam Type</option>
+              <option value="Midterm">Mid-Term</option>
+              <option value="Final">Final</option>
+            </select>
+          </label>
+
+          <label id="label-popup-exam">
+            Exam Date:
+            <input
+            id='popup-exam-sub'
+              type='date'
+              value={formData?.examDate || ''}
+              onChange={(e) => setFormData({ ...formData, examDate: e.target.value })}
+              required
+            />
+          </label>
+          <label id="label-popup-exam">
+            Start Time:
+            <input
+            id='popup-exam-sub'
+              type="time"
+              value={formData?.startTime || ''}
+              onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+              required
+            />
+          </label>
+
+          <label id="label-popup-exam">
+            End Time:
+            <input
+            id='popup-exam-sub'
+              type="time"
+              value={formData?.endTime || ''}
+              onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
+              required
+            />
+          </label>
+
+          <button id="update-exam-btn" onClick={() =>  handleUpdate(formData)}>Update</button>
+        
+      </Popup>
 
         </div>
       </div>
@@ -439,7 +518,7 @@ const AddExamSchedule = () => {
             <button id='student-exam-btn' type="submit">Add Exam Schedule</button>
 
           </form>
-              
+          
           <div id="student-exam-timetable2">
             <td>
               <select
@@ -493,7 +572,7 @@ const AddExamSchedule = () => {
               <td id='student-exam-sub'>{examSchedule.endTime}</td>
               <td id='student-exam-sub'>
 
-              <button id="editexamschedulebtn" onClick={() => handleEdit(index)}><FiEdit /></button>
+              <button id="editexamschedulebtn" onClick={() =>  handleEdit(examSchedule)}><FiEdit /></button>
             <button id="deleteexamschedulebtn" onClick={() => handleDelete(index)}><RiDeleteBin6Line /></button>
               </td>
             </tr>
@@ -501,6 +580,88 @@ const AddExamSchedule = () => {
           </tbody>
         </table>
         </div>
+
+        <Popup contentStyle={{width: "400px" , height:'fit-content',borderRadius:'10px',background:'#f7f9fb'}}
+        open={isEditPopupOpen} closeOnDocumentClick onClose={handleEditClose} >
+        <div id="popup-content-exam">
+          <div id="popup-header-exam">
+          <h2 className="popup-title-exam">Edit Exam Schedule</h2>
+                <button id="close-btn-exam" onClick={handleEditClose}>X</button>
+          </div>
+          
+          <label id="label-popup-exam">
+            Standard:
+              <input
+              id='popup-exam-sub'
+              type='text'
+              value={formData?.standard || ''}
+              onChange={(e) => setFormData({ ...formData, standard: e.target.value })}
+              readOnly
+              />
+            </label>
+            
+          <label id="label-popup-exam">
+            Subject:
+            <select
+            id='popup-exam-sub'
+              value={formData?.subject || ''}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              required
+            >
+              <option value="" disabled={true}>Select Subject</option>
+              {subjectData.map((subject) => (
+                <option key={subject} value={subject}>
+                  {subject}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label id="label-popup-exam">
+            Exam Type:
+            <select
+            id='popup-exam-sub'
+              value={formData?.examType || ''}
+              onChange={(e) => setFormData({ ...formData, examType: e.target.value })}
+              required
+            >
+              <option value="" disabled={true}>Select Exam Type</option>
+              <option value="Midterm">Mid-Term</option>
+              <option value="Final">Final</option>
+            </select>
+          </label>
+          <label id="label-popup-exam">
+            Exam Date:
+            <input
+            id='popup-exam-sub'
+              type='date'
+              value={formData?.examDate || ''}
+              onChange={(e) => setFormData({ ...formData, examDate: e.target.value })}
+              required
+            />
+          </label>
+          <label id="label-popup-exam">
+            Start Time:
+            <input
+            id='popup-exam-sub'
+              type="time"
+              value={formData?.startTime || ''}
+              onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+              required
+            />
+          </label>
+          <label id="label-popup-exam">
+            End Time:
+            <input
+            id='popup-exam-sub'
+              type="time"
+              value={formData?.endTime || ''}
+              onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
+              required
+            />
+          </label>
+          <button id="update-exam-btn" onClick={() =>  handleUpdate(formData)}>Update</button>
+        </div>
+      </Popup>
 
         </div>
       </div>
