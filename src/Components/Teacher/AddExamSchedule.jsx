@@ -70,8 +70,7 @@ const AddExamSchedule = () => {
     fetchSubjects();
   }, []);
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     fetchExamSchedules();
   }, []);
 
@@ -136,21 +135,24 @@ const AddExamSchedule = () => {
     setIsEditPopupOpen(true); 
   };
   
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     if (formData) {
-      axios
-        .put(`${config.ApiUrl}Exam/PutExam/${formData.id}`, formData)
-        .then((response) => {
-          toast.success('Exam schedule updated successfully');
-          fetchExamSchedules(); 
-          setIsEditPopupOpen(false); 
-        })
-        .catch((error) => {
-          toast.error('Failed to update exam schedule');
-          console.error('Error updating exam schedule:', error);
+      try {
+        await axios.put(`${config.ApiUrl}Exam/PutExam/${formData.id}`, {
+          ...formData,
+          SubjectName: formData.subject,
         });
+  
+        toast.success('Exam schedule updated successfully');
+        fetchExamSchedules();
+        setIsEditPopupOpen(false);
+      } catch (error) {
+        toast.error('Failed to update exam schedule');
+        console.error('Error updating exam schedule:', error);
+      }
     }
   };
+  
   
   const handleDelete = async (id) => {
     Swal.fire({
