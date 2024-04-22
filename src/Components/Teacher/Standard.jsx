@@ -8,6 +8,8 @@ const Standard = () => {
   const [data, setData] = useState([]);
   const [role, setRole] = useState('');
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
+
 
   // useEffect(() => {
     
@@ -47,6 +49,10 @@ const Standard = () => {
     fetchData();
   }, []);
 
+  const toggleTheme = () => {
+    setDarkTheme(!darkTheme);
+  };
+
   // if (role !== 'teacher') {
   //   return <Redirect to="/PageNotFound" />;
   // }
@@ -57,7 +63,22 @@ const Standard = () => {
   }
 
   return (
+     <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
     <TeacherSidebar>
+    <button onClick={toggleTheme} className='d-k-button'>
+          {darkTheme ? 'Light' : 'Dark'}
+        </button>
+{/* <input
+  type="checkbox"
+  id="toggleSwitch"
+  onChange={toggleTheme}
+  checked={darkTheme}
+  style={{ display: 'none' }}
+/>
+<label htmlFor="toggleSwitch" className="toggleSwitch">
+  <div className="slider round"></div>
+</label> */}
+
     <div>
       <div id='standard'>
         <h1 id='stdheader'>Standard List</h1>
@@ -80,8 +101,10 @@ const Standard = () => {
           </table>
         </div>
       </div>
+      
     </div>
     </TeacherSidebar>
+    </div>
   );
 };
 
