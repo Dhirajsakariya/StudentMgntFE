@@ -1,29 +1,24 @@
-import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import config from '../Login/config';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
+import { BiBriefcase, BiEdit, BiEnvelope, BiFemale, BiMale, BiPhone, BiTrash } from 'react-icons/bi';
+import { CgMail } from 'react-icons/cg';
+import { FaSearch } from 'react-icons/fa';
+import { FiEdit, FiUser } from 'react-icons/fi';
+import { GiFemaleVampire, GiNurseFemale } from "react-icons/gi";
+import { GrScorecard } from "react-icons/gr";
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { SiAmazonpay } from "react-icons/si";
+import PhoneInput from 'react-phone-input-2';
+import { Redirect, useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import './Search_Student.css';
+import Swal from 'sweetalert2';
+import ocuupation from '../Assets/occupation.png';
+import config from '../Login/config';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import TeacherSidebar from '../Sidebar/TeacherSidebar';
-import { FiEdit } from 'react-icons/fi';
-import { RiDeleteBin6Line } from 'react-icons/ri';
-import { toast, Toaster } from 'react-hot-toast';
-import { FaSearch } from 'react-icons/fa';
-import { MdOutlineFamilyRestroom } from "react-icons/md";
-import { SiAmazonpay } from "react-icons/si";
-import { Redirect } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { useHistory } from 'react-router-dom';
-import { GrScorecard } from "react-icons/gr";
-import { CgMail } from 'react-icons/cg';
-import { FiUser } from "react-icons/fi";
-import PhoneInput from 'react-phone-input-2';
-import { BiMale, BiFemale, BiEdit, BiTrash, BiEnvelope, BiPhone, BiBriefcase } from 'react-icons/bi';
-import ocuupation from '../Assets/occupation.png'
-import { GiFemaleVampire } from "react-icons/gi";
-import { GiNurseFemale } from "react-icons/gi";
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
+import './Search_Student.css';
 
 
 const Search_Student = () => {
@@ -421,7 +416,7 @@ const Search_Student = () => {
                         }).then((result) => {
                           if (result.isConfirmed) {
                             axios
-                              .delete(`${config.ApiUrl}Student/DeleteStudent/${id}`)
+                              .delete(`${config.ApiUrl}Student/DeleteStudentAndPhoto/${id}`)
                               .then((response) => {
                                 if (response.status === 200) {
                                   setData((prevData) => prevData.filter((student) => student.id !== id));
