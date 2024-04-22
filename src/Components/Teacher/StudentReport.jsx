@@ -34,6 +34,7 @@ function StudentReport() {
   });
   const [currentUserRole,setCurrentUserRole]=useState('');
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
     const userRoleString = localStorage.getItem('loggedInRole');
@@ -68,12 +69,21 @@ function StudentReport() {
 
     console.log('Submitted ratings:', ratings);
   };
+  const toggleTheme = () => {
+    setDarkTheme(!darkTheme);
+  };
+
 
   return (
-    <>
+    <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
+    
     { currentUserRole =='admin' ?
     <AdminSidebar>
     <>
+    <button onClick={toggleTheme} className='d-k-button'>
+            {darkTheme ? 'Light' : 'Dark'}
+          </button>
+
       <div className='studentprojectreport'>
         <form>
           <div className='header-student-report'>
@@ -188,7 +198,7 @@ function StudentReport() {
       </>
     </TeacherSidebar>
     }
-    </>
+    </div>
   );
 }
 
