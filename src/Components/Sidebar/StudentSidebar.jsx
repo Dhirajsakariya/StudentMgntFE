@@ -11,6 +11,8 @@ import { FaTableCells } from "react-icons/fa6";
 import { FaBars } from 'react-icons/fa';
 import { GrSchedules } from "react-icons/gr";
 import { useHistory, Redirect } from 'react-router-dom';
+import { FaAddressCard } from "react-icons/fa";
+
 
 const StudentSidebar = ({ handleLogout, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -96,6 +98,11 @@ const StudentSidebar = ({ handleLogout, children }) => {
             path: '/Exam_Schedule',
             name: 'Exam Schedule',
             icon: <GrSchedules />,
+        },
+        {
+            path: '/IDCard',
+            name: 'IDCard',
+            icon: <FaAddressCard />,
         },
         {
             path: '/Home',

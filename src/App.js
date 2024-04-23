@@ -32,6 +32,7 @@ import Home from './Components/Dashboard/Home';
 import Footer from './Components/Dashboard/Footer';
 import Exam_Schedule from './Components/Student/Exam_Schedule';
 import FeesCalculators from './Components/Admin/FeesCalculators';
+import IDCard from './Components/Student/IDCard';
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
           <PrivateRoute path='/StudentReport' component={StudentReport} />
           <PrivateRoute path='/FeesCalculators' component={FeesCalculators} />
           <PrivateRoute path='/Parents' component={Parents} />
+          <PrivateRoute path='/IDCard' component={IDCard} />
           {/*<Redirect to="/Login" /> */}
           <Route path='/' component={Home} />
         </Switch>
