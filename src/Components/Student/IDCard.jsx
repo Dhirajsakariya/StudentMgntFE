@@ -117,7 +117,7 @@ const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: 
     <div className="id-card">
 
       <div className="id-card-header">
-       <center> <p className='idcard-school'>{Student.name}</p> </center>
+       <h2 className='idcard-school'>{Student.name}</h2> 
       </div>
 
         {/* <div className="id-card-body">
