@@ -2,13 +2,13 @@
   margin: 60px;
 }
 
-#heading1 {
+#headingg1 {
   color: #333;
 }
 .error-messagee {
   color: red;
 }
-#submitmarks{
+#submitmarkss{
   cursor: pointer;
   width: 140px;
   height: 40px;
@@ -39,31 +39,37 @@
   border-radius: 3px;
   width: 50px;
 }
-#t1
+#tt1
  {
   width: 100%;
   border-collapse: collapse;
 }
 
-#t1 #th1,
-#t1 #td1 {
+#tt1 #thh1,
+#tt1 #tdd1 {
   border: 1px solid #ccc;
   padding: 8px;
 }
+#thhh1{
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  width: 8%;
+}
 
-#t1 #th1 {
+#tt1 #thh1 {
+  
   background-color: #f0f0f0;
 }
 
-#t1 #tbody #tr1:nth-child(even) {
+#tt1 #tbodyy #trr1:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-#t1 #tbody #tr1:hover {
+#tt1 #tbodyy #trr1:hover {
   background-color: #e0e0e0;
 }
 
-#i1 {
+#ii1 {
   width: 100%;
   padding: 6px;
   box-sizing: border-box;
