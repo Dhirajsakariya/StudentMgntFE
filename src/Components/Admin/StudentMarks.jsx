@@ -168,39 +168,39 @@ const InputMarksTable = () => {
       <>
       <div className="studentmarkscontainer">
         <center>
-          <h2 id="heading1">Input Marks</h2>
+          <h2 id="headingg1">Input Marks</h2>
         </center><br></br>
         <form onSubmit={handleSubmit}>
-          <table id="t1">
+          <table id="tt1">
             <thead>
-              <tr id="tr1">
-                <th id="th1">Name</th>
-                <th id="th1">Exam Type</th>
+              <tr id="trr1">
+                <th id="thhh1">Name</th>
+                <th id="thh1">Exam Type</th>
                 {subjects.map((subject) => (
-                  <th id="th1" key={subject}>{subject}</th>
+                  <th id="thh1" key={subject}>{subject}</th>
                 ))}
               </tr>
             </thead>
-            <tbody id="tbody">
-              <tr id="tr1">
-                <td id='td1'>{studentName}</td>
-                <td id='td1'>
-                  <select id='examType' value={examType} onChange={handleExamTypeChange}>
+            <tbody id="tbodyy">
+              <tr id="trr1">
+                <td id='tdd1'align='center'>{studentName}</td>
+                <td id='tdd1'>
+                  <select id='examTypee' value={examType} onChange={handleExamTypeChange}>
                     <option value="" disabled={true}>Select Exam Type</option>
                     <option value="Midterm">Midterm</option>
                     <option value="Final">Final</option>
                   </select>
                 </td>
                 {subjects.map((subject) => (
-                  <td id='td1' key={subject}><center></center>
-                    <input id='i1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required  autoComplete="off"  />
+                  <td id='tdd1' key={subject}><center></center>
+                    <input id='ii1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required  autoComplete="off"  />
                   </td>
                 ))}
               </tr>
             </tbody>
           </table>
           <center>
-            <button id='submitmarks' type="submit">
+            <button id='submitmarkss' type="submit">
               {editedIndex !== null ? "Save Changes" : "Add To Table"}
             </button>
           </center>
@@ -209,34 +209,34 @@ const InputMarksTable = () => {
         {submitted && enteredData.length > 0 && (
           <div>
             <center>
-              <h2 id='heading1'>View Marks</h2>
+              <h2 id='headingg1'>View Marks</h2>
             </center><br />
-            <table id='t1'>
+            <table id='tt1'>
               <thead>
-                <tr id='tr1'>
-                  <th id='th1'>Name</th>
-                  <th id='th1'>Exam Type</th>
+                <tr id='trr1'>
+                  <th id='thhh1'>Name</th>
+                  <th id='thh1'>Exam Type</th>
                   {subjects.map((subject) => (
-                    <th id='th1' key={subject}>{subject}</th>
+                    <th id='thh1' key={subject}>{subject}</th>
                   ))}
-                  <th id='th1'>Total Marks</th>
-                  <th id='th1'>Obtained Marks</th>
-                  <th id='th1'>Status</th>
-                  <th id='th1'>Actions</th>
+                  <th id='thh1'>Total Marks</th>
+                  <th id='thh1'>Obtained Marks</th>
+                  <th id='thh1'>Status</th>
+                  <th id='thh1'>Actions</th>
                 </tr>
               </thead>
-              <tbody id='tbody'>
+              <tbody id='tbodyy'>
                 {enteredData.map((data, index) => (
-                  <tr id='tr1' key={index}>
-                    <td id='td1'>{data.name}</td>
-                    <td id='td1'>{data.examType}</td>
+                  <tr id='trr1' key={index}>
+                    <td id='tdd1'>{data.name}</td>
+                    <td id='tdd1'>{data.examType}</td>
                     {subjects.map((subject) => (
-                      <td id='td1' key={subject}>{data[subject]}</td>
+                      <td id='tdd1' key={subject}>{data[subject]}</td>
                     ))}
-                    <td id='td1'>{data.totalMarks}</td>
-                    <td id='td1'>{data.obtainedMarks}</td>
-                    <td id='td1'>{data.status}</td>
-                    <td id='td1'>
+                    <td id='tdd1'>{data.totalMarks}</td>
+                    <td id='tdd1'>{data.obtainedMarks}</td>
+                    <td id='tdd1'>{data.status}</td>
+                    <td id='tdd1'>
                       <button id="btn-editt" onClick={() => handleEdit(index)}>
                         <FiEdit />
                       </button>&nbsp;&nbsp;&nbsp;
@@ -259,39 +259,39 @@ const InputMarksTable = () => {
       <>
       <div className="studentmarkscontainer">
         <center>
-          <h2 id="heading1">Input Marks</h2>
+          <h2 id="headingg1">Input Marks</h2>
         </center><br></br>
         <form onSubmit={handleSubmit}>
-          <table id="t1">
+          <table id="tt1">
             <thead>
-              <tr id="tr1">
-                <th id="th1">Name</th>
-                <th id="th1">Exam Type</th>
+              <tr id="trr1">
+                <th id="thh1">Name</th>
+                <th id="thh1">Exam Type</th>
                 {subjects.map((subject) => (
-                  <th id="th1" key={subject}>{subject}</th>
+                  <th id="thh1" key={subject}>{subject}</th>
                 ))}
               </tr>
             </thead>
-            <tbody id="tbody">
-              <tr id="tr1">
-                <td id='td1'>{studentName}</td>
-                <td id='td1'>
-                  <select id='examType' value={examType} onChange={handleExamTypeChange}>
+            <tbody id="tbodyy">
+              <tr id="trr1">
+                <td id='tdd1'>{studentName}</td>
+                <td id='tdd1'>
+                  <select id='examTypee' value={examType} onChange={handleExamTypeChange}>
                     <option value="" disabled={true}>Select Exam Type</option>
                     <option value="Midterm">Midterm</option>
                     <option value="Final">Final</option>
                   </select>
                 </td>
                 {subjects.map((subject) => (
-                  <td id='td1' key={subject}><center></center>
-                    <input id='i1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required  autoComplete="off"  />
+                  <td id='tdd1' key={subject}><center></center>
+                    <input id='ii1' type="text" value={marks[subject] || ''} onChange={(e) => handleSubjectChange(subject, e.target.value)} required  autoComplete="off"  />
                   </td>
                 ))}
               </tr>
             </tbody>
           </table>
           <center>
-            <button id='submitmarks' type="submit">
+            <button id='submitmarkss' type="submit">
               {editedIndex !== null ? "Save Changes" : "Add To Table"}
             </button>
           </center>
@@ -300,34 +300,34 @@ const InputMarksTable = () => {
         {submitted && enteredData.length > 0 && (
           <div>
             <center>
-              <h2 id='heading1'>View Marks</h2>
+              <h2 id='headingg1'>View Marks</h2>
             </center><br />
-            <table id='t1'>
+            <table id='tt1'>
               <thead>
-                <tr id='tr1'>
-                  <th id='th1'>Name</th>
-                  <th id='th1'>Exam Type</th>
+                <tr id='trr1'>
+                  <th id='thh1'>Name</th>
+                  <th id='thh1'>Exam Type</th>
                   {subjects.map((subject) => (
-                    <th id='th1' key={subject}>{subject}</th>
+                    <th id='thh1' key={subject}>{subject}</th>
                   ))}
-                  <th id='th1'>Total Marks</th>
-                  <th id='th1'>Obtained Marks</th>
-                  <th id='th1'>Status</th>
-                  <th id='th1'>Actions</th>
+                  <th id='thh1'>Total Marks</th>
+                  <th id='thh1'>Obtained Marks</th>
+                  <th id='thh1'>Status</th>
+                  <th id='thh1'>Actions</th>
                 </tr>
               </thead>
-              <tbody id='tbody'>
+              <tbody id='tbodyy'>
                 {enteredData.map((data, index) => (
-                  <tr id='tr1' key={index}>
-                    <td id='td1'>{data.name}</td>
-                    <td id='td1'>{data.examType}</td>
+                  <tr id='trr1' key={index}>
+                    <td id='tdd1'>{data.name}</td>
+                    <td id='tdd1'>{data.examType}</td>
                     {subjects.map((subject) => (
-                      <td id='td1' key={subject}>{data[subject]}</td>
+                      <td id='tdd1' key={subject}>{data[subject]}</td>
                     ))}
-                    <td id='td1'>{data.totalMarks}</td>
-                    <td id='td1'>{data.obtainedMarks}</td>
-                    <td id='td1'>{data.status}</td>
-                    <td id='td1'>
+                    <td id='tdd1'>{data.totalMarks}</td>
+                    <td id='tdd1'>{data.obtainedMarks}</td>
+                    <td id='tdd1'>{data.status}</td>
+                    <td id='tdd1'>
                       <button id="btn-editt" onClick={() => handleEdit(index)}>
                         <FiEdit />
                       </button>&nbsp;&nbsp;&nbsp;
