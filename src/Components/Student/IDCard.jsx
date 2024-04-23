@@ -3,7 +3,7 @@ import './IDCard.css';
 import config from '../Login/config';
 import { Redirect } from 'react-router-dom';
 import QRCode from 'react-qr-code';
-
+import StudentSidebar from '../Sidebar/StudentSidebar';
 
 const IDCard = () => {
 
@@ -112,11 +112,12 @@ const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: 
 
 
   return (
-
+    <>
+    <StudentSidebar>
     <div className="id-card">
 
       <div className="id-card-header">
-      <h2 className='idcard-school'>School</h2>
+       <center> <p className='idcard-school'>{Student.name}</p> </center>
       </div>
 
         {/* <div className="id-card-body">
@@ -148,10 +149,10 @@ const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: 
 <img id="id-card-photo" src={userPhoto} alt="" />
 </div>
 
-        <div className="id-card-name">
-        <strong> {Student.name}</strong>
+        {/* <div className="id-card-name">
+        <strong> </strong>
 
-        </div> 
+        </div>  */}
 
         <div className="id-card-Role">
         <strong>  STUDENT </strong>
@@ -163,6 +164,8 @@ const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: 
       </div> 
 
     </div>
+    </StudentSidebar>
+        </>
   );
 };
 
