@@ -13,6 +13,8 @@ import user_icon from '../Assets/user_icon.png';
 import config from '../Login/config';
 import './Sidebar.css';
 import { Redirect } from 'react-router-dom';
+import { FaAddressCard } from "react-icons/fa";
+
 
 const AdminSidebar = ({handleLogout, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -69,6 +71,11 @@ const AdminSidebar = ({handleLogout, children }) => {
           path: '/StudentReport',
           name: 'Student Report',
           icon: <GrScorecard />
+        },
+        {
+          path: '/IDcardadmin',
+          name: 'IDcard',
+          icon: <FaAddressCard/>
         },
         {
           path: '/Home',
