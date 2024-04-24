@@ -107,8 +107,22 @@ const IDCard = () => {
     return <Redirect to="/PageNotFound" />; 
   }
 
-//   const qrCodeValue = `Roll No: ${Student.rollNo},  Name: ${Student.name}, Number: ${Student.mobileNumber}, Gender: ${Student.gender}, Paid Fees: ${totalPaidAmount}, Pending Fees: ${pendingAmount}`;
-const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: ${Student.mobileNumber}\nGender: ${Student.gender}\nPaid Fees: ${totalPaidAmount}\nPending Fees: ${pendingAmount}`;
+const qrCodeValue = 
+`\nRoll No: ${Student.rollNo}
+ \n Name: ${Student.name}
+ \n Email: ${Student.email}
+ \n Number: ${Student.mobileNumber}
+ \n Birth Date: ${Student.birthDate.split("-").reverse().join("-")}
+ \n Join Date ${Student.joinDate.split("-").reverse().join("-")} 
+ \n bloodGroup ${Student.bloodGroup}
+ \n Gender: ${Student.gender}
+ \n address: ${Student.address}
+ \n City: ${Student.city}
+ \n District ${Student.district}
+ \n State ${Student.state}
+ \n Pincode ${Student.pinCode}
+ \n Paid Fees: ${totalPaidAmount}
+ \n Pending Fees: ${pendingAmount}`;
 
 
   return (
