@@ -9,6 +9,7 @@ import { GiFemaleVampire, GiNurseFemale } from "react-icons/gi";
 import { GrScorecard } from "react-icons/gr";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { SiAmazonpay } from "react-icons/si";
+import { MdFamilyRestroom } from "react-icons/md";
 import PhoneInput from 'react-phone-input-2';
 import { Redirect, useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
@@ -463,6 +464,13 @@ const Search_Student = () => {
                         console.log('selectedStudentId',id);
                       }
 
+                      //add family details  
+                      const handlefamilyadd = (id) => {
+                        history.push('/ParentsPortal');
+                        localStorage.setItem('selectedStudentId', id);
+                        console.log('selectedStudentId',id);
+                      }
+
                       //To add Student Details
                       const handleAddStudent = () => {
                         history.push('/StudentForm');
@@ -570,9 +578,13 @@ const Search_Student = () => {
                             </button>
 
                           <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
-                          <SiAmazonpay />
+                            <SiAmazonpay />
+                          </button> 
 
-                        </button> 
+                          <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
+                          <MdFamilyRestroom />
+                          </button>
+
                           </td>
                         </tr>
                       );
@@ -1029,10 +1041,14 @@ const Search_Student = () => {
                               <GrScorecard />
                             </button>
 
-                          <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
-                          <SiAmazonpay />
+                            <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
+                              <SiAmazonpay />
+                            </button> 
 
-                        </button> 
+                            <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
+                          <MdFamilyRestroom />
+                          </button>
+
                           </td>
                         </tr>
                       );
