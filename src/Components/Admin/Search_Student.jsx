@@ -8,6 +8,7 @@ import { FiEdit, FiUser } from 'react-icons/fi';
 import { GiFemaleVampire, GiNurseFemale } from "react-icons/gi";
 import { GrScorecard } from "react-icons/gr";
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { MdFamilyRestroom } from "react-icons/md";
 import { SiAmazonpay } from "react-icons/si";
 import PhoneInput from 'react-phone-input-2';
 import { Redirect, useHistory } from 'react-router-dom';
@@ -463,6 +464,14 @@ const Search_Student = () => {
                         console.log('selectedStudentId',id);
                       }
 
+                      
+                      //add family details  
+                      const handlefamilyadd = (id) => {
+                        history.push('/ParentsPortal');
+                        localStorage.setItem('selectedStudentId', id);
+                        console.log('selectedStudentId',id);
+                      }
+
                       //To add Student Details
                       const handleAddStudent = () => {
                         history.push('/StudentForm');
@@ -571,8 +580,13 @@ const Search_Student = () => {
 
                           <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
                           <SiAmazonpay />
-
                         </button> 
+
+                        
+                        <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
+                          <MdFamilyRestroom />
+                          </button>
+
                           </td>
                         </tr>
                       );
@@ -1031,8 +1045,13 @@ const Search_Student = () => {
 
                           <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
                           <SiAmazonpay />
-
                         </button> 
+
+                        
+                        <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
+                          <MdFamilyRestroom />
+                          </button>
+                          
                           </td>
                         </tr>
                       );
