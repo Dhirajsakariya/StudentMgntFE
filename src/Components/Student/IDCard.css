@@ -1,13 +1,13 @@
 
 .id-card {
-  width: 235px;
-  border: 2px solid black;
-  border-radius: 5px;
+  width: 350px;
+  border: 2px solid rgb(26, 38, 87);
+  border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   margin-top: 4%;
-  background:white;
+  background:#d5eaf3;
 
 }
 
@@ -25,7 +25,7 @@
 
 .id-card-body {
   margin-top: 15px;
-  margin-left: 52%;
+  margin-left: 58%;
 }
 
 
@@ -38,32 +38,33 @@
   /* margin-left: 22px; */
   font-size: 28px;
   text-align: center;
-  color:black;
+  color:rgb(42, 42, 68);
 
 }
 
 .qrcode{
-  height: 129px;
-  /* margin-top: 188%; */
-  margin-left: -107%;
+  height: 150px;
+  margin-top: 9%; 
+  margin-left: -100%;
 }
 
-.id-card-name{
+.id-card-role{
   margin-top: 8%;
   margin-left: -9%;
-  color: black;
+  color: rgb(42, 42, 68);
   margin-right: -20px;
   text-align: center;
   margin-bottom: 16px;
 }
 
-.id-card-Role{
-  margin-top: 8%;
-  margin-left: -9%;
+.id-card-name{
+  margin-top: 0%;
+  height: 30px;
+  margin-left: -5.9%;
   color: white;
-  background: rgb(118, 118, 119);
+  background: rgb(42, 42, 74);
   margin-right: -20px;
-  border: 2px solid   gray;
+  border: 2px solid rgb(42, 42, 68);
   text-align: center;
 }
 
@@ -75,5 +76,5 @@ justify-content: center;
 align-items: center; 
 width: 67%; 
 height: 100%; 
-margin-left: 39px;
+margin-left: 60px;
 }

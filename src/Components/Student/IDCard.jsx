@@ -107,22 +107,8 @@ const IDCard = () => {
     return <Redirect to="/PageNotFound" />; 
   }
 
-const qrCodeValue = 
-`\nRoll No: ${Student.rollNo}
- \n Name: ${Student.name}
- \n Email: ${Student.email}
- \n Number: ${Student.mobileNumber}
- \n Birth Date: ${Student.birthDate.split("-").reverse().join("-")}
- \n Join Date ${Student.joinDate.split("-").reverse().join("-")} 
- \n bloodGroup ${Student.bloodGroup}
- \n Gender: ${Student.gender}
- \n address: ${Student.address}
- \n City: ${Student.city}
- \n District ${Student.district}
- \n State ${Student.state}
- \n Pincode ${Student.pinCode}
- \n Paid Fees: ${totalPaidAmount}
- \n Pending Fees: ${pendingAmount}`;
+//   const qrCodeValue = `Roll No: ${Student.rollNo},  Name: ${Student.name}, Number: ${Student.mobileNumber}, Gender: ${Student.gender}, Paid Fees: ${totalPaidAmount}, Pending Fees: ${pendingAmount}`;
+     const qrCodeValue = `Roll No: ${Student.rollNo}\nName: ${Student.name}\nNumber: ${Student.mobileNumber}\nGender: ${Student.gender}\nPaid Fees: ${totalPaidAmount}\nPending Fees: ${pendingAmount}`;
 
 
   return (
@@ -130,8 +116,8 @@ const qrCodeValue =
     <StudentSidebar>
     <div className="id-card">
 
-      <div className="id-card-header">
-       <h2 className='idcard-school'>{Student.name}</h2> 
+      <div className="idcard-school">
+      <strong>  STUDENT </strong>
       </div>
 
         {/* <div className="id-card-body">
@@ -168,8 +154,10 @@ const qrCodeValue =
 
         </div>  */}
 
-        <div className="id-card-Role">
-        <strong>  STUDENT </strong>
+        <div className="id-card-name">
+        <h2 className='id-card-header'>{Student.name}</h2> 
+
+        
 
         </div> 
 
