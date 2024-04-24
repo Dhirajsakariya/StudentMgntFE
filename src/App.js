@@ -34,6 +34,7 @@ import Exam_Schedule from './Components/Student/Exam_Schedule';
 import FeesCalculators from './Components/Admin/FeesCalculators';
 import IDCard from './Components/Student/IDCard';
 import IDcardadmin from './Components/Admin/IDcardadmin';
+import IDcardteacher from './Components/Teacher/IDcardteacher';
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
           <PrivateRoute path='/Parents' component={Parents} />
           <PrivateRoute path='/IDCard' component={IDCard} />
           <PrivateRoute path='/IDcardadmin' component={IDcardadmin} />
+          <PrivateRoute path='/IDcardteacher' component={IDcardteacher} />
           {/*<Redirect to="/Login" /> */}
           <Route path='/' component={Home} />
         </Switch>
