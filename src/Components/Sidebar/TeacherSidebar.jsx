@@ -13,6 +13,9 @@ import { useHistory,Redirect} from 'react-router-dom';
 import user_icon from '../Assets/user_icon.png';
 import { MdEditCalendar } from "react-icons/md";
 import Logout from '../Login/Logout';
+import { icons } from 'antd/es/image/PreviewGroup';
+import { FaAddressCard } from "react-icons/fa";
+
 
 const TeacherSidebar = ({ handleLogout,children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +25,7 @@ const TeacherSidebar = ({ handleLogout,children }) => {
     const [teacher, setTeacher] = useState(null);
     const [error, setError] = useState(null);
     const [redirectToNotFound, setRedirectToNotFound] = useState(false);
+    
 
     // useEffect(() => {
       
@@ -73,6 +77,11 @@ const TeacherSidebar = ({ handleLogout,children }) => {
             path: '/StudentReport',
             name: 'Student Report',
             icon: <GrScorecard />
+        },
+        {
+            path: '/IDcardteacher',
+            name: 'IDcard',
+            icon: <FaAddressCard />
         },
         {
             path: '/Home',

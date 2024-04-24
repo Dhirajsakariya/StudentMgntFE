@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import './IDcardadmin.css';
+import './IDcardteacher.css';
 import config from '../Login/config';
 import { Redirect } from 'react-router-dom';
 import QRCode from 'react-qr-code';
-import AdminSidebar from '../Sidebar/AdminSidebar';
+import TeacherSidebar from '../Sidebar/TeacherSidebar';
 
-const IDcardadmin = () => {
+const IDcardteacher = () => {
 
 
   const [redirectToNotFound, setRedirectToNotFound] = useState(false);
   const [error, setError] = useState(null);
-  const [Admin, setAdmin] = useState(null);
+  const [teacher, setTeacher] = useState(null);
 
 
 
@@ -20,8 +20,8 @@ const IDcardadmin = () => {
     const userRoleString = localStorage.getItem('loggedInRole');
     if (userRoleString) {
       const userRole = JSON.parse(userRoleString);
-      console.log('loggedInRole for Admin Personal', userRole.Role);
-      if (userRole.Role !== 'admin') {
+      console.log('loggedInRole for Teacher Personal', userRole.Role);
+      if (userRole.Role !== 'teacher') {
         setRedirectToNotFound(true);
       }
     } else {
@@ -30,7 +30,7 @@ const IDcardadmin = () => {
   }, []);
 
   useEffect(() => {
-    const fetchAdminDetails = async () => {
+    const fetchTeacherDetails = async () => {
       try {
         const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
 
@@ -38,60 +38,61 @@ const IDcardadmin = () => {
           throw new Error('User ID not found in local storage');
         }
 
-        const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${storedId}`);
+         const response = await fetch(`${config.ApiUrl}AdminTeacher/GetAdminTeacher/${storedId}`);
         
         if (!response.ok) {
-          throw new Error(`Error fetching Admin details: ${response.status} ${response.statusText}`);
+          throw new Error(`Error fetching teacher details: ${response.status} ${response.statusText}`);
         }
 
         const responseData = await response.json();
-        setAdmin(responseData);
+        setTeacher(responseData);
       } catch (fetchError) {
         setError(fetchError.message);
       }
     };
 
-    fetchAdminDetails();
+    fetchTeacherDetails();
   }, []);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  if (!Admin) {
+  if (!teacher) {
     return <div>Loading...</div>;
   }
-  // if (role !== 'admin') {
+
+  
+
+  // if (role !== 'teacher') {
   //   return <Redirect to="/PageNotFound" />;
   // }
-
   if (redirectToNotFound) {
-    return <Redirect to="/PageNotFound" />; 
+    return <Redirect to="/PageNotFound" />;
   }
 
 
-//   const qrCodeValue = `Roll No: ${Student.rollNo},  Name: ${Student.name}, Number: ${Student.mobileNumber}, Gender: ${Student.gender}, Paid Fees: ${totalPaidAmount}, Pending Fees: ${pendingAmount}`;
-const qrCodeValue = 
-`\n Name: ${Admin.name} 
- \n Email: ${Admin.email}
- \n Birthdate: ${Admin.birthDate.split("-").reverse().join("-")}
- \n Join Date: ${Admin.joinDate.split("-").reverse().join("-")}
- \n Mobile Number ${Admin.mobileNumber}
- \n Gender: ${Admin.gender}
- \n Address: ${Admin.address}
- \n City: ${Admin.city} 
- \n District: ${Admin.district}
- \n State ${Admin.state} 
- \n Pincode: ${Admin.pinCode}`;
+ const qrCodeValue = 
+`\n Name: ${teacher.name} 
+ \n Email: ${teacher.email}
+ \n Birthdate: ${teacher.birthDate.split("-").reverse().join("-")}
+ \n Join Date: ${teacher.joinDate.split("-").reverse().join("-")}
+ \n Mobile Number: ${teacher.mobileNumber}
+ \n Gender: ${teacher.gender}
+ \n Address: ${teacher.address}
+ \n City: ${teacher.city} 
+ \n District: ${teacher.district}
+ \n State: ${teacher.state} 
+ \n Pincode: ${teacher.pinCode}`;
 
 
   return (
     <>
-    <AdminSidebar>
+    <TeacherSidebar>
     <div className="id-card">
 
       <div className="id-card-header">
-       <h2 className='idcard-admin'>{Admin.name}</h2> 
+       <h2 className='idcard-teacher'>{teacher.name}</h2> 
       </div>
 
 
@@ -101,7 +102,7 @@ const qrCodeValue =
         </div>  */}
 
         <div className="id-card-Role">
-        <strong>  Admin </strong>
+        <strong>  Teacher </strong>
 
         </div> 
 
@@ -110,11 +111,11 @@ const qrCodeValue =
       </div> 
 
     </div>
-    </AdminSidebar>
+    </TeacherSidebar>
         </>
   );
 };
 
-export default IDcardadmin;
+export default IDcardteacher;
 
 
