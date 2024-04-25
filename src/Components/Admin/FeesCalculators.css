@@ -1,189 +1,193 @@
 #form-admin-fess{
    
-  width: 33%;
-  color:black;
-  border-radius: 4%;
-  padding: 30px 20px;
-  height: auto;
-  background: transparent;
-  border: 2px solid;
-  background-color:#e1e4e8;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  justify-content: center;
-  margin-top: 9.3%;
-  padding-top: 0.5%;
-}
-
-#close-btn-fees {
-    position: absolute;
-    top: 0px;
-    right: 10px;
-    width:30px;
-    background-color: transparent;
-    border: none;
-    color: black;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-#close-btn-fees:hover {
-    color: white;
-    background-color:  #24305E; 
-}
-
-.fees-admin{
-    align-items: center;
-    margin-left: 14%;
-    margin-top: 41px;
-    line-height: 31px;
-    border: 1px solid black;
-    margin-right: 55px;
-    border-radius: 13px;
-    padding: 20px;
-}
-
-.details-fees{
-    line-height: 30px;
-    align-items: center;
-}
-
-#submit-pay-admin{
-    cursor: pointer;
-    display: inline;
-    width: 45%;
-    height: 40px;
-    border-radius: 10px;
-    outline: auto;
-    border: 1px;
-    background:#24305E;
-    justify-content: center;
-    text-align: center;
-    margin-left: 3%;
-    margin-top: 30px;
-    margin-bottom: 1%;
-    font-weight: 700;
-    font-size: 15px;
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-}
-
-.submit-pay-admin:hover{
-        background-color: green;
-        color: white;
-}
-
-
-#submit-view-admin{
-
-    cursor: pointer;
-    display: inline;
-    width: 45%;
-    height: 40px;
-    border-radius: 10px;
-    outline: auto;
-    border: 1px;
-    background:#24305E;
-    justify-content: center;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: -30px;
-    margin-bottom: 1%;
-    font-weight: 700;
-    font-size: 15px;
-    color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 17px;
-}
-
-.submit-view-admin:hover{
-    background-color: #24305E;
-    color: white;
-}
-
-.select-fees-admin{
-    margin-left: 26%;
-    box-sizing: border-box;
-    background: transparent;
-    margin-bottom: 20px;
-    font-size: 18px;
-    width: 215px;
-    border-radius: 5px;
-    margin-top: 6px;
-}
-
-#input-fees-admin{
-    width:85%;  
-    margin-left: 7%;
-    padding:2.2%;
-    background-color: white;
-    box-sizing: border-box;
-    margin-top:0.7%;
-    border:2px;
-    border-radius: 5px;
-    border-top: 1px solid #24305E;
-    border-left: 1px solid #24305E;
-}
-
-#h2-fees-admin{
-    justify-content: center;
-    padding-top: 1px;
-    color:#146a51;;
-    text-align: center;
-    font: bold;
-    margin-top:5%;
-    margin-bottom:8% ;
-    text-decoration: underline;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    
-}
-
-#lable-fees-form{
- display: block;
-  margin-bottom: 3%;
-  margin-top: 1%;
-  margin-left: 8%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 17px;
-}
-
-.print-admin-fees{
-
-    width: 230px;
-    line-height: 20px;
-    border-radius: 10px;
-    padding: 25px 41px;
-    height: 50px;
+    width: 30%;
+    color:black;
+    border-radius: 4%;
+    padding: 30px 20px;
+    height: auto;
     background: transparent;
     border: 2px solid;
-    margin-left: 22%;
-    margin-top: 3%;
-    padding-top: 15px;
-    background-color: #24305E;
-    color: white;
-    font-size: x-large;
-
-}
-
-.p-admin-fees-form{
-    color: black;   
-}
-
-@media print {
-    body * {
-      display: none;
-    }
-  
-    #popup-content,
-    #popup-content * {
-      display: block !important;
-    }
+    background-color:#e1e4e8;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 9.3%;
+    padding-top: 0.5%;
   }
   
-  #print-view {
-    color: red;
-}
+  #close-btn-fees {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+      width:30px;
+      background-color: transparent;
+      border: none;
+      color: black;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 5px;
+  }
+  #close-btn-fees:hover {
+      color: white;
+      background-color:  #24305E; 
+  }
+  
+  .fees-admin{
+      align-items: center;
+      margin-left: 14%;
+      margin-top: 41px;
+      line-height: 31px;
+      border: 1px solid black;
+      margin-right: 55px;
+      border-radius: 13px;
+      padding: 20px;
+  }
+  
+  .details-fees{
+      line-height: 30px;
+      text-align: center;
+      
+  }
+  #bold{
+      font-size: 15px;
+  }
+  
+  #submit-pay-admin{
+      cursor: pointer;
+      display: inline;
+      width: 35%;
+      height: 40px;
+      border-radius: 10px;
+      outline: auto;
+      border: 1px;
+      background:#24305E;
+      justify-content: center;
+      text-align: center;
+      margin-left: 13%;
+      margin-top: 30px;
+      margin-bottom: 1%;
+      font-weight: 700;
+      font-size: 15px;
+      color: white;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 17px;
+  }
+  
+  .submit-pay-admin:hover{
+          background-color: green;
+          color: white;
+  }
   
   
+  #submit-view-admin{
+  
+      cursor: pointer;
+      display: inline;
+      width: 35%;
+      height: 40px;
+      border-radius: 10px;
+      outline: auto;
+      border: 1px;
+      background:#24305E;
+      justify-content: center;
+      text-align: center;
+      margin-left: 5%;
+      margin-top: -30px;
+      margin-bottom: 1%;
+      font-weight: 700;
+      font-size: 15px;
+      color: white;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 17px;
+  }
+  
+  .submit-view-admin:hover{
+      background-color: #24305E;
+      color: white;
+  }
+  
+  .select-fees-admin{
+      margin-left: 26%;
+      box-sizing: border-box;
+      background: transparent;
+      margin-bottom: 20px;
+      font-size: 18px;
+      width: 215px;
+      border-radius: 5px;
+      margin-top: 6px;
+  }
+  
+  #input-fees-admin{
+      width:85%;  
+      margin-left: 7%;
+      padding:2.2%;
+      background-color: white;
+      box-sizing: border-box;
+      margin-top:0.7%;
+      border:2px;
+      border-radius: 5px;
+      border-top: 1px solid #24305E;
+      border-left: 1px solid #24305E;
+  }
+  
+  #h2-fees-admin{
+      justify-content: center;
+      padding-top: 1px;
+      color:#146a51;;
+      text-align: center;
+      font: bold;
+      margin-top:5%;
+      margin-bottom:8% ;
+      text-decoration: underline;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      
+  }
+  
+  #lable-fees-form{
+   display: block;
+    margin-bottom: 3%;
+    margin-top: 1%;
+    margin-left: 8%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+  }
+  
+  .print-admin-fees{
+      cursor: pointer;
+      width: 180px;
+      line-height: 20px;
+      border-radius: 10px;
+      padding: 25px 41px;
+      height: 50px;
+      background: transparent;
+      border: 2px solid;
+      margin-left: 27%;
+      margin-top: 3%;
+      padding-top: 15px;
+      background-color: #24305E;
+      color: white;
+      font-size: 28px;
+  
+  }
+  
+  .p-admin-fees-form{
+      color: black;   
+  }
+  
+  @media print {
+      body * {
+        display: none;
+      }
+    
+      #popup-content,
+      #popup-content * {
+        display: block !important;
+      }
+    }
+    
+    #print-view {
+      color: red;
+  }
+    
+    
