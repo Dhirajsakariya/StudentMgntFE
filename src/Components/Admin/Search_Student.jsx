@@ -467,7 +467,7 @@ const Search_Student = () => {
                       //To add Student Details
                       const handleAddStudent = () => {
                         toast.success('successfull add student')
-                        history.push('/Search_Student');
+                        history.push('/StudentForm');
                       };
 
                       // Function to filter data based on search query
