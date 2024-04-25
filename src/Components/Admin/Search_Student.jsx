@@ -463,18 +463,11 @@ const Search_Student = () => {
                         localStorage.setItem('selectedStudentId',id);
                         console.log('selectedStudentId',id);
                       }
-
                       
-                      //add family details  
-                      const handlefamilyadd = (id) => {
-                        history.push('/ParentsPortal');
-                        localStorage.setItem('selectedStudentId', id);
-                        console.log('selectedStudentId',id);
-                      }
-
                       //To add Student Details
                       const handleAddStudent = () => {
-                        history.push('/StudentForm');
+                        toast.success('successfull add student')
+                        history.push('/Search_Student');
                       };
 
                       // Function to filter data based on search query
@@ -581,11 +574,6 @@ const Search_Student = () => {
                           <button id="btnaddstudentfees" onClick={() => handlefeesform(student.id)}>
                           <SiAmazonpay />
                         </button> 
-
-                        
-                        <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
-                          <MdFamilyRestroom />
-                          </button>
 
                           </td>
                         </tr>
@@ -1047,11 +1035,6 @@ const Search_Student = () => {
                           <SiAmazonpay />
                         </button> 
 
-                        
-                        <button id='btnaddfamilydetails' onClick={() => handlefamilyadd(student.id)}>
-                          <MdFamilyRestroom />
-                          </button>
-                          
                           </td>
                         </tr>
                       );

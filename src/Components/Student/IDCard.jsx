@@ -4,6 +4,7 @@ import config from '../Login/config';
 import { Redirect } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import StudentSidebar from '../Sidebar/StudentSidebar';
+import axios from 'axios';
 
 const IDCard = () => {
 
@@ -14,7 +15,8 @@ const IDCard = () => {
   const [totalPaidAmount, setTotalPaidAmount] = useState('');
   const [pendingAmount,setPendingAmount] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
-
+  const [parents, setParents] = useState([]);
+  const [loading, setLoading] = useState(true);  
 
   const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
 
@@ -70,6 +72,23 @@ const IDCard = () => {
           }
         };
   
+        const fetchFamilyDetails = async () => {
+          try {
+            const studentId = JSON.parse(localStorage.getItem('loggedInUserId'));
+            if (!studentId) {
+              throw new Error('Student ID not found in local storage');
+            }
+    
+            const response = await axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
+            setParents(response);
+          } catch (err) {
+            setError(err.message);
+            console.error("Error fetching family details:", err);
+          } finally {
+            setLoading(false);
+          }
+        }; 
+
         const fetchUserPhoto = async () => {
           try {
             const photoResponse = await fetch(`${config.ApiUrl}Student/GetPhoto/${storedId}`);
@@ -84,7 +103,7 @@ const IDCard = () => {
           }
         };
   
-        await Promise.all([fetchStudentDetails(), fetchFeesDetails(), fetchUserPhoto()]);
+        await Promise.all([fetchStudentDetails(), fetchFeesDetails(), fetchUserPhoto(), fetchFamilyDetails()]);
       } catch (error) {
         setError(error.message);
       }
@@ -122,6 +141,12 @@ const qrCodeValue =
  \n District ${Student.district}
  \n State ${Student.state}
  \n Pincode ${Student.pinCode}
+ \n Parents Email id ${parents.email}
+ \n Parents Name: ${parents.name}
+ \n parents Gender: ${parents.gender}
+ \n Mobile Number: ${parents.mobileNumber}
+ \n parents Relation: ${parents.relation}
+ \n occupation: ${parents.occupation}
  \n Paid Fees: ${totalPaidAmount}
  \n Pending Fees: ${pendingAmount}`;
 
