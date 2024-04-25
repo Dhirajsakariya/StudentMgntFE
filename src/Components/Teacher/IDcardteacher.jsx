@@ -89,9 +89,9 @@ const IDcardteacher = () => {
   return (
     <>
     <TeacherSidebar>
-    <div className="id-card">
+    <div className="id-card-teacher">
 
-      <div className="id-card-header">
+      <div className="id-card-header-teacher">
        <h2 className='idcard-teacher'>{teacher.name}</h2> 
       </div>
 
@@ -101,13 +101,13 @@ const IDcardteacher = () => {
 
         </div>  */}
 
-        <div className="id-card-Role">
+        <div className="id-card-Role-teacher">
         <strong>  Teacher </strong>
 
         </div> 
 
-      <div className="id-card-body">
-        <QRCode  value={qrCodeValue} className='qrcode' />
+      <div className="id-card-body-teacher">
+        <QRCode  value={qrCodeValue} className='qrcode-teacher' />
       </div> 
 
     </div>

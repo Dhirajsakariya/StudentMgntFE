@@ -88,9 +88,9 @@ const qrCodeValue =
   return (
     <>
     <AdminSidebar>
-    <div className="id-card">
+    <div className="id-card-admin">
 
-      <div className="id-card-header">
+      <div className="id-card-header-admin">
        <h2 className='idcard-admin'>{Admin.name}</h2> 
       </div>
 
@@ -100,13 +100,13 @@ const qrCodeValue =
 
         </div>  */}
 
-        <div className="id-card-Role">
+        <div className="id-card-Role-admin">
         <strong>  Admin </strong>
 
         </div> 
 
-      <div className="id-card-body">
-        <QRCode  value={qrCodeValue} className='qrcode' />
+      <div className="id-card-body-admin">
+        <QRCode  value={qrCodeValue} className='qrcode-admin' />
       </div> 
 
     </div>
