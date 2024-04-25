@@ -241,10 +241,10 @@ try {
       >
         <div id="popup-content" className='fees-admin'>
           <h2 className='details-fees'> {studentName} </h2>
-         <p id='popup-content' className='p-admin-fees-form'> Standard : {studentStandard} </p> 
-         <p id='popup-content' className='p-admin-fees-form'> Email : {studentEmail} </p>
-         <p id='popup-content' className='p-admin-fees-form'> Paid fees : {totalPaidAmount}</p> 
-         <p id='popup-content' className='p-admin-fees-form'> Pending Fees : {pendingAmount} </p>
+         <p id='popup-content' className='p-admin-fees-form'><b id='bold'> Standard : </b>{studentStandard} </p> 
+         <p id='popup-content' className='p-admin-fees-form'> <b id='bold'>Email :</b> {studentEmail} </p>
+         <p id='popup-content' className='p-admin-fees-form'><b id='bold'> Paid fees :</b> {totalPaidAmount}</p> 
+         <p id='popup-content' className='p-admin-fees-form'> <b id='bold'>Pending Fees :</b> {pendingAmount} </p>
           <button id="close-btn-fees" onClick={() => setShowModal(false)}> × </button>
          
         </div>
