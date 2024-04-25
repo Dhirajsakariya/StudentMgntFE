@@ -4,7 +4,6 @@ import config from '../Login/config';
 import { Redirect } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import StudentSidebar from '../Sidebar/StudentSidebar';
-import axios from 'axios';
 
 const IDCard = () => {
 
@@ -15,8 +14,7 @@ const IDCard = () => {
   const [totalPaidAmount, setTotalPaidAmount] = useState('');
   const [pendingAmount,setPendingAmount] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
-  const [parents, setParents] = useState([]);
-  const [loading, setLoading] = useState(true);  
+
 
   const storedId = JSON.parse(localStorage.getItem('loggedInUserId'));
 
@@ -72,23 +70,6 @@ const IDCard = () => {
           }
         };
   
-        const fetchFamilyDetails = async () => {
-          try {
-            const studentId = JSON.parse(localStorage.getItem('loggedInUserId'));
-            if (!studentId) {
-              throw new Error('Student ID not found in local storage');
-            }
-    
-            const response = await axios.get(`${config.ApiUrl}Family/GetFamilyByStudentId/${studentId}`);
-            setParents(response);
-          } catch (err) {
-            setError(err.message);
-            console.error("Error fetching family details:", err);
-          } finally {
-            setLoading(false);
-          }
-        }; 
-
         const fetchUserPhoto = async () => {
           try {
             const photoResponse = await fetch(`${config.ApiUrl}Student/GetPhoto/${storedId}`);
@@ -103,7 +84,7 @@ const IDCard = () => {
           }
         };
   
-        await Promise.all([fetchStudentDetails(), fetchFeesDetails(), fetchUserPhoto(), fetchFamilyDetails()]);
+        await Promise.all([fetchStudentDetails(), fetchFeesDetails(), fetchUserPhoto()]);
       } catch (error) {
         setError(error.message);
       }
@@ -141,21 +122,15 @@ const qrCodeValue =
  \n District ${Student.district}
  \n State ${Student.state}
  \n Pincode ${Student.pinCode}
- \n Parents Email id ${parents.email}
- \n Parents Name: ${parents.name}
- \n parents Gender: ${parents.gender}
- \n Mobile Number: ${parents.mobileNumber}
- \n parents Relation: ${parents.relation}
- \n occupation: ${parents.occupation}
  \n Paid Fees: ${totalPaidAmount}
  \n Pending Fees: ${pendingAmount}`;
 
   return (
     <>
     <StudentSidebar>
-    <div className="id-card">
+    <div className="id-card_student">
 
-      <div className="idcard-school">
+      <div className="idcard-school_student">
       <strong>  STUDENT </strong>
       </div>
 
@@ -185,7 +160,7 @@ const qrCodeValue =
       </div> */}
 
 <div>
-<img id="id-card-photo" src={userPhoto} alt="" />
+<img id="id-card-photo_student" src={userPhoto} alt="" />
 </div>
 
         {/* <div className="id-card-name">
@@ -193,15 +168,15 @@ const qrCodeValue =
 
         </div>  */}
 
-        <div className="id-card-name">
-        <h2 className='id-card-header'>{Student.name}</h2> 
+        <div className="id-card-name_student">
+        <h2 className='id-card-header_student'>{Student.name}</h2> 
 
         
 
         </div> 
 
-      <div className="id-card-body">
-        <QRCode  value={qrCodeValue} className='qrcode' />
+      <div className="id-card-body_student">
+        <QRCode  value={qrCodeValue} className='qrcode_student' />
       </div> 
 
     </div>
