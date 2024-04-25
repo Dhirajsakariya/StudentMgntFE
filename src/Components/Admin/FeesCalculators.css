@@ -30,7 +30,7 @@
 }
 #close-btn-fees:hover {
     color: white;
-    background-color:  #24305E; 
+    background-color:  red; 
 }
 
 .fees-admin{
@@ -181,9 +181,5 @@
       display: block !important;
     }
   }
-  
-  #print-view {
-    color: red;
-}
   
   
