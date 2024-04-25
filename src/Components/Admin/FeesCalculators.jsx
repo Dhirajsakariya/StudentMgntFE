@@ -226,6 +226,8 @@ try {
         <br />
        
      
+
+     
       <button id='submit-pay-admin' type="submit" onClick={handleSubmit} >Pay</button>
      
       <button onClick={handleView} id='submit-view-admin' >View</button>
